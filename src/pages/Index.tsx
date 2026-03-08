@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
+import AIFlowSection from '@/components/AIFlowSection';
 import ServicesSection from '@/components/ServicesSection';
 import DemoBots from '@/components/DemoBots';
 import HowItWorks from '@/components/HowItWorks';

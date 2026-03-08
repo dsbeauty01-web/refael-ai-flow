@@ -18,6 +18,7 @@ const Index = () => {
       <FloatingWhatsApp />
       <Header />
       <HeroSection />
+      <AIFlowSection />
       <ServicesSection />
       <DemoBots />
       <HowItWorks />

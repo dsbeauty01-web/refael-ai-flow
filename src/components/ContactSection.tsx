@@ -91,7 +91,7 @@ const ContactSection = () => {
             </a>
 
             <a
-              href="mailto:refael@example.com"
+              href="mailto:dsbeauty01@gmail.com"
               className="flex items-center gap-4 p-5 rounded-xl bg-card border border-border hover:shadow-md transition-all duration-300"
             >
               <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center">

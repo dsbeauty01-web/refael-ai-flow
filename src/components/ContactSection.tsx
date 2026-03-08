@@ -7,7 +7,7 @@ import { MessageCircle, Mail, Phone } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useToast } from '@/hooks/use-toast';
 
-const WHATSAPP_NUMBER = '972500000000';
+const WHATSAPP_NUMBER = '97253327125';
 
 const ContactSection = () => {
   const { t, isHebrew } = useLanguage();
@@ -91,7 +91,7 @@ const ContactSection = () => {
             </a>
 
             <a
-              href="mailto:refael@example.com"
+              href="mailto:dsbeauty01@gmail.com"
               className="flex items-center gap-4 p-5 rounded-xl bg-card border border-border hover:shadow-md transition-all duration-300"
             >
               <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center">
@@ -99,7 +99,7 @@ const ContactSection = () => {
               </div>
               <div>
                 <p className="font-bold text-primary">{t('contact.email')}</p>
-                <p className="text-sm text-muted-foreground">refael@example.com</p>
+                <p className="text-sm text-muted-foreground">dsbeauty01@gmail.com</p>
               </div>
             </a>
 

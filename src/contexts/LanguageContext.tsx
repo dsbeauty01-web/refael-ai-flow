@@ -5,7 +5,7 @@ type Language = 'he' | 'en';
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string) => any;
   dir: 'rtl' | 'ltr';
   isHebrew: boolean;
 }
@@ -19,14 +19,14 @@ export const useLanguage = () => {
 };
 
 // Translation getter helper
-function getNestedValue(obj: Record<string, any>, path: string): string {
+function getNestedValue(obj: Record<string, any>, path: string): any {
   const keys = path.split('.');
   let current: any = obj;
   for (const key of keys) {
     if (current === undefined || current === null) return path;
     current = current[key];
   }
-  return typeof current === 'string' ? current : path;
+  return current !== undefined ? current : path;
 }
 
 import { translations } from '@/lib/translations';
@@ -42,7 +42,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     document.documentElement.lang = language;
   }, [language, dir]);
 
-  const t = (key: string): string => {
+  const t = (key: string): any => {
     return getNestedValue(translations[language], key);
   };
 

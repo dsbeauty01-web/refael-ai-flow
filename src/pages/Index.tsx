@@ -3,6 +3,7 @@ import HeroSection from '@/components/HeroSection';
 import AIFlowSection from '@/components/AIFlowSection';
 import RAGSection from '@/components/RAGSection';
 import ServicesSection from '@/components/ServicesSection';
+import ProductGrid from '@/components/ProductGrid';
 import DemoBots from '@/components/DemoBots';
 import HowItWorks from '@/components/HowItWorks';
 import WhyWorkWithMe from '@/components/WhyWorkWithMe';
@@ -22,6 +23,7 @@ const Index = () => {
       <AIFlowSection />
       <RAGSection />
       <ServicesSection />
+      <ProductGrid />
       <DemoBots />
       <HowItWorks />
       <WhyWorkWithMe />

@@ -58,13 +58,38 @@ const AIFlowSection = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-extrabold text-foreground tracking-tight mb-4">
-            {isHebrew ? 'איך העוזר החכם עובד' : 'How the AI Assistant Works'}
+            {isHebrew ? 'עוזר AI שמכיר את כל החנות שלך' : 'AI Assistant That Knows Your Entire Store'}
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
             {isHebrew
-              ? 'מענה אוטומטי ללקוחות, המלצות מוצרים חכמות, והעברה לנציג אנושי כשצריך'
-              : 'Automated customer responses, smart product recommendations, and seamless human handoff'}
+              ? 'עוזר חכם שעובד 24/7, מאומן על כל המוצרים, המדיניות והמידע העסקי שלך — כדי שתוכל להתמקד בצמיחה'
+              : 'A 24/7 intelligent assistant trained on all your products, policies, and store data — so you can focus on growth'}
           </p>
+          <div className={`flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground max-w-3xl mx-auto ${isHebrew ? 'direction-rtl' : ''}`}>
+            {(isHebrew
+              ? [
+                  'מענה מיידי עם מידע מדויק על מוצרים',
+                  'ממליץ על המוצרים הנכונים להגדלת מכירות',
+                  'לוכד לידים ופרטי לקוחות אוטומטית',
+                  'מעביר לנציג אנושי כשצריך',
+                  'עובד בצ׳אט באתר וברשתות חברתיות',
+                  'זמין תמיד, יום ולילה',
+                ]
+              : [
+                  'Instant answers with accurate product info',
+                  'Recommends the right products to boost sales',
+                  'Captures leads & customer details automatically',
+                  'Escalates to human support when needed',
+                  'Works on website chat & social media',
+                  'Always available, day and night',
+                ]
+            ).map((line, i) => (
+              <span key={i} className="flex items-center gap-1.5">
+                <span className="w-1 h-1 rounded-full bg-accent" />
+                {line}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Flow container */}

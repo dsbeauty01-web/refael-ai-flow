@@ -42,7 +42,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     document.documentElement.lang = language;
   }, [language, dir]);
 
-  const t = (key: string): string => {
+  const t = (key: string): any => {
     return getNestedValue(translations[language], key);
   };
 

@@ -23,6 +23,7 @@ const Index = () => {
       <AIFlowSection />
       <RAGSection />
       <ServicesSection />
+      <ProductGrid />
       <DemoBots />
       <HowItWorks />
       <WhyWorkWithMe />

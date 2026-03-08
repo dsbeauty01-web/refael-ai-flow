@@ -20,6 +20,7 @@ const Index = () => {
       <Header />
       <HeroSection />
       <AIFlowSection />
+      <RAGSection />
       <ServicesSection />
       <DemoBots />
       <HowItWorks />

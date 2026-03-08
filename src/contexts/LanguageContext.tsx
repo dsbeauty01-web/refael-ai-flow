@@ -19,14 +19,14 @@ export const useLanguage = () => {
 };
 
 // Translation getter helper
-function getNestedValue(obj: Record<string, any>, path: string): string {
+function getNestedValue(obj: Record<string, any>, path: string): any {
   const keys = path.split('.');
   let current: any = obj;
   for (const key of keys) {
     if (current === undefined || current === null) return path;
     current = current[key];
   }
-  return typeof current === 'string' ? current : path;
+  return current !== undefined ? current : path;
 }
 
 import { translations } from '@/lib/translations';

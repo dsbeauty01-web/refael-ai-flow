@@ -7,7 +7,7 @@ import { MessageCircle, Mail, Phone } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useToast } from '@/hooks/use-toast';
 
-const WHATSAPP_NUMBER = '972500000000';
+const WHATSAPP_NUMBER = '97253327125';
 
 const ContactSection = () => {
   const { t, isHebrew } = useLanguage();

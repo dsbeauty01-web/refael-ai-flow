@@ -9,10 +9,12 @@ import Testimonials from '@/components/Testimonials';
 import Portfolio from '@/components/Portfolio';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <FloatingWhatsApp />
       <Header />
       <HeroSection />
       <ServicesSection />

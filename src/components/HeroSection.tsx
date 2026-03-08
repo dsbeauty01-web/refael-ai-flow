@@ -2,7 +2,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, Bot } from 'lucide-react';
 
-const WHATSAPP_NUMBER = '972500000000'; // Replace with real number
+const WHATSAPP_NUMBER = '97253327125';
 const WHATSAPP_MESSAGE_HE = 'שלום רפאל, אני מעוניין לשמוע על שירותי האוטומציה שלך';
 const WHATSAPP_MESSAGE_EN = 'Hi Refael, I\'m interested in your AI automation services';
 

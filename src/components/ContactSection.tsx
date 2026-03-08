@@ -99,7 +99,7 @@ const ContactSection = () => {
               </div>
               <div>
                 <p className="font-bold text-primary">{t('contact.email')}</p>
-                <p className="text-sm text-muted-foreground">refael@example.com</p>
+                <p className="text-sm text-muted-foreground">dsbeauty01@gmail.com</p>
               </div>
             </a>
 

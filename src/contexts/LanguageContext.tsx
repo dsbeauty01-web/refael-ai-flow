@@ -5,7 +5,7 @@ type Language = 'he' | 'en';
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string) => any;
   dir: 'rtl' | 'ltr';
   isHebrew: boolean;
 }

@@ -47,25 +47,38 @@ const AIFlowSection = () => {
   const ref = useScrollAnimation();
 
   return (
-    <section className="section-padding bg-background relative overflow-hidden" ref={ref}>
-      {/* Soft ambient glows */}
+    <section className="relative overflow-hidden py-20 md:py-28" ref={ref}>
+      {/* Rich gradient background */}
+      <div className="absolute inset-0 bg-[linear-gradient(160deg,hsl(215_30%_8%)_0%,hsl(211_52%_16%)_30%,hsl(200_45%_18%)_60%,hsl(215_35%_10%)_100%)]" />
+
+      {/* Ambient glows */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[20%] left-[15%] w-[300px] h-[300px] rounded-full bg-blue-500/[0.04] blur-[100px]" />
-        <div className="absolute bottom-[20%] right-[15%] w-[300px] h-[300px] rounded-full bg-purple-500/[0.04] blur-[100px]" />
+        <div className="absolute top-[10%] left-[10%] w-[400px] h-[400px] rounded-full bg-[radial-gradient(ellipse_at_center,hsl(220_70%_50%/0.08),transparent_65%)] blur-3xl" />
+        <div className="absolute bottom-[10%] right-[10%] w-[400px] h-[400px] rounded-full bg-[radial-gradient(ellipse_at_center,hsl(166_84%_32%/0.08),transparent_65%)] blur-3xl" />
+        <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[radial-gradient(ellipse_at_center,hsl(280_60%_50%/0.05),transparent_60%)] blur-3xl" />
       </div>
 
-      <div className="container mx-auto max-w-5xl relative z-10">
+      {/* Dot pattern */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: 'radial-gradient(circle, hsl(0 0% 100%) 0.5px, transparent 0.5px)',
+        backgroundSize: '28px 28px',
+      }} />
+
+      <div className="container mx-auto max-w-5xl px-4 sm:px-6 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground tracking-tight mb-4">
-            {isHebrew ? 'עוזר AI שמכיר את כל החנות שלך' : 'AI Assistant That Knows Your Entire Store'}
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground tracking-tight mb-6 leading-[1.1]">
+            {isHebrew ? 'עוזר AI שמכיר את כל החנות שלך' : 'AI Assistant That Knows'}
+            <span className="block text-gradient mt-1">
+              {isHebrew ? '' : 'Your Entire Store'}
+            </span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
+          <p className="text-primary-foreground/60 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
             {isHebrew
               ? 'עוזר חכם שעובד 24/7, מאומן על כל המוצרים, המדיניות והמידע העסקי שלך — כדי שתוכל להתמקד בצמיחה'
               : 'A 24/7 intelligent assistant trained on all your products, policies, and store data — so you can focus on growth'}
           </p>
-          <div className={`flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground max-w-3xl mx-auto ${isHebrew ? 'direction-rtl' : ''}`}>
+          <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-3 max-w-3xl mx-auto ${isHebrew ? 'direction-rtl' : ''}`}>
             {(isHebrew
               ? [
                   'מענה מיידי עם מידע מדויק על מוצרים',
@@ -84,8 +97,8 @@ const AIFlowSection = () => {
                   'Always available, day and night',
                 ]
             ).map((line, i) => (
-              <span key={i} className="flex items-center gap-1.5">
-                <span className="w-1 h-1 rounded-full bg-accent" />
+              <span key={i} className="flex items-center gap-2 text-sm md:text-base font-semibold text-primary-foreground/50">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
                 {line}
               </span>
             ))}
@@ -93,35 +106,34 @@ const AIFlowSection = () => {
         </div>
 
         {/* Flow container */}
-        <div className="relative rounded-3xl border border-border bg-card/50 backdrop-blur-sm p-8 md:p-12">
-          {/* Inner subtle grid */}
-          <div className="absolute inset-0 rounded-3xl opacity-[0.03]" style={{
-            backgroundImage: 'radial-gradient(circle, hsl(var(--foreground)) 0.5px, transparent 0.5px)',
+        <div className="relative rounded-3xl border border-primary-foreground/[0.08] bg-primary-foreground/[0.04] backdrop-blur-xl p-8 md:p-14 shadow-2xl">
+          {/* Inner grid */}
+          <div className="absolute inset-0 rounded-3xl opacity-[0.02]" style={{
+            backgroundImage: 'radial-gradient(circle, hsl(0 0% 100%) 0.5px, transparent 0.5px)',
             backgroundSize: '24px 24px',
           }} />
 
           {/* Desktop flow */}
           <div className="hidden md:block relative">
             {/* Connection line */}
-            <div className="absolute top-1/2 left-[10%] right-[10%] h-px -translate-y-1/2 z-0">
-              <div className="w-full h-full bg-gradient-to-r from-blue-400/30 via-purple-400/30 to-emerald-400/30" />
-              {/* Animated pulse on line */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/40 to-transparent animate-[shimmer_3s_ease-in-out_infinite]" />
+            <div className="absolute top-1/2 left-[10%] right-[10%] h-[2px] -translate-y-1/2 z-0 rounded-full overflow-hidden">
+              <div className="w-full h-full bg-gradient-to-r from-blue-400/25 via-purple-400/25 to-emerald-400/25" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/50 to-transparent animate-[shimmer_3s_ease-in-out_infinite]" />
             </div>
 
             <div className={`flex items-center justify-between relative z-10 ${isHebrew ? 'flex-row-reverse' : ''}`}>
               {steps.map((step, i) => (
-                <div key={i} className="flex flex-col items-center gap-4 group">
-                  {/* Glow behind icon */}
-                  <div className={`absolute w-16 h-16 rounded-full ${glowColors[i]} blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                <div key={i} className="flex flex-col items-center gap-5 group">
+                  {/* Glow */}
+                  <div className={`absolute w-20 h-20 rounded-full ${glowColors[i]} blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
-                  {/* Icon container */}
-                  <div className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${colors[i]} border backdrop-blur-sm flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110`}>
-                    <step.Icon className={`w-7 h-7 ${iconColors[i]}`} />
+                  {/* Icon */}
+                  <div className={`relative w-20 h-20 rounded-2xl bg-gradient-to-br ${colors[i]} border backdrop-blur-sm flex items-center justify-center shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl`}>
+                    <step.Icon className={`w-9 h-9 ${iconColors[i]}`} />
                   </div>
 
                   {/* Label */}
-                  <span className="text-xs font-semibold text-muted-foreground text-center max-w-[100px] leading-tight">
+                  <span className="text-sm font-bold text-primary-foreground/60 text-center max-w-[120px] leading-tight">
                     {isHebrew ? labels[step.labelKey].he : labels[step.labelKey].en}
                   </span>
                 </div>
@@ -129,20 +141,20 @@ const AIFlowSection = () => {
             </div>
           </div>
 
-          {/* Mobile flow (vertical) */}
+          {/* Mobile flow */}
           <div className="md:hidden flex flex-col items-center gap-1 relative">
             {steps.map((step, i) => (
               <div key={i}>
-                <div className="flex items-center gap-4">
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${colors[i]} border backdrop-blur-sm flex items-center justify-center shadow-lg`}>
-                    <step.Icon className={`w-6 h-6 ${iconColors[i]}`} />
+                <div className="flex items-center gap-5">
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${colors[i]} border backdrop-blur-sm flex items-center justify-center shadow-xl`}>
+                    <step.Icon className={`w-7 h-7 ${iconColors[i]}`} />
                   </div>
-                  <span className="text-sm font-semibold text-muted-foreground">
+                  <span className="text-base font-bold text-primary-foreground/60">
                     {isHebrew ? labels[step.labelKey].he : labels[step.labelKey].en}
                   </span>
                 </div>
                 {i < steps.length - 1 && (
-                  <div className="w-px h-6 bg-gradient-to-b from-border to-transparent ml-7" />
+                  <div className="w-[2px] h-6 bg-gradient-to-b from-primary-foreground/10 to-transparent ml-8" />
                 )}
               </div>
             ))}

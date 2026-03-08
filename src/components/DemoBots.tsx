@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Bot, MessageSquare } from 'lucide-react';
+import { Bot, MessageSquare, Play } from 'lucide-react';
 import MockChatModal from './MockChatModal';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -19,41 +18,46 @@ const DemoBots = () => {
   }>;
 
   return (
-    <section id="demos" className="section-padding" ref={ref}>
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">{t('demos.title')}</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{t('demos.subtitle')}</p>
+    <section id="demos" className="section-padding bg-secondary/50" ref={ref}>
+      <div className="container mx-auto max-w-6xl">
+        <div className="text-center mb-6">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-primary tracking-tight">{t('demos.title')}</h2>
         </div>
+        <p className="text-center text-muted-foreground text-lg leading-relaxed max-w-3xl mx-auto mb-16">
+          {t('demos.subtitle')}
+        </p>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6">
           {Array.isArray(items) && items.map((item, index) => (
-            <Card key={index} className="group bg-card hover:shadow-lg transition-all duration-300 border-border">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center">
-                    <Bot className="h-5 w-5 text-primary-foreground" />
-                  </div>
-                  <CardTitle className="text-lg text-primary">{item.name}</CardTitle>
+            <div
+              key={index}
+              className="group p-8 rounded-2xl bg-card border border-border hover:shadow-lg hover:border-accent/30 transition-all duration-300"
+            >
+              <div className="flex items-start gap-4 mb-5">
+                <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center shrink-0">
+                  <Bot className="h-6 w-6 text-primary-foreground" />
                 </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground text-sm mb-3">{item.description}</p>
-                <div className="bg-secondary rounded-lg p-3 mb-4">
-                  <p className="text-xs text-muted-foreground flex items-start gap-2">
-                    <MessageSquare className="h-3.5 w-3.5 mt-0.5 shrink-0 text-accent" />
-                    {item.useCase}
-                  </p>
+                <div>
+                  <h3 className="text-xl font-bold text-primary">{item.name}</h3>
+                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{item.description}</p>
                 </div>
-                <Button
-                  variant="outline"
-                  className="w-full border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
-                  onClick={() => setOpenChat(index)}
-                >
-                  {item.buttonText}
-                </Button>
-              </CardContent>
-            </Card>
+              </div>
+
+              <div className="bg-secondary rounded-xl p-4 mb-6">
+                <p className="text-sm text-muted-foreground flex items-start gap-2.5">
+                  <MessageSquare className="h-4 w-4 mt-0.5 shrink-0 text-accent" />
+                  {item.useCase}
+                </p>
+              </div>
+
+              <Button
+                className="w-full gradient-accent text-accent-foreground font-semibold rounded-xl h-12 hover:opacity-90 transition-opacity"
+                onClick={() => setOpenChat(index)}
+              >
+                <Play className="h-4 w-4" />
+                {item.buttonText}
+              </Button>
+            </div>
           ))}
         </div>
       </div>

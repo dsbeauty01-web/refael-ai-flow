@@ -1,6 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Card, CardContent } from '@/components/ui/card';
-import { Quote } from 'lucide-react';
+import { Quote, Star } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const Testimonials = () => {
@@ -11,28 +10,44 @@ const Testimonials = () => {
     name: string;
     role: string;
     text: string;
+    result: string;
   }>;
 
   return (
-    <section id="testimonials" className="section-padding" ref={ref}>
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">{t('testimonials.title')}</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{t('testimonials.subtitle')}</p>
+    <section id="testimonials" className="section-padding bg-secondary/50" ref={ref}>
+      <div className="container mx-auto max-w-6xl">
+        <div className="text-center mb-6">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-primary tracking-tight">{t('testimonials.title')}</h2>
         </div>
+        <p className="text-center text-muted-foreground text-lg leading-relaxed max-w-3xl mx-auto mb-16">
+          {t('testimonials.subtitle')}
+        </p>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6">
           {Array.isArray(items) && items.map((item, index) => (
-            <Card key={index} className="bg-card border-border hover:shadow-md transition-all duration-300">
-              <CardContent className="pt-6">
-                <Quote className="h-8 w-8 text-accent/30 mb-4" />
-                <p className="text-foreground text-sm leading-relaxed mb-6">"{item.text}"</p>
-                <div className="border-t border-border pt-4">
-                  <p className="font-bold text-primary">{item.name}</p>
-                  <p className="text-xs text-muted-foreground">{item.role}</p>
-                </div>
-              </CardContent>
-            </Card>
+            <div key={index} className="p-8 rounded-2xl bg-card border border-border hover:shadow-lg transition-all duration-300 flex flex-col">
+              {/* Stars */}
+              <div className="flex gap-1 mb-5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-accent text-accent" />
+                ))}
+              </div>
+
+              {/* Quote */}
+              <Quote className="h-6 w-6 text-accent/25 mb-3" />
+              <p className="text-foreground leading-relaxed mb-6 flex-1">{item.text}</p>
+
+              {/* Result badge */}
+              <div className="bg-accent/10 rounded-xl p-3 mb-6">
+                <p className="text-sm font-bold text-accent text-center">{item.result}</p>
+              </div>
+
+              {/* Author */}
+              <div className="border-t border-border pt-5">
+                <p className="font-bold text-primary text-lg">{item.name}</p>
+                <p className="text-sm text-muted-foreground">{item.role}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>

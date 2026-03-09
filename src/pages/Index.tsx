@@ -26,6 +26,7 @@ const Index = () => {
       <ServicesSection />
       <ProductGrid />
       <DemoBots />
+      <AIStoreDemo />
       <HowItWorks />
       <WhyWorkWithMe />
       <Industries />

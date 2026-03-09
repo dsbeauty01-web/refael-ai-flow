@@ -5,6 +5,7 @@ import RAGSection from '@/components/RAGSection';
 import ServicesSection from '@/components/ServicesSection';
 import ProductGrid from '@/components/ProductGrid';
 import DemoBots from '@/components/DemoBots';
+import AIStoreDemo from '@/components/AIStoreDemo';
 import HowItWorks from '@/components/HowItWorks';
 import WhyWorkWithMe from '@/components/WhyWorkWithMe';
 import Industries from '@/components/Industries';

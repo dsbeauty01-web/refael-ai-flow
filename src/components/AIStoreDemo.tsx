@@ -15,7 +15,7 @@ const ChatIllustration = () => (
           <Bot className="h-4 w-4 text-accent-foreground" />
         </div>
         <span className="text-sm font-semibold text-foreground">AI Store Assistant</span>
-        <span className="ml-auto w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+        <span className="ml-auto w-2 h-2 rounded-full bg-accent animate-pulse" />
       </div>
 
       {/* Customer bubble */}

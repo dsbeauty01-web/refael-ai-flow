@@ -298,10 +298,10 @@ export const translations = {
       modalCta: 'דבר איתי על הפתרון הזה',
       items: [
         {
-          title: 'בוט תמיכה חכם',
-          shortDesc: 'מענה מיידי ללקוחות שלך, 24/7, עם תשובות מדויקות מבוססות מידע העסק.',
-          fullDesc: 'בוט AI שמבין שאלות של לקוחות, עונה מיידית על בסיס הנתונים של העסק שלך, ומפנה לנציג אנושי רק כשבאמת נדרש. מצמצם עומס פניות ומשפר שביעות רצון.',
-          highlights: ['מענה אנושי תוך שניות — ללא זמן המתנה', 'לומד מתוך מאגר המידע של העסק', 'העברה חכמה לנציג כשצריך', 'דוחות שבועיים על מגמות פניות'],
+          title: 'בוט WhatsApp AI',
+          shortDesc: 'בוט חכם שפועל ישירות בוואטסאפ — עונה ללקוחות, מטפל בפניות ומוכר בשבילך, 24/7.',
+          fullDesc: 'בוט AI שרץ ישירות בוואטסאפ של העסק שלך. הלקוחות שולחים הודעה ומקבלים מענה מיידי, אנושי ומדויק — בלי לחכות, בלי להתפשר. מסינון לידים ועד סגירת עסקאות.',
+          highlights: ['פועל ישירות בוואטסאפ — בלי אפליקציות נוספות', 'מענה אנושי תוך שניות, 24/7', 'מסנן לידים ומעביר רק את הרלוונטיים', 'דוחות שבועיים על שיחות ומגמות'],
           cta: 'למד עוד',
         },
         {
@@ -326,10 +326,10 @@ export const translations = {
           cta: 'למד עוד',
         },
         {
-          title: 'אוטומציית שיווק ותוכן',
-          shortDesc: 'יצירת תוכן, פרסום ברשתות חברתיות וניהול קמפיינים — הכל אוטומטי.',
-          fullDesc: 'מערכת שיוצרת תוכן מותאם למותג שלך, מפרסמת ברשתות, מתזמנת פוסטים ומנהלת לוח תוכן — כדי שתתמקד בעסק ולא בשיווק.',
-          highlights: ['תוכן מותאם לזהות המותג', 'פרסום אוטומטי בפייסבוק, אינסטגרם ולינקדאין', 'לוח תוכן שבועי חכם', 'דוחות ביצועים ואנליטיקס'],
+          title: 'אווטאר AI מדבר',
+          shortDesc: 'דמות דיגיטלית שמציגה את העסק שלך בווידאו — מקצועית, אישית ובלתי נשכחת.',
+          fullDesc: 'אווטאר AI ריאליסטי שמדבר בשמך — מציג מוצרים, מסביר שירותים ויוצר תוכן וידאו מרשים. בלי צילומים, בלי סטודיו, בלי עלויות מוגזמות.',
+          highlights: ['דמות דיגיטלית ריאליסטית בהתאמה אישית', 'יצירת וידאו מקצועי תוך דקות', 'תמיכה בעברית ואנגלית', 'מושלם לפרסום, הדרכות ודפי נחיתה'],
           cta: 'למד עוד',
         },
       ],
@@ -639,10 +639,10 @@ export const translations = {
       modalCta: 'Talk to me about this solution',
       items: [
         {
-          title: 'Smart Support Bot',
-          shortDesc: 'Instant answers for your customers, 24/7, with accurate responses based on your business data.',
-          fullDesc: 'An AI bot that understands customer questions, responds instantly from your business knowledge base, and escalates to a human only when truly needed. Reduces support load and boosts satisfaction.',
-          highlights: ['Human-like responses in seconds — zero wait time', 'Learns from your business knowledge base', 'Smart handoff to agents when needed', 'Weekly reports on inquiry trends'],
+          title: 'WhatsApp AI Bot',
+          shortDesc: 'A smart bot that runs directly on WhatsApp — answers customers, handles inquiries, and sells for you 24/7.',
+          fullDesc: 'An AI bot running directly on your business WhatsApp. Customers send a message and get instant, human-like, accurate responses — no waiting, no compromise. From lead filtering to closing deals.',
+          highlights: ['Runs directly on WhatsApp — no extra apps needed', 'Human-like responses in seconds, 24/7', 'Filters leads and forwards only relevant ones', 'Weekly reports on conversations and trends'],
           cta: 'Learn More',
         },
         {
@@ -667,10 +667,10 @@ export const translations = {
           cta: 'Learn More',
         },
         {
-          title: 'Marketing & Content Automation',
-          shortDesc: 'Content creation, social media publishing, and campaign management — all automated.',
-          fullDesc: 'A system that creates brand-matched content, publishes across networks, schedules posts, and manages a content calendar — so you focus on business, not marketing.',
-          highlights: ['Content matched to your brand identity', 'Auto-publishing to Facebook, Instagram, LinkedIn', 'Smart weekly content calendar', 'Performance reports and analytics'],
+          title: 'AI Talking Avatar',
+          shortDesc: 'A digital character that presents your business in video — professional, personal, and unforgettable.',
+          fullDesc: 'A realistic AI avatar that speaks on your behalf — presents products, explains services, and creates stunning video content. No filming, no studio, no excessive costs.',
+          highlights: ['Custom realistic digital character', 'Professional video creation in minutes', 'Hebrew and English support', 'Perfect for ads, tutorials, and landing pages'],
           cta: 'Learn More',
         },
       ],

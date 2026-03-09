@@ -639,10 +639,10 @@ export const translations = {
       modalCta: 'Talk to me about this solution',
       items: [
         {
-          title: 'Smart Support Bot',
-          shortDesc: 'Instant answers for your customers, 24/7, with accurate responses based on your business data.',
-          fullDesc: 'An AI bot that understands customer questions, responds instantly from your business knowledge base, and escalates to a human only when truly needed. Reduces support load and boosts satisfaction.',
-          highlights: ['Human-like responses in seconds — zero wait time', 'Learns from your business knowledge base', 'Smart handoff to agents when needed', 'Weekly reports on inquiry trends'],
+          title: 'WhatsApp AI Bot',
+          shortDesc: 'A smart bot that runs directly on WhatsApp — answers customers, handles inquiries, and sells for you 24/7.',
+          fullDesc: 'An AI bot running directly on your business WhatsApp. Customers send a message and get instant, human-like, accurate responses — no waiting, no compromise. From lead filtering to closing deals.',
+          highlights: ['Runs directly on WhatsApp — no extra apps needed', 'Human-like responses in seconds, 24/7', 'Filters leads and forwards only relevant ones', 'Weekly reports on conversations and trends'],
           cta: 'Learn More',
         },
         {

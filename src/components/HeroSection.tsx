@@ -1,6 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { MessageCircle, ArrowDown, Bot, Zap, BarChart3, MessageSquare, ShoppingCart, Workflow, Brain, Send, TrendingUp, Users, Calendar, FileText } from 'lucide-react';
+import { MessageCircle, ArrowDown, Bot, Zap, BarChart3, MessageSquare, ShoppingCart, Workflow, Brain, Send, TrendingUp, Users, Calendar, FileText, Filter, Video } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '97253327125';
 const WHATSAPP_MESSAGE_HE = 'שלום רפאל, אני מעוניין לשמוע על שירותי האוטומציה שלך';

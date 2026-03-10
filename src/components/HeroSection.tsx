@@ -1,6 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { MessageCircle, ArrowDown, Bot, Zap, BarChart3, MessageSquare, ShoppingCart, Workflow, Brain, Send, TrendingUp, Users, Calendar, FileText } from 'lucide-react';
+import { MessageCircle, ArrowDown, Bot, Zap, BarChart3, MessageSquare, ShoppingCart, Workflow, Brain, Send, TrendingUp, Users, Calendar, FileText, Filter, Video } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '97253327125';
 const WHATSAPP_MESSAGE_HE = 'שלום רפאל, אני מעוניין לשמוע על שירותי האוטומציה שלך';
@@ -101,6 +101,35 @@ const HeroSection = () => {
                 ))}
               </div>
             )}
+
+            {/* Product strip */}
+            <div className="mt-10 animate-fade-up" style={{ animationDelay: '0.55s' }}>
+              <div className={`flex flex-wrap gap-3 ${isHebrew ? 'flex-row-reverse' : ''}`}>
+                {[
+                  { icon: MessageCircle, label: isHebrew ? 'בוט WhatsApp AI' : 'WhatsApp AI Bot', color: 'hsl(142 70% 35%)' },
+                  { icon: Video, label: isHebrew ? 'אווטאר מדבר AI' : 'AI Talking Avatar', color: 'hsl(270 60% 55%)' },
+                  { icon: Filter, label: isHebrew ? 'סינון לידים AI' : 'AI Lead Filter', color: 'hsl(211 60% 50%)' },
+                  { icon: Calendar, label: isHebrew ? 'סוכן תיאומים AI' : 'AI Booking Agent', color: 'hsl(330 60% 50%)' },
+                  { icon: FileText, label: isHebrew ? 'הצעות מחיר AI' : 'AI Quote Generator', color: 'hsl(45 80% 50%)' },
+                ].map((product, i) => (
+                  <button
+                    key={i}
+                    onClick={() => document.querySelector('#products')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="group flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-primary-foreground/[0.06] border border-primary-foreground/[0.08] hover:border-primary-foreground/20 hover:bg-primary-foreground/[0.1] transition-all duration-300 cursor-pointer"
+                  >
+                    <div
+                      className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: `${product.color.replace(')', ' / 0.15)')}` }}
+                    >
+                      <product.icon className="w-3.5 h-3.5" style={{ color: product.color }} />
+                    </div>
+                    <span className="text-xs font-semibold text-primary-foreground/70 group-hover:text-primary-foreground/90 transition-colors whitespace-nowrap">
+                      {product.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Right side - Visual composition */}

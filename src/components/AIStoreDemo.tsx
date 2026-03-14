@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { ExternalLink, ShoppingBag, Send, Bot, User } from 'lucide-react';
+import { Send, Bot, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface ChatMessage {
@@ -14,7 +14,7 @@ const AIStoreDemo = () => {
   const ref = useScrollAnimation();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
-  const [replyText, setReplyText] = useState('Ask me anything about Hardgraft products.');
+  const [replyText, setReplyText] = useState('Send a message to start talking with the AI avatar.');
   const [videoUrl, setVideoUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -32,7 +32,7 @@ const AIStoreDemo = () => {
       const res = await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chatInput: text, sessionId: 'web-demo-session' }),
+        body: JSON.stringify({ chatInput: text, sessionId: 'web-session' }),
       });
       const data = await res.json();
       const output = Array.isArray(data) ? data[0] : data;
@@ -45,8 +45,9 @@ const AIStoreDemo = () => {
         setTimeout(() => videoRef.current?.play(), 100);
       }
     } catch {
-      setReplyText('Something went wrong. Please try again.');
-      setMessages(prev => [...prev, { role: 'ai', text: 'Something went wrong.' }]);
+      const errMsg = 'Something went wrong. Please try again.';
+      setReplyText(errMsg);
+      setMessages(prev => [...prev, { role: 'ai', text: errMsg }]);
     } finally {
       setLoading(false);
       setTimeout(() => chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 150);
@@ -56,41 +57,19 @@ const AIStoreDemo = () => {
   return (
     <section id="store-demo" className="section-padding bg-background" ref={ref}>
       <div className="container mx-auto max-w-6xl">
-        {/* Badge */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-4">
-            <ShoppingBag className="h-4 w-4" />
-            Live Demo
-          </div>
           <h2 className="text-3xl md:text-4xl font-extrabold text-primary tracking-tight">
-            See the AI E-commerce Bot Live
+            AI Avatar Chat
           </h2>
           <p className="text-muted-foreground text-lg mt-3 max-w-2xl mx-auto">
-            This demo shows how an AI avatar assistant can help customers shop in an online store.
+            Type a message and get a real-time AI video response.
           </p>
         </div>
 
-        {/* Instructions */}
-        <div className="flex justify-center mb-8">
-          <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-            <span className="font-semibold text-foreground">To test:</span>
-            <span>1. Browse the catalog</span>
-            <span>2. Pick a product</span>
-            <span>3. Ask the AI below</span>
-            <Button asChild size="sm" className="gradient-accent text-accent-foreground rounded-lg">
-              <a href="https://www.hardgraft.com/collections/all" target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="h-3.5 w-3.5" />
-                Open Hardgraft Store
-              </a>
-            </Button>
-          </div>
-        </div>
-
-        {/* Two-column: Avatar + Chat */}
-        <div className="grid lg:grid-cols-2 gap-6 mb-6">
-          {/* Left: Avatar */}
+        <div className="grid lg:grid-cols-2 gap-6">
+          {/* Left: Avatar Video + Reply */}
           <div className="rounded-2xl border border-border bg-card overflow-hidden flex flex-col">
-            <div className="aspect-video bg-secondary flex items-center justify-center relative">
+            <div className="aspect-video bg-secondary flex items-center justify-center">
               {videoUrl ? (
                 <video
                   ref={videoRef}
@@ -115,19 +94,14 @@ const AIStoreDemo = () => {
 
           {/* Right: Chat */}
           <div className="rounded-2xl border border-border bg-card flex flex-col h-[480px]">
-            {/* Chat header */}
             <div className="px-4 py-3 border-b border-border flex items-center gap-2">
               <div className="w-8 h-8 rounded-full gradient-accent flex items-center justify-center">
                 <Bot className="h-4 w-4 text-accent-foreground" />
               </div>
-              <div>
-                <p className="text-sm font-semibold text-foreground">AI Store Assistant</p>
-                <p className="text-xs text-muted-foreground">Product help & recommendations</p>
-              </div>
+              <p className="text-sm font-semibold text-foreground">AI Assistant</p>
               <span className="ml-auto w-2 h-2 rounded-full bg-accent animate-pulse" />
             </div>
 
-            {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
               {messages.length === 0 && (
                 <p className="text-sm text-muted-foreground text-center pt-8">
@@ -142,13 +116,11 @@ const AIStoreDemo = () => {
                         <Bot className="h-3 w-3 text-accent-foreground" />
                       </div>
                     )}
-                    <div
-                      className={`text-sm px-3 py-2 rounded-2xl ${
-                        msg.role === 'user'
-                          ? 'bg-accent/15 text-foreground rounded-br-sm'
-                          : 'bg-secondary text-foreground rounded-bl-sm'
-                      }`}
-                    >
+                    <div className={`text-sm px-3 py-2 rounded-2xl ${
+                      msg.role === 'user'
+                        ? 'bg-accent/15 text-foreground rounded-br-sm'
+                        : 'bg-secondary text-foreground rounded-bl-sm'
+                    }`}>
                       {msg.text}
                     </div>
                     {msg.role === 'user' && (
@@ -178,16 +150,12 @@ const AIStoreDemo = () => {
               <div ref={chatEndRef} />
             </div>
 
-            {/* Input */}
             <div className="p-3 border-t border-border">
-              <form
-                onSubmit={e => { e.preventDefault(); sendMessage(); }}
-                className="flex gap-2"
-              >
+              <form onSubmit={e => { e.preventDefault(); sendMessage(); }} className="flex gap-2">
                 <input
                   value={input}
                   onChange={e => setInput(e.target.value)}
-                  placeholder="Ask about bags, backpacks, or products..."
+                  placeholder="Type your message..."
                   className="flex-1 h-10 rounded-xl border border-input bg-background px-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   disabled={loading}
                 />
@@ -203,10 +171,6 @@ const AIStoreDemo = () => {
             </div>
           </div>
         </div>
-
-        <p className="text-xs text-muted-foreground text-center">
-          This is an independent demo project and is not affiliated with Hardgraft.
-        </p>
       </div>
     </section>
   );

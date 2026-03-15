@@ -15,9 +15,9 @@ const AIStoreDemo = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [replyText, setReplyText] = useState('Send a message to start talking with the AI avatar.');
-  const [videoUrl, setVideoUrl] = useState('');
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [sessionId] = useState(() => `session-${Date.now()}-${Math.random().toString(36).slice(2)}`);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   const sendMessage = async () => {
@@ -32,17 +32,17 @@ const AIStoreDemo = () => {
       const res = await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chatInput: text, sessionId: 'web-session' }),
+        body: JSON.stringify({ chatInput: text, sessionId }),
       });
       const data = await res.json();
       const output = Array.isArray(data) ? data[0] : data;
 
-      setReplyText(output.ai_reply_text);
-      setMessages(prev => [...prev, { role: 'ai', text: output.ai_reply_text }]);
+      const aiText = output.ai_reply_text || 'No response received.';
+      setReplyText(aiText);
+      setMessages(prev => [...prev, { role: 'ai', text: aiText }]);
 
-      if (output.video_url) {
+      if (output.video_url && typeof output.video_url === 'string' && output.video_url.trim() !== '') {
         setVideoUrl(output.video_url);
-        setTimeout(() => videoRef.current?.play(), 100);
       }
     } catch {
       const errMsg = 'Something went wrong. Please try again.';
@@ -72,12 +72,15 @@ const AIStoreDemo = () => {
             <div className="aspect-video bg-secondary flex items-center justify-center">
               {videoUrl ? (
                 <video
-                  ref={videoRef}
-                  src={videoUrl}
-                  className="w-full h-full object-cover"
+                  key={videoUrl}
+                  controls
                   autoPlay
                   playsInline
-                />
+                  className="w-full h-full object-cover"
+                  style={{ borderRadius: 0 }}
+                >
+                  <source src={videoUrl} type="video/mp4" />
+                </video>
               ) : (
                 <div className="flex flex-col items-center gap-3 text-muted-foreground">
                   <div className="w-16 h-16 rounded-full gradient-accent flex items-center justify-center">

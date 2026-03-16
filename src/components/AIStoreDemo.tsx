@@ -67,35 +67,8 @@ const AIStoreDemo = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6">
-          {/* Left: Avatar Video + Reply */}
-          <div className="rounded-2xl border border-border bg-card overflow-hidden flex flex-col">
-            <div className="aspect-video bg-secondary flex items-center justify-center">
-              {videoUrl ? (
-                <video
-                  key={videoUrl}
-                  controls
-                  autoPlay
-                  playsInline
-                  className="w-full h-full object-cover"
-                  style={{ borderRadius: 0 }}
-                >
-                  <source src={videoUrl} type="video/mp4" />
-                </video>
-              ) : (
-                <div className="flex flex-col items-center gap-3 text-muted-foreground">
-                  <div className="w-16 h-16 rounded-full gradient-accent flex items-center justify-center">
-                    <Bot className="h-8 w-8 text-accent-foreground" />
-                  </div>
-                  <span className="text-sm">Avatar will appear here</span>
-                </div>
-              )}
-            </div>
-            <div className="p-4 border-t border-border min-h-[80px]">
-              <p className="text-sm text-foreground leading-relaxed">{replyText}</p>
-            </div>
-          </div>
-
-          {/* Right: Chat */}
+          {/* Left: Chat */}
+          {/* Left: Chat */}
           <div className="rounded-2xl border border-border bg-card flex flex-col h-[480px]">
             <div className="px-4 py-3 border-b border-border flex items-center gap-2">
               <div className="w-8 h-8 rounded-full gradient-accent flex items-center justify-center">
@@ -171,6 +144,34 @@ const AIStoreDemo = () => {
                   <Send className="h-4 w-4" />
                 </Button>
               </form>
+            </div>
+          </div>
+
+          {/* Right: Avatar Video + Reply */}
+          <div className="rounded-2xl border border-border bg-card overflow-hidden flex flex-col">
+            <div className="aspect-video bg-secondary flex items-center justify-center">
+              {videoUrl ? (
+                <video
+                  key={videoUrl}
+                  controls
+                  autoPlay
+                  playsInline
+                  className="w-full h-full object-cover"
+                  style={{ borderRadius: 0 }}
+                >
+                  <source src={videoUrl} type="video/mp4" />
+                </video>
+              ) : (
+                <div className="flex flex-col items-center gap-3 text-muted-foreground">
+                  <div className="w-16 h-16 rounded-full gradient-accent flex items-center justify-center">
+                    <Bot className="h-8 w-8 text-accent-foreground" />
+                  </div>
+                  <span className="text-sm">Avatar will appear here</span>
+                </div>
+              )}
+            </div>
+            <div className="p-4 border-t border-border min-h-[80px]">
+              <p className="text-sm text-foreground leading-relaxed">{replyText}</p>
             </div>
           </div>
         </div>

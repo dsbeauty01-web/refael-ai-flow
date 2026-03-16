@@ -67,6 +67,7 @@ const AIStoreDemo = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6">
+          {/* Left: Chat */}
           {/* Left: Avatar Video + Reply */}
           <div className="rounded-2xl border border-border bg-card overflow-hidden flex flex-col">
             <div className="aspect-video bg-secondary flex items-center justify-center">

@@ -1,41 +1,21 @@
-import Header from '@/components/Header';
-import HeroSection from '@/components/HeroSection';
-import AIFlowSection from '@/components/AIFlowSection';
-import RAGSection from '@/components/RAGSection';
-import ServicesSection from '@/components/ServicesSection';
-import ProductGrid from '@/components/ProductGrid';
-import DemoBots from '@/components/DemoBots';
-import AIStoreDemo from '@/components/AIStoreDemo';
-import HowItWorks from '@/components/HowItWorks';
-import WhyWorkWithMe from '@/components/WhyWorkWithMe';
-import Industries from '@/components/Industries';
-import Testimonials from '@/components/Testimonials';
-import Portfolio from '@/components/Portfolio';
-import ContactSection from '@/components/ContactSection';
-import Footer from '@/components/Footer';
-import FloatingWhatsApp from '@/components/FloatingWhatsApp';
+import HeroSection from '@/components/portfolio/HeroSection';
+import ProductCards from '@/components/portfolio/ProductCards';
+import LiveDemos from '@/components/portfolio/LiveDemos';
+import TechDiagram from '@/components/portfolio/TechDiagram';
+import StatsSection from '@/components/portfolio/StatsSection';
+import ContactSection from '@/components/portfolio/ContactSection';
+import Footer from '@/components/portfolio/Footer';
 
-const Index = () => {
-  return (
-    <div className="min-h-screen">
-      <FloatingWhatsApp />
-      <Header />
-      <HeroSection />
-      <AIFlowSection />
-      <RAGSection />
-      <ServicesSection />
-      <ProductGrid />
-      <DemoBots />
-      <AIStoreDemo />
-      <HowItWorks />
-      <WhyWorkWithMe />
-      <Industries />
-      <Testimonials />
-      <Portfolio />
-      <ContactSection />
-      <Footer />
-    </div>
-  );
-};
+const Index = () => (
+  <div className="min-h-screen bg-background">
+    <HeroSection />
+    <ProductCards />
+    <LiveDemos />
+    <TechDiagram />
+    <StatsSection />
+    <ContactSection />
+    <Footer />
+  </div>
+);
 
 export default Index;

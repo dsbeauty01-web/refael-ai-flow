@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['DM Sans', 'sans-serif'],
+        sans: ['Outfit', 'sans-serif'],
         hebrew: ['Heebo', 'sans-serif'],
       },
       colors: {
@@ -23,8 +23,9 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        gold: "hsl(var(--gold))",
-        blue: "hsl(var(--blue))",
+        coral: "hsl(var(--coral))",
+        purple: "hsl(var(--purple))",
+        navy: "hsl(var(--navy))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

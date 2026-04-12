@@ -19,7 +19,7 @@ const ContactSection = () => {
   };
 
   const inputClass =
-    'w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-coral/50 transition-all text-sm';
+    'w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-coral/50 transition-all text-base';
 
   return (
     <section
@@ -30,10 +30,10 @@ const ContactSection = () => {
     >
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="font-hebrew text-3xl sm:text-4xl font-bold text-white mb-2">מוכנים? בואו נדבר.</h2>
-          <p className="text-white/60 mb-1">Ready? Let's Talk.</p>
-          <p className="font-hebrew text-sm text-white/40">ייעוץ ראשוני חינם.</p>
-          <p className="text-xs text-white/30">Free consultation.</p>
+          <h2 className="font-hebrew text-4xl sm:text-5xl font-black text-white mb-2">מוכנים? בואו נדבר.</h2>
+          <p className="text-lg text-white/60 mb-1">Ready? Let's Talk.</p>
+          <p className="font-hebrew text-base text-white/40">ייעוץ ראשוני חינם.</p>
+          <p className="text-sm text-white/30">Free consultation.</p>
         </div>
 
         <div
@@ -55,9 +55,9 @@ const ContactSection = () => {
               <option value="Other">אחר / Other</option>
             </select>
             <textarea placeholder="Tell me about your business... / ספרו לי על העסק שלכם..." rows={4} className={inputClass} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
-            <Button type="submit" size="lg" className="w-full gradient-coral text-white font-semibold h-14 rounded-xl hover:opacity-90 transition-all">
-              {sent ? '✓ Opening email...' : (
-                <>שלח <Send className="ml-2 h-4 w-4" /> Send</>
+            <Button type="submit" size="lg" className="w-full gradient-coral text-white font-bold h-14 rounded-xl hover:opacity-90 transition-all text-base">
+              {sent ? 'Opening email...' : (
+                <>שלח <Send className="ml-2 h-5 w-5" /> Send</>
               )}
             </Button>
           </form>
@@ -67,19 +67,19 @@ const ContactSection = () => {
               href="https://m.me/refael.silanikove"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-primary hover:bg-primary/90 text-white font-semibold px-6 py-4 rounded-xl transition-all"
+              className="flex items-center gap-3 bg-primary hover:bg-primary/90 text-white font-bold px-6 py-4 rounded-xl transition-all text-base"
             >
-              <MessageCircle className="h-5 w-5" />
+              <MessageCircle className="h-6 w-6" />
               Chat on Messenger
             </a>
             <a
               href="mailto:dsbeauty01@gmail.com"
-              className="flex items-center gap-3 bg-white/10 hover:bg-white/15 text-white font-semibold px-6 py-4 rounded-xl transition-all border border-white/10"
+              className="flex items-center gap-3 bg-white/10 hover:bg-white/15 text-white font-bold px-6 py-4 rounded-xl transition-all border border-white/10 text-base"
             >
-              <Mail className="h-5 w-5" />
+              <Mail className="h-6 w-6" />
               Email me directly
             </a>
-            <p className="text-sm text-white/40 text-center lg:text-left">
+            <p className="text-base text-white/40 text-center lg:text-left">
               I'm a human, not a bot (ironically)
             </p>
           </div>

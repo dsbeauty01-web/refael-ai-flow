@@ -1,16 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useInView } from '@/hooks/useInView';
 import { Play, Loader2 } from 'lucide-react';
+import AnimatedAvatar from './AnimatedAvatar';
+import SoundBars from './SoundBars';
 
 interface DemoProps {
   title: string;
   heTitle: string;
   src: string;
   chips: string[];
-  accentClass: string;
+  accentColor: string;
 }
 
-const DemoCard = ({ title, heTitle, src, chips, accentClass }: DemoProps) => {
+const TypingMessage = ({ text, delay }: { text: string; delay: number }) => {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), delay);
+    return () => clearTimeout(t);
+  }, [delay]);
+
+  if (!visible) return null;
+  return (
+    <div className="animate-fade-in bg-white/10 backdrop-blur rounded-xl px-3 py-2 text-xs text-white/80 max-w-[180px]">
+      {text}
+    </div>
+  );
+};
+
+const DemoCard = ({ title, heTitle, src, chips, accentColor }: DemoProps) => {
   const [state, setState] = useState<'idle' | 'loading' | 'loaded'>('idle');
 
   const handleLoad = () => {
@@ -20,37 +37,39 @@ const DemoCard = ({ title, heTitle, src, chips, accentClass }: DemoProps) => {
 
   return (
     <div className="flex flex-col">
-      <h3 className="font-hebrew text-xl font-bold mb-0.5">{heTitle}</h3>
-      <p className="text-sm text-muted-foreground mb-4">{title}</p>
-      <div className="relative rounded-2xl overflow-hidden border border-border bg-card" style={{ minHeight: 700 }}>
+      <h3 className="font-hebrew text-xl font-bold mb-0.5 text-white">{heTitle}</h3>
+      <p className="text-sm text-white/60 mb-4">{title}</p>
+      <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#12121f]" style={{ minHeight: 520 }}>
         {state === 'idle' && (
           <button
             onClick={handleLoad}
-            className="absolute inset-0 flex flex-col items-center justify-center gap-6 bg-card hover:bg-secondary/30 transition-colors cursor-pointer z-10"
+            className="absolute inset-0 flex flex-col items-center justify-center gap-6 bg-[#12121f] hover:bg-[#181828] transition-colors cursor-pointer z-10"
           >
-            {/* Avatar preview */}
-            <div className="relative">
-              <div className={`w-32 h-32 rounded-full ${accentClass} flex items-center justify-center shadow-xl`}>
-                <div className="w-28 h-28 rounded-full bg-white/10 backdrop-blur flex items-center justify-center">
-                  <div className="flex items-center gap-[3px] h-8">
-                    {[0,1,2,3,4].map(i => (
-                      <div key={i} className="w-[3px] rounded-full bg-white" style={{
-                        animation: `wave 1.2s ease-in-out ${i * 0.15}s infinite`, height: '12px'
-                      }} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="absolute inset-0 rounded-full animate-pulse-ring border-2 border-primary/30" />
+            {/* Animated avatar preview */}
+            <AnimatedAvatar size={150} />
+
+            {/* Sound bars below face */}
+            <SoundBars count={7} height={36} color={accentColor} />
+
+            {/* Mock typing messages */}
+            <div className="space-y-2 mt-2">
+              <TypingMessage text="Hi! How can I help you?" delay={500} />
+              <TypingMessage text="Looking for products?" delay={2000} />
             </div>
-            <div className="flex items-center gap-2 gradient-coral text-white font-semibold px-6 py-2.5 rounded-full shadow-lg">
-              <Play className="h-4 w-4" />
-              Load Demo
+
+            {/* Glowing play button */}
+            <div className="relative mt-4">
+              <div className="absolute inset-0 rounded-full animate-pulse-ring" style={{ background: `${accentColor}33`, transform: 'scale(1.5)' }} />
+              <div className="flex items-center gap-2 text-white font-semibold px-8 py-3 rounded-full shadow-xl relative z-10"
+                style={{ background: accentColor }}>
+                <Play className="h-5 w-5" />
+                Load Demo
+              </div>
             </div>
           </button>
         )}
         {state === 'loading' && (
-          <div className="absolute inset-0 flex items-center justify-center bg-card z-10">
+          <div className="absolute inset-0 flex items-center justify-center bg-[#12121f] z-10">
             <Loader2 className="h-8 w-8 text-primary animate-spin" />
           </div>
         )}
@@ -58,7 +77,7 @@ const DemoCard = ({ title, heTitle, src, chips, accentClass }: DemoProps) => {
           <iframe
             src={src}
             width="100%"
-            height="700"
+            height="520"
             className={`border-0 rounded-2xl transition-opacity duration-500 ${state === 'loaded' ? 'opacity-100' : 'opacity-0'}`}
             allow="camera; microphone; autoplay"
             title={title}
@@ -68,7 +87,7 @@ const DemoCard = ({ title, heTitle, src, chips, accentClass }: DemoProps) => {
       </div>
       <div className="flex flex-wrap gap-2 mt-3">
         {chips.map(c => (
-          <span key={c} className="text-xs px-3 py-1.5 rounded-full bg-secondary border border-border text-muted-foreground">
+          <span key={c} className="text-xs px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/60">
             {c}
           </span>
         ))}
@@ -106,14 +125,14 @@ const LiveDemos = () => {
             heTitle="עוזרת מכירות לחנות יופי"
             src="https://dsbeauty01-web.github.io/avatar/"
             chips={['Show me leather bags', 'Return policy?']}
-            accentClass="gradient-blue"
+            accentColor="hsl(217 91% 60%)"
           />
           <DemoCard
             title="Salon Receptionist"
             heTitle="פקידת קבלה למספרה"
             src="https://dsbeauty01-web.github.io/salon/"
             chips={['Book a haircut', 'Try voice']}
-            accentClass="gradient-coral"
+            accentColor="hsl(24 95% 53%)"
           />
         </div>
       </div>

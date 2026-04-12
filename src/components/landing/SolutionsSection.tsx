@@ -1,7 +1,7 @@
 import { useInView } from '@/hooks/useInView';
 import { ShoppingCart, Calendar, Video, MessageSquare, ShoppingBag, Check } from 'lucide-react';
-import AnimatedAvatar from './AnimatedAvatar';
 import SoundBars from './SoundBars';
+import avatarSpeaking from '@/assets/avatar-speaking.png';
 
 const solutions = [
   {
@@ -37,22 +37,21 @@ const solutions = [
 ];
 
 const AnimatedSalesVisual = () => (
-  <div className="relative bg-secondary/50 rounded-2xl p-4 space-y-3 overflow-hidden">
+  <div className="relative bg-secondary/50 rounded-2xl p-5 space-y-3 overflow-hidden">
     <div className="flex gap-2 items-start">
-      <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-        <MessageSquare className="h-3.5 w-3.5 text-primary" />
+      <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+        <MessageSquare className="h-4 w-4 text-primary" />
       </div>
-      <div className="bg-card rounded-xl px-3 py-2 text-xs">Show me leather bags under ₪300</div>
+      <div className="bg-card rounded-xl px-4 py-2.5 text-sm">Show me leather bags under ₪300</div>
     </div>
     <div className="flex gap-2 items-start justify-end">
-      <div className="gradient-blue text-white rounded-xl px-3 py-2 text-xs max-w-[200px]">
+      <div className="gradient-blue text-white rounded-xl px-4 py-2.5 text-sm max-w-[220px]">
         Here are 3 options with free shipping!
       </div>
     </div>
-    {/* Animated shopping bag */}
     <div className="flex justify-center pt-2">
       <div className="relative">
-        <ShoppingBag className="h-12 w-12 text-primary/40 animate-float" />
+        <ShoppingBag className="h-14 w-14 text-primary/40 animate-float" />
         {[0, 1, 2].map(i => (
           <div key={i} className="absolute w-3 h-3 rounded bg-primary/30 animate-float"
             style={{ top: -8 - i * 6, left: 10 + i * 8, animationDelay: `${i * 0.4}s`, animationDuration: '2s' }} />
@@ -63,15 +62,15 @@ const AnimatedSalesVisual = () => (
 );
 
 const AnimatedCalendarVisual = () => (
-  <div className="bg-secondary/50 rounded-2xl p-4">
-    <div className="grid grid-cols-7 gap-1 text-center text-[10px] text-muted-foreground mb-2">
+  <div className="bg-secondary/50 rounded-2xl p-5">
+    <div className="grid grid-cols-7 gap-1 text-center text-xs text-muted-foreground mb-2">
       {['Su','Mo','Tu','We','Th','Fr','Sa'].map(d => <div key={d}>{d}</div>)}
     </div>
-    <div className="grid grid-cols-7 gap-1 text-center text-xs">
+    <div className="grid grid-cols-7 gap-1 text-center text-sm">
       {Array.from({ length: 28 }, (_, i) => (
         <div
           key={i}
-          className={`py-1 rounded relative ${
+          className={`py-1.5 rounded relative ${
             [8, 14, 21].includes(i)
               ? 'gradient-coral text-white font-bold'
               : 'text-muted-foreground'
@@ -79,7 +78,7 @@ const AnimatedCalendarVisual = () => (
         >
           {i + 1}
           {i === 14 && (
-            <Check className="absolute -top-1 -right-1 h-3 w-3 text-green-500 animate-fade-in" style={{ animationDelay: '1s', animationFillMode: 'both' }} />
+            <Check className="absolute -top-1 -right-1 h-4 w-4 text-green-500 animate-fade-in" style={{ animationDelay: '1s', animationFillMode: 'both' }} />
           )}
         </div>
       ))}
@@ -89,9 +88,11 @@ const AnimatedCalendarVisual = () => (
 
 const AnimatedAvatarVisual = () => (
   <div className="flex flex-col items-center justify-center py-4 gap-3">
-    <AnimatedAvatar size={110} />
+    <div className="w-[120px] h-[120px] rounded-full overflow-hidden border-2 border-primary/20 shadow-lg">
+      <img src={avatarSpeaking} alt="Talking avatar" loading="lazy" width={512} height={512} className="w-full h-full object-cover" />
+    </div>
     <SoundBars count={5} height={24} color="hsl(217 91% 60% / 0.6)" />
-    <div className="bg-card px-3 py-1 rounded-full text-[10px] font-semibold border border-border shadow">
+    <div className="bg-card px-4 py-1.5 rounded-full text-xs font-semibold border border-border shadow">
       Speaking...
     </div>
   </div>
@@ -110,9 +111,9 @@ const SolutionsSection = () => {
     <section id="solutions" className="py-24 px-4 sm:px-6 lg:px-8" ref={ref}>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-xs font-semibold uppercase tracking-widest text-primary">Solutions</span>
-          <h2 className="font-hebrew text-3xl sm:text-4xl font-bold mt-3 mb-2">מה אני בונה לך</h2>
-          <p className="text-muted-foreground">What I Build For You</p>
+          <span className="text-sm font-semibold uppercase tracking-widest text-primary">Solutions</span>
+          <h2 className="font-hebrew text-4xl sm:text-5xl font-black mt-3 mb-2">מה אני בונה לך</h2>
+          <p className="text-lg text-muted-foreground">What I Build For You</p>
         </div>
 
         <div className="space-y-8">
@@ -129,26 +130,26 @@ const SolutionsSection = () => {
               </div>
               <div className={`${i % 2 === 1 ? 'lg:order-1' : ''}`} dir="rtl">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-11 h-11 rounded-xl gradient-blue flex items-center justify-center">
-                    <s.icon className="h-5 w-5 text-white" />
+                  <div className="w-12 h-12 rounded-xl gradient-blue flex items-center justify-center">
+                    <s.icon className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-hebrew text-xl font-bold">{s.heTitle}</h3>
-                    <p className="text-sm text-muted-foreground">{s.enTitle}</p>
+                    <h3 className="font-hebrew text-2xl font-bold">{s.heTitle}</h3>
+                    <p className="text-base text-muted-foreground">{s.enTitle}</p>
                   </div>
                 </div>
-                <p className="font-hebrew text-sm text-muted-foreground leading-relaxed mb-2">{s.heDesc}</p>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4" dir="ltr">{s.enDesc}</p>
+                <p className="font-hebrew text-base text-muted-foreground leading-relaxed mb-2">{s.heDesc}</p>
+                <p className="text-base text-muted-foreground leading-relaxed mb-4" dir="ltr">{s.enDesc}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {s.tags.map(t => (
-                    <span key={t} className="text-xs px-3 py-1 rounded-full bg-secondary text-secondary-foreground border border-border">
+                    <span key={t} className="text-sm px-4 py-1.5 rounded-full bg-secondary text-secondary-foreground border border-border">
                       {t}
                     </span>
                   ))}
                 </div>
-                <div className="text-xs space-y-1" dir="ltr">
+                <div className="text-sm space-y-1" dir="ltr">
                   <p className="text-muted-foreground line-through">{s.price.old}</p>
-                  <p className="text-primary font-semibold">{s.price.new}</p>
+                  <p className="text-primary font-bold">{s.price.new}</p>
                 </div>
               </div>
             </div>

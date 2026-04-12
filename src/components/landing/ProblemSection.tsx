@@ -28,9 +28,9 @@ const ProblemSection = () => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-card" ref={ref}>
       <div className="max-w-6xl mx-auto text-center">
-        <span className="text-xs font-semibold uppercase tracking-widest text-coral">The Problem</span>
-        <h2 className="font-hebrew text-3xl sm:text-4xl font-bold mt-3 mb-2">כל יום אתה מפסיד לקוחות</h2>
-        <p className="text-muted-foreground mb-16">Every Day You're Losing Customers</p>
+        <span className="text-sm font-semibold uppercase tracking-widest text-coral">The Problem</span>
+        <h2 className="font-hebrew text-4xl sm:text-5xl font-black mt-3 mb-2">כל יום אתה מפסיד לקוחות</h2>
+        <p className="text-lg text-muted-foreground mb-16">Every Day You're Losing Customers</p>
 
         <div className="grid md:grid-cols-3 gap-6">
           {problems.map((p, i) => (
@@ -41,12 +41,12 @@ const ProblemSection = () => {
               }`}
               style={{ transitionDelay: `${i * 150}ms` }}
             >
-              <div className="w-14 h-14 rounded-2xl bg-destructive/10 flex items-center justify-center mx-auto mb-5">
-                <p.icon className="h-7 w-7 text-destructive" />
+              <div className="w-16 h-16 rounded-2xl bg-destructive/10 flex items-center justify-center mx-auto mb-5">
+                <p.icon className="h-8 w-8 text-destructive" />
               </div>
-              <h3 className="font-hebrew text-lg font-bold mb-1">{p.he}</h3>
-              <p className="text-sm text-muted-foreground mb-3">{p.en}</p>
-              <p className="font-hebrew text-sm text-muted-foreground leading-relaxed" dir="rtl">{p.desc}</p>
+              <h3 className="font-hebrew text-xl font-bold mb-1">{p.he}</h3>
+              <p className="text-base text-muted-foreground mb-3">{p.en}</p>
+              <p className="font-hebrew text-base text-muted-foreground leading-relaxed" dir="rtl">{p.desc}</p>
             </div>
           ))}
         </div>

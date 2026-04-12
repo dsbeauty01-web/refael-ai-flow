@@ -28,8 +28,8 @@ const WhyMeSection = () => {
   return (
     <section id="why" className="py-24 px-4 sm:px-6 lg:px-8 bg-card" ref={ref}>
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="font-hebrew text-3xl sm:text-4xl font-bold mb-2">למה דווקא אני?</h2>
-        <p className="text-muted-foreground mb-16">Why Work With Me</p>
+        <h2 className="font-hebrew text-4xl sm:text-5xl font-black mb-2">למה דווקא אני?</h2>
+        <p className="text-lg text-muted-foreground mb-16">Why Work With Me</p>
 
         <div className="grid md:grid-cols-3 gap-6">
           {items.map((item, i) => (
@@ -40,12 +40,12 @@ const WhyMeSection = () => {
               }`}
               style={{ transitionDelay: `${i * 150}ms` }}
             >
-              <div className="w-14 h-14 rounded-2xl gradient-blue flex items-center justify-center mx-auto mb-5">
-                <item.icon className="h-7 w-7 text-white" />
+              <div className="w-16 h-16 rounded-2xl gradient-blue flex items-center justify-center mx-auto mb-5">
+                <item.icon className="h-8 w-8 text-white" />
               </div>
-              <h3 className="font-hebrew text-lg font-bold mb-1">{item.he}</h3>
-              <p className="text-sm text-muted-foreground mb-3">{item.en}</p>
-              <p className="font-hebrew text-sm text-muted-foreground leading-relaxed" dir="rtl">{item.desc}</p>
+              <h3 className="font-hebrew text-xl font-bold mb-1">{item.he}</h3>
+              <p className="text-base text-muted-foreground mb-3">{item.en}</p>
+              <p className="font-hebrew text-base text-muted-foreground leading-relaxed" dir="rtl">{item.desc}</p>
             </div>
           ))}
         </div>

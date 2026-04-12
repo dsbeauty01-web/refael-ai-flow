@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useInView } from '@/hooks/useInView';
 import { Play, Loader2 } from 'lucide-react';
-import AnimatedAvatar from './AnimatedAvatar';
 import SoundBars from './SoundBars';
+import demoAvatar from '@/assets/demo-avatar.png';
 
 interface DemoProps {
   title: string;
@@ -21,7 +21,7 @@ const TypingMessage = ({ text, delay }: { text: string; delay: number }) => {
 
   if (!visible) return null;
   return (
-    <div className="animate-fade-in bg-white/10 backdrop-blur rounded-xl px-3 py-2 text-xs text-white/80 max-w-[180px]">
+    <div className="animate-fade-in bg-white/10 backdrop-blur rounded-xl px-4 py-2.5 text-sm text-white/80 max-w-[200px]">
       {text}
     </div>
   );
@@ -37,18 +37,20 @@ const DemoCard = ({ title, heTitle, src, chips, accentColor }: DemoProps) => {
 
   return (
     <div className="flex flex-col">
-      <h3 className="font-hebrew text-xl font-bold mb-0.5 text-white">{heTitle}</h3>
-      <p className="text-sm text-white/60 mb-4">{title}</p>
+      <h3 className="font-hebrew text-2xl font-bold mb-1 text-white">{heTitle}</h3>
+      <p className="text-base text-white/60 mb-4">{title}</p>
       <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#12121f]" style={{ minHeight: 520 }}>
         {state === 'idle' && (
           <button
             onClick={handleLoad}
             className="absolute inset-0 flex flex-col items-center justify-center gap-6 bg-[#12121f] hover:bg-[#181828] transition-colors cursor-pointer z-10"
           >
-            {/* Animated avatar preview */}
-            <AnimatedAvatar size={150} />
+            {/* 3D Avatar preview */}
+            <div className="w-[160px] h-[160px] rounded-full overflow-hidden border-2 border-white/20 shadow-2xl">
+              <img src={demoAvatar} alt="Demo avatar" loading="lazy" width={512} height={512} className="w-full h-full object-cover" />
+            </div>
 
-            {/* Sound bars below face */}
+            {/* Sound bars below */}
             <SoundBars count={7} height={36} color={accentColor} />
 
             {/* Mock typing messages */}
@@ -60,7 +62,7 @@ const DemoCard = ({ title, heTitle, src, chips, accentColor }: DemoProps) => {
             {/* Glowing play button */}
             <div className="relative mt-4">
               <div className="absolute inset-0 rounded-full animate-pulse-ring" style={{ background: `${accentColor}33`, transform: 'scale(1.5)' }} />
-              <div className="flex items-center gap-2 text-white font-semibold px-8 py-3 rounded-full shadow-xl relative z-10"
+              <div className="flex items-center gap-2 text-white font-bold px-8 py-3 rounded-full shadow-xl relative z-10 text-base"
                 style={{ background: accentColor }}>
                 <Play className="h-5 w-5" />
                 Load Demo
@@ -70,7 +72,7 @@ const DemoCard = ({ title, heTitle, src, chips, accentColor }: DemoProps) => {
         )}
         {state === 'loading' && (
           <div className="absolute inset-0 flex items-center justify-center bg-[#12121f] z-10">
-            <Loader2 className="h-8 w-8 text-primary animate-spin" />
+            <Loader2 className="h-10 w-10 text-primary animate-spin" />
           </div>
         )}
         {(state === 'loading' || state === 'loaded') && (
@@ -87,7 +89,7 @@ const DemoCard = ({ title, heTitle, src, chips, accentColor }: DemoProps) => {
       </div>
       <div className="flex flex-wrap gap-2 mt-3">
         {chips.map(c => (
-          <span key={c} className="text-xs px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/60">
+          <span key={c} className="text-sm px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/60">
             {c}
           </span>
         ))}
@@ -108,11 +110,11 @@ const LiveDemos = () => {
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-xs font-semibold uppercase tracking-widest text-coral">Live Demos</span>
-          <h2 className="font-hebrew text-3xl sm:text-4xl font-bold mt-3 mb-2 text-white">
+          <span className="text-sm font-semibold uppercase tracking-widest text-coral">Live Demos</span>
+          <h2 className="font-hebrew text-4xl sm:text-5xl font-black mt-3 mb-2 text-white">
             אל תאמין לי — תנסה בעצמך
           </h2>
-          <p className="text-white/60">Don't Take My Word For It — Try Them Now</p>
+          <p className="text-lg text-white/60">Don't Take My Word For It — Try Them Now</p>
         </div>
 
         <div

@@ -114,6 +114,20 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
   }
 
+  .card-float {
+    @apply transition-all duration-300;
+    animation: gentle-float 6s ease-in-out infinite;
+  }
+  .card-float:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  }
+
+  @keyframes gentle-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-4px); }
+  }
+
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-12px); }
@@ -132,8 +146,8 @@
   }
 
   @keyframes orbit {
-    0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
-    100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+    0% { transform: rotate(0deg) translateX(160px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(160px) rotate(-360deg); }
   }
 
   @keyframes pulse-ring {
@@ -147,6 +161,11 @@
     50% { height: 28px; }
   }
 
+  @keyframes equalizer {
+    0% { height: 20%; }
+    100% { height: 100%; }
+  }
+
   @keyframes count-up {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
@@ -157,8 +176,48 @@
     50% { background-position: 100% 50%; }
   }
 
+  @keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.05); }
+  }
+
+  @keyframes speak {
+    0%, 100% { transform: scaleY(0.3) scaleX(0.85); border-radius: 50%; }
+    25% { transform: scaleY(1) scaleX(1); border-radius: 50%; }
+    50% { transform: scaleY(0.6) scaleX(0.9); border-radius: 50%; }
+    75% { transform: scaleY(0.9) scaleX(1); border-radius: 50%; }
+  }
+
+  @keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0.5) translateY(0); }
+    50% { opacity: 1; transform: scale(1.2) translateY(-20px); }
+  }
+
+  @keyframes bubble-bounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes particle {
+    0% { opacity: 0; transform: translateY(0) scale(0.5); }
+    20% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-400px) scale(0); }
+  }
+
+  .avatar-eye {
+    animation: blink 3s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  .avatar-mouth {
+    animation: speak 0.8s ease-in-out infinite;
+    transform-origin: center;
+  }
+
   .animate-float { animation: float 4s ease-in-out infinite; }
   .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
   .animate-blob { animation: blob 8s ease-in-out infinite; }
   .animate-pulse-ring { animation: pulse-ring 2s ease-in-out infinite; }
+  .animate-sparkle { animation: sparkle 2s ease-in-out infinite; }
+  .animate-particle { animation: particle 6s linear infinite; }
 }

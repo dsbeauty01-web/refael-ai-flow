@@ -1,20 +1,7 @@
 import { ArrowDown, Calendar, Search, Mail, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-const SoundWave = () => (
-  <div className="flex items-center gap-[3px] h-8">
-    {[0, 1, 2, 3, 4].map((i) => (
-      <div
-        key={i}
-        className="w-[3px] rounded-full bg-primary"
-        style={{
-          animation: `wave 1.2s ease-in-out ${i * 0.15}s infinite`,
-          height: '12px',
-        }}
-      />
-    ))}
-  </div>
-);
+import AnimatedAvatar from './AnimatedAvatar';
+import SoundBars from './SoundBars';
 
 const OrbitIcon = ({ icon: Icon, delay, color }: { icon: any; delay: number; color: string }) => (
   <div
@@ -24,49 +11,50 @@ const OrbitIcon = ({ icon: Icon, delay, color }: { icon: any; delay: number; col
       animationDelay: `${delay}s`,
     }}
   >
-    <div className={`w-10 h-10 rounded-xl glass flex items-center justify-center shadow-lg`}>
+    <div className="w-11 h-11 rounded-xl glass flex items-center justify-center shadow-lg">
       <Icon className="h-5 w-5" style={{ color }} />
     </div>
   </div>
 );
 
-const ChatBubble = ({ text, className }: { text: string; className: string }) => (
-  <div className={`absolute glass rounded-2xl px-4 py-2.5 text-xs font-medium text-foreground shadow-lg max-w-[180px] animate-float ${className}`}>
+const ChatBubble = ({ text, className, delay = '0s' }: { text: string; className: string; delay?: string }) => (
+  <div
+    className={`absolute glass rounded-2xl px-5 py-3.5 text-sm font-medium text-foreground shadow-xl max-w-[200px] ${className}`}
+    style={{ animation: `bubble-bounce 3s ease-in-out ${delay} infinite` }}
+  >
     {text}
   </div>
 );
 
+const Particle = ({ style }: { style: React.CSSProperties }) => (
+  <div
+    className="absolute w-1.5 h-1.5 rounded-full animate-particle"
+    style={{ background: 'radial-gradient(circle, hsl(var(--primary) / 0.7), transparent)', ...style }}
+  />
+);
+
 const HeroSection = () => (
   <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
-    {/* Animated gradient blobs */}
+    {/* Noise texture overlay */}
+    <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
+      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+      backgroundSize: '128px 128px',
+    }} />
+
+    {/* Larger animated gradient blobs */}
     <div className="absolute inset-0 overflow-hidden">
-      <div
-        className="absolute w-[600px] h-[600px] rounded-full opacity-30 animate-blob"
-        style={{
-          background: 'radial-gradient(circle, hsl(217 91% 60% / 0.4), transparent 70%)',
-          top: '10%',
-          left: '60%',
-        }}
-      />
-      <div
-        className="absolute w-[500px] h-[500px] rounded-full opacity-25 animate-blob"
-        style={{
-          background: 'radial-gradient(circle, hsl(263 70% 58% / 0.35), transparent 70%)',
-          top: '40%',
-          left: '30%',
-          animationDelay: '2s',
-        }}
-      />
-      <div
-        className="absolute w-[400px] h-[400px] rounded-full opacity-20 animate-blob"
-        style={{
-          background: 'radial-gradient(circle, hsl(24 95% 53% / 0.3), transparent 70%)',
-          top: '60%',
-          left: '70%',
-          animationDelay: '4s',
-        }}
-      />
+      <div className="absolute w-[800px] h-[800px] rounded-full opacity-35 animate-blob"
+        style={{ background: 'radial-gradient(circle, hsl(217 91% 60% / 0.5), transparent 70%)', top: '5%', left: '55%' }} />
+      <div className="absolute w-[700px] h-[700px] rounded-full opacity-30 animate-blob"
+        style={{ background: 'radial-gradient(circle, hsl(263 70% 58% / 0.45), transparent 70%)', top: '35%', left: '25%', animationDelay: '2s' }} />
+      <div className="absolute w-[600px] h-[600px] rounded-full opacity-25 animate-blob"
+        style={{ background: 'radial-gradient(circle, hsl(24 95% 53% / 0.4), transparent 70%)', top: '55%', left: '65%', animationDelay: '4s' }} />
     </div>
+
+    {/* Floating particles */}
+    {Array.from({ length: 12 }, (_, i) => (
+      <Particle key={i} style={{ left: `${10 + (i * 7) % 80}%`, bottom: `${-5}%`, animationDelay: `${i * 0.7}s`, animationDuration: `${5 + (i % 4)}s` }} />
+    ))}
 
     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid lg:grid-cols-2 gap-12 items-center">
       {/* Left: Text */}
@@ -109,36 +97,33 @@ const HeroSection = () => (
         </div>
       </div>
 
-      {/* Right: Avatar illustration */}
-      <div className="relative flex items-center justify-center h-[500px] lg:h-[550px]">
-        {/* Outer glow ring */}
-        <div className="absolute w-72 h-72 rounded-full border-2 border-primary/20 animate-pulse-ring" />
-        <div className="absolute w-80 h-80 rounded-full border border-primary/10 animate-pulse-ring" style={{ animationDelay: '0.5s' }} />
+      {/* Right: Animated avatar */}
+      <div className="relative flex items-center justify-center h-[500px] lg:h-[600px]">
+        {/* Glow rings */}
+        <div className="absolute w-80 h-80 rounded-full border-2 border-primary/20 animate-pulse-ring" />
+        <div className="absolute w-96 h-96 rounded-full border border-primary/10 animate-pulse-ring" style={{ animationDelay: '0.5s' }} />
 
-        {/* Avatar circle */}
-        <div className="relative w-56 h-56 rounded-full gradient-blue flex items-center justify-center shadow-2xl glow-blue">
-          <div className="w-48 h-48 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-            <SoundWave />
-          </div>
+        {/* Sound bars - left */}
+        <div className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2">
+          <SoundBars count={5} height={80} color="hsl(217 91% 60% / 0.6)" />
         </div>
+        {/* Sound bars - right */}
+        <div className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2">
+          <SoundBars count={5} height={80} color="hsl(263 70% 58% / 0.6)" />
+        </div>
+
+        {/* Avatar */}
+        <AnimatedAvatar size={260} />
 
         {/* Orbiting icons */}
         <OrbitIcon icon={Calendar} delay={0} color="hsl(24 95% 53%)" />
         <OrbitIcon icon={Search} delay={2.5} color="hsl(217 91% 60%)" />
         <OrbitIcon icon={Mail} delay={5} color="hsl(263 70% 58%)" />
 
-        {/* Floating chat bubbles */}
-        <ChatBubble text="Do you have this in blue?" className="top-8 right-4 lg:right-0" />
-        <ChatBubble
-          text="Appointment booked for 3pm!"
-          className="bottom-20 left-0 lg:left-4"
-          style-delay="1s"
-        />
-        <ChatBubble
-          text="Here are 3 matching products..."
-          className="top-24 left-8 lg:left-0"
-          style-delay="2s"
-        />
+        {/* Floating chat bubbles - bigger, bounce animated */}
+        <ChatBubble text="Do you have this in blue?" className="top-6 right-0 lg:right-[-20px]" delay="0s" />
+        <ChatBubble text="Appointment booked for 3pm!" className="bottom-16 left-[-10px] lg:left-0" delay="1s" />
+        <ChatBubble text="Here are 3 matching products..." className="top-28 left-4 lg:left-[-30px]" delay="2s" />
       </div>
     </div>
   </section>

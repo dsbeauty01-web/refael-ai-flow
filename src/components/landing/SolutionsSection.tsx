@@ -1,5 +1,7 @@
 import { useInView } from '@/hooks/useInView';
-import { ShoppingCart, Calendar, Video, MessageSquare } from 'lucide-react';
+import { ShoppingCart, Calendar, Video, MessageSquare, ShoppingBag, Check } from 'lucide-react';
+import AnimatedAvatar from './AnimatedAvatar';
+import SoundBars from './SoundBars';
 
 const solutions = [
   {
@@ -34,8 +36,8 @@ const solutions = [
   },
 ];
 
-const MockChat = () => (
-  <div className="bg-secondary/50 rounded-2xl p-4 space-y-3">
+const AnimatedSalesVisual = () => (
+  <div className="relative bg-secondary/50 rounded-2xl p-4 space-y-3 overflow-hidden">
     <div className="flex gap-2 items-start">
       <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
         <MessageSquare className="h-3.5 w-3.5 text-primary" />
@@ -47,10 +49,20 @@ const MockChat = () => (
         Here are 3 options with free shipping!
       </div>
     </div>
+    {/* Animated shopping bag */}
+    <div className="flex justify-center pt-2">
+      <div className="relative">
+        <ShoppingBag className="h-12 w-12 text-primary/40 animate-float" />
+        {[0, 1, 2].map(i => (
+          <div key={i} className="absolute w-3 h-3 rounded bg-primary/30 animate-float"
+            style={{ top: -8 - i * 6, left: 10 + i * 8, animationDelay: `${i * 0.4}s`, animationDuration: '2s' }} />
+        ))}
+      </div>
+    </div>
   </div>
 );
 
-const MockCalendar = () => (
+const AnimatedCalendarVisual = () => (
   <div className="bg-secondary/50 rounded-2xl p-4">
     <div className="grid grid-cols-7 gap-1 text-center text-[10px] text-muted-foreground mb-2">
       {['Su','Mo','Tu','We','Th','Fr','Sa'].map(d => <div key={d}>{d}</div>)}
@@ -59,44 +71,36 @@ const MockCalendar = () => (
       {Array.from({ length: 28 }, (_, i) => (
         <div
           key={i}
-          className={`py-1 rounded ${
+          className={`py-1 rounded relative ${
             [8, 14, 21].includes(i)
               ? 'gradient-coral text-white font-bold'
               : 'text-muted-foreground'
           }`}
         >
           {i + 1}
+          {i === 14 && (
+            <Check className="absolute -top-1 -right-1 h-3 w-3 text-green-500 animate-fade-in" style={{ animationDelay: '1s', animationFillMode: 'both' }} />
+          )}
         </div>
       ))}
     </div>
   </div>
 );
 
-const MockAvatar = () => (
-  <div className="flex items-center justify-center py-8">
-    <div className="relative">
-      <div className="w-28 h-28 rounded-full gradient-blue flex items-center justify-center">
-        <div className="w-24 h-24 rounded-full bg-white/10 backdrop-blur flex items-center justify-center">
-          <div className="flex items-center gap-[2px] h-6">
-            {[0,1,2,3,4].map(i => (
-              <div key={i} className="w-[2px] rounded-full bg-white" style={{
-                animation: `wave 1s ease-in-out ${i*0.12}s infinite`, height: '8px'
-              }} />
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-card px-3 py-1 rounded-full text-[10px] font-semibold border border-border shadow">
-        Speaking...
-      </div>
+const AnimatedAvatarVisual = () => (
+  <div className="flex flex-col items-center justify-center py-4 gap-3">
+    <AnimatedAvatar size={110} />
+    <SoundBars count={5} height={24} color="hsl(217 91% 60% / 0.6)" />
+    <div className="bg-card px-3 py-1 rounded-full text-[10px] font-semibold border border-border shadow">
+      Speaking...
     </div>
   </div>
 );
 
 const visuals: Record<string, React.ReactNode> = {
-  sales: <MockChat />,
-  calendar: <MockCalendar />,
-  avatar: <MockAvatar />,
+  sales: <AnimatedSalesVisual />,
+  calendar: <AnimatedCalendarVisual />,
+  avatar: <AnimatedAvatarVisual />,
 };
 
 const SolutionsSection = () => {
@@ -115,7 +119,7 @@ const SolutionsSection = () => {
           {solutions.map((s, i) => (
             <div
               key={i}
-              className={`grid lg:grid-cols-2 gap-8 items-center bg-card rounded-3xl border border-border p-6 sm:p-8 card-lift transition-all duration-500 ${
+              className={`grid lg:grid-cols-2 gap-8 items-center bg-card rounded-3xl border border-border p-6 sm:p-8 card-float transition-all duration-500 ${
                 inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${i * 200}ms` }}

@@ -5,10 +5,11 @@ import SoundBars from './SoundBars';
 import demoAvatar from '@/assets/demo-avatar.png';
 
 interface DemoProps {
-  title: string;
   heTitle: string;
+  enTitle: string;
   src: string;
-  chips: string[];
+  heChips: string[];
+  enChips: string[];
   accentColor: string;
 }
 
@@ -21,13 +22,13 @@ const TypingMessage = ({ text, delay }: { text: string; delay: number }) => {
 
   if (!visible) return null;
   return (
-    <div className="animate-fade-in bg-white/10 backdrop-blur rounded-xl px-4 py-2.5 text-sm text-white/80 max-w-[200px]">
+    <div className="animate-fade-in bg-white/10 backdrop-blur rounded-xl px-4 py-2.5 text-[0.95rem] text-white/80 max-w-[200px]">
       {text}
     </div>
   );
 };
 
-const DemoCard = ({ title, heTitle, src, chips, accentColor }: DemoProps) => {
+const DemoCard = ({ heTitle, enTitle, src, heChips, enChips, accentColor }: DemoProps) => {
   const [state, setState] = useState<'idle' | 'loading' | 'loaded'>('idle');
 
   const handleLoad = () => {
@@ -37,8 +38,8 @@ const DemoCard = ({ title, heTitle, src, chips, accentColor }: DemoProps) => {
 
   return (
     <div className="flex flex-col">
-      <h3 className="font-hebrew text-2xl font-bold mb-1 text-white">{heTitle}</h3>
-      <p className="text-base text-white/60 mb-4">{title}</p>
+      <h3 className="font-hebrew text-[1.5rem] font-bold mb-0.5 text-white text-right" dir="rtl">{heTitle}</h3>
+      <p className="text-[1.1rem] text-white/60 mb-4 text-left">{enTitle}</p>
       <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#12121f]" style={{ minHeight: 520 }}>
         {state === 'idle' && (
           <button
@@ -62,10 +63,12 @@ const DemoCard = ({ title, heTitle, src, chips, accentColor }: DemoProps) => {
             {/* Glowing play button */}
             <div className="relative mt-4">
               <div className="absolute inset-0 rounded-full animate-pulse-ring" style={{ background: `${accentColor}33`, transform: 'scale(1.5)' }} />
-              <div className="flex items-center gap-2 text-white font-bold px-8 py-3 rounded-full shadow-xl relative z-10 text-base"
+              <div className="flex items-center gap-2 text-white font-bold px-10 py-4 rounded-full shadow-xl relative z-10 text-[1.1rem]"
                 style={{ background: accentColor }}>
                 <Play className="h-5 w-5" />
-                Load Demo
+                <span className="font-hebrew">טען דמו</span>
+                <span className="mx-1">/</span>
+                <span>Load Demo</span>
               </div>
             </div>
           </button>
@@ -82,15 +85,15 @@ const DemoCard = ({ title, heTitle, src, chips, accentColor }: DemoProps) => {
             height="520"
             className={`border-0 rounded-2xl transition-opacity duration-500 ${state === 'loaded' ? 'opacity-100' : 'opacity-0'}`}
             allow="camera; microphone; autoplay"
-            title={title}
+            title={enTitle}
             onLoad={() => setState('loaded')}
           />
         )}
       </div>
       <div className="flex flex-wrap gap-2 mt-3">
-        {chips.map(c => (
-          <span key={c} className="text-sm px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/60">
-            {c}
+        {heChips.map((c, i) => (
+          <span key={c} className="text-[0.9rem] px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/60">
+            {c} / {enChips[i]}
           </span>
         ))}
       </div>
@@ -110,11 +113,13 @@ const LiveDemos = () => {
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-sm font-semibold uppercase tracking-widest text-coral">Live Demos</span>
-          <h2 className="font-hebrew text-4xl sm:text-5xl font-black mt-3 mb-2 text-white">
+          <span className="text-[0.85rem] font-semibold uppercase tracking-widest text-coral">Live Demos</span>
+          <h2 className="font-hebrew text-[3rem] sm:text-[3.5rem] font-black mt-3 mb-1 text-white text-right mx-auto max-w-3xl" dir="rtl">
             אל תאמין לי — תנסה בעצמך
           </h2>
-          <p className="text-lg text-white/60">Don't Take My Word For It — Try Them Now</p>
+          <p className="text-[1.8rem] font-semibold text-white/60 text-left mx-auto max-w-3xl">
+            Don't Take My Word For It — Try Them Now
+          </p>
         </div>
 
         <div
@@ -123,17 +128,19 @@ const LiveDemos = () => {
           }`}
         >
           <DemoCard
-            title="Beauty Store Assistant"
+            enTitle="Beauty Store Assistant"
             heTitle="עוזרת מכירות לחנות יופי"
             src="https://dsbeauty01-web.github.io/avatar/"
-            chips={['Show me leather bags', 'Return policy?']}
+            heChips={['הראי לי תיקים', 'מדיניות החזרה?']}
+            enChips={['Show me leather bags', 'Return policy?']}
             accentColor="hsl(217 91% 60%)"
           />
           <DemoCard
-            title="Salon Receptionist"
+            enTitle="Salon Receptionist"
             heTitle="פקידת קבלה למספרה"
             src="https://dsbeauty01-web.github.io/salon/"
-            chips={['Book a haircut', 'Try voice']}
+            heChips={['קבעי תור', 'נסי קול']}
+            enChips={['Book a haircut', 'Try voice']}
             accentColor="hsl(24 95% 53%)"
           />
         </div>

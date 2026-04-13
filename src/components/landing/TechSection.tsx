@@ -2,11 +2,11 @@ import { Brain, Search, Calendar, Table, User } from 'lucide-react';
 import { useInView } from '@/hooks/useInView';
 
 const techStack = [
-  { icon: Brain, label: 'AI Brain', sub: 'n8n' },
-  { icon: Search, label: 'Vector Search', sub: 'Pinecone' },
-  { icon: Calendar, label: 'Google Calendar', sub: 'Booking' },
-  { icon: Table, label: 'Google Sheets', sub: 'Data' },
-  { icon: User, label: 'D-ID Avatar', sub: 'Video' },
+  { icon: Brain, he: 'מוח AI', en: 'AI Brain', sub: 'n8n' },
+  { icon: Search, he: 'חיפוש וקטורי', en: 'Vector Search', sub: 'Pinecone' },
+  { icon: Calendar, he: 'יומן גוגל', en: 'Google Calendar', sub: 'Booking' },
+  { icon: Table, he: 'גיליונות גוגל', en: 'Google Sheets', sub: 'Data' },
+  { icon: User, he: 'אווטאר D-ID', en: 'D-ID Avatar', sub: 'Video' },
 ];
 
 const TechSection = () => {
@@ -16,9 +16,9 @@ const TechSection = () => {
     <section className="py-24 px-4 sm:px-6 lg:px-8" ref={ref}>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-sm font-semibold uppercase tracking-widest text-accent">Under The Hood</span>
-          <h2 className="font-hebrew text-4xl sm:text-5xl font-black mt-3 mb-2">מה מתחת למכסה</h2>
-          <p className="text-lg text-muted-foreground">What Powers These Bots</p>
+          <span className="text-[0.85rem] font-semibold uppercase tracking-widest text-accent">Under The Hood</span>
+          <h2 className="font-hebrew text-[3.5rem] font-black mt-3 mb-1 text-right mx-auto max-w-xl" dir="rtl">מה מתחת למכסה</h2>
+          <p className="text-[2rem] font-semibold text-muted-foreground text-left mx-auto max-w-xl">What Powers These Bots</p>
         </div>
 
         <div
@@ -26,19 +26,19 @@ const TechSection = () => {
             inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div dir="rtl">
-            <h3 className="font-hebrew text-2xl font-bold mb-3">מה זה RAG?</h3>
-            <p className="font-hebrew text-base text-muted-foreground leading-relaxed mb-2">
+          <div>
+            <h3 className="font-hebrew text-[1.5rem] font-bold mb-3 text-right" dir="rtl">מה זה RAG?</h3>
+            <p className="font-hebrew text-[1.1rem] text-muted-foreground leading-relaxed mb-1 text-right" dir="rtl">
               טכנולוגיה שמאפשרת לבוט לחפש מידע אמיתי מהעסק שלך ולענות בדיוק.
             </p>
-            <p className="text-base text-muted-foreground leading-relaxed mb-6" dir="ltr">
+            <p className="text-[1rem] text-muted-foreground leading-relaxed mb-6 text-left">
               Technology that lets the bot search your real business data and answer with facts.
             </p>
             <div className="bg-secondary/50 rounded-2xl p-6 border border-border">
-              <p className="font-hebrew text-base leading-relaxed mb-2">
+              <p className="font-hebrew text-[1.1rem] leading-relaxed mb-1 text-right" dir="rtl">
                 דמיין בוט תמיכה שמכיר כל מוצר בקטלוג של 10,000 פריטים — ועונה תוך 5 שניות.
               </p>
-              <p className="text-sm text-muted-foreground" dir="ltr">
+              <p className="text-[1rem] text-muted-foreground text-left">
                 Imagine a support bot that knows every detail of your 10,000-item catalog.
               </p>
             </div>
@@ -48,13 +48,14 @@ const TechSection = () => {
             {techStack.map((t, i) => (
               <div
                 key={i}
-                className="bg-card rounded-xl p-5 border border-border card-lift text-center"
+                className="bg-card rounded-xl p-5 border border-border card-float text-center"
               >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                  <t.icon className="h-6 w-6 text-primary" />
+                <div className="w-[40px] h-[40px] rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                  <t.icon className="h-[40px] w-[40px] text-primary" />
                 </div>
-                <p className="text-base font-semibold">{t.label}</p>
-                <p className="text-sm text-muted-foreground">{t.sub}</p>
+                <p className="font-hebrew text-[1rem] font-semibold text-right" dir="rtl">{t.he}</p>
+                <p className="text-[0.9rem] text-muted-foreground text-left">{t.en}</p>
+                <p className="text-[0.85rem] text-muted-foreground mt-1">{t.sub}</p>
               </div>
             ))}
           </div>

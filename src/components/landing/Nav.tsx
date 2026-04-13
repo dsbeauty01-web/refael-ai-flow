@@ -3,9 +3,9 @@ import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const links = [
-  { label: 'פתרונות', href: '#solutions' },
-  { label: 'דמואים חיים', href: '#demos' },
-  { label: 'למה אני', href: '#why' },
+  { he: 'פתרונות', en: 'Solutions', href: '#solutions' },
+  { he: 'דמואים חיים', en: 'Live Demos', href: '#demos' },
+  { he: 'למה אני', en: 'Why Me', href: '#why' },
 ];
 
 const Nav = () => {
@@ -22,17 +22,18 @@ const Nav = () => {
             <a
               key={l.href}
               href={l.href}
-              className="font-hebrew text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="flex flex-col items-center leading-tight"
             >
-              {l.label}
+              <span className="font-hebrew text-base font-medium text-foreground">{l.he}</span>
+              <span className="text-[0.85rem] text-muted-foreground">{l.en}</span>
             </a>
           ))}
           <Button
             size="sm"
-            className="gradient-coral text-white font-semibold rounded-full px-6"
+            className="gradient-coral text-white font-bold rounded-full px-6 text-[1.1rem]"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            דברו איתי
+            <span className="font-hebrew">דברו איתי</span>
           </Button>
         </div>
 
@@ -49,21 +50,22 @@ const Nav = () => {
             <a
               key={l.href}
               href={l.href}
-              className="block font-hebrew text-sm font-medium text-muted-foreground hover:text-foreground"
+              className="block"
               onClick={() => setOpen(false)}
             >
-              {l.label}
+              <span className="font-hebrew text-base font-medium text-foreground block text-right">{l.he}</span>
+              <span className="text-[0.85rem] text-muted-foreground block text-left">{l.en}</span>
             </a>
           ))}
           <Button
             size="sm"
-            className="gradient-coral text-white font-semibold rounded-full px-6 w-full"
+            className="gradient-coral text-white font-bold rounded-full px-6 w-full text-[1.1rem]"
             onClick={() => {
               setOpen(false);
               document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            דברו איתי
+            <span className="font-hebrew">דברו איתי</span>
           </Button>
         </div>
       )}

@@ -3,6 +3,7 @@ import { useInView } from '@/hooks/useInView';
 import { Play, Loader2 } from 'lucide-react';
 import SoundBars from './SoundBars';
 import demoAvatar from '@/assets/demo-avatar.png';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface DemoProps {
   heTitle: string;
@@ -19,7 +20,6 @@ const TypingMessage = ({ text, delay }: { text: string; delay: number }) => {
     const t = setTimeout(() => setVisible(true), delay);
     return () => clearTimeout(t);
   }, [delay]);
-
   if (!visible) return null;
   return (
     <div className="animate-fade-in bg-white/10 backdrop-blur rounded-xl px-4 py-2.5 text-[0.95rem] text-white/80 max-w-[200px]">
@@ -30,6 +30,7 @@ const TypingMessage = ({ text, delay }: { text: string; delay: number }) => {
 
 const DemoCard = ({ heTitle, enTitle, src, heChips, enChips, accentColor }: DemoProps) => {
   const [state, setState] = useState<'idle' | 'loading' | 'loaded'>('idle');
+  const { isHebrew } = useLanguage();
 
   const handleLoad = () => {
     setState('loading');
@@ -38,37 +39,25 @@ const DemoCard = ({ heTitle, enTitle, src, heChips, enChips, accentColor }: Demo
 
   return (
     <div className="flex flex-col">
-      <h3 className="font-hebrew text-[1.5rem] font-bold mb-0.5 text-white text-right" dir="rtl">{heTitle}</h3>
-      <p className="text-[1.1rem] text-white/60 mb-4 text-left">{enTitle}</p>
-      <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#12121f]" style={{ minHeight: 520 }}>
+      <h3 className={`text-[1.5rem] font-bold mb-1 text-white ${isHebrew ? 'font-hebrew text-right' : 'text-left'}`} dir={isHebrew ? 'rtl' : 'ltr'}>
+        {isHebrew ? heTitle : enTitle}
+      </h3>
+      <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#12121f] mt-3" style={{ minHeight: 520 }}>
         {state === 'idle' && (
-          <button
-            onClick={handleLoad}
-            className="absolute inset-0 flex flex-col items-center justify-center gap-6 bg-[#12121f] hover:bg-[#181828] transition-colors cursor-pointer z-10"
-          >
-            {/* 3D Avatar preview */}
+          <button onClick={handleLoad} className="absolute inset-0 flex flex-col items-center justify-center gap-6 bg-[#12121f] hover:bg-[#181828] transition-colors cursor-pointer z-10">
             <div className="w-[160px] h-[160px] rounded-full overflow-hidden border-2 border-white/20 shadow-2xl">
               <img src={demoAvatar} alt="Demo avatar" loading="lazy" width={512} height={512} className="w-full h-full object-cover" />
             </div>
-
-            {/* Sound bars below */}
             <SoundBars count={7} height={36} color={accentColor} />
-
-            {/* Mock typing messages */}
             <div className="space-y-2 mt-2">
-              <TypingMessage text="Hi! How can I help you?" delay={500} />
-              <TypingMessage text="Looking for products?" delay={2000} />
+              <TypingMessage text={isHebrew ? 'היי! איך אפשר לעזור?' : 'Hi! How can I help you?'} delay={500} />
+              <TypingMessage text={isHebrew ? 'מחפשים מוצרים?' : 'Looking for products?'} delay={2000} />
             </div>
-
-            {/* Glowing play button */}
             <div className="relative mt-4">
               <div className="absolute inset-0 rounded-full animate-pulse-ring" style={{ background: `${accentColor}33`, transform: 'scale(1.5)' }} />
-              <div className="flex items-center gap-2 text-white font-bold px-10 py-4 rounded-full shadow-xl relative z-10 text-[1.1rem]"
-                style={{ background: accentColor }}>
+              <div className="flex items-center gap-2 text-white font-bold px-10 py-4 rounded-full shadow-xl relative z-10 text-[1.1rem]" style={{ background: accentColor }}>
                 <Play className="h-5 w-5" />
-                <span className="font-hebrew">טען דמו</span>
-                <span className="mx-1">/</span>
-                <span>Load Demo</span>
+                <span className={isHebrew ? 'font-hebrew' : ''}>{isHebrew ? 'טען דמו' : 'Load Demo'}</span>
               </div>
             </div>
           </button>
@@ -79,21 +68,13 @@ const DemoCard = ({ heTitle, enTitle, src, heChips, enChips, accentColor }: Demo
           </div>
         )}
         {(state === 'loading' || state === 'loaded') && (
-          <iframe
-            src={src}
-            width="100%"
-            height="520"
-            className={`border-0 rounded-2xl transition-opacity duration-500 ${state === 'loaded' ? 'opacity-100' : 'opacity-0'}`}
-            allow="camera; microphone; autoplay"
-            title={enTitle}
-            onLoad={() => setState('loaded')}
-          />
+          <iframe src={src} width="100%" height="520" className={`border-0 rounded-2xl transition-opacity duration-500 ${state === 'loaded' ? 'opacity-100' : 'opacity-0'}`} allow="camera; microphone; autoplay" title={enTitle} onLoad={() => setState('loaded')} />
         )}
       </div>
       <div className="flex flex-wrap gap-2 mt-3">
-        {heChips.map((c, i) => (
-          <span key={c} className="text-[0.9rem] px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/60">
-            {c} / {enChips[i]}
+        {(isHebrew ? heChips : enChips).map(c => (
+          <span key={c} className={`text-[0.9rem] px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/60 ${isHebrew ? 'font-hebrew' : ''}`}>
+            {c}
           </span>
         ))}
       </div>
@@ -103,30 +84,21 @@ const DemoCard = ({ heTitle, enTitle, src, heChips, enChips, accentColor }: Demo
 
 const LiveDemos = () => {
   const { ref, inView } = useInView();
+  const { isHebrew } = useLanguage();
 
   return (
-    <section
-      id="demos"
-      className="py-24 px-4 sm:px-6 lg:px-8"
-      style={{ background: 'hsl(222 47% 11%)' }}
-      ref={ref}
-    >
+    <section id="demos" className="py-24 px-4 sm:px-6 lg:px-8" style={{ background: 'hsl(222 47% 11%)' }} ref={ref}>
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-[0.85rem] font-semibold uppercase tracking-widest text-coral">Live Demos</span>
-          <h2 className="font-hebrew text-[3rem] sm:text-[3.5rem] font-black mt-3 mb-1 text-white text-right mx-auto max-w-3xl" dir="rtl">
-            אל תאמין לי — תנסה בעצמך
+          <span className="text-[0.85rem] font-semibold uppercase tracking-widest text-coral">
+            {isHebrew ? 'דמואים חיים' : 'Live Demos'}
+          </span>
+          <h2 className={`text-[3rem] sm:text-[3.5rem] font-black mt-3 mb-1 text-white ${isHebrew ? 'font-hebrew' : ''}`} dir={isHebrew ? 'rtl' : 'ltr'}>
+            {isHebrew ? 'אל תאמין לי — תנסה בעצמך' : "Don't Take My Word For It — Try Them Now"}
           </h2>
-          <p className="text-[1.8rem] font-semibold text-white/60 text-left mx-auto max-w-3xl">
-            Don't Take My Word For It — Try Them Now
-          </p>
         </div>
 
-        <div
-          className={`grid lg:grid-cols-2 gap-8 transition-all duration-700 ${
-            inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
+        <div className={`grid lg:grid-cols-2 gap-8 transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <DemoCard
             enTitle="Beauty Store Assistant"
             heTitle="עוזרת מכירות לחנות יופי"

@@ -1,5 +1,6 @@
 import { PhoneOff, TrendingDown, DollarSign } from 'lucide-react';
 import { useInView } from '@/hooks/useInView';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const problems = [
   {
@@ -27,19 +28,19 @@ const problems = [
 
 const ProblemSection = () => {
   const { ref, inView } = useInView();
+  const { isHebrew } = useLanguage();
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-card" ref={ref}>
       <div className="max-w-6xl mx-auto text-center">
-        <span className="text-[0.85rem] font-semibold uppercase tracking-widest text-coral">The Problem</span>
-        <h2 className="font-hebrew text-[3.5rem] font-black mt-3 mb-1 text-right mx-auto max-w-2xl" dir="rtl">
-          כל יום אתה מפסיד לקוחות
+        <span className="text-[0.85rem] font-semibold uppercase tracking-widest text-coral">
+          {isHebrew ? 'הבעיה' : 'The Problem'}
+        </span>
+        <h2 className={`text-[3.5rem] font-black mt-3 mb-1 ${isHebrew ? 'font-hebrew' : ''}`} dir={isHebrew ? 'rtl' : 'ltr'}>
+          {isHebrew ? 'כל יום אתה מפסיד לקוחות' : "Every Day You're Losing Customers"}
         </h2>
-        <p className="text-[2rem] font-semibold text-muted-foreground mb-16 text-left mx-auto max-w-2xl">
-          Every Day You're Losing Customers
-        </p>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6 mt-16">
           {problems.map((p, i) => (
             <div
               key={i}
@@ -51,10 +52,12 @@ const ProblemSection = () => {
               <div className="w-16 h-16 rounded-2xl bg-destructive/10 flex items-center justify-center mx-auto mb-5">
                 <p.icon className="h-12 w-12 text-destructive" />
               </div>
-              <h3 className="font-hebrew text-[1.4rem] font-bold mb-1 text-right" dir="rtl">{p.he}</h3>
-              <p className="text-[1.1rem] text-muted-foreground mb-3 text-left">{p.en}</p>
-              <p className="font-hebrew text-[1.1rem] text-muted-foreground leading-relaxed text-right" dir="rtl">{p.heDesc}</p>
-              <p className="text-[1rem] text-muted-foreground leading-relaxed mt-1 text-left">{p.enDesc}</p>
+              <h3 className={`text-[1.4rem] font-bold mb-3 ${isHebrew ? 'font-hebrew' : ''}`} dir={isHebrew ? 'rtl' : 'ltr'}>
+                {isHebrew ? p.he : p.en}
+              </h3>
+              <p className={`text-[1.1rem] text-muted-foreground leading-relaxed ${isHebrew ? 'font-hebrew' : ''}`} dir={isHebrew ? 'rtl' : 'ltr'}>
+                {isHebrew ? p.heDesc : p.enDesc}
+              </p>
             </div>
           ))}
         </div>

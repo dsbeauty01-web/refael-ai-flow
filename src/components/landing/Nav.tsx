@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const links = [
   { he: 'פתרונות', en: 'Solutions', href: '#solutions' },
@@ -10,6 +11,7 @@ const links = [
 
 const Nav = () => {
   const [open, setOpen] = useState(false);
+  const { language, setLanguage, isHebrew } = useLanguage();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
@@ -17,23 +19,39 @@ const Nav = () => {
         <a href="#" className="text-xl font-bold text-gradient">Refael.ai</a>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="flex flex-col items-center leading-tight"
+              className={`text-base font-medium text-muted-foreground hover:text-foreground transition-colors ${isHebrew ? 'font-hebrew' : ''}`}
             >
-              <span className="font-hebrew text-base font-medium text-foreground">{l.he}</span>
-              <span className="text-[0.85rem] text-muted-foreground">{l.en}</span>
+              {isHebrew ? l.he : l.en}
             </a>
           ))}
+
+          {/* Language toggle */}
+          <div className="flex items-center gap-1 bg-secondary rounded-full p-1 border border-border">
+            <button
+              onClick={() => setLanguage('he')}
+              className={`px-3 py-1 rounded-full text-[0.85rem] font-bold transition-all ${language === 'he' ? 'bg-primary text-white shadow' : 'text-muted-foreground hover:text-foreground'}`}
+            >
+              HE
+            </button>
+            <button
+              onClick={() => setLanguage('en')}
+              className={`px-3 py-1 rounded-full text-[0.85rem] font-bold transition-all ${language === 'en' ? 'bg-primary text-white shadow' : 'text-muted-foreground hover:text-foreground'}`}
+            >
+              EN
+            </button>
+          </div>
+
           <Button
             size="sm"
             className="gradient-coral text-white font-bold rounded-full px-6 text-[1.1rem]"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            <span className="font-hebrew">דברו איתי</span>
+            <span className={isHebrew ? 'font-hebrew' : ''}>{isHebrew ? 'דברו איתי' : 'Contact Me'}</span>
           </Button>
         </div>
 
@@ -46,15 +64,30 @@ const Nav = () => {
       {/* Mobile menu */}
       {open && (
         <div className="md:hidden glass border-t border-border/50 px-4 py-4 space-y-3">
+          {/* Language toggle mobile */}
+          <div className="flex items-center gap-1 bg-secondary rounded-full p-1 border border-border w-fit">
+            <button
+              onClick={() => setLanguage('he')}
+              className={`px-3 py-1 rounded-full text-[0.85rem] font-bold transition-all ${language === 'he' ? 'bg-primary text-white shadow' : 'text-muted-foreground'}`}
+            >
+              HE
+            </button>
+            <button
+              onClick={() => setLanguage('en')}
+              className={`px-3 py-1 rounded-full text-[0.85rem] font-bold transition-all ${language === 'en' ? 'bg-primary text-white shadow' : 'text-muted-foreground'}`}
+            >
+              EN
+            </button>
+          </div>
+
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="block"
+              className={`block text-base font-medium text-muted-foreground hover:text-foreground ${isHebrew ? 'font-hebrew text-right' : 'text-left'}`}
               onClick={() => setOpen(false)}
             >
-              <span className="font-hebrew text-base font-medium text-foreground block text-right">{l.he}</span>
-              <span className="text-[0.85rem] text-muted-foreground block text-left">{l.en}</span>
+              {isHebrew ? l.he : l.en}
             </a>
           ))}
           <Button
@@ -65,7 +98,7 @@ const Nav = () => {
               document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            <span className="font-hebrew">דברו איתי</span>
+            <span className={isHebrew ? 'font-hebrew' : ''}>{isHebrew ? 'דברו איתי' : 'Contact Me'}</span>
           </Button>
         </div>
       )}

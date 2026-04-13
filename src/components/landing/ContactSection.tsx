@@ -19,7 +19,7 @@ const ContactSection = () => {
   };
 
   const inputClass =
-    'w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-coral/50 transition-all text-base';
+    'w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-coral/50 transition-all text-[1rem]';
 
   return (
     <section
@@ -30,10 +30,10 @@ const ContactSection = () => {
     >
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="font-hebrew text-4xl sm:text-5xl font-black text-white mb-2">מוכנים? בואו נדבר.</h2>
-          <p className="text-lg text-white/60 mb-1">Ready? Let's Talk.</p>
-          <p className="font-hebrew text-base text-white/40">ייעוץ ראשוני חינם.</p>
-          <p className="text-sm text-white/30">Free consultation.</p>
+          <h2 className="font-hebrew text-[3rem] sm:text-[3.5rem] font-black text-white mb-1 text-right mx-auto max-w-xl" dir="rtl">מוכנים? בואו נדבר.</h2>
+          <p className="text-[1.8rem] font-semibold text-white/60 mb-2 text-left mx-auto max-w-xl">Ready? Let's Talk.</p>
+          <p className="font-hebrew text-[1.1rem] text-white/40 text-right mx-auto max-w-xl" dir="rtl">ייעוץ ראשוני חינם.</p>
+          <p className="text-[1rem] text-white/30 text-left mx-auto max-w-xl">Free consultation.</p>
         </div>
 
         <div
@@ -42,22 +42,38 @@ const ContactSection = () => {
           }`}
         >
           <form onSubmit={handleSubmit} className="space-y-4">
-            <input type="text" placeholder="Name / שם" required className={inputClass} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-            <input type="email" placeholder="Email / אימייל" required className={inputClass} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-            <select className={inputClass} value={form.business} onChange={(e) => setForm({ ...form, business: e.target.value })}>
-              <option value="">Business type / סוג עסק</option>
-              <option value="Salon">מספרה / Salon</option>
-              <option value="Clinic">קליניקה / Clinic</option>
-              <option value="Restaurant">מסעדה / Restaurant</option>
-              <option value="E-commerce">חנות / E-commerce</option>
-              <option value="Real Estate">נדל"ן / Real Estate</option>
-              <option value="Consultant">יועץ / Consultant</option>
-              <option value="Other">אחר / Other</option>
-            </select>
-            <textarea placeholder="Tell me about your business... / ספרו לי על העסק שלכם..." rows={4} className={inputClass} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
-            <Button type="submit" size="lg" className="w-full gradient-coral text-white font-bold h-14 rounded-xl hover:opacity-90 transition-all text-base">
+            <div>
+              <label className="block font-hebrew text-[0.95rem] text-white/60 mb-1 text-right" dir="rtl">שם</label>
+              <label className="block text-[0.85rem] text-white/40 mb-2 text-left">Name</label>
+              <input type="text" placeholder="Your name / השם שלך" required className={inputClass} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+            </div>
+            <div>
+              <label className="block font-hebrew text-[0.95rem] text-white/60 mb-1 text-right" dir="rtl">אימייל</label>
+              <label className="block text-[0.85rem] text-white/40 mb-2 text-left">Email</label>
+              <input type="email" placeholder="your@email.com" required className={inputClass} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+            </div>
+            <div>
+              <label className="block font-hebrew text-[0.95rem] text-white/60 mb-1 text-right" dir="rtl">סוג עסק</label>
+              <label className="block text-[0.85rem] text-white/40 mb-2 text-left">Business type</label>
+              <select className={inputClass} value={form.business} onChange={(e) => setForm({ ...form, business: e.target.value })}>
+                <option value="">בחר / Select</option>
+                <option value="Salon">מספרה / Salon</option>
+                <option value="Clinic">קליניקה / Clinic</option>
+                <option value="Restaurant">מסעדה / Restaurant</option>
+                <option value="E-commerce">חנות / E-commerce</option>
+                <option value="Real Estate">נדל"ן / Real Estate</option>
+                <option value="Consultant">יועץ / Consultant</option>
+                <option value="Other">אחר / Other</option>
+              </select>
+            </div>
+            <div>
+              <label className="block font-hebrew text-[0.95rem] text-white/60 mb-1 text-right" dir="rtl">הודעה</label>
+              <label className="block text-[0.85rem] text-white/40 mb-2 text-left">Message</label>
+              <textarea placeholder="Tell me about your business..." rows={4} className={inputClass} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
+            </div>
+            <Button type="submit" size="lg" className="w-full gradient-coral text-white font-bold h-14 rounded-xl hover:opacity-90 transition-all text-[1.1rem]">
               {sent ? 'Opening email...' : (
-                <>שלח <Send className="ml-2 h-5 w-5" /> Send</>
+                <><span className="font-hebrew">שלח</span> <Send className="mx-2 h-5 w-5" /> <span>Send</span></>
               )}
             </Button>
           </form>
@@ -67,21 +83,28 @@ const ContactSection = () => {
               href="https://m.me/refael.silanikove"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-primary hover:bg-primary/90 text-white font-bold px-6 py-4 rounded-xl transition-all text-base"
+              className="flex items-center gap-3 bg-primary hover:bg-primary/90 text-white font-bold px-6 py-4 rounded-xl transition-all text-[1.1rem]"
             >
               <MessageCircle className="h-6 w-6" />
-              Chat on Messenger
+              <div>
+                <span className="font-hebrew block text-right" dir="rtl">שלחו הודעה במסנג׳ר</span>
+                <span className="block text-left text-white/80 text-[0.95rem]">Chat on Messenger</span>
+              </div>
             </a>
             <a
               href="mailto:dsbeauty01@gmail.com"
-              className="flex items-center gap-3 bg-white/10 hover:bg-white/15 text-white font-bold px-6 py-4 rounded-xl transition-all border border-white/10 text-base"
+              className="flex items-center gap-3 bg-white/10 hover:bg-white/15 text-white font-bold px-6 py-4 rounded-xl transition-all border border-white/10 text-[1.1rem]"
             >
               <Mail className="h-6 w-6" />
-              Email me directly
+              <div>
+                <span className="font-hebrew block text-right" dir="rtl">שלחו מייל</span>
+                <span className="block text-left text-white/80 text-[0.95rem]">Email me directly</span>
+              </div>
             </a>
-            <p className="text-base text-white/40 text-center lg:text-left">
-              I'm a human, not a bot (ironically)
-            </p>
+            <div className="text-center lg:text-left">
+              <p className="font-hebrew text-[1rem] text-white/40 text-right" dir="rtl">אני בן אדם, לא בוט (באירוניה)</p>
+              <p className="text-[0.9rem] text-white/30 text-left">I'm a human, not a bot (ironically)</p>
+            </div>
           </div>
         </div>
       </div>

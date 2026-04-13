@@ -19,7 +19,7 @@ const OrbitIcon = ({ icon: Icon, delay, color }: { icon: any; delay: number; col
 
 const ChatBubble = ({ text, className, delay = '0s' }: { text: string; className: string; delay?: string }) => (
   <div
-    className={`absolute glass rounded-2xl px-6 py-4 text-base font-medium text-foreground shadow-xl max-w-[220px] ${className}`}
+    className={`absolute glass rounded-2xl px-6 py-4 text-[0.95rem] font-medium text-foreground shadow-xl max-w-[240px] ${className}`}
     style={{ animation: `bubble-bounce 3s ease-in-out ${delay} infinite` }}
   >
     {text}
@@ -58,41 +58,48 @@ const HeroSection = () => (
 
     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid lg:grid-cols-2 gap-12 items-center">
       {/* Left: Text */}
-      <div className="text-right" dir="rtl">
-        <span className="inline-block gradient-coral text-white text-sm font-semibold px-5 py-2 rounded-full mb-6">
+      <div>
+        <span className="inline-block gradient-coral text-white text-[0.85rem] font-semibold px-5 py-2 rounded-full mb-6">
           FOR SMALL BUSINESSES
         </span>
-        <h1 className="font-hebrew text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-4 leading-tight">
+
+        {/* Hebrew heading */}
+        <h1 className="font-hebrew text-[3.5rem] sm:text-[4rem] lg:text-[4.5rem] font-black text-foreground mb-2 leading-[1.1] text-right" dir="rtl">
           הלקוחות שלך מחכים.
           <br />
           <span className="text-gradient">אף אחד לא עונה.</span>
         </h1>
-        <p className="text-xl sm:text-2xl font-bold text-muted-foreground mb-5">
+        {/* English heading */}
+        <p className="text-[1.8rem] sm:text-[2rem] font-semibold text-muted-foreground mb-6 text-left">
           Your customers are waiting. Nobody's answering.
         </p>
-        <p className="font-hebrew text-base text-muted-foreground mb-2 leading-relaxed max-w-xl">
+
+        {/* Hebrew description */}
+        <p className="font-hebrew text-[1.2rem] text-foreground/80 mb-2 leading-relaxed max-w-xl text-right" dir="rtl">
           אני בונה בוטים חכמים עם פנים אמיתיות שעונים ללקוחות, קובעים תורים, ומוכרים — גם ב-3 בלילה. מה שחברות גדולות משלמות עליו עשרות אלפים, אני בונה תוך ימים.
         </p>
-        <p className="text-base text-muted-foreground mb-10 leading-relaxed max-w-xl" dir="ltr">
+        {/* English description */}
+        <p className="text-[1.1rem] text-muted-foreground mb-10 leading-relaxed max-w-xl text-left">
           I build AI bots with real talking faces that answer customers, book appointments, and sell — even at 3am. What big companies pay $10K+ for, I build in days.
         </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-end">
+
+        <div className="flex flex-col sm:flex-row gap-3">
           <Button
             size="lg"
-            className="gradient-coral text-white font-bold text-base h-14 px-10 rounded-full hover:opacity-90 transition-all shadow-lg glow-coral"
+            className="gradient-coral text-white font-bold text-[1.1rem] h-14 px-10 rounded-full hover:opacity-90 transition-all shadow-lg glow-coral"
             onClick={() => document.getElementById('demos')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            ראו את הדמואים החיים
+            <span className="font-hebrew">ראו את הדמואים החיים</span>
             <ArrowDown className="mr-2 h-5 w-5" />
           </Button>
           <Button
             size="lg"
             variant="outline"
-            className="border-border text-foreground hover:bg-secondary font-bold text-base h-14 px-10 rounded-full"
+            className="border-border text-foreground hover:bg-secondary font-bold text-[1.1rem] h-14 px-10 rounded-full"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
             <MessageCircle className="ml-2 h-5 w-5" />
-            בואו נדבר
+            <span className="font-hebrew">בואו נדבר</span>
           </Button>
         </div>
       </div>
@@ -100,8 +107,8 @@ const HeroSection = () => (
       {/* Right: 3D Avatar Image */}
       <div className="relative flex items-center justify-center h-[500px] lg:h-[650px]">
         {/* Glow rings */}
-        <div className="absolute w-[360px] h-[360px] rounded-full border-2 border-primary/20 animate-pulse-ring" />
-        <div className="absolute w-[440px] h-[440px] rounded-full border border-primary/10 animate-pulse-ring" style={{ animationDelay: '0.5s' }} />
+        <div className="absolute w-[400px] h-[400px] rounded-full border-2 border-primary/20 animate-pulse-ring" />
+        <div className="absolute w-[480px] h-[480px] rounded-full border border-primary/10 animate-pulse-ring" style={{ animationDelay: '0.5s' }} />
 
         {/* Sound bars - left */}
         <div className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2">
@@ -114,7 +121,7 @@ const HeroSection = () => (
 
         {/* 3D Avatar Image */}
         <div className="relative z-10">
-          <div className="w-[350px] h-[350px] rounded-full overflow-hidden shadow-2xl border-4 border-white/20 bg-gradient-to-br from-primary/10 to-accent/10">
+          <div className="w-[380px] h-[380px] rounded-full overflow-hidden shadow-2xl border-4 border-white/20 bg-gradient-to-br from-primary/10 to-accent/10">
             <img
               src={heroAvatar}
               alt="AI Assistant"

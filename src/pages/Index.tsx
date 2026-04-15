@@ -28,6 +28,7 @@ const Index = () => {
       <TechSection />
       <ContactSection />
       <Footer />
+      <FloatingChatWidget />
     </div>
   );
 };

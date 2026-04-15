@@ -7,6 +7,7 @@ import WhyMeSection from '@/components/landing/WhyMeSection';
 import TechSection from '@/components/landing/TechSection';
 import ContactSection from '@/components/landing/ContactSection';
 import Footer from '@/components/landing/Footer';
+import FloatingChatWidget from '@/components/FloatingChatWidget';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const Index = () => {

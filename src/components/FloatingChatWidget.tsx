@@ -9,17 +9,25 @@ const FloatingChatWidget = () => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+          className="fixed z-[9999] w-16 h-16 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+          style={{ bottom: 20, right: 20, animation: 'pulse-ring 2s ease-in-out infinite' }}
         >
-          <MessageCircle size={28} />
+          <MessageCircle size={30} fill="white" stroke="white" />
         </button>
       )}
 
       {isOpen && (
-        <div className="fixed bottom-0 right-0 z-50 w-full h-full sm:bottom-6 sm:right-6 sm:w-[400px] sm:h-[650px] sm:rounded-2xl bg-background border border-border shadow-2xl overflow-hidden flex flex-col">
-          <div className="flex items-center justify-between p-3 border-b border-border bg-primary text-primary-foreground">
-            <span className="font-semibold text-sm">AI Assistant</span>
-            <button onClick={() => setIsOpen(false)} className="hover:opacity-80">
+        <div
+          className="fixed z-[9999] bottom-0 right-0 w-full h-full md:w-[400px] md:h-[650px] md:bottom-5 md:right-5 flex flex-col overflow-hidden"
+          style={{
+            borderRadius: window.innerWidth >= 768 ? 20 : 0,
+            boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
+            animation: 'slide-up-panel 0.3s ease-out',
+          }}
+        >
+          <div className="flex items-center justify-between px-4 py-3 bg-primary text-primary-foreground" style={{ borderRadius: window.innerWidth >= 768 ? '20px 20px 0 0' : 0 }}>
+            <span className="font-semibold text-sm tracking-wide">Ava — AI Assistant</span>
+            <button onClick={() => setIsOpen(false)} className="hover:opacity-80 transition-opacity">
               <X size={20} />
             </button>
           </div>
@@ -27,11 +35,23 @@ const FloatingChatWidget = () => {
             src="https://dsbeauty01-web.github.io/assitant_love/"
             width="100%"
             height="100%"
-            style={{ border: 'none', flex: 1 }}
+            style={{ border: 'none', flex: 1, background: '#fff' }}
             allow="camera;microphone;autoplay"
           />
         </div>
       )}
+
+      <style>{`
+        @keyframes pulse-ring {
+          0% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.5); }
+          70% { box-shadow: 0 0 0 12px hsl(var(--primary) / 0); }
+          100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0); }
+        }
+        @keyframes slide-up-panel {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </>
   );
 };

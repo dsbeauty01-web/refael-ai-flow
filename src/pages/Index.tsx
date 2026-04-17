@@ -7,6 +7,7 @@ import WhyMeSection from '@/components/landing/WhyMeSection';
 import TechSection from '@/components/landing/TechSection';
 import ContactSection from '@/components/landing/ContactSection';
 import Footer from '@/components/landing/Footer';
+import AvaFloatingButton from '@/components/AvaFloatingButton';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const Index = () => {
@@ -27,6 +28,7 @@ const Index = () => {
       <TechSection />
       <ContactSection />
       <Footer />
+      <AvaFloatingButton />
     </div>
   );
 };

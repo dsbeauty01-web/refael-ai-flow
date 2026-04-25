@@ -19,6 +19,112 @@
 
   <body>
     <div id="root"></div>
+    <!-- On-screen network logger (captures fetch + XHR calls made by any script, including the D-ID widget) -->
+    <div id="net-log" style="position:fixed;top:10px;left:10px;width:460px;max-height:55vh;overflow:auto;background:rgba(0,0,0,0.85);color:#0f0;font:11px/1.35 ui-monospace,Menlo,Consolas,monospace;border:1px solid #0f0;border-radius:8px;z-index:2147483647;padding:8px 10px;box-shadow:0 4px 20px rgba(0,0,0,0.5);direction:ltr;text-align:left;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:6px;">
+        <strong style="color:#0f0;">🌐 Network Log</strong>
+        <span>
+          <input id="net-log-filter" placeholder="filter (e.g. webhook, n8n)" style="background:#111;color:#0f0;border:1px solid #0f0;border-radius:4px;padding:2px 6px;font:11px ui-monospace;width:160px;" />
+          <button id="net-log-clear" style="background:#111;color:#0f0;border:1px solid #0f0;border-radius:4px;padding:2px 8px;cursor:pointer;margin-left:4px;">Clear</button>
+          <button id="net-log-toggle" style="background:#111;color:#0f0;border:1px solid #0f0;border-radius:4px;padding:2px 8px;cursor:pointer;margin-left:4px;">Hide</button>
+        </span>
+      </div>
+      <div id="net-log-list"></div>
+    </div>
+    <script>
+    (function () {
+      var listEl = document.getElementById('net-log-list');
+      var panel = document.getElementById('net-log');
+      var filterEl = document.getElementById('net-log-filter');
+      var clearBtn = document.getElementById('net-log-clear');
+      var toggleBtn = document.getElementById('net-log-toggle');
+      var entries = [];
+      var filter = '';
+      var hidden = false;
+
+      function colorFor(status) {
+        if (status === 'pending') return '#ff0';
+        if (status === 'error')   return '#f55';
+        var n = parseInt(status, 10);
+        if (n >= 200 && n < 300) return '#0f0';
+        if (n >= 300 && n < 400) return '#0ff';
+        if (n >= 400)            return '#f55';
+        return '#ccc';
+      }
+
+      function render() {
+        var f = filter.toLowerCase();
+        listEl.innerHTML = entries
+          .filter(function (e) { return !f || e.url.toLowerCase().indexOf(f) !== -1; })
+          .slice(-200)
+          .map(function (e) {
+            return '<div style="border-bottom:1px dashed #033;padding:3px 0;word-break:break-all;">' +
+              '<span style="color:#9ff;">[' + e.time + ']</span> ' +
+              '<span style="color:#fff;font-weight:bold;">' + e.method + '</span> ' +
+              '<span style="color:' + colorFor(e.status) + ';">' + e.status + '</span> ' +
+              '<span style="color:#0f0;">' + e.url + '</span>' +
+              (e.via ? ' <span style="color:#888;">(' + e.via + ')</span>' : '') +
+              '</div>';
+          }).join('');
+        listEl.scrollTop = listEl.scrollHeight;
+      }
+
+      function add(entry) {
+        entries.push(entry);
+        if (entries.length > 500) entries.shift();
+        render();
+      }
+
+      function update(entry, patch) {
+        Object.assign(entry, patch);
+        render();
+      }
+
+      filterEl.addEventListener('input', function (e) { filter = e.target.value; render(); });
+      clearBtn.addEventListener('click', function () { entries = []; render(); });
+      toggleBtn.addEventListener('click', function () {
+        hidden = !hidden;
+        listEl.style.display = hidden ? 'none' : '';
+        filterEl.style.display = hidden ? 'none' : '';
+        toggleBtn.textContent = hidden ? 'Show' : 'Hide';
+      });
+
+      // --- Patch fetch ---
+      var origFetch = window.fetch;
+      window.fetch = function (input, init) {
+        var url = typeof input === 'string' ? input : (input && input.url) || String(input);
+        var method = (init && init.method) || (input && input.method) || 'GET';
+        var entry = { time: new Date().toLocaleTimeString(), method: method.toUpperCase(), url: url, status: 'pending', via: 'fetch' };
+        add(entry);
+        return origFetch.apply(this, arguments).then(function (res) {
+          update(entry, { status: String(res.status) });
+          return res;
+        }).catch(function (err) {
+          update(entry, { status: 'error: ' + (err && err.message || err) });
+          throw err;
+        });
+      };
+
+      // --- Patch XHR ---
+      var OrigXHR = window.XMLHttpRequest;
+      var origOpen = OrigXHR.prototype.open;
+      var origSend = OrigXHR.prototype.send;
+      OrigXHR.prototype.open = function (method, url) {
+        this.__net_entry = { time: new Date().toLocaleTimeString(), method: String(method).toUpperCase(), url: String(url), status: 'pending', via: 'xhr' };
+        return origOpen.apply(this, arguments);
+      };
+      OrigXHR.prototype.send = function () {
+        var entry = this.__net_entry;
+        if (entry) {
+          add(entry);
+          this.addEventListener('loadend', function () {
+            update(entry, { status: String(this.status || 'error') });
+          });
+        }
+        return origSend.apply(this, arguments);
+      };
+    })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
     <script type="module"
       src="https://agent.d-id.com/v2/index.js"

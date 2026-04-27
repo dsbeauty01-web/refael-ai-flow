@@ -1,131 +1,684 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>רפאל סלע — אוטומציה חכמה לעסקים קטנים | AI Automation</title>
-    <meta name="description" content="רפאל סלע מסייע לעסקים קטנים לחסוך זמן ולסגור יותר עסקאות באמצעות מערכות אוטומציה מבוססות AI." />
-    <meta name="author" content="Refael Sela" />
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Refael.ai — AI Bots for Small Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-    <meta property="og:title" content="Refael Sela — AI Automation for Small Businesses" />
-    <meta property="og:description" content="Smart AI automation systems for customer support, lead capture, booking, and sales workflows." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+<!-- D-ID Agent Widget -->
+<script type="module"
+  src="https://agent.d-id.com/v2/index.js"
+  data-mode="fabio"
+  data-client-key="ck_TTib26kd6XmFIFgO_Lji-"
+  data-agent-id="v2_agt_Z7uYXWFx"
+  data-name="did-agent"
+  data-monitor="true"
+  data-orientation="horizontal"
+  data-position="right"
+  data-open-mode="expanded">
+</script>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@refaelsela" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <body>
-    <div id="root"></div>
-    <!-- On-screen network logger (captures fetch + XHR calls made by any script, including the D-ID widget) -->
-    <div id="net-log" style="position:fixed;top:10px;left:10px;width:460px;max-height:55vh;overflow:auto;background:rgba(0,0,0,0.85);color:#0f0;font:11px/1.35 ui-monospace,Menlo,Consolas,monospace;border:1px solid #0f0;border-radius:8px;z-index:2147483647;padding:8px 10px;box-shadow:0 4px 20px rgba(0,0,0,0.5);direction:ltr;text-align:left;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:6px;">
-        <strong style="color:#0f0;">🌐 Network Log</strong>
-        <span>
-          <input id="net-log-filter" placeholder="filter (e.g. webhook, n8n)" style="background:#111;color:#0f0;border:1px solid #0f0;border-radius:4px;padding:2px 6px;font:11px ui-monospace;width:160px;" />
-          <button id="net-log-clear" style="background:#111;color:#0f0;border:1px solid #0f0;border-radius:4px;padding:2px 8px;cursor:pointer;margin-left:4px;">Clear</button>
-          <button id="net-log-toggle" style="background:#111;color:#0f0;border:1px solid #0f0;border-radius:4px;padding:2px 8px;cursor:pointer;margin-left:4px;">Hide</button>
-        </span>
+  :root {
+    --primary: hsl(217 91% 60%);
+    --accent:  hsl(263 70% 58%);
+    --coral:   hsl(24 95% 53%);
+    --navy:    hsl(222 47% 11%);
+    --bg:      hsl(220 20% 97%);
+    --fg:      hsl(222 47% 11%);
+    --card:    #fff;
+    --muted:   hsl(220 9% 46%);
+    --border:  hsl(220 13% 91%);
+    --radius:  0.75rem;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── Utility ── */
+  .en { font-family: 'Outfit', sans-serif; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  .gradient-text { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .gradient-coral { background: linear-gradient(135deg, var(--coral), hsl(24 95% 63%)); }
+  .gradient-blue  { background: linear-gradient(135deg, var(--primary), var(--accent)); }
+  .btn { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; border-radius: 99px; cursor: pointer; transition: all 0.2s; border: none; font-family: inherit; text-decoration: none; }
+  .btn-primary { background: linear-gradient(135deg, var(--coral), hsl(24 95% 63%)); color: #fff; padding: 0.9rem 2rem; font-size: 1.1rem; box-shadow: 0 4px 20px hsl(24 95% 53% / 0.35); }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--fg); padding: 0.9rem 2rem; font-size: 1.1rem; border: 2px solid var(--border); }
+  .btn-outline:hover { background: var(--border); }
+  .tag { display: inline-block; font-size: 0.85rem; padding: 0.35rem 1rem; border-radius: 99px; background: hsl(220 14% 96%); border: 1px solid var(--border); color: var(--muted); }
+  .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* Animations */
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  @keyframes blob  { 0%,100%{transform:scale(1) translate(0,0)} 33%{transform:scale(1.08) translate(2%,-3%)} 66%{transform:scale(0.95) translate(-2%,2%)} }
+  @keyframes orbit { from{transform:rotate(0deg) translateX(180px) rotate(0deg)} to{transform:rotate(360deg) translateX(180px) rotate(-360deg)} }
+  @keyframes soundbar { 0%,100%{height:8px} 50%{height:var(--h,32px)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
+  @keyframes bubble { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  @keyframes spin { to{transform:rotate(360deg)} }
+
+  .animate-float { animation: float 4s ease-in-out infinite; }
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-up.visible { opacity: 1; transform: none; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    height: 64px;
+    display: flex; align-items: center;
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+  .nav-logo { font-size: 1.3rem; font-weight: 900; text-decoration: none; font-family: 'Outfit', sans-serif; }
+  .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+  .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--fg); }
+  .lang-toggle { display: flex; background: hsl(220 14% 96%); border-radius: 99px; padding: 4px; border: 1px solid var(--border); }
+  .lang-btn { padding: 4px 14px; border-radius: 99px; font-size: 0.82rem; font-weight: 700; cursor: pointer; border: none; background: transparent; color: var(--muted); transition: all 0.2s; font-family: 'Outfit', sans-serif; }
+  .lang-btn.active { background: var(--primary); color: #fff; }
+  @media(max-width:768px) { .nav-links { display: none; } }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 64px;
+  }
+  .hero-blob {
+    position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; animation: blob 10s ease-in-out infinite;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; width: 100%; }
+  .hero-text { text-align: right; }
+  .hero-badge { display: inline-block; background: linear-gradient(135deg, var(--coral), hsl(24 95% 63%)); color: #fff; font-size: 0.82rem; font-weight: 700; padding: 0.4rem 1.1rem; border-radius: 99px; margin-bottom: 1.5rem; }
+  h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; }
+  .hero-sub { font-size: 1.15rem; color: var(--muted); margin-bottom: 2.5rem; max-width: 480px; margin-right: 0; margin-left: auto; line-height: 1.7; }
+  .hero-btns { display: flex; gap: 0.75rem; justify-content: flex-end; flex-wrap: wrap; }
+  .hero-visual { position: relative; height: 520px; display: flex; align-items: center; justify-content: center; }
+  .hero-avatar-wrap {
+    width: 340px; height: 340px; border-radius: 50%; overflow: hidden;
+    border: 4px solid rgba(255,255,255,0.3);
+    box-shadow: 0 0 80px hsl(217 91% 60% / 0.3);
+    position: relative; z-index: 2;
+  }
+  .hero-avatar-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top; transform: scale(1.1); }
+  .orbit-ring { position: absolute; width: 440px; height: 440px; border-radius: 50%; border: 2px dashed hsl(217 91% 60% / 0.2); }
+  .orbit-icon {
+    position: absolute; top: 50%; left: 50%;
+    width: 48px; height: 48px; border-radius: 14px;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    font-size: 1.4rem;
+  }
+  .chat-bubble {
+    position: absolute; background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 18px; padding: 0.75rem 1.25rem;
+    font-size: 0.9rem; font-weight: 600; color: var(--fg);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1); max-width: 220px;
+    animation: bubble 3s ease-in-out infinite; z-index: 3;
+  }
+  .soundbar-group { display: flex; align-items: center; gap: 4px; }
+  .soundbar { width: 4px; border-radius: 4px; animation: soundbar 1.2s ease-in-out infinite; }
+  @media(max-width:768px){
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-text { text-align: center; }
+    .hero-sub { margin: 0 auto 2rem; }
+    .hero-btns { justify-content: center; }
+    .hero-visual { height: 320px; }
+    .hero-avatar-wrap { width: 220px; height: 220px; }
+    .orbit-ring { width: 280px; height: 280px; }
+  }
+
+  /* ── PROBLEM ── */
+  .problem { padding: 6rem 0; background: var(--card); }
+  .section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; text-align: center; margin-bottom: 1rem; }
+  .card-grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 4rem; }
+  .card {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 1.25rem;
+    padding: 2rem; transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .card-icon { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-size: 1.6rem; }
+  .card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.6rem; text-align: center; }
+  .card p { font-size: 1rem; color: var(--muted); line-height: 1.6; text-align: center; }
+  @media(max-width:768px){ .card-grid-3 { grid-template-columns: 1fr; } }
+
+  /* ── SOLUTIONS ── */
+  .solutions { padding: 6rem 0; }
+  .solution-row { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; background: var(--card); border: 1px solid var(--border); border-radius: 1.5rem; padding: 2.5rem; margin-bottom: 1.5rem; transition: transform 0.3s; }
+  .solution-row:hover { transform: translateY(-3px); }
+  .solution-row.reverse .sol-visual { order: 2; }
+  .solution-row.reverse .sol-content { order: 1; }
+  .sol-content h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  .sol-content p { font-size: 1.05rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.7; }
+  .sol-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+  .sol-price { background: hsl(142 76% 95%); border: 1px solid hsl(142 76% 80%); border-radius: 0.75rem; padding: 0.75rem 1rem; }
+  .sol-price s { color: var(--muted); font-size: 0.95rem; }
+  .sol-price strong { color: hsl(142 76% 36%); display: block; font-size: 0.95rem; }
+  .sol-visual { border-radius: 1.25rem; overflow: hidden; background: hsl(220 14% 96%); padding: 1.5rem; }
+  @media(max-width:768px){
+    .solution-row { grid-template-columns: 1fr; }
+    .solution-row.reverse .sol-visual, .solution-row.reverse .sol-content { order: unset; }
+  }
+
+  /* ── DEMOS ── */
+  .demos { padding: 6rem 0; background: var(--navy); }
+  .demos .section-label { color: var(--coral); }
+  .demos .section-title { color: #fff; }
+  .demos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 4rem; }
+  .demo-card { display: flex; flex-direction: column; }
+  .demo-card h3 { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 0.75rem; }
+  .demo-frame { border-radius: 1.25rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: #12121f; min-height: 500px; position: relative; }
+  .demo-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.25rem; cursor: pointer; transition: background 0.2s; }
+  .demo-placeholder:hover { background: rgba(255,255,255,0.03); }
+  .demo-avatar { width: 140px; height: 140px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(255,255,255,0.2); }
+  .demo-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .load-btn { display: flex; align-items: center; gap: 0.5rem; color: #fff; font-weight: 700; font-size: 1.05rem; padding: 1rem 2.5rem; border-radius: 99px; border: none; cursor: pointer; font-family: inherit; margin-top: 0.5rem; }
+  .demo-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+  .demo-chip { font-size: 0.85rem; padding: 0.4rem 1rem; border-radius: 99px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); }
+  @media(max-width:768px){ .demos-grid { grid-template-columns: 1fr; } }
+
+  /* ── WHY ME ── */
+  .whyme { padding: 6rem 0; background: var(--card); }
+  .whyme-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 4rem; }
+  @media(max-width:768px){ .whyme-grid { grid-template-columns: 1fr; } }
+
+  /* ── TECH ── */
+  .tech { padding: 6rem 0; }
+  .tech-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .tech-inner h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.75rem; }
+  .tech-inner p { color: var(--muted); font-size: 1.05rem; margin-bottom: 1.25rem; line-height: 1.7; }
+  .rag-box { background: hsl(220 14% 96%); border: 1px solid var(--border); border-radius: 1rem; padding: 1.25rem 1.5rem; font-size: 1.05rem; line-height: 1.7; }
+  .tech-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; }
+  .tech-card { background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 1.25rem; text-align: center; transition: transform 0.2s; }
+  .tech-card:hover { transform: translateY(-3px); }
+  .tech-card .icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .tech-card p { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.1rem; }
+  .tech-card small { color: var(--muted); font-size: 0.82rem; }
+  @media(max-width:768px){ .tech-inner { grid-template-columns: 1fr; } }
+
+  /* ── CONTACT ── */
+  .contact { padding: 6rem 0; background: var(--navy); }
+  .contact .section-title { color: #fff; }
+  .contact-sub { color: rgba(255,255,255,0.4); text-align: center; font-size: 1.1rem; margin-bottom: 4rem; }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .form-field { margin-bottom: 1rem; }
+  .form-field input, .form-field select, .form-field textarea {
+    width: 100%; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 0.75rem; padding: 1rem 1.25rem; color: #fff; font-size: 1rem;
+    font-family: inherit; transition: border-color 0.2s; outline: none;
+  }
+  .form-field input::placeholder, .form-field textarea::placeholder { color: rgba(255,255,255,0.3); }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--coral); }
+  .form-field select option { background: var(--navy); color: #fff; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; justify-content: center; }
+  .contact-link { display: flex; align-items: center; gap: 0.75rem; padding: 1.1rem 1.5rem; border-radius: 0.75rem; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.2s; font-family: inherit; }
+  .contact-link.messenger { background: var(--primary); color: #fff; }
+  .contact-link.messenger:hover { background: hsl(217 91% 55%); }
+  .contact-link.email { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #fff; }
+  .contact-link.email:hover { background: rgba(255,255,255,0.12); }
+  .contact-note { color: rgba(255,255,255,0.35); font-size: 0.95rem; text-align: center; margin-top: 1rem; }
+  @media(max-width:768px){ .contact-inner { grid-template-columns: 1fr; } }
+
+  /* ── FOOTER ── */
+  footer { background: var(--card); border-top: 1px solid var(--border); padding: 2.5rem 0; text-align: center; }
+  footer p { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.25rem; }
+  footer strong { color: var(--fg); }
+  .footer-tags { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+
+  /* ── LANGUAGE ── */
+  [data-lang="en"] .he { display: none; }
+  [data-lang="he"] .en { display: none; }
+  [data-lang="en"] { direction: ltr; font-family: 'Outfit', sans-serif; }
+  [data-lang="he"] { direction: rtl; font-family: 'Heebo', sans-serif; }
+</style>
+</head>
+
+<body data-lang="he">
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo gradient-text">Refael.ai</a>
+    <div class="nav-links">
+      <a href="#solutions"><span class="he">פתרונות</span><span class="en">Solutions</span></a>
+      <a href="#demos"><span class="he">דמואים חיים</span><span class="en">Live Demos</span></a>
+      <a href="#why"><span class="he">למה אני</span><span class="en">Why Me</span></a>
+      <div class="lang-toggle">
+        <button class="lang-btn" data-l="he" onclick="setLang('he')">HE</button>
+        <button class="lang-btn" data-l="en" onclick="setLang('en')">EN</button>
       </div>
-      <div id="net-log-list"></div>
+      <a href="#contact" class="btn btn-primary" style="padding:0.55rem 1.4rem;font-size:0.95rem;">
+        <span class="he">דברו איתי</span><span class="en">Contact Me</span>
+      </a>
     </div>
-    <script>
-    (function () {
-      var listEl = document.getElementById('net-log-list');
-      var panel = document.getElementById('net-log');
-      var filterEl = document.getElementById('net-log-filter');
-      var clearBtn = document.getElementById('net-log-clear');
-      var toggleBtn = document.getElementById('net-log-toggle');
-      var entries = [];
-      var filter = '';
-      var hidden = false;
+  </div>
+</nav>
 
-      function colorFor(status) {
-        if (status === 'pending') return '#ff0';
-        if (status === 'error')   return '#f55';
-        var n = parseInt(status, 10);
-        if (n >= 200 && n < 300) return '#0f0';
-        if (n >= 300 && n < 400) return '#0ff';
-        if (n >= 400)            return '#f55';
-        return '#ccc';
-      }
+<!-- HERO -->
+<section class="hero">
+  <!-- blobs -->
+  <div class="hero-blob" style="width:700px;height:700px;background:radial-gradient(circle,hsl(217 91% 60%/0.35),transparent 70%);top:-10%;left:40%;"></div>
+  <div class="hero-blob" style="width:600px;height:600px;background:radial-gradient(circle,hsl(263 70% 58%/0.3),transparent 70%);top:30%;left:15%;animation-delay:2s;"></div>
+  <div class="hero-blob" style="width:500px;height:500px;background:radial-gradient(circle,hsl(24 95% 53%/0.25),transparent 70%);top:50%;left:60%;animation-delay:4s;"></div>
 
-      function render() {
-        var f = filter.toLowerCase();
-        listEl.innerHTML = entries
-          .filter(function (e) { return !f || e.url.toLowerCase().indexOf(f) !== -1; })
-          .slice(-200)
-          .map(function (e) {
-            return '<div style="border-bottom:1px dashed #033;padding:3px 0;word-break:break-all;">' +
-              '<span style="color:#9ff;">[' + e.time + ']</span> ' +
-              '<span style="color:#fff;font-weight:bold;">' + e.method + '</span> ' +
-              '<span style="color:' + colorFor(e.status) + ';">' + e.status + '</span> ' +
-              '<span style="color:#0f0;">' + e.url + '</span>' +
-              (e.via ? ' <span style="color:#888;">(' + e.via + ')</span>' : '') +
-              '</div>';
-          }).join('');
-        listEl.scrollTop = listEl.scrollHeight;
-      }
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text fade-up">
+        <div class="hero-badge"><span class="he">לעסקים קטנים</span><span class="en">FOR SMALL BUSINESSES</span></div>
+        <h1>
+          <span class="he">הלקוחות שלך מחכים.<br><span class="gradient-text">אף אחד לא עונה.</span></span>
+          <span class="en">Your customers are waiting.<br><span class="gradient-text">Nobody's answering.</span></span>
+        </h1>
+        <p class="hero-sub">
+          <span class="he">אני בונה בוטים חכמים עם פנים אמיתיות שעונים ללקוחות, קובעים תורים, ומוכרים — גם ב-3 בלילה. מה שחברות גדולות משלמות עליו עשרות אלפים, אני בונה תוך ימים.</span>
+          <span class="en">I build AI bots with real talking faces that answer customers, book appointments, and sell — even at 3am. What big companies pay $10K+ for, I build in days.</span>
+        </p>
+        <div class="hero-btns">
+          <a href="#demos" class="btn btn-primary">
+            <span class="he">ראו את הדמואים החיים ↓</span>
+            <span class="en">See Live Demos ↓</span>
+          </a>
+          <a href="#contact" class="btn btn-outline">
+            <span class="he">💬 בואו נדבר</span>
+            <span class="en">💬 Let's Talk</span>
+          </a>
+        </div>
+      </div>
 
-      function add(entry) {
-        entries.push(entry);
-        if (entries.length > 500) entries.shift();
-        render();
-      }
+      <div class="hero-visual fade-up" style="animation-delay:0.2s">
+        <div class="orbit-ring"></div>
+        <!-- orbit icons -->
+        <div class="orbit-icon" style="animation:orbit 10s linear infinite;">📅</div>
+        <div class="orbit-icon" style="animation:orbit 12s linear infinite;animation-delay:-4s;">🔍</div>
+        <div class="orbit-icon" style="animation:orbit 14s linear infinite;animation-delay:-8s;">✉️</div>
+        <!-- avatar -->
+        <div class="hero-avatar-wrap">
+          <img src="https://dsbeauty01-web.github.io/avatar/avatar.png" onerror="this.style.background='linear-gradient(135deg,hsl(217 91% 60%),hsl(263 70% 58%))'" alt="AI Assistant" />
+        </div>
+        <!-- chat bubbles -->
+        <div class="chat-bubble" style="top:10%;right:-5%;animation-delay:0s;">
+          <span class="he">יש לכם את זה בכחול?</span><span class="en">Do you have this in blue?</span>
+        </div>
+        <div class="chat-bubble" style="bottom:15%;left:-5%;animation-delay:1s;">
+          <span class="he">תור נקבע ל-15:00! ✅</span><span class="en">Appointment booked for 3pm! ✅</span>
+        </div>
+        <div class="chat-bubble" style="top:28%;left:-8%;animation-delay:2s;">
+          <span class="he">הנה 3 מוצרים מתאימים...</span><span class="en">Here are 3 matching products...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      function update(entry, patch) {
-        Object.assign(entry, patch);
-        render();
-      }
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="container">
+    <p class="section-label" style="text-align:center;color:var(--coral);">
+      <span class="he">הבעיה</span><span class="en">The Problem</span>
+    </p>
+    <h2 class="section-title fade-up">
+      <span class="he">כל יום אתה מפסיד לקוחות</span>
+      <span class="en">Every Day You're Losing Customers</span>
+    </h2>
+    <div class="card-grid-3">
+      <div class="card fade-up">
+        <div class="card-icon" style="background:hsl(0 84% 95%);">📵</div>
+        <h3><span class="he">אף אחד לא עונה</span><span class="en">Nobody's answering</span></h3>
+        <p><span class="he">לקוח מתקשר ב-9 בערב. אתה בבית. הוא הלך למתחרה.</span><span class="en">A customer calls at 9pm. You're home. They went to a competitor.</span></p>
+      </div>
+      <div class="card fade-up" style="transition-delay:0.15s">
+        <div class="card-icon" style="background:hsl(217 91% 95%);">📉</div>
+        <h3><span class="he">האתר לא מוכר</span><span class="en">Your website doesn't sell</span></h3>
+        <p><span class="he">אנשים נכנסים, מסתכלים, ויוצאים. אין מי שיגיד להם מה הם צריכים.</span><span class="en">People visit, browse, and leave. Nobody tells them what they need.</span></p>
+      </div>
+      <div class="card fade-up" style="transition-delay:0.3s">
+        <div class="card-icon" style="background:hsl(142 76% 95%);">💸</div>
+        <h3><span class="he">עובדים עולים כסף</span><span class="en">Staff costs keep rising</span></h3>
+        <p><span class="he">פקידת קבלה, איש מכירות — כל אחד עולה אלפים בחודש.</span><span class="en">A receptionist, a salesperson — each costs thousands per month.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      filterEl.addEventListener('input', function (e) { filter = e.target.value; render(); });
-      clearBtn.addEventListener('click', function () { entries = []; render(); });
-      toggleBtn.addEventListener('click', function () {
-        hidden = !hidden;
-        listEl.style.display = hidden ? 'none' : '';
-        filterEl.style.display = hidden ? 'none' : '';
-        toggleBtn.textContent = hidden ? 'Show' : 'Hide';
-      });
+<!-- SOLUTIONS -->
+<section id="solutions" class="solutions">
+  <div class="container">
+    <p class="section-label" style="text-align:center;color:var(--primary);">
+      <span class="he">פתרונות</span><span class="en">Solutions</span>
+    </p>
+    <h2 class="section-title fade-up">
+      <span class="he">מה אני בונה לך</span><span class="en">What I Build For You</span>
+    </h2>
 
-      // --- Patch fetch ---
-      var origFetch = window.fetch;
-      window.fetch = function (input, init) {
-        var url = typeof input === 'string' ? input : (input && input.url) || String(input);
-        var method = (init && init.method) || (input && input.method) || 'GET';
-        var entry = { time: new Date().toLocaleTimeString(), method: method.toUpperCase(), url: url, status: 'pending', via: 'fetch' };
-        add(entry);
-        return origFetch.apply(this, arguments).then(function (res) {
-          update(entry, { status: String(res.status) });
-          return res;
-        }).catch(function (err) {
-          update(entry, { status: 'error: ' + (err && err.message || err) });
-          throw err;
-        });
-      };
+    <!-- Sales Bot -->
+    <div class="solution-row fade-up" style="margin-top:4rem;">
+      <div class="sol-visual">
+        <div style="background:#fff;border-radius:1rem;padding:1.25rem;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+          <div style="display:flex;gap:0.75rem;align-items:flex-start;margin-bottom:0.75rem;">
+            <div style="width:32px;height:32px;border-radius:50%;background:hsl(217 91% 95%);display:flex;align-items:center;justify-content:center;flex-shrink:0;">💬</div>
+            <div style="background:hsl(220 14% 96%);border-radius:14px;padding:0.65rem 1rem;font-size:0.9rem;">
+              <span class="he">הראי לי תיקי עור מתחת ל-₪300</span><span class="en">Show me leather bags under ₪300</span>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;">
+            <div style="background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;border-radius:14px;padding:0.65rem 1rem;font-size:0.9rem;max-width:220px;">
+              <span class="he">הנה 3 אפשרויות עם משלוח חינם! 🎉</span><span class="en">Here are 3 options with free shipping! 🎉</span>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:1rem;font-size:2rem;animation:float 4s ease-in-out infinite;">🛍️</div>
+        </div>
+      </div>
+      <div class="sol-content">
+        <h3>🛒 <span class="he">בוט מכירות חכם</span><span class="en">Smart Sales Bot</span></h3>
+        <p><span class="he">הבוט מכיר כל מוצר, כל מחיר, כל מבצע. הוא ממליץ, מראה לינקים, ועוזר ללקוח לקנות.</span><span class="en">Knows every product, every price, every deal. Recommends, shows links, helps close.</span></p>
+        <div class="sol-tags">
+          <span class="tag he">חיפוש מוצרים</span><span class="tag en">Product Search</span>
+          <span class="tag he">המלצות</span><span class="tag en">Recommendations</span>
+          <span class="tag he">לינקים לקנייה</span><span class="tag en">Buy Links</span>
+        </div>
+        <div class="sol-price">
+          <s><span class="he">עלות ארגונית: $10K+</span><span class="en">Enterprise cost: $10K+</span></s>
+          <strong><span class="he">המחיר שלי: מנוי חודשי משתלם ✓</span><span class="en">My price: affordable monthly ✓</span></strong>
+        </div>
+      </div>
+    </div>
 
-      // --- Patch XHR ---
-      var OrigXHR = window.XMLHttpRequest;
-      var origOpen = OrigXHR.prototype.open;
-      var origSend = OrigXHR.prototype.send;
-      OrigXHR.prototype.open = function (method, url) {
-        this.__net_entry = { time: new Date().toLocaleTimeString(), method: String(method).toUpperCase(), url: String(url), status: 'pending', via: 'xhr' };
-        return origOpen.apply(this, arguments);
-      };
-      OrigXHR.prototype.send = function () {
-        var entry = this.__net_entry;
-        if (entry) {
-          add(entry);
-          this.addEventListener('loadend', function () {
-            update(entry, { status: String(this.status || 'error') });
-          });
-        }
-        return origSend.apply(this, arguments);
-      };
-    })();
-    </script>
-    <script type="module" src="/src/main.tsx"></script>
-    <script type="module" src="https://agent.d-id.com/v2/index.js" data-mode="fabio" data-client-key="Z29vZ2xlLW9hdXRoMnwxMDg1MzgzODIxMDg4OTU5MjE2MzA6dUtILVVlUFhjeFNUZS1lNjV2VG5t" data-agent-id="v2_agt_Z7uYXWFx" data-name="did-agent" data-monitor="true" data-orientation="horizontal" data-position="right" data-open-mode="compact"> </script>
-  </body>
+    <!-- Receptionist -->
+    <div class="solution-row reverse fade-up">
+      <div class="sol-visual">
+        <div style="background:#fff;border-radius:1rem;padding:1.25rem;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:0.8rem;color:var(--muted);margin-bottom:6px;">
+            <span>א</span><span>ב</span><span>ג</span><span>ד</span><span>ה</span><span>ו</span><span>ש</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;">
+            ${Array.from({length:28},(_,i)=>`<div style="padding:6px 2px;border-radius:6px;font-size:0.85rem;${[7,14,21].includes(i)?'background:linear-gradient(135deg,var(--coral),hsl(24 95% 63%));color:#fff;font-weight:700;':'color:var(--muted);'}">${i+1}</div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="sol-content">
+        <h3>📅 <span class="he">פקידת קבלה AI</span><span class="en">AI Receptionist</span></h3>
+        <p><span class="he">בודקת יומן, קובעת תורים, אוספת פרטים. עובדת 24/7 בלי חופש מחלה. עם קלט קולי.</span><span class="en">Checks calendar, books appointments, collects details. Works 24/7 with voice input.</span></p>
+        <div class="sol-tags">
+          <span class="tag he">קלט קולי</span><span class="tag en">Voice Input</span>
+          <span class="tag">Google Calendar</span>
+          <span class="tag he">אישורים אוטומטיים</span><span class="tag en">Auto Confirmations</span>
+        </div>
+        <div class="sol-price">
+          <s><span class="he">משכורת פקידה: ₪6K+/חודש</span><span class="en">Receptionist salary: ₪6K+/mo</span></s>
+          <strong><span class="he">המחיר שלי: שבר מזה ✓</span><span class="en">My price: fraction of that ✓</span></strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Avatar -->
+    <div class="solution-row fade-up">
+      <div class="sol-visual" style="text-align:center;padding:2rem;">
+        <div style="width:120px;height:120px;border-radius:50%;overflow:hidden;border:3px solid hsl(217 91% 60%/0.3);margin:0 auto 1rem;box-shadow:0 0 30px hsl(217 91% 60%/0.2);">
+          <img src="https://dsbeauty01-web.github.io/avatar/avatar.png" onerror="this.style.background='linear-gradient(135deg,hsl(217 91% 60%),hsl(263 70% 58%))'" style="width:100%;height:100%;object-fit:cover;" alt="Avatar" />
+        </div>
+        <div class="soundbar-group" style="justify-content:center;">
+          <div class="soundbar" style="--h:28px;background:var(--primary);animation-delay:0s;"></div>
+          <div class="soundbar" style="--h:40px;background:var(--accent);animation-delay:0.2s;"></div>
+          <div class="soundbar" style="--h:22px;background:var(--primary);animation-delay:0.4s;"></div>
+          <div class="soundbar" style="--h:36px;background:var(--coral);animation-delay:0.1s;"></div>
+          <div class="soundbar" style="--h:18px;background:var(--accent);animation-delay:0.3s;"></div>
+        </div>
+        <div style="margin-top:0.75rem;display:inline-block;background:var(--card);border:1px solid var(--border);border-radius:99px;padding:0.4rem 1rem;font-size:0.85rem;font-weight:700;">Speaking...</div>
+      </div>
+      <div class="sol-content">
+        <h3>🎬 <span class="he">אווטאר מדבר</span><span class="en">Talking AI Avatar</span></h3>
+        <p><span class="he">לא צ׳אטבוט. פנים אמיתיות שמדברות עם הלקוחות שלך. עם סינכרון שפתיים וקול טבעי.</span><span class="en">Not a chatbot. A real face that talks with lip-sync and natural voice.</span></p>
+        <div class="sol-tags">
+          <span class="tag he">סנכרון שפתיים</span><span class="tag en">Lip Sync</span>
+          <span class="tag he">קול טבעי</span><span class="tag en">Natural Voice</span>
+          <span class="tag he">תחושה אנושית</span><span class="tag en">Human Feel</span>
+        </div>
+        <div class="sol-price">
+          <s><span class="he">הפקת וידאו: $5K+</span><span class="en">Video production: $5K+</span></s>
+          <strong><span class="he">אווטאר: תמיד פעיל, תמיד מעודכן ✓</span><span class="en">Avatar: always on, always updated ✓</span></strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMOS -->
+<section id="demos" class="demos">
+  <div class="container">
+    <p class="section-label" style="text-align:center;">
+      <span class="he">דמואים חיים</span><span class="en">Live Demos</span>
+    </p>
+    <h2 class="section-title fade-up">
+      <span class="he">אל תאמין לי — תנסה בעצמך</span>
+      <span class="en">Don't Take My Word For It — Try Them Now</span>
+    </h2>
+    <div class="demos-grid">
+      <!-- Demo 1 -->
+      <div class="demo-card fade-up">
+        <h3><span class="he">עוזרת מכירות לחנות יופי</span><span class="en">Beauty Store Assistant</span></h3>
+        <div class="demo-frame" id="frame1">
+          <div class="demo-placeholder" id="ph1" onclick="loadDemo('frame1','ph1','https://dsbeauty01-web.github.io/avatar/')">
+            <div class="demo-avatar"><img src="https://dsbeauty01-web.github.io/avatar/avatar.png" onerror="this.src=''" alt="Demo" /></div>
+            <div class="soundbar-group">
+              <div class="soundbar" style="--h:24px;background:hsl(217 91% 60%);animation-delay:0s;"></div>
+              <div class="soundbar" style="--h:36px;background:hsl(217 91% 60%);animation-delay:0.15s;"></div>
+              <div class="soundbar" style="--h:18px;background:hsl(217 91% 60%);animation-delay:0.3s;"></div>
+              <div class="soundbar" style="--h:30px;background:hsl(217 91% 60%);animation-delay:0.1s;"></div>
+              <div class="soundbar" style="--h:22px;background:hsl(217 91% 60%);animation-delay:0.25s;"></div>
+            </div>
+            <button class="load-btn" style="background:hsl(217 91% 60%);">▶ <span class="he">טען דמו</span><span class="en">Load Demo</span></button>
+          </div>
+        </div>
+        <div class="demo-chips">
+          <span class="demo-chip he">הראי לי תיקים</span><span class="demo-chip en">Show me leather bags</span>
+          <span class="demo-chip he">מדיניות החזרה?</span><span class="demo-chip en">Return policy?</span>
+        </div>
+      </div>
+      <!-- Demo 2 -->
+      <div class="demo-card fade-up" style="transition-delay:0.15s">
+        <h3><span class="he">פקידת קבלה למספרה</span><span class="en">Salon Receptionist</span></h3>
+        <div class="demo-frame" id="frame2">
+          <div class="demo-placeholder" id="ph2" onclick="loadDemo('frame2','ph2','https://dsbeauty01-web.github.io/salon/')">
+            <div class="demo-avatar"><img src="https://dsbeauty01-web.github.io/avatar/avatar.png" onerror="this.src=''" alt="Demo" /></div>
+            <div class="soundbar-group">
+              <div class="soundbar" style="--h:24px;background:var(--coral);animation-delay:0.05s;"></div>
+              <div class="soundbar" style="--h:36px;background:var(--coral);animation-delay:0.2s;"></div>
+              <div class="soundbar" style="--h:18px;background:var(--coral);animation-delay:0.35s;"></div>
+              <div class="soundbar" style="--h:30px;background:var(--coral);animation-delay:0.12s;"></div>
+              <div class="soundbar" style="--h:22px;background:var(--coral);animation-delay:0.28s;"></div>
+            </div>
+            <button class="load-btn" style="background:var(--coral);">▶ <span class="he">טען דמו</span><span class="en">Load Demo</span></button>
+          </div>
+        </div>
+        <div class="demo-chips">
+          <span class="demo-chip he">קבעי תור</span><span class="demo-chip en">Book a haircut</span>
+          <span class="demo-chip he">נסי קול</span><span class="demo-chip en">Try voice</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ME -->
+<section id="why" class="whyme">
+  <div class="container">
+    <h2 class="section-title fade-up">
+      <span class="he">למה דווקא אני?</span><span class="en">Why Work With Me</span>
+    </h2>
+    <div class="whyme-grid">
+      <div class="card fade-up">
+        <div class="card-icon gradient-blue" style="color:#fff;">⚡</div>
+        <h3><span class="he">מהיר</span><span class="en">Fast</span></h3>
+        <p><span class="he">לא חודשים. ימים. הבוט שלך חי באתר תוך שבוע.</span><span class="en">Not months. Days. Your bot is live within a week.</span></p>
+      </div>
+      <div class="card fade-up" style="transition-delay:0.15s">
+        <div class="card-icon gradient-blue" style="color:#fff;">💰</div>
+        <h3><span class="he">משתלם</span><span class="en">Affordable</span></h3>
+        <p><span class="he">מה שסוכנויות גובות ₪40K+, אני בונה בשבר מהמחיר.</span><span class="en">What agencies charge ₪40K+ for, I build at a fraction of the cost.</span></p>
+      </div>
+      <div class="card fade-up" style="transition-delay:0.3s">
+        <div class="card-icon gradient-blue" style="color:#fff;">🎯</div>
+        <h3><span class="he">מותאם אישית</span><span class="en">Custom Built</span></h3>
+        <p><span class="he">כל בוט בנוי בדיוק לעסק שלך, עם הנתונים שלך.</span><span class="en">Every bot is built exactly for your business, with your data.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH -->
+<section class="tech">
+  <div class="container">
+    <p class="section-label" style="text-align:center;color:var(--accent);">
+      <span class="he">מתחת למכסה</span><span class="en">Under The Hood</span>
+    </p>
+    <h2 class="section-title fade-up">
+      <span class="he">מה מתחת למכסה</span><span class="en">What Powers These Bots</span>
+    </h2>
+    <div class="tech-inner" style="margin-top:4rem;">
+      <div class="fade-up">
+        <h3><span class="he">מה זה RAG?</span><span class="en">What is RAG?</span></h3>
+        <p><span class="he">טכנולוגיה שמאפשרת לבוט לחפש מידע אמיתי מהעסק שלך ולענות בדיוק.</span><span class="en">Technology that lets the bot search your real business data and answer with facts.</span></p>
+        <div class="rag-box">
+          <span class="he">דמיין בוט תמיכה שמכיר כל מוצר בקטלוג של 10,000 פריטים — ועונה תוך 5 שניות.</span>
+          <span class="en">Imagine a support bot that knows every detail of your 10,000-item catalog — and answers in 5 seconds.</span>
+        </div>
+      </div>
+      <div class="tech-grid fade-up" style="transition-delay:0.2s">
+        <div class="tech-card"><div class="icon">🧠</div><p><span class="he">מוח AI</span><span class="en">AI Brain</span></p><small>n8n</small></div>
+        <div class="tech-card"><div class="icon">🔍</div><p><span class="he">חיפוש וקטורי</span><span class="en">Vector Search</span></p><small>Pinecone</small></div>
+        <div class="tech-card"><div class="icon">📅</div><p><span class="he">יומן גוגל</span><span class="en">Google Calendar</span></p><small>Booking</small></div>
+        <div class="tech-card"><div class="icon">📊</div><p><span class="he">גיליונות גוגל</span><span class="en">Google Sheets</span></p><small>Data</small></div>
+        <div class="tech-card"><div class="icon">🎭</div><p><span class="he">אווטאר D-ID</span><span class="en">D-ID Avatar</span></p><small>Video</small></div>
+        <div class="tech-card"><div class="icon">🤖</div><p>OpenAI</p><small>GPT-4o</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="container">
+    <h2 class="section-title fade-up">
+      <span class="he">מוכנים? בואו נדבר.</span><span class="en">Ready? Let's Talk.</span>
+    </h2>
+    <p class="contact-sub"><span class="he">ייעוץ ראשוני חינם.</span><span class="en">Free consultation.</span></p>
+    <div class="contact-inner">
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-field">
+          <input type="text" id="fname" placeholder="" required />
+          <!-- placeholder set via JS for language -->
+        </div>
+        <div class="form-field">
+          <input type="email" id="femail" placeholder="" required />
+        </div>
+        <div class="form-field">
+          <select id="fbiz">
+            <option value="">בחר סוג עסק / Select business type</option>
+            <option>Salon</option><option>Clinic</option><option>Restaurant</option>
+            <option>E-commerce</option><option>Real Estate</option><option>Consultant</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <textarea id="fmsg" rows="4" placeholder=""></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;border-radius:0.75rem;">
+          <span class="he">שלח ↗</span><span class="en">Send ↗</span>
+        </button>
+      </form>
+      <div class="contact-links">
+        <a href="https://m.me/refael.silanikove" target="_blank" class="contact-link messenger">
+          💬 <span class="he">שלחו הודעה במסנג׳ר</span><span class="en">Chat on Messenger</span>
+        </a>
+        <a href="mailto:dsbeauty01@gmail.com" class="contact-link email">
+          ✉️ <span class="he">שלחו מייל</span><span class="en">Email me directly</span>
+        </a>
+        <p class="contact-note"><span class="he">אני בן אדם, לא בוט (באירוניה)</span><span class="en">I'm a human, not a bot (ironically)</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p><strong>© 2026 <span class="he">רפאל סלע</span><span class="en">Refael Sela</span></strong></p>
+    <p><span class="he">מישראל, עובד עם כל העולם</span><span class="en">Based in Israel, Working worldwide</span></p>
+    <div class="footer-tags">
+      <span class="tag">n8n</span>
+      <span class="tag">D-ID</span>
+      <span class="tag">OpenAI</span>
+      <span class="tag">Pinecone</span>
+      <span class="tag">GitHub Pages</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Language ──
+function setLang(l) {
+  document.body.setAttribute('data-lang', l);
+  document.documentElement.setAttribute('lang', l);
+  document.documentElement.setAttribute('dir', l === 'he' ? 'rtl' : 'ltr');
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.l === l));
+  updatePlaceholders(l);
+}
+
+function updatePlaceholders(l) {
+  const ph = l === 'he';
+  document.getElementById('fname').placeholder  = ph ? 'השם שלך' : 'Your name';
+  document.getElementById('femail').placeholder = ph ? 'אימייל' : 'Email';
+  document.getElementById('fmsg').placeholder   = ph ? 'ספרו לי על העסק שלכם...' : 'Tell me about your business...';
+}
+
+// init
+setLang('he');
+
+// ── Demo loader ──
+function loadDemo(frameId, phId, src) {
+  const frame = document.getElementById(frameId);
+  const ph = document.getElementById(phId);
+  ph.style.display = 'none';
+  const ifr = document.createElement('iframe');
+  ifr.src = src;
+  ifr.style.cssText = 'width:100%;height:500px;border:0;border-radius:1.25rem;';
+  ifr.allow = 'camera; microphone; autoplay';
+  frame.appendChild(ifr);
+}
+
+// ── Contact form ──
+function handleSubmit(e) {
+  e.preventDefault();
+  const name = document.getElementById('fname').value;
+  const email = document.getElementById('femail').value;
+  const biz = document.getElementById('fbiz').value;
+  const msg = document.getElementById('fmsg').value;
+  const subject = encodeURIComponent(`New inquiry from ${name}`);
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nBusiness: ${biz}\n\n${msg}`);
+  window.open(`mailto:dsbeauty01@gmail.com?subject=${subject}&body=${body}`, '_blank');
+}
+
+// ── Scroll animations ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
 </html>

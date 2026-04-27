@@ -15,13 +15,15 @@ const TechSection = () => {
   const { isHebrew } = useLanguage();
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8" ref={ref}>
-      <div className="max-w-6xl mx-auto">
+    <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-section-mid overflow-hidden" ref={ref}>
+      <div className="absolute inset-0 noise-overlay" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 bg-accent/40 pointer-events-none" />
+      <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-[0.85rem] font-semibold uppercase tracking-widest text-accent">
             {isHebrew ? 'מתחת למכסה' : 'Under The Hood'}
           </span>
-          <h2 className={`text-[3.5rem] font-black mt-3 mb-1 ${isHebrew ? 'font-hebrew' : ''}`} dir={isHebrew ? 'rtl' : 'ltr'}>
+          <h2 className={`text-[3.5rem] sm:text-[4rem] font-black mt-3 mb-1 tracking-tight ${isHebrew ? 'font-hebrew' : ''}`} dir={isHebrew ? 'rtl' : 'ltr'}>
             {isHebrew ? 'מה מתחת למכסה' : 'What Powers These Bots'}
           </h2>
         </div>
@@ -36,7 +38,7 @@ const TechSection = () => {
                 ? 'טכנולוגיה שמאפשרת לבוט לחפש מידע אמיתי מהעסק שלך ולענות בדיוק.'
                 : 'Technology that lets the bot search your real business data and answer with facts.'}
             </p>
-            <div className="bg-secondary/50 rounded-2xl p-6 border border-border">
+            <div className="glass rounded-2xl p-6">
               <p className={`text-[1.1rem] leading-relaxed ${isHebrew ? 'font-hebrew' : ''}`}>
                 {isHebrew
                   ? 'דמיין בוט תמיכה שמכיר כל מוצר בקטלוג של 10,000 פריטים — ועונה תוך 5 שניות.'
@@ -47,8 +49,8 @@ const TechSection = () => {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {techStack.map((t, i) => (
-              <div key={i} className="bg-card rounded-xl p-5 border border-border card-float text-center">
-                <div className="w-[40px] h-[40px] rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3">
+              <div key={i} className="glass rounded-xl p-5 card-lift text-center">
+                <div className="w-[40px] h-[40px] rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center mx-auto mb-3 shadow-[0_0_20px_hsl(217_91%_62%/0.3)]">
                   <t.icon className="h-[40px] w-[40px] text-primary" />
                 </div>
                 <p className={`text-[1rem] font-semibold ${isHebrew ? 'font-hebrew' : ''}`}>

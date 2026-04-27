@@ -46,17 +46,17 @@ const solutions = [
 const AnimatedSalesVisual = () => {
   const { isHebrew } = useLanguage();
   return (
-    <div className="relative bg-secondary/50 rounded-2xl p-5 space-y-3 overflow-hidden">
+    <div className="relative glass rounded-2xl p-5 space-y-3 overflow-hidden">
       <div className="flex gap-2 items-start">
         <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
           <MessageSquare className="h-4 w-4 text-primary" />
         </div>
-        <div className="bg-card rounded-xl px-4 py-2.5 text-[1rem]">
+        <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-[1rem] text-foreground">
           {isHebrew ? 'הראי לי תיקי עור מתחת ל-₪300' : 'Show me leather bags under ₪300'}
         </div>
       </div>
       <div className="flex gap-2 items-start justify-end">
-        <div className="gradient-blue text-white rounded-xl px-4 py-2.5 text-[1rem] max-w-[240px]">
+        <div className="gradient-blue text-white rounded-xl px-4 py-2.5 text-[1rem] max-w-[240px] shadow-lg">
           {isHebrew ? 'הנה 3 אפשרויות עם משלוח חינם!' : 'Here are 3 options with free shipping!'}
         </div>
       </div>
@@ -68,13 +68,13 @@ const AnimatedSalesVisual = () => {
 };
 
 const AnimatedCalendarVisual = () => (
-  <div className="bg-secondary/50 rounded-2xl p-5">
+  <div className="glass rounded-2xl p-5">
     <div className="grid grid-cols-7 gap-1 text-center text-[0.85rem] text-muted-foreground mb-2">
       {['Su','Mo','Tu','We','Th','Fr','Sa'].map(d => <div key={d}>{d}</div>)}
     </div>
     <div className="grid grid-cols-7 gap-1 text-center text-[1rem]">
       {Array.from({ length: 28 }, (_, i) => (
-        <div key={i} className={`py-1.5 rounded relative ${[8, 14, 21].includes(i) ? 'gradient-coral text-white font-bold' : 'text-muted-foreground'}`}>
+        <div key={i} className={`py-1.5 rounded relative ${[8, 14, 21].includes(i) ? 'gradient-coral text-white font-bold shadow-lg' : 'text-muted-foreground'}`}>
           {i + 1}
           {i === 14 && <Check className="absolute -top-1 -right-1 h-4 w-4 text-green-500 animate-fade-in" style={{ animationDelay: '1s', animationFillMode: 'both' }} />}
         </div>
@@ -83,15 +83,26 @@ const AnimatedCalendarVisual = () => (
   </div>
 );
 
-const AnimatedAvatarVisual = () => (
-  <div className="flex flex-col items-center justify-center py-4 gap-3">
-    <div className="w-[120px] h-[120px] rounded-full overflow-hidden border-2 border-primary/20 shadow-lg">
-      <img src={avatarSpeaking} alt="Talking avatar" loading="lazy" width={512} height={512} className="w-full h-full object-cover" />
+const AnimatedAvatarVisual = () => {
+  const { isHebrew } = useLanguage();
+  return (
+    <div className="relative flex flex-col items-center justify-center py-6 gap-4">
+      <div className="absolute inset-0 blur-3xl opacity-40 bg-gradient-to-br from-primary/40 to-accent/40 rounded-full" />
+      <div className="relative">
+        <div className="w-[160px] h-[160px] rounded-full overflow-hidden border-4 border-white/15 shadow-2xl glow-blue animate-float-y">
+          <img src={avatarSpeaking} alt="Talking avatar" loading="lazy" width={1024} height={1024} className="w-full h-full object-cover object-top" />
+        </div>
+        <div className="absolute -top-2 -right-4 glass rounded-2xl rounded-bl-sm px-3 py-2 text-[0.8rem] font-medium text-foreground animate-float-y" style={{ animationDelay: '1s' }}>
+          {isHebrew ? 'שלום! 👋' : 'Hello!'}
+        </div>
+      </div>
+      <SoundBars count={5} height={28} color="hsl(217 91% 70%)" />
+      <div className="glass px-4 py-1.5 rounded-full text-[0.85rem] font-semibold text-foreground">
+        {isHebrew ? 'מדבר...' : 'Speaking...'}
+      </div>
     </div>
-    <SoundBars count={5} height={24} color="hsl(217 91% 60% / 0.6)" />
-    <div className="bg-card px-4 py-1.5 rounded-full text-[0.85rem] font-semibold border border-border shadow">Speaking...</div>
-  </div>
-);
+  );
+};
 
 const visuals: Record<string, React.ReactNode> = {
   sales: <AnimatedSalesVisual />,
@@ -104,13 +115,16 @@ const SolutionsSection = () => {
   const { isHebrew } = useLanguage();
 
   return (
-    <section id="solutions" className="py-24 px-4 sm:px-6 lg:px-8" ref={ref}>
-      <div className="max-w-6xl mx-auto">
+    <section id="solutions" className="relative py-24 px-4 sm:px-6 lg:px-8 bg-section-deep overflow-hidden" ref={ref}>
+      <div className="absolute inset-0 noise-overlay" />
+      <div className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full blur-3xl opacity-20 bg-primary/40 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 bg-accent/40 pointer-events-none" />
+      <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-[0.85rem] font-semibold uppercase tracking-widest text-primary">
             {isHebrew ? 'פתרונות' : 'Solutions'}
           </span>
-          <h2 className={`text-[3.5rem] font-black mt-3 mb-1 ${isHebrew ? 'font-hebrew' : ''}`} dir={isHebrew ? 'rtl' : 'ltr'}>
+          <h2 className={`text-[3.5rem] sm:text-[4rem] font-black mt-3 mb-1 tracking-tight ${isHebrew ? 'font-hebrew' : ''}`} dir={isHebrew ? 'rtl' : 'ltr'}>
             {isHebrew ? 'מה אני בונה לך' : 'What I Build For You'}
           </h2>
         </div>
@@ -119,7 +133,7 @@ const SolutionsSection = () => {
           {solutions.map((s, i) => (
             <div
               key={i}
-              className={`grid lg:grid-cols-2 gap-8 items-center bg-card rounded-3xl border border-border p-6 sm:p-8 card-float transition-all duration-500 ${
+              className={`grid lg:grid-cols-2 gap-8 items-center glass rounded-3xl p-6 sm:p-8 card-lift transition-all duration-500 ${
                 inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${i * 200}ms` }}
@@ -129,10 +143,10 @@ const SolutionsSection = () => {
               </div>
               <div className={`${i % 2 === 1 ? 'lg:order-1' : ''}`} dir={isHebrew ? 'rtl' : 'ltr'}>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl gradient-blue flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-xl gradient-blue flex items-center justify-center shadow-lg glow-blue">
                     <s.icon className="h-6 w-6 text-white" />
                   </div>
-                  <h3 className={`text-[1.6rem] font-bold ${isHebrew ? 'font-hebrew' : ''}`}>
+                  <h3 className={`text-[1.75rem] font-bold ${isHebrew ? 'font-hebrew' : ''}`}>
                     {isHebrew ? s.heTitle : s.enTitle}
                   </h3>
                 </div>
@@ -141,16 +155,16 @@ const SolutionsSection = () => {
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {(isHebrew ? s.heTags : s.enTags).map(t => (
-                    <span key={t} className={`text-[0.85rem] px-4 py-1.5 rounded-full bg-secondary text-secondary-foreground border border-border ${isHebrew ? 'font-hebrew' : ''}`}>
+                    <span key={t} className={`text-[0.85rem] px-4 py-1.5 rounded-full bg-white/5 text-foreground/80 border border-white/10 ${isHebrew ? 'font-hebrew' : ''}`}>
                       {t}
                     </span>
                   ))}
                 </div>
-                <div className="space-y-1 bg-green-500/10 rounded-xl px-4 py-3 border border-green-500/20">
+                <div className="space-y-1 bg-green-500/10 rounded-xl px-4 py-3 border border-green-500/30">
                   <p className={`text-[1rem] text-muted-foreground line-through ${isHebrew ? 'font-hebrew' : ''}`}>
                     {isHebrew ? s.heOld : s.enOld}
                   </p>
-                  <p className={`text-[1rem] text-primary font-bold ${isHebrew ? 'font-hebrew' : ''}`}>
+                  <p className={`text-[1rem] text-green-400 font-bold ${isHebrew ? 'font-hebrew' : ''}`}>
                     {isHebrew ? s.heNew : s.enNew}
                   </p>
                 </div>

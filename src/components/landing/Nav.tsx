@@ -14,7 +14,7 @@ const Nav = () => {
   const { language, setLanguage, isHebrew } = useLanguage();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <a href="#" className="text-xl font-bold text-gradient">Refael.ai</a>
 
@@ -31,16 +31,16 @@ const Nav = () => {
           ))}
 
           {/* Language toggle */}
-          <div className="flex items-center gap-1 bg-secondary rounded-full p-1 border border-border">
+          <div className="flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/10">
             <button
               onClick={() => setLanguage('he')}
-              className={`px-3 py-1 rounded-full text-[0.85rem] font-bold transition-all ${language === 'he' ? 'bg-primary text-white shadow' : 'text-muted-foreground hover:text-foreground'}`}
+              className={`px-3 py-1 rounded-full text-[0.85rem] font-bold transition-all ${language === 'he' ? 'gradient-blue text-white shadow-lg' : 'text-muted-foreground hover:text-foreground'}`}
             >
               HE
             </button>
             <button
               onClick={() => setLanguage('en')}
-              className={`px-3 py-1 rounded-full text-[0.85rem] font-bold transition-all ${language === 'en' ? 'bg-primary text-white shadow' : 'text-muted-foreground hover:text-foreground'}`}
+              className={`px-3 py-1 rounded-full text-[0.85rem] font-bold transition-all ${language === 'en' ? 'gradient-blue text-white shadow-lg' : 'text-muted-foreground hover:text-foreground'}`}
             >
               EN
             </button>
@@ -48,7 +48,7 @@ const Nav = () => {
 
           <Button
             size="sm"
-            className="gradient-coral text-white font-bold rounded-full px-6 text-[1.1rem]"
+            className="gradient-coral text-white font-bold rounded-full px-6 text-[1.1rem] shadow-lg glow-coral hover:scale-[1.05] transition-transform"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
             <span className={isHebrew ? 'font-hebrew' : ''}>{isHebrew ? 'דברו איתי' : 'Contact Me'}</span>
@@ -63,18 +63,18 @@ const Nav = () => {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden glass border-t border-border/50 px-4 py-4 space-y-3">
+        <div className="md:hidden glass border-t border-white/10 px-4 py-4 space-y-3">
           {/* Language toggle mobile */}
-          <div className="flex items-center gap-1 bg-secondary rounded-full p-1 border border-border w-fit">
+          <div className="flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/10 w-fit">
             <button
               onClick={() => setLanguage('he')}
-              className={`px-3 py-1 rounded-full text-[0.85rem] font-bold transition-all ${language === 'he' ? 'bg-primary text-white shadow' : 'text-muted-foreground'}`}
+              className={`px-3 py-1 rounded-full text-[0.85rem] font-bold transition-all ${language === 'he' ? 'gradient-blue text-white shadow' : 'text-muted-foreground'}`}
             >
               HE
             </button>
             <button
               onClick={() => setLanguage('en')}
-              className={`px-3 py-1 rounded-full text-[0.85rem] font-bold transition-all ${language === 'en' ? 'bg-primary text-white shadow' : 'text-muted-foreground'}`}
+              className={`px-3 py-1 rounded-full text-[0.85rem] font-bold transition-all ${language === 'en' ? 'gradient-blue text-white shadow' : 'text-muted-foreground'}`}
             >
               EN
             </button>
@@ -92,7 +92,7 @@ const Nav = () => {
           ))}
           <Button
             size="sm"
-            className="gradient-coral text-white font-bold rounded-full px-6 w-full text-[1.1rem]"
+            className="gradient-coral text-white font-bold rounded-full px-6 w-full text-[1.1rem] shadow-lg glow-coral"
             onClick={() => {
               setOpen(false);
               document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });

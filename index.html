@@ -8,18 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-<!-- D-ID Agent Widget -->
-<script type="module"
-  src="https://agent.d-id.com/v2/index.js"
-  data-mode="fabio"
-  data-client-key="ck_TTib26kd6XmFIFgO_Lji-"
-  data-agent-id="v2_agt_Z7uYXWFx"
-  data-name="did-agent"
-  data-monitor="true"
-  data-orientation="horizontal"
-  data-position="right"
-  data-open-mode="expanded">
-</script>
+
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -308,8 +297,22 @@
         <div class="orbit-icon" style="animation:orbit 12s linear infinite;animation-delay:-4s;">🔍</div>
         <div class="orbit-icon" style="animation:orbit 14s linear infinite;animation-delay:-8s;">✉️</div>
         <!-- avatar -->
-        <div class="hero-avatar-wrap">
-          <img src="https://dsbeauty01-web.github.io/avatar/avatar.png" onerror="this.style.background='linear-gradient(135deg,hsl(217 91% 60%),hsl(263 70% 58%))'" alt="AI Assistant" />
+        <div class="hero-avatar-wrap" style="background:linear-gradient(135deg,hsl(217,91%,60%),hsl(263,70%,58%));display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 200 200" width="280" height="280" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="85" r="55" fill="rgba(255,255,255,0.2)"/>
+            <circle cx="100" cy="85" r="48" fill="rgba(255,255,255,0.15)"/>
+            <circle cx="82" cy="78" r="10" fill="white" opacity="0.9"/>
+            <circle cx="118" cy="78" r="10" fill="white" opacity="0.9"/>
+            <circle cx="85" cy="80" r="5" fill="#1e40af"/>
+            <circle cx="121" cy="80" r="5" fill="#1e40af"/>
+            <path d="M82 100 Q100 114 118 100" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <rect x="88" y="30" width="24" height="12" rx="4" fill="rgba(255,255,255,0.5)"/>
+            <line x1="100" y1="30" x2="100" y2="24" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+            <circle cx="100" cy="22" r="4" fill="rgba(255,255,255,0.7)"/>
+            <ellipse cx="100" cy="155" rx="45" ry="30" fill="rgba(255,255,255,0.15)"/>
+            <rect x="70" y="135" width="60" height="40" rx="12" fill="rgba(255,255,255,0.2)"/>
+            <text x="100" y="162" text-anchor="middle" fill="white" font-size="11" font-family="sans-serif" opacity="0.8">AI Assistant</text>
+          </svg>
         </div>
         <!-- chat bubbles -->
         <div class="chat-bubble" style="top:10%;right:-5%;animation-delay:0s;">
@@ -430,7 +433,7 @@
     <div class="solution-row fade-up">
       <div class="sol-visual" style="text-align:center;padding:2rem;">
         <div style="width:120px;height:120px;border-radius:50%;overflow:hidden;border:3px solid hsl(217 91% 60%/0.3);margin:0 auto 1rem;box-shadow:0 0 30px hsl(217 91% 60%/0.2);">
-          <img src="https://dsbeauty01-web.github.io/avatar/avatar.png" onerror="this.style.background='linear-gradient(135deg,hsl(217 91% 60%),hsl(263 70% 58%))'" style="width:100%;height:100%;object-fit:cover;" alt="Avatar" />
+          <svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(135deg,hsl(217,91%,60%),hsl(263,70%,58%));border-radius:50%"><circle cx="50" cy="42" r="26" fill="rgba(255,255,255,0.2)"/><circle cx="40" cy="39" r="5" fill="white" opacity="0.9"/><circle cx="60" cy="39" r="5" fill="white" opacity="0.9"/><path d="M40 52 Q50 60 60 52" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse cx="50" cy="78" rx="22" ry="15" fill="rgba(255,255,255,0.15)"/></svg>
         </div>
         <div class="soundbar-group" style="justify-content:center;">
           <div class="soundbar" style="--h:28px;background:var(--primary);animation-delay:0s;"></div>
@@ -474,7 +477,7 @@
         <h3><span class="he">עוזרת מכירות לחנות יופי</span><span class="en">Beauty Store Assistant</span></h3>
         <div class="demo-frame" id="frame1">
           <div class="demo-placeholder" id="ph1" onclick="loadDemo('frame1','ph1','https://dsbeauty01-web.github.io/avatar/')">
-            <div class="demo-avatar"><img src="https://dsbeauty01-web.github.io/avatar/avatar.png" onerror="this.src=''" alt="Demo" /></div>
+            <div class="demo-avatar" style="background:linear-gradient(135deg,hsl(217,91%,60%),hsl(263,70%,58%));display:flex;align-items:center;justify-content:center;font-size:3rem;">🤖</div>
             <div class="soundbar-group">
               <div class="soundbar" style="--h:24px;background:hsl(217 91% 60%);animation-delay:0s;"></div>
               <div class="soundbar" style="--h:36px;background:hsl(217 91% 60%);animation-delay:0.15s;"></div>
@@ -495,7 +498,7 @@
         <h3><span class="he">פקידת קבלה למספרה</span><span class="en">Salon Receptionist</span></h3>
         <div class="demo-frame" id="frame2">
           <div class="demo-placeholder" id="ph2" onclick="loadDemo('frame2','ph2','https://dsbeauty01-web.github.io/salon/')">
-            <div class="demo-avatar"><img src="https://dsbeauty01-web.github.io/avatar/avatar.png" onerror="this.src=''" alt="Demo" /></div>
+            <div class="demo-avatar" style="background:linear-gradient(135deg,var(--coral),hsl(24,95%,65%));display:flex;align-items:center;justify-content:center;font-size:3rem;">💇</div>
             <div class="soundbar-group">
               <div class="soundbar" style="--h:24px;background:var(--coral);animation-delay:0.05s;"></div>
               <div class="soundbar" style="--h:36px;background:var(--coral);animation-delay:0.2s;"></div>
@@ -680,5 +683,17 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
+<!-- D-ID Agent Widget -->
+<script type="module"
+  src="https://agent.d-id.com/v2/index.js"
+  data-mode="fabio"
+  data-client-key="ck_TTib26kd6XmFIFgO_Lji-"
+  data-agent-id="v2_agt_Z7uYXWFx"
+  data-name="did-agent"
+  data-monitor="true"
+  data-orientation="horizontal"
+  data-position="right"
+  data-open-mode="expanded">
+</script>
 </body>
 </html>

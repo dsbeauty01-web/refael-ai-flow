@@ -651,8 +651,8 @@
         <img class="placeholder-img" id="botPlaceholder" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&crop=faces" alt="Maya" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=&quot;font-size:3rem&quot;>🤖</div>';" />
       </div>
       <div class="bot-status" id="botStatus">
-        <span class="he">לחץ על שלח כדי להתחיל</span>
-        <span class="en">Send a message to start</span>
+        <span class="he">💬 שלח הודעה כדי להתחיל</span>
+        <span class="en">💬 Send a message to start</span>
       </div>
       <div class="bot-chat" id="botChat"></div>
       <div class="bot-input-row">
@@ -933,7 +933,7 @@ function handleSubmit(e) {
     chatEl.scrollTop = chatEl.scrollHeight;
   }
 
-  // ── D-ID init (lazy — only when user actually sends a message) ──
+  // ── D-ID init (lazy, completely optional — never blocks chat) ──
   function initDID() {
     if (didInited) return;
     didInited = true;
@@ -948,25 +948,37 @@ function handleSubmit(e) {
       onConnectionStateChange(state) {
         if (state==='connected') { connected=true; setStatus('● Connected'); }
         else if (['disconnected','closed','failed'].includes(state)) {
-          connected=false; setStatus('Avatar offline — chat still works');
-          if (state!=='failed') setTimeout(()=>agentManager?.reconnect(), 3000);
+          connected=false; setStatus('💬 Chat only mode');
         } else setStatus(state);
       },
       onVideoStateChange(state) {
         if (state==='STOP') {
-          const idle = agentManager?.agent?.presenter?.idle_video;
-          if (idle) { videoEl.srcObject=null; videoEl.src=idle; videoEl.loop=true; videoEl.muted=false; videoEl.play().catch(()=>{}); }
           if (connected) setStatus('● Connected');
-        } else { videoEl.src=''; videoEl.srcObject=stream; videoEl.muted=false; setStatus('Speaking...'); }
+        } else { setStatus('Speaking...'); }
       },
-      onError(e) { console.error('D-ID:',e); setStatus('Avatar offline — chat still works'); }
+      onError(e) {
+        console.warn('D-ID unavailable (avatar will not appear, chat still works):', e);
+        connected = false;
+        setStatus('💬 Chat only mode');
+      }
     };
-    createAgentManager(AGENT_ID, {
-      auth: { type: 'key', clientKey: CLIENT_KEY },
-      callbacks,
-      streamOptions: { compatibilityMode: 'auto', streamWarmup: true }
-    }).then(m => { agentManager = m; return agentManager.connect(); })
-      .catch(e => { console.error('D-ID init:',e); setStatus('Avatar offline — chat still works'); });
+    try {
+      createAgentManager(AGENT_ID, {
+        auth: { type: 'key', clientKey: CLIENT_KEY },
+        callbacks,
+        streamOptions: { compatibilityMode: 'auto', streamWarmup: true }
+      }).then(m => {
+        agentManager = m;
+        return agentManager.connect();
+      }).catch(e => {
+        console.warn('D-ID init failed (chat still works):', e);
+        connected = false;
+        setStatus('💬 Chat only mode');
+      });
+    } catch(e) {
+      console.warn('D-ID setup failed (chat still works):', e);
+      setStatus('💬 Chat only mode');
+    }
   }
 
   // ── Speech recognition ──
@@ -993,8 +1005,9 @@ function handleSubmit(e) {
     inputEl.value = '';
     sendBtn.disabled = true;
 
-    // Lazy-init D-ID on first message
-    if (!didInited) initDID();
+    // D-ID disabled (out of credits) — chat-only mode
+    // To re-enable when topped up: uncomment the next line
+    // if (!didInited) initDID();
 
     addMsg(text, 'user');
     const thinkEl = document.createElement('div');
@@ -1015,8 +1028,15 @@ function handleSubmit(e) {
       if (!reply) throw new Error('empty');
       thinkEl.remove();
       addMsg(reply, 'bot');
+      // Speak via avatar ONLY if D-ID is connected — never block
       if (connected && agentManager) {
-        agentManager.speak({ type: 'text', input: shortenForVoice(reply) }).catch(()=>{});
+        try {
+          agentManager.speak({ type: 'text', input: shortenForVoice(reply) }).catch(err => {
+            console.warn('Speak failed (text reply still shown):', err);
+          });
+        } catch(e) {
+          console.warn('Speak error:', e);
+        }
       }
     } catch(e) {
       thinkEl.remove();
@@ -1034,8 +1054,10 @@ function handleSubmit(e) {
 </script>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- D-ID Floating Widget (bottom-right)     -->
+<!-- D-ID Floating Widget — DISABLED (no credits) -->
+<!-- Re-enable when you top up D-ID credits      -->
 <!-- ═══════════════════════════════════════ -->
+<!--
 <script type="module"
   src="https://agent.d-id.com/v2/index.js"
   data-mode="fabio"
@@ -1047,6 +1069,7 @@ function handleSubmit(e) {
   data-position="right"
   data-open-mode="compact">
 </script>
+-->
 
 </body>
 </html>

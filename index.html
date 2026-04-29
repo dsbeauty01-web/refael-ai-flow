@@ -819,10 +819,7 @@
   </div>
 </footer>
 
-<!-- FLOATING CTA -->
-<a href="#contact" class="floating-cta" id="floatingCta">
-  💬 <span class="he">דבר איתי</span><span class="en">Talk to me</span>
-</a>
+<!-- FLOATING CTA REMOVED — D-ID widget now lives in this spot -->
 
 <script>
 // ── Language toggle ──
@@ -847,11 +844,7 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-// ── Floating CTA show/hide ──
-window.addEventListener('scroll', () => {
-  const heroBottom = document.querySelector('.hero').offsetHeight;
-  document.getElementById('floatingCta').classList.toggle('visible', window.scrollY > heroBottom);
-});
+// Floating CTA removed — D-ID widget takes that spot now
 
 // ── Contact form (uses formsubmit.co — simple, no backend) ──
 function handleSubmit(e) {
@@ -1005,9 +998,8 @@ function handleSubmit(e) {
     inputEl.value = '';
     sendBtn.disabled = true;
 
-    // D-ID disabled (out of credits) — chat-only mode
-    // To re-enable when topped up: uncomment the next line
-    // if (!didInited) initDID();
+    // D-ID re-enabled — credits available
+    if (!didInited) initDID();
 
     addMsg(text, 'user');
     const thinkEl = document.createElement('div');
@@ -1054,10 +1046,8 @@ function handleSubmit(e) {
 </script>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- D-ID Floating Widget — DISABLED (no credits) -->
-<!-- Re-enable when you top up D-ID credits      -->
+<!-- D-ID Floating Widget (bottom-right)     -->
 <!-- ═══════════════════════════════════════ -->
-<!--
 <script type="module"
   src="https://agent.d-id.com/v2/index.js"
   data-mode="fabio"
@@ -1069,7 +1059,6 @@ function handleSubmit(e) {
   data-position="right"
   data-open-mode="compact">
 </script>
--->
 
 </body>
 </html>

@@ -135,7 +135,7 @@
     background: linear-gradient(135deg, #c7d2fe, #ddd6fe);
     animation: glow 4s ease-in-out infinite;
   }
-  .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
   .orbit-ring { position: absolute; width: 480px; height: 480px; border-radius: 50%; border: 2px dashed rgba(99,102,241,0.2); }
   .orbit-icon {
     position: absolute; top: 50%; left: 50%;
@@ -230,7 +230,7 @@
     box-shadow: 0 20px 60px rgba(99,102,241,0.25);
     background: linear-gradient(135deg, #c7d2fe, #ddd6fe);
   }
-  .sol-character img { width: 100%; height: 100%; object-fit: cover; }
+  .sol-character img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
   @media(max-width:768px){
     .solution-row { grid-template-columns: 1fr; padding: 2rem; }
     .solution-row.reverse .sol-visual, .solution-row.reverse .sol-content { order: unset; }
@@ -259,7 +259,7 @@
     position: relative;
   }
   .bot-avatar video { width: 100%; height: 100%; object-fit: cover; display: none; }
-  .bot-avatar .placeholder-img { width: 100%; height: 100%; object-fit: cover; }
+  .bot-avatar .placeholder-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
   .bot-status { text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; min-height: 1.2em; }
   .bot-chat {
     height: 300px; overflow-y: auto;

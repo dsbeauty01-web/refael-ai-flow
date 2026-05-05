@@ -1,5 +1,6 @@
 import Nav from '@/components/landing/Nav';
 import HeroSection from '@/components/landing/HeroSection';
+import RealCustomerVideo from '@/components/landing/RealCustomerVideo';
 import ProblemSection from '@/components/landing/ProblemSection';
 import SolutionsSection from '@/components/landing/SolutionsSection';
 import LiveDemos from '@/components/landing/LiveDemos';
@@ -20,6 +21,7 @@ const Index = () => {
     >
       <Nav />
       <HeroSection />
+      <RealCustomerVideo />
       <ProblemSection />
       <SolutionsSection />
       <LiveDemos />

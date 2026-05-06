@@ -2,16 +2,12 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, ArrowDown, Bot, Zap, BarChart3, MessageSquare, ShoppingCart, Workflow, Brain, Send, TrendingUp, Users, Calendar, FileText, Filter, Video } from 'lucide-react';
 
-const WHATSAPP_NUMBER = '97253327125';
-const WHATSAPP_MESSAGE_HE = 'שלום רפאל, אני מעוניין לשמוע על שירותי האוטומציה שלך';
-const WHATSAPP_MESSAGE_EN = 'Hi Refael, I\'m interested in your AI automation services';
+const MESSENGER_URL = 'https://www.facebook.com/refael.silanikove';
 
 const HeroSection = () => {
   const { t, isHebrew } = useLanguage();
 
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    isHebrew ? WHATSAPP_MESSAGE_HE : WHATSAPP_MESSAGE_EN
-  )}`;
+  const messengerUrl = MESSENGER_URL;
 
   const stats = t('hero.stats') as unknown as Array<{ value: string; label: string }>;
 
@@ -74,7 +70,7 @@ const HeroSection = () => {
                 className="gradient-accent text-accent-foreground font-semibold text-base h-14 px-10 rounded-xl hover:opacity-90 transition-all shadow-lg shadow-accent/25 hover:shadow-accent/40"
                 asChild
               >
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                <a href={messengerUrl} target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="h-5 w-5" />
                   {t('hero.cta1')}
                 </a>

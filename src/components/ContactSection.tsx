@@ -7,7 +7,7 @@ import { MessageCircle, Mail, Phone, Send } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useToast } from '@/hooks/use-toast';
 
-const WHATSAPP_NUMBER = '97253327125';
+const MESSENGER_URL = 'https://www.facebook.com/refael.silanikove';
 
 const ContactSection = () => {
   const { t, isHebrew } = useLanguage();
@@ -15,9 +15,7 @@ const ContactSection = () => {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: '', email: '', phone: '', business: '', message: '' });
 
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    isHebrew ? 'שלום רפאל, אני מעוניין לשמוע על שירותי האוטומציה שלך' : 'Hi Refael, I\'m interested in your automation services'
-  )}`;
+  const messengerUrl = MESSENGER_URL;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,7 +105,7 @@ const ContactSection = () => {
           {/* Contact options */}
           <div className="lg:col-span-2 space-y-5">
             <a
-              href={whatsappUrl}
+              href={messengerUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 p-6 rounded-2xl bg-card border border-border hover:shadow-lg hover:border-accent/30 transition-all duration-300"
@@ -135,7 +133,7 @@ const ContactSection = () => {
             </a>
 
             <a
-              href={whatsappUrl}
+              href={messengerUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 p-6 rounded-2xl bg-card border border-border hover:shadow-lg hover:border-accent/30 transition-all duration-300"

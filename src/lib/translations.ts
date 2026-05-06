@@ -20,7 +20,7 @@ export const translations = {
         { value: '3x', label: 'יותר לידים מטופלים' },
         { value: '24/7', label: 'זמינות מלאה' },
       ],
-      cta1: 'דבר איתי בוואטסאפ',
+      cta1: 'דבר איתי במסנג׳ר',
       cta2: 'ראה את הבוטים בפעולה',
     },
     services: {

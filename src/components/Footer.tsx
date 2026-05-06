@@ -2,14 +2,12 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { MessageCircle } from 'lucide-react';
 
-const WHATSAPP_NUMBER = '97253327125';
+const MESSENGER_URL = 'https://www.facebook.com/refael.silanikove';
 
 const Footer = () => {
   const { t, isHebrew } = useLanguage();
 
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    isHebrew ? 'שלום רפאל, אני מעוניין לשמוע על שירותי האוטומציה שלך' : 'Hi Refael, I\'m interested in your automation services'
-  )}`;
+  const messengerUrl = MESSENGER_URL;
 
   const navItems = [
     { key: 'services', href: '#services' },
@@ -32,7 +30,7 @@ const Footer = () => {
             className="gradient-accent text-accent-foreground font-semibold h-14 px-10 rounded-xl text-base hover:opacity-90 transition-opacity"
             asChild
           >
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+            <a href={messengerUrl} target="_blank" rel="noopener noreferrer">
               <MessageCircle className="h-5 w-5" />
               {t('contact.whatsapp')}
             </a>

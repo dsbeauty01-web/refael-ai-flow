@@ -292,6 +292,45 @@
   .bot-send:disabled { opacity: 0.4; cursor: not-allowed; }
   .bot-hint { text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 1rem; }
 
+  /* ANAM avatar */
+  .anam-stage {
+    position: relative; width: 100%; aspect-ratio: 16/10;
+    background: #0a0a14; border-radius: 1.25rem; overflow: hidden;
+    margin-bottom: 1rem; border: 1px solid rgba(255,255,255,0.08);
+  }
+  .anam-stage video { width: 100%; height: 100%; object-fit: cover; display: block; background:#0a0a14; }
+  .anam-overlay {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 0.85rem;
+    background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(139,92,246,0.25)), #0a0a14;
+  }
+  .anam-overlay.hidden { display: none; }
+  .anam-start-btn { padding: 1rem 2rem; font-size: 1.05rem; min-height: 56px; }
+  .anam-overlay-hint { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+  .anam-counter {
+    text-align: center; font-size: 0.85rem; color: var(--coral);
+    font-weight: 700; margin-bottom: 0.85rem;
+  }
+  .anam-lead { padding: 0.5rem 0; }
+  .anam-lead-title {
+    font-size: 1.15rem; font-weight: 800; color: #fff;
+    text-align: center; margin-bottom: 1.25rem; line-height: 1.5;
+  }
+  .anam-lead-form { display: flex; flex-direction: column; gap: 0.85rem; }
+  .anam-lead-form input {
+    width: 100%; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 0.85rem;
+    padding: 1rem 1.2rem; min-height: 56px; color: #fff;
+    font-size: 1.05rem; font-family: inherit; outline: none;
+  }
+  .anam-lead-form input::placeholder { color: rgba(255,255,255,0.3); }
+  .anam-lead-form input:focus { border-color: var(--coral); }
+  .anam-lead-success {
+    padding: 1.25rem; border-radius: 0.85rem;
+    background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.4);
+    color: #4ade80; font-weight: 700; text-align: center;
+  }
+
   /* WHY ME */
   .whyme { background: var(--bg-soft); }
   .whyme-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 4rem; }
@@ -656,24 +695,49 @@
     </p>
 
     <div class="bot-frame fade-up">
-      <div class="bot-avatar" id="botAvatar">
-        <video id="botVideo" autoplay playsinline muted></video>
-        <img class="placeholder-img" id="botPlaceholder" src="/src/assets/hero-avatar.png" alt="Maya" />
+      <!-- Anam avatar video -->
+      <div class="anam-stage" id="anamStage">
+        <video id="anamVideo" autoplay playsinline></video>
+        <div class="anam-overlay" id="anamOverlay">
+          <button id="anamStartBtn" class="btn btn-primary anam-start-btn">
+            <span class="he">התחל הדגמה</span><span class="en">Start Demo</span>
+          </button>
+          <p class="anam-overlay-hint">
+            <span class="he">לחץ כדי לדבר עם אווטר חי</span>
+            <span class="en">Click to talk to a live avatar</span>
+          </p>
+        </div>
       </div>
-      <div class="bot-status" id="botStatus">
-        <span class="he">💬 שלח הודעה כדי להתחיל</span>
-        <span class="en">💬 Send a message to start</span>
-      </div>
-      <div class="bot-chat" id="botChat"></div>
-      <div class="bot-input-row">
+
+      <div class="bot-status" id="botStatus"></div>
+      <div class="anam-counter" id="anamCounter" style="display:none;"></div>
+
+      <div class="bot-chat" id="botChat" style="display:none;"></div>
+
+      <div class="bot-input-row" id="botInputRow" style="display:none;">
         <input id="botInput" class="bot-input" type="text" />
-        <button class="bot-mic" id="botMic" title="Voice">🎤</button>
         <button class="bot-send" id="botSend"><span class="he">שלח</span><span class="en">Send</span></button>
       </div>
-      <p class="bot-hint">
-        <span class="he">💡 נסה: "יש לי מספרה, איך אתה יכול לעזור?"</span>
-        <span class="en">💡 Try: "I have a salon, how can you help?"</span>
-      </p>
+
+      <!-- Lead capture form (hidden until session ends) -->
+      <div class="anam-lead" id="anamLead" style="display:none;">
+        <h3 class="anam-lead-title">
+          <span class="he">רוצה אווטר כזה לעסק שלך? השאר פרטים ואחזור תוך שעה</span>
+          <span class="en">Want one for your business? Leave your details, I'll reply within 1 hour</span>
+        </h3>
+        <form id="anamLeadForm" class="anam-lead-form">
+          <input type="text" id="leadName" required placeholder="" />
+          <input type="tel" id="leadPhone" required placeholder="050-1234567" />
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;border-radius:0.85rem;padding:1rem;min-height:56px;">
+            <span class="he">שלח → אחזור תוך שעה</span>
+            <span class="en">Send → I'll reply within 1 hour</span>
+          </button>
+        </form>
+        <div class="anam-lead-success" id="anamLeadSuccess" style="display:none;">
+          <span class="he">תודה! חוזר אליך תוך שעה</span>
+          <span class="en">Thanks! Replying within an hour</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -876,173 +940,178 @@ function handleSubmit(e) {
 </script>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- LIVE BOT — D-ID SDK + n8n webhook       -->
+<!-- LIVE BOT — Anam avatar + n8n brain      -->
 <!-- ═══════════════════════════════════════ -->
 <script type="module">
-  import { createAgentManager } from 'https://esm.sh/@d-id/client-sdk@1.1.53';
+  import { unsafe_createClientWithApiKey } from 'https://esm.sh/@anam-ai/js-sdk@4.13.0';
 
-  const AGENT_ID    = 'v2_agt_Z7uYXWFx';
-  const CLIENT_KEY  = 'ck_TTib26kd6XmFIFgO_Lji-';
+  const PERSONA_ID  = '16d953d6-3c64-4a19-b2e5-c2b80c2f3e98';
+  const ANAM_KEY    = import.meta.env.VITE_ANAM_API_KEY;
   const N8N_WEBHOOK = 'https://rafa5555.app.n8n.cloud/webhook/sales-bot/v1/chat/completions';
+  const MAX_MSGS    = 3;
 
-  const videoEl    = document.getElementById('botVideo');
-  const placeholderEl = document.getElementById('botPlaceholder');
+  const stageEl    = document.getElementById('anamStage');
+  const overlayEl  = document.getElementById('anamOverlay');
+  const startBtn   = document.getElementById('anamStartBtn');
+  const videoEl    = document.getElementById('anamVideo');
   const statusEl   = document.getElementById('botStatus');
+  const counterEl  = document.getElementById('anamCounter');
   const chatEl     = document.getElementById('botChat');
+  const inputRow   = document.getElementById('botInputRow');
   const inputEl    = document.getElementById('botInput');
   const sendBtn    = document.getElementById('botSend');
-  const micBtn     = document.getElementById('botMic');
+  const leadEl     = document.getElementById('anamLead');
+  const leadForm   = document.getElementById('anamLeadForm');
+  const leadName   = document.getElementById('leadName');
+  const leadPhone  = document.getElementById('leadPhone');
+  const leadOk     = document.getElementById('anamLeadSuccess');
 
-  let agentManager = null, connected = false, stream = null, didInited = false;
+  let anamClient = null;
+  const today = new Date().toISOString().slice(0,10);
+  const STORAGE_KEY = `anam_msgs_${today}`;
+  let msgCount = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
+  const history = [];
 
-  // ── Helpers ──
-  function cleanForSpeech(text) {
-    return text.replace(/\*\*([^*]+)\*\*/g,'$1').replace(/\*([^*]+)\*/g,'$1')
-      .replace(/\[([^\]]+)\]\([^)]+\)/g,'$1').replace(/^[\s]*[-•*]\s*/gm,'')
-      .replace(/^[\s]*\d+\.\s*/gm,'').replace(/^#+\s*/gm,'')
-      .replace(/https?:\/\/[^\s)]+/g,'').replace(/[#*_~`|>]/g,'')
-      .replace(/\n{2,}/g,'. ').replace(/\n/g,'. ')
-      .replace(/\s{2,}/g,' ').replace(/\.\s*\./g,'.').trim();
+  function isHe() { return document.body.dataset.lang === 'he'; }
+  function setStatus(he, en) { statusEl.textContent = isHe() ? he : en; }
+  function updateCounter() {
+    const rem = Math.max(0, MAX_MSGS - msgCount);
+    counterEl.style.display = 'block';
+    counterEl.textContent = isHe()
+      ? `נותרו ${rem} הודעות`
+      : `${rem} messages remaining`;
   }
-  function shortenForVoice(text, max=280) {
-    const cleaned = cleanForSpeech(text);
-    if (cleaned.length <= max) return cleaned;
-    const sentences = cleaned.split(/(?<=[.!?])\s+/);
-    let result = '';
-    for (const s of sentences) { if ((result+' '+s).length > max) break; result += (result?' ':'') + s; }
-    return result || cleaned.substring(0, max) + '...';
-  }
-  function formatReply(text) {
-    return text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank">$1</a>')
-      .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
-  }
-  function setStatus(s) { statusEl.textContent = s; }
   function addMsg(text, type) {
     const div = document.createElement('div');
     div.className = 'bot-msg bot-msg-' + type;
-    if (type === 'bot') div.innerHTML = formatReply(text); else div.textContent = text;
+    div.textContent = text;
     chatEl.appendChild(div);
     chatEl.scrollTop = chatEl.scrollHeight;
   }
 
-  // ── D-ID init (lazy, completely optional — never blocks chat) ──
-  function initDID() {
-    if (didInited) return;
-    didInited = true;
-    setStatus('Connecting avatar...');
-    const callbacks = {
-      onSrcObjectReady(v) {
-        stream = v; videoEl.srcObject = v; videoEl.muted = true;
-        videoEl.style.display = 'block';
-        if (placeholderEl) placeholderEl.style.display = 'none';
-        videoEl.play().catch(()=>{});
-      },
-      onConnectionStateChange(state) {
-        if (state==='connected') { connected=true; setStatus('● Connected'); }
-        else if (['disconnected','closed','failed'].includes(state)) {
-          connected=false; setStatus('💬 Chat only mode');
-        } else setStatus(state);
-      },
-      onVideoStateChange(state) {
-        if (state==='STOP') {
-          if (connected) setStatus('● Connected');
-        } else { setStatus('Speaking...'); }
-      },
-      onError(e) {
-        console.warn('D-ID unavailable (avatar will not appear, chat still works):', e);
-        connected = false;
-        setStatus('💬 Chat only mode');
-      }
-    };
+  // Localized placeholders
+  function applyLangPlaceholders() {
+    const he = isHe();
+    inputEl.placeholder = he ? 'כתוב הודעה...' : 'Type a message...';
+    leadName.placeholder = he ? 'השם שלך' : 'Your name';
+  }
+  applyLangPlaceholders();
+  document.addEventListener('langchange', applyLangPlaceholders);
+
+  async function startSession() {
+    if (msgCount >= MAX_MSGS) {
+      showLeadForm();
+      return;
+    }
+    startBtn.disabled = true;
+    setStatus('מתחבר...', 'Connecting...');
     try {
-      createAgentManager(AGENT_ID, {
-        auth: { type: 'key', clientKey: CLIENT_KEY },
-        callbacks,
-        streamOptions: { compatibilityMode: 'auto', streamWarmup: true }
-      }).then(m => {
-        agentManager = m;
-        return agentManager.connect();
-      }).catch(e => {
-        console.warn('D-ID init failed (chat still works):', e);
-        connected = false;
-        setStatus('💬 Chat only mode');
+      anamClient = unsafe_createClientWithApiKey(ANAM_KEY, {
+        personaConfig: { personaId: PERSONA_ID }
       });
-    } catch(e) {
-      console.warn('D-ID setup failed (chat still works):', e);
-      setStatus('💬 Chat only mode');
+      await anamClient.streamToVideoElement(videoEl.id);
+      overlayEl.classList.add('hidden');
+      chatEl.style.display = 'flex';
+      inputRow.style.display = 'flex';
+      setStatus('● מחובר', '● Connected');
+      updateCounter();
+      inputEl.focus();
+    } catch (e) {
+      console.error('Anam start failed:', e);
+      setStatus('שגיאת חיבור. נסה שוב.', 'Connection error. Try again.');
+      startBtn.disabled = false;
     }
   }
 
-  // ── Speech recognition ──
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  let recog = null, isRec = false;
-  if (SR) {
-    recog = new SR();
-    recog.lang = 'he-IL'; recog.interimResults = true; recog.continuous = false;
-    recog.onresult = e => {
-      let t = ''; for (let i=e.resultIndex;i<e.results.length;i++) t+=e.results[i][0].transcript;
-      inputEl.value = t;
-      if (e.results[e.results.length-1].isFinal) { stopRec(); if(t.trim()) sendMsg(); }
-    };
-    recog.onerror = recog.onend = () => stopRec();
-  } else { micBtn.style.display = 'none'; }
-  function startRec() { if(!recog||isRec) return; isRec=true; micBtn.classList.add('recording'); micBtn.textContent='⏹'; try{recog.start();}catch(e){stopRec();} }
-  function stopRec()  { if(!isRec) return; isRec=false; micBtn.classList.remove('recording'); micBtn.textContent='🎤'; try{recog.stop();}catch(e){} }
-  micBtn.addEventListener('click', ()=> isRec ? stopRec() : startRec());
+  async function endSession() {
+    try { if (anamClient) await anamClient.stopStreaming(); } catch(e) {}
+    anamClient = null;
+    try { videoEl.srcObject = null; } catch(e) {}
+  }
 
-  // ── Send to n8n ──
+  function showLeadForm() {
+    endSession();
+    stageEl.style.display = 'none';
+    chatEl.style.display = 'none';
+    inputRow.style.display = 'none';
+    counterEl.style.display = 'none';
+    statusEl.textContent = '';
+    leadEl.style.display = 'block';
+  }
+
   async function sendMsg() {
     const text = inputEl.value.trim();
-    if (!text) return;
+    if (!text || !anamClient) return;
+    if (msgCount >= MAX_MSGS) { showLeadForm(); return; }
+
     inputEl.value = '';
     sendBtn.disabled = true;
-
-    // D-ID disabled (out of credits) — chat-only mode
-    // To re-enable when topped up: uncomment the next line
-    // if (!didInited) initDID();
-
     addMsg(text, 'user');
-    const thinkEl = document.createElement('div');
-    thinkEl.className = 'bot-msg bot-msg-thinking';
-    thinkEl.textContent = '...';
-    chatEl.appendChild(thinkEl);
-    chatEl.scrollTop = chatEl.scrollHeight;
+    history.push({ role: 'user', content: text });
+    msgCount++;
+    localStorage.setItem(STORAGE_KEY, String(msgCount));
+    updateCounter();
+
+    const isLast = msgCount >= MAX_MSGS;
 
     try {
       const res = await fetch(N8N_WEBHOOK, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [{ role: 'user', content: text }], stream: false })
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history, stream: false })
       });
       if (!res.ok) throw new Error('n8n ' + res.status);
       const data = await res.json();
-      let reply = data.reply ?? data.output ?? data.text ?? data.message ?? data.choices?.[0]?.message?.content;
-      if (reply) reply = reply.replace(/^=/,'').trim();
-      if (!reply) throw new Error('empty');
-      thinkEl.remove();
+      let reply = data.reply ?? data.output ?? data.text ?? data.message
+                ?? data.choices?.[0]?.message?.content ?? '';
+      reply = String(reply).replace(/^=/,'').trim();
+      if (!reply) reply = isHe() ? 'מצטער, נסה שוב.' : 'Sorry, try again.';
+
       addMsg(reply, 'bot');
-      // Speak via avatar ONLY if D-ID is connected — never block
-      if (connected && agentManager) {
-        try {
-          agentManager.speak({ type: 'text', input: shortenForVoice(reply) }).catch(err => {
-            console.warn('Speak failed (text reply still shown):', err);
-          });
-        } catch(e) {
-          console.warn('Speak error:', e);
+      history.push({ role: 'assistant', content: reply });
+
+      try {
+        if (anamClient && typeof anamClient.talk === 'function') {
+          await anamClient.talk(reply);
         }
+      } catch (e) { console.warn('Anam talk failed:', e); }
+
+      if (isLast) {
+        // Wait briefly so reply is heard, then end + show form
+        setTimeout(showLeadForm, 6000);
       }
-    } catch(e) {
-      thinkEl.remove();
-      const errMsg = document.body.dataset.lang === 'he'
-        ? 'אופס, משהו השתבש. נסה שוב? 🙏'
-        : 'Oops, something went wrong. Try again? 🙏';
-      addMsg(errMsg, 'bot');
+    } catch (e) {
       console.error('Bot error:', e);
+      addMsg(isHe() ? 'אופס, משהו השתבש.' : 'Oops, something went wrong.', 'bot');
     }
     sendBtn.disabled = false;
     inputEl.focus();
   }
+
+  startBtn.addEventListener('click', startSession);
   sendBtn.addEventListener('click', sendMsg);
-  inputEl.addEventListener('keydown', e => { if(e.key==='Enter'){e.preventDefault();sendMsg();} });
+  inputEl.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); sendMsg(); } });
+
+  // Lead form submit
+  leadForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const payload = {
+      type: 'lead',
+      name: leadName.value.trim(),
+      phone: leadPhone.value.trim(),
+      source: 'anam-demo',
+      lang: isHe() ? 'he' : 'en',
+    };
+    try {
+      await fetch(N8N_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (err) { console.warn('Lead post failed:', err); }
+    leadForm.style.display = 'none';
+    leadOk.style.display = 'block';
+  });
 </script>
 
 <!-- ═══════════════════════════════════════ -->

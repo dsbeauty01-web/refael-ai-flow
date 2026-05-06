@@ -854,9 +854,6 @@ function handleSubmit(e) {
   const data = {
     name: document.getElementById('fname').value,
     phone: document.getElementById('fphone').value,
-    email: document.getElementById('femail').value || 'none',
-    business: document.getElementById('fbiz').value || 'not specified',
-    message: document.getElementById('fmsg').value || 'none'
   };
 
   // FormSubmit.co — works without setup, sends to your email
@@ -872,7 +869,7 @@ function handleSubmit(e) {
     document.getElementById('formSuccess').classList.add('visible');
   }).catch(() => {
     // fallback to mailto
-    const body = `Name: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}\nBusiness: ${data.business}\n\n${data.message}`;
+    const body = `Name: ${data.name}\nPhone: ${data.phone}`;
     window.location.href = `mailto:dsbeauty01@gmail.com?subject=${encodeURIComponent('New lead: ' + data.name)}&body=${encodeURIComponent(body)}`;
   });
 }

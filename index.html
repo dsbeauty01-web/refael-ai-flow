@@ -344,18 +344,18 @@
   .contact .section-title { color: #fff; }
   .contact .section-sub { color: rgba(255,255,255,0.5); }
   .contact-card {
-    max-width: 600px; margin: 0 auto;
+    max-width: 500px; margin: 0 auto;
     background: rgba(255,255,255,0.04);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 2rem;
     padding: 2.5rem;
   }
-  .form-field { margin-bottom: 1rem; }
+  .form-field { margin-bottom: 1.1rem; }
   .form-field label { display: block; font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 0.4rem; font-weight: 600; }
   .form-field input, .form-field select, .form-field textarea {
     width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 0.85rem; padding: 0.95rem 1.2rem; color: #fff; font-size: 1rem;
+    border-radius: 0.85rem; padding: 1rem 1.2rem; min-height: 56px; color: #fff; font-size: 1.05rem;
     font-family: inherit; transition: border-color 0.2s; outline: none;
   }
   .form-field input::placeholder, .form-field textarea::placeholder { color: rgba(255,255,255,0.3); }
@@ -766,8 +766,8 @@
 
     <div class="contact-card fade-up">
       <div class="form-success" id="formSuccess">
-        <span class="he">✅ קיבלתי! אחזור אליך תוך 24 שעות.</span>
-        <span class="en">✅ Got it! I'll be back to you within 24h.</span>
+        <span class="he">תודה! חוזר אליך תוך שעה</span>
+        <span class="en">Thanks! Replying within an hour</span>
       </div>
 
       <form id="contactForm" onsubmit="handleSubmit(event)">
@@ -779,30 +779,9 @@
           <label><span class="he">וואטסאפ או טלפון *</span><span class="en">WhatsApp or phone *</span></label>
           <input type="tel" id="fphone" required placeholder="050-1234567" />
         </div>
-        <div class="form-field">
-          <label><span class="he">אימייל (לא חובה)</span><span class="en">Email (optional)</span></label>
-          <input type="email" id="femail" />
-        </div>
-        <div class="form-field">
-          <label><span class="he">סוג העסק</span><span class="en">Business type</span></label>
-          <select id="fbiz">
-            <option value=""><span>—</span></option>
-            <option><span class="he">סלון יופי / מספרה</span><span class="en">Salon / Beauty</span></option>
-            <option>Restaurant / Hospitality</option>
-            <option>E-commerce</option>
-            <option>Real Estate</option>
-            <option>Coach / Consultant</option>
-            <option>Clinic / Wellness</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label><span class="he">מה הבעיה הכי גדולה שתרצה ש-AI יפתור?</span><span class="en">What's the #1 problem you'd want AI to solve?</span></label>
-          <textarea id="fmsg" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;border-radius:0.85rem;padding:1rem;">
-          <span class="he">שלח → רפאל יחזור תוך 24 שעות</span>
-          <span class="en">Send → Refael will reply within 24h</span>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;border-radius:0.85rem;padding:1.1rem;min-height:56px;font-size:1.05rem;">
+          <span class="he">שלח → אחזור תוך שעה</span>
+          <span class="en">Send → I'll reply within 1 hour</span>
         </button>
 
         <div class="quick-actions">
@@ -853,8 +832,6 @@ function setLang(l) {
   const ph = l === 'he';
   document.getElementById('fname').placeholder = ph ? 'יוסי כהן' : 'John Smith';
   document.getElementById('fphone').placeholder = ph ? '050-1234567' : '+1 555-0123';
-  document.getElementById('femail').placeholder = ph ? 'you@example.com' : 'you@example.com';
-  document.getElementById('fmsg').placeholder = ph ? 'אני מאבד לקוחות אחרי שעות העבודה...' : 'I lose customers after hours...';
   document.getElementById('botInput').placeholder = ph ? 'כתוב הודעה...' : 'Type a message...';
 }
 setLang('he');

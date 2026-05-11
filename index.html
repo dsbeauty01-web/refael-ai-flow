@@ -746,50 +746,8 @@
       <span class="en">This is the same bot I build for clients. It answers, recommends, and captures your info if you want a quote.</span>
     </p>
 
-    <div class="bot-frame fade-up">
-      <!-- Anam avatar video -->
-      <div class="anam-stage" id="anamStage">
-        <video id="anamVideo" autoplay playsinline></video>
-        <div class="anam-overlay" id="anamOverlay">
-          <button id="anamStartBtn" class="btn btn-primary anam-start-btn">
-            <span class="he">התחל הדגמה</span><span class="en">Start Demo</span>
-          </button>
-          <p class="anam-overlay-hint">
-            <span class="he">לחץ כדי לדבר עם אווטר חי</span>
-            <span class="en">Click to talk to a live avatar</span>
-          </p>
-        </div>
-      </div>
-
-      <div class="bot-status" id="botStatus"></div>
-      <div class="anam-counter" id="anamCounter" style="display:none;"></div>
-
-      <div class="bot-chat" id="botChat" style="display:none;"></div>
-
-      <div class="bot-input-row" id="botInputRow" style="display:none;">
-        <input id="botInput" class="bot-input" type="text" />
-        <button class="bot-send" id="botSend"><span class="he">שלח</span><span class="en">Send</span></button>
-      </div>
-
-      <!-- Lead capture form (hidden until session ends) -->
-      <div class="anam-lead" id="anamLead" style="display:none;">
-        <h3 class="anam-lead-title">
-          <span class="he">רוצה אווטר כזה לעסק שלך? השאר פרטים ואחזור תוך שעה</span>
-          <span class="en">Want one for your business? Leave your details, I'll reply within 1 hour</span>
-        </h3>
-        <form id="anamLeadForm" class="anam-lead-form">
-          <input type="text" id="leadName" required placeholder="" />
-          <input type="tel" id="leadPhone" required placeholder="050-1234567" />
-          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;border-radius:0.85rem;padding:1rem;min-height:56px;">
-            <span class="he">שלח → אחזור תוך שעה</span>
-            <span class="en">Send → I'll reply within 1 hour</span>
-          </button>
-        </form>
-        <div class="anam-lead-success" id="anamLeadSuccess" style="display:none;">
-          <span class="he">תודה! חוזר אליך תוך שעה</span>
-          <span class="en">Thanks! Replying within an hour</span>
-        </div>
-      </div>
+    <div class="anam-embed fade-up">
+      <anam-agent agent-id="16d953d6-3c64-4a19-b2e5-c2b80c2f3e98"></anam-agent>
     </div>
   </div>
 </section>

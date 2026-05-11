@@ -334,6 +334,55 @@
     color: #4ade80; font-weight: 700; text-align: center;
   }
 
+  /* Anam agent embed (in-page) */
+  .anam-embed {
+    max-width: 500px; margin: 0 auto;
+    background: #0a0a14; border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 0 40px rgba(99,102,241,0.15);
+    overflow: hidden; border: 1px solid rgba(255,255,255,0.08);
+    min-height: 480px;
+  }
+  .anam-embed anam-agent { display: block; width: 100%; height: 100%; min-height: 480px; }
+
+  /* Floating Anam avatar */
+  @keyframes anam-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(99,102,241,0.55), 0 12px 32px rgba(0,0,0,0.45); }
+    50%      { box-shadow: 0 0 0 18px rgba(99,102,241,0), 0 12px 32px rgba(0,0,0,0.45); }
+  }
+  .anam-fab {
+    position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+    width: 120px; height: 120px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    border: 3px solid rgba(255,255,255,0.15); cursor: pointer;
+    overflow: hidden; padding: 0; display: flex; align-items: center; justify-content: center;
+    animation: anam-pulse 2.4s ease-out infinite;
+    transition: transform 0.2s;
+  }
+  .anam-fab:hover { transform: scale(1.06); }
+  .anam-fab svg { width: 56px; height: 56px; color: #fff; }
+  .anam-fab.hidden { display: none; }
+  .anam-panel {
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    width: 400px; height: 500px; border-radius: 16px;
+    background: #0a0a14; border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+    overflow: hidden; display: none; flex-direction: column;
+  }
+  .anam-panel.open { display: flex; }
+  .anam-panel-close {
+    position: absolute; top: 8px; right: 8px; z-index: 2;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(0,0,0,0.55); color: #fff; border: none; cursor: pointer;
+    font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+  }
+  .anam-panel-body { flex: 1; min-height: 0; }
+  .anam-panel-body anam-agent { display: block; width: 100%; height: 100%; }
+  @media (max-width: 640px) {
+    .anam-fab { width: 80px; height: 80px; bottom: 16px; right: 16px; }
+    .anam-fab svg { width: 38px; height: 38px; }
+    .anam-panel { width: calc(100vw - 32px); height: 70vh; bottom: 16px; right: 16px; }
+  }
+
   /* WHY ME */
   .whyme { background: var(--bg-soft); }
   .whyme-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 4rem; }

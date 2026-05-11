@@ -968,5 +968,40 @@ function handleSubmit(e) {
 </script>
 -->
 
+<!-- Floating Anam talking-avatar widget -->
+<button id="anamFab" class="anam-fab" aria-label="Open AI avatar">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="8" r="4"/>
+    <path d="M4 21c0-4.418 3.582-8 8-8s8 3.582 8 8"/>
+  </svg>
+</button>
+<div id="anamPanel" class="anam-panel" role="dialog" aria-label="AI avatar">
+  <button id="anamPanelClose" class="anam-panel-close" aria-label="Close">✕</button>
+  <div class="anam-panel-body" id="anamPanelBody"></div>
+</div>
+<script>
+  (function () {
+    const fab   = document.getElementById('anamFab');
+    const panel = document.getElementById('anamPanel');
+    const close = document.getElementById('anamPanelClose');
+    const body  = document.getElementById('anamPanelBody');
+    let mounted = false;
+    fab.addEventListener('click', () => {
+      if (!mounted) {
+        const el = document.createElement('anam-agent');
+        el.setAttribute('agent-id', '16d953d6-3c64-4a19-b2e5-c2b80c2f3e98');
+        body.appendChild(el);
+        mounted = true;
+      }
+      panel.classList.add('open');
+      fab.classList.add('hidden');
+    });
+    close.addEventListener('click', () => {
+      panel.classList.remove('open');
+      fab.classList.remove('hidden');
+    });
+  })();
+</script>
+
 </body>
 </html>

@@ -7,7 +7,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import AIChat from "./pages/AIChat";
 import NotFound from "./pages/NotFound";
-import FloatingMessenger from "./components/FloatingWhatsApp";
+import { FloatingAvatarWidget } from "./components/FloatingAvatarWidget";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +23,7 @@ const App = () => (
             <Route path="/chat" element={<AIChat />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <FloatingMessenger />
+          <FloatingAvatarWidget />
         </BrowserRouter>
       </TooltipProvider>
     </LanguageProvider>

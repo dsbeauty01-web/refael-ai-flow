@@ -3,15 +3,7 @@ import { AvatarCall } from '@runwayml/avatars-react';
 import '@runwayml/avatars-react/styles.css';
 
 const BOT_SERVER_URL = import.meta.env.VITE_BOT_SERVER_URL || 'https://bot-vibk.onrender.com';
-
-function VideoIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M23 7l-7 5 7 5V7z" />
-      <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
-    </svg>
-  );
-}
+const FACE_SRC = '/consultant-face.jpg';
 
 export function FloatingAvatarWidget() {
   const [open, setOpen] = useState(false);
@@ -23,16 +15,21 @@ export function FloatingAvatarWidget() {
           onClick={() => setOpen(true)}
           className="fixed bottom-5 right-5 z-[9999] flex items-center gap-3 bg-transparent border-0 p-0 cursor-pointer"
           dir="rtl"
-          aria-label="דבר עם היועצת"
+          aria-label="דבר עם היועץ"
         >
           <span className="hidden sm:inline-block bg-[#0a0a1a]/90 text-white text-sm font-medium px-3 py-2 rounded-full shadow-lg backdrop-blur-sm whitespace-nowrap">
-            דבר עם היועצת
+            דבר איתי עכשיו 👋
           </span>
           <span
-            className="relative w-[70px] h-[70px] rounded-full flex items-center justify-center shadow-xl animate-pulse-ring-cyan"
-            style={{ background: 'linear-gradient(135deg, #00e5ff 0%, #0099ff 100%)' }}
+            className="relative w-[72px] h-[72px] rounded-full shadow-xl animate-pulse-ring-cyan"
+            style={{ border: '3px solid #00e5ff' }}
           >
-            <VideoIcon className="w-8 h-8 text-white" />
+            <img
+              src={FACE_SRC}
+              alt="יועץ AI"
+              className="w-full h-full rounded-full object-cover"
+            />
+            <span className="absolute top-0 right-0 w-3.5 h-3.5 rounded-full bg-green-500 border-2 border-[#0a0a1a]" />
           </span>
         </button>
       )}
@@ -49,7 +46,7 @@ export function FloatingAvatarWidget() {
             lang="he"
           >
             <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-[#0a0a1a]">
-              <span className="font-semibold text-white">יועצת AI</span>
+              <span className="font-semibold text-white">יועץ AI</span>
               <button
                 onClick={() => setOpen(false)}
                 className="text-white/60 hover:text-white text-2xl leading-none px-2"
@@ -60,9 +57,13 @@ export function FloatingAvatarWidget() {
             </div>
 
             <div className="flex-1 relative bg-black flex items-center justify-center">
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-white/70">
+              <div
+                className="absolute inset-0 bg-center bg-cover"
+                style={{ backgroundImage: `url(${FACE_SRC})` }}
+              />
+              <div className="absolute inset-0 bg-black/55 flex flex-col items-center justify-center gap-3 text-white">
                 <div className="w-10 h-10 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin" />
-                <span className="text-sm">מתחברת...</span>
+                <span className="text-sm">מתחבר...</span>
               </div>
               <AvatarCall
                 avatarId="default"

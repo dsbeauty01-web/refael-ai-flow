@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AvatarCall, ControlBar } from '@runwayml/avatars-react';
+import { AvatarCall, AvatarVideo, ControlBar, AudioRenderer } from '@runwayml/avatars-react';
 import { useRoomContext } from '@livekit/components-react';
 import '@runwayml/avatars-react/styles.css';
 
@@ -116,6 +116,8 @@ export function FloatingAvatarWidget() {
                 onError={(e) => console.error('Avatar error:', e)}
                 className="relative w-full h-full z-10"
               >
+                <AvatarVideo />
+                <AudioRenderer />
                 <ControlBar showCamera={false} showScreenShare={false} />
                 <QuickReplies />
               </AvatarCall>

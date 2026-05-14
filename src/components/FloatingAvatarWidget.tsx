@@ -1,9 +1,43 @@
 import { useState } from 'react';
-import { AvatarCall } from '@runwayml/avatars-react';
+import { AvatarCall, ControlBar } from '@runwayml/avatars-react';
+import { useRoomContext } from '@livekit/components-react';
 import '@runwayml/avatars-react/styles.css';
 
 const BOT_SERVER_URL = import.meta.env.VITE_BOT_SERVER_URL || 'https://bot-vibk.onrender.com';
 const FACE_SRC = '/consultant-face.jpg';
+
+const QUICK_REPLIES = [
+  'כמה זה עולה? 💰',
+  'אני רוצה הצעת מחיר 📋',
+  'מה הבוט יכול לעשות?',
+];
+
+function QuickReplies() {
+  const room = useRoomContext();
+  const send = async (text: string) => {
+    try {
+      await room.localParticipant.sendText(text, { topic: 'lk.chat' });
+    } catch (err) {
+      console.error('sendText failed:', err);
+    }
+  };
+  return (
+    <div
+      dir="rtl"
+      className="flex flex-row-reverse flex-wrap gap-2 px-3 py-3 border-t border-white/10 bg-[#0a0a1a]"
+    >
+      {QUICK_REPLIES.map((q) => (
+        <button
+          key={q}
+          onClick={() => send(q)}
+          className="rounded-full px-3 py-1.5 text-xs sm:text-sm text-white bg-[#0a0a1a] border border-cyan-400/60 hover:bg-cyan-400/10 transition-colors whitespace-nowrap"
+        >
+          {q}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 export function FloatingAvatarWidget() {
   const [open, setOpen] = useState(false);
@@ -77,11 +111,14 @@ export function FloatingAvatarWidget() {
                   return await res.json();
                 }}
                 audio
-                video
+                video={false}
                 onEnd={() => setOpen(false)}
                 onError={(e) => console.error('Avatar error:', e)}
                 className="relative w-full h-full z-10"
-              />
+              >
+                <ControlBar showCamera={false} showScreenShare={false} />
+                <QuickReplies />
+              </AvatarCall>
             </div>
           </div>
         </div>

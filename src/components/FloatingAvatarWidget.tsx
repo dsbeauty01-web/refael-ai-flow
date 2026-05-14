@@ -67,7 +67,15 @@ export function FloatingAvatarWidget() {
               </div>
               <AvatarCall
                 avatarId="default"
-                connectUrl={`${BOT_SERVER_URL}/connect`}
+                connect={async () => {
+                  const res = await fetch(`${BOT_SERVER_URL}/session`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ avatarId: 'default' }),
+                  });
+                  if (!res.ok) throw new Error(`Session fetch failed: ${res.status}`);
+                  return await res.json();
+                }}
                 audio
                 video
                 onEnd={() => setOpen(false)}

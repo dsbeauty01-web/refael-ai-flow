@@ -539,7 +539,7 @@ export function FloatingAvatarWidget() {
             דבר איתי עכשיו
           </span>
           <span
-            className="relative w-[72px] h-[72px] rounded-full shadow-xl"
+            className="relative w-[130px] h-[130px] rounded-full shadow-xl"
             style={{ border: '3px solid #00e5ff' }}
           >
             <img
@@ -547,7 +547,7 @@ export function FloatingAvatarWidget() {
               alt="מיקה"
               className="w-full h-full rounded-full object-cover"
             />
-            <span className="absolute top-0 right-0 w-3.5 h-3.5 rounded-full bg-green-500 border-2 border-[#0a0a1a]" />
+            <span className="absolute top-0 right-0 w-5 h-5 rounded-full bg-green-500 border-2 border-[#0a0a1a]" />
           </span>
         </button>
       )}

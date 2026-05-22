@@ -1,29 +1,48 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import SalonAvatarWidget from '@/components/SalonAvatarWidget';
+
+// ============================================================
+//  Maya = Runway's hosted embed widget (no custom React code).
+//  Mika still uses the SDK via FloatingAvatarWidget on the main site.
+// ============================================================
+
+const MAYA_WIDGET_SCRIPT_SRC = 'https://cdn.dev.runwayml.com/prod/widget.js';
+const MAYA_PUB_KEY =
+  'pub_515b16e7eef6a6fa7ffc1bd9561ffaeccb38675116bed61c22a26bda6a5a8e67';
 
 const RealCustomerVideo = () => {
   const { isHebrew } = useLanguage();
-  const [open, setOpen] = useState(false);
+
+  // Load Runway widget script ONCE for the whole page
+  useEffect(() => {
+    const existing = document.querySelector(
+      `script[src="${MAYA_WIDGET_SCRIPT_SRC}"]`,
+    );
+    if (existing) return;
+
+    const s = document.createElement('script');
+    s.src = MAYA_WIDGET_SCRIPT_SRC;
+    s.async = true;
+    s.setAttribute('data-pub-key', MAYA_PUB_KEY);
+    document.body.appendChild(s);
+  }, []);
 
   const t = isHebrew
     ? {
         sectionTitle: 'ככה זה נראה אצל לקוחות אמיתיים',
-        live: '🟢 חי',
-        title: 'מאיה — מזכירה דיגיטלית',
-        subtitle: 'סלון יופי וציפורניים',
-        description: 'קובעת תורים, בודקת יומן, עונה 24/7.',
-        bullets: ['קביעת תורים', 'עברית ואנגלית', 'קול וטקסט'],
-        cta: '💬 דברו עם מאיה',
+        cardTitle: 'מאיה — מזכירה דיגיטלית',
+        cardSubtitle: 'דמו חי של בוט לקליניקת יופי',
+        cardBody:
+          'לחצו על הבועה למטה כדי לדבר עם מאיה. היא קובעת תורים, עונה על שאלות מחירים ושעות, ופועלת 24/7.',
+        hint: '👀 הסתכלו בפינה הימנית למטה',
       }
     : {
-        sectionTitle: "Real customers, real results",
-        live: '🟢 LIVE',
-        title: 'Maya — Digital Receptionist',
-        subtitle: 'Beauty & Nail Salon',
-        description: 'Books, checks calendar, replies 24/7.',
-        bullets: ['Booking', 'Hebrew & English', 'Voice & text'],
-        cta: '💬 Talk to Maya',
+        sectionTitle: 'Real customers, real results',
+        cardTitle: 'Maya — Digital Receptionist',
+        cardSubtitle: 'Live demo of a beauty clinic bot',
+        cardBody:
+          "Click the bubble below to talk with Maya. She books, answers price/hours questions, and runs 24/7.",
+        hint: '👀 Look at the bottom-right corner',
       };
 
   return (
@@ -37,10 +56,7 @@ const RealCustomerVideo = () => {
           {t.sectionTitle}
         </h2>
 
-        {/* 2-COLUMN GRID: video left, Maya card right (desktop). Stacked on mobile. */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start max-w-5xl mx-auto"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start max-w-5xl mx-auto">
           {/* LEFT: existing video */}
           <div className="w-full">
             <video
@@ -54,146 +70,85 @@ const RealCustomerVideo = () => {
             />
           </div>
 
-          {/* RIGHT: Maya card */}
+          {/* RIGHT: Maya intro card — points users to the Runway widget */}
           <div
-            className="w-full relative"
+            className={`w-full ${isHebrew ? 'font-hebrew' : 'font-sans'}`}
+            dir={isHebrew ? 'rtl' : 'ltr'}
             style={{
               background: '#fdf6f0',
               border: '1px solid #eadbc8',
               borderRadius: '24px',
               padding: '32px 24px',
               boxShadow: '0 12px 40px rgba(0,0,0,0.25)',
+              minHeight: '320px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
             }}
-            dir={isHebrew ? 'rtl' : 'ltr'}
           >
-            {/* LIVE badge */}
             <div
-              className="absolute top-4"
               style={{
-                [isHebrew ? 'left' : 'right']: '16px',
+                alignSelf: isHebrew ? 'flex-end' : 'flex-start',
                 background: '#ffe4ec',
                 color: '#b04a6f',
                 padding: '6px 12px',
                 borderRadius: '999px',
                 fontSize: '12px',
                 fontWeight: 600,
+                marginBottom: '16px',
               }}
             >
-              {t.live}
+              {isHebrew ? '🟢 חי' : '🟢 LIVE'}
             </div>
 
-            {/* Avatar circle */}
-            <div className="flex justify-center mb-4">
-              <div
-                style={{
-                  width: '140px',
-                  height: '140px',
-                  borderRadius: '50%',
-                  border: '3px solid #d4a574',
-                  overflow: 'hidden',
-                  boxShadow: '0 0 0 6px rgba(212,165,116,0.15)',
-                  animation: 'mayaPulse 2.4s ease-in-out infinite',
-                  background: '#fff',
-                }}
-              >
-                <img
-                  src="/maya-face.jpg"
-                  alt="Maya"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).style.display = 'none';
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Title + subtitle */}
             <h3
-              className={`text-center font-bold ${isHebrew ? 'font-hebrew' : 'font-sans'}`}
-              style={{ color: '#3a2818', fontSize: '22px', marginBottom: '4px' }}
+              style={{
+                color: '#3a2818',
+                fontSize: '24px',
+                fontWeight: 700,
+                marginBottom: '6px',
+              }}
             >
-              {t.title}
+              {t.cardTitle}
             </h3>
             <p
-              className={`text-center ${isHebrew ? 'font-hebrew' : 'font-sans'}`}
-              style={{ color: '#8a6850', fontSize: '14px', marginBottom: '12px' }}
+              style={{
+                color: '#8a6850',
+                fontSize: '14px',
+                marginBottom: '14px',
+              }}
             >
-              {t.subtitle}
+              {t.cardSubtitle}
             </p>
 
-            {/* Description */}
             <p
-              className={`text-center ${isHebrew ? 'font-hebrew' : 'font-sans'}`}
-              style={{ color: '#5a3f2b', fontSize: '15px', marginBottom: '16px' }}
+              style={{
+                color: '#3a2818',
+                fontSize: '15px',
+                lineHeight: 1.5,
+                marginBottom: '18px',
+              }}
             >
-              {t.description}
+              {t.cardBody}
             </p>
 
-            {/* 3 bullets */}
-            <ul
-              className={isHebrew ? 'font-hebrew' : 'font-sans'}
+            <div
               style={{
-                listStyle: 'none',
-                padding: 0,
-                margin: '0 0 20px 0',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '8px',
-              }}
-            >
-              {t.bullets.map((b, i) => (
-                <li
-                  key={i}
-                  style={{
-                    color: '#3a2818',
-                    fontSize: '14px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                  }}
-                >
-                  <span style={{ color: '#d4a574', fontWeight: 700 }}>✓</span>
-                  {b}
-                </li>
-              ))}
-            </ul>
-
-            {/* CTA */}
-            <button
-              onClick={() => setOpen(true)}
-              className={`w-full ${isHebrew ? 'font-hebrew' : 'font-sans'}`}
-              style={{
-                background: 'linear-gradient(135deg, #d4a574 0%, #c08a5c 100%)',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '14px',
-                padding: '14px 20px',
-                fontSize: '16px',
+                color: '#c08a5c',
+                fontSize: '14px',
                 fontWeight: 600,
-                cursor: 'pointer',
-                boxShadow: '0 6px 18px rgba(212,165,116,0.45)',
-                transition: 'transform 0.15s ease',
+                background: '#fff',
+                border: '1px dashed #d4a574',
+                padding: '10px 14px',
+                borderRadius: '12px',
+                textAlign: 'center',
               }}
-              onMouseDown={(e) => (e.currentTarget.style.transform = 'scale(0.98)')}
-              onMouseUp={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-              onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
             >
-              {t.cta}
-            </button>
+              {t.hint}
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Modal */}
-      <SalonAvatarWidget open={open} onClose={() => setOpen(false)} />
-
-      {/* Inline pulse animation */}
-      <style>{`
-        @keyframes mayaPulse {
-          0%, 100% { box-shadow: 0 0 0 6px rgba(212,165,116,0.15); }
-          50%      { box-shadow: 0 0 0 10px rgba(212,165,116,0.25); }
-        }
-      `}</style>
     </section>
   );
 };

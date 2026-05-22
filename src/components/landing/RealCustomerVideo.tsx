@@ -2,13 +2,16 @@ import { useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 // ============================================================
-//  Maya = Runway's hosted embed widget (no custom React code).
+//  Maya = Runway's hosted embed widget (floating bottom-right).
 //  Mika still uses the SDK via FloatingAvatarWidget on the main site.
 // ============================================================
 
 const MAYA_WIDGET_SCRIPT_SRC = 'https://cdn.dev.runwayml.com/prod/widget.js';
 const MAYA_PUB_KEY =
   'pub_515b16e7eef6a6fa7ffc1bd9561ffaeccb38675116bed61c22a26bda6a5a8e67';
+
+// Beauty clinic mockup image. Place file at /public so it's served at /<name>.
+const BEAUTY_IMG = '/0e55ac1a-f33c-4d3c-8a42-37c6a40bfef0.png';
 
 const RealCustomerVideo = () => {
   const { isHebrew } = useLanguage();
@@ -33,16 +36,16 @@ const RealCustomerVideo = () => {
         cardTitle: 'מאיה — מזכירה דיגיטלית',
         cardSubtitle: 'דמו חי של בוט לקליניקת יופי',
         cardBody:
-          'לחצו על הבועה למטה כדי לדבר עם מאיה. היא קובעת תורים, עונה על שאלות מחירים ושעות, ופועלת 24/7.',
-        hint: '👀 הסתכלו בפינה הימנית למטה',
+          'לחצו על הבועה של מאיה למטה כדי לדבר איתה. היא קובעת תורים, עונה על שאלות מחירים ושעות, ופועלת 24/7.',
+        hint: '👀 הסתכלו בפינה למטה — מאיה כבר שם',
       }
     : {
         sectionTitle: 'Real customers, real results',
         cardTitle: 'Maya — Digital Receptionist',
         cardSubtitle: 'Live demo of a beauty clinic bot',
         cardBody:
-          "Click the bubble below to talk with Maya. She books, answers price/hours questions, and runs 24/7.",
-        hint: '👀 Look at the bottom-right corner',
+          "Click Maya's bubble below to chat. She books appointments, answers price/hours questions, runs 24/7.",
+        hint: '👀 Look at the corner below — Maya is already there',
       };
 
   return (
@@ -56,21 +59,21 @@ const RealCustomerVideo = () => {
           {t.sectionTitle}
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start max-w-5xl mx-auto">
-          {/* LEFT: existing video */}
-          <div className="w-full">
-            <video
-              src="https://dsbeauty01-web.github.io/refael-ai-flow/shil.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-auto"
-              style={{ borderRadius: '16px' }}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-5xl mx-auto">
+          {/* LEFT: beauty clinic image */}
+          <div className="w-full flex">
+            <img
+              src={BEAUTY_IMG}
+              alt={isHebrew ? 'דמו אתר קליניקת יופי' : 'Beauty clinic demo'}
+              className="w-full h-auto object-cover"
+              style={{
+                borderRadius: '16px',
+                boxShadow: '0 12px 40px rgba(0,0,0,0.35)',
+              }}
             />
           </div>
 
-          {/* RIGHT: Maya intro card — points users to the Runway widget */}
+          {/* RIGHT: Maya intro card */}
           <div
             className={`w-full ${isHebrew ? 'font-hebrew' : 'font-sans'}`}
             dir={isHebrew ? 'rtl' : 'ltr'}
@@ -80,7 +83,6 @@ const RealCustomerVideo = () => {
               borderRadius: '24px',
               padding: '32px 24px',
               boxShadow: '0 12px 40px rgba(0,0,0,0.25)',
-              minHeight: '320px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',

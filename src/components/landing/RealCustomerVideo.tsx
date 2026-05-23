@@ -14,7 +14,10 @@ const BOT_SERVER_URL =
   (import.meta as any).env?.VITE_BOT_SERVER_URL || 'https://bot-vibk.onrender.com';
 const SALON_AVATAR_ID = '72860735-d02e-49af-9b5d-1020bc956ebc';
 const SALON_IMAGE = '/0e55ac1a-f33c-4d3c-8a42-37c6a40bfef0.png';
-const MIA_FACE = '/consultant-face.jpg'; // fallback face for idle state — swap if you have a Mia-specific image
+// URL-encoded because filename has spaces and underscores
+const MIA_FACE = encodeURI(
+  '/Nano Banana Pro - Friendly young woman 25 years old_ kids dance instructor_ stylized 3D render with.png'
+);
 const VIDEO_SRC = '/shil.mp4';
 
 // ============================================================
@@ -56,7 +59,7 @@ function MiaInnerView({ onEnd }: { onEnd: () => void }) {
 // ============================================================
 export function RealCustomerVideo() {
   const [callStarted, setCallStarted] = useState(false);
-  const [awake, setAwake] = useState(false); // Mia "wakes up" when user scrolls into view
+  const [awake, setAwake] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   // Intersection observer — wake Mia when section is visible
@@ -69,7 +72,7 @@ export function RealCustomerVideo() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setAwake(true);
-            obs.disconnect(); // wake once, don't keep re-firing
+            obs.disconnect();
           }
         });
       },
@@ -111,12 +114,15 @@ export function RealCustomerVideo() {
               playsInline
               className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full" dir="rtl">
+            <div
+              className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full"
+              dir="rtl"
+            >
               דוגמה אמיתית
             </div>
           </div>
 
-          {/* RIGHT — salon image with Mia avatar in the middle */}
+          {/* RIGHT — salon image with Mia at bottom */}
           <div className="relative rounded-2xl overflow-hidden shadow-2xl min-h-[400px] md:min-h-[520px] bg-[#1a1a2a]">
             {/* Background salon image */}
             <img
@@ -128,57 +134,58 @@ export function RealCustomerVideo() {
               }}
             />
 
-            {/* Soft overlay so Mia is readable */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-black/30" />
+            {/* Bottom gradient so Mia + label are readable */}
+            <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/85 via-black/50 to-transparent" />
 
-            {/* Salon name label bottom-right */}
-            <div className="absolute bottom-5 right-5 text-white z-10" dir="rtl">
-              <div className="text-xl font-bold drop-shadow-lg">סלון יופי "אלגנט"</div>
-              <div className="text-white/90 text-xs drop-shadow-lg">תל אביב • פתוח 9:00–20:00</div>
+            {/* Salon name label — top-right corner now (so it doesn't fight with Mia) */}
+            <div className="absolute top-5 right-5 text-white z-10" dir="rtl">
+              <div className="bg-black/40 backdrop-blur-sm rounded-lg px-3 py-1.5">
+                <div className="text-base font-bold drop-shadow-lg">סלון יופי "אלגנט"</div>
+                <div className="text-white/90 text-[11px] drop-shadow-lg">
+                  תל אביב • פתוח 9:00–20:00
+                </div>
+              </div>
             </div>
 
-            {/* Mia avatar in the MIDDLE */}
+            {/* Mia avatar — BOTTOM position, not center */}
             {!callStarted && (
-              <div className="absolute inset-0 flex items-center justify-center z-20">
-                <div className="relative flex flex-col items-center gap-3">
-                  {/* Speech bubble — appears when awake */}
-                  {awake && (
+              <div className="absolute bottom-6 left-0 right-0 z-20 flex flex-col items-center gap-2 px-4">
+                {/* Speech bubble — appears when awake */}
+                {awake && (
+                  <div
+                    className="bg-white text-[#2a1f10] text-sm font-semibold rounded-2xl px-4 py-2 shadow-xl relative"
+                    dir="rtl"
+                    style={{ animation: 'fadeInUp 0.6s ease-out' }}
+                  >
+                    היי 👋 רוצה לקבוע תור?
                     <div
-                      className="bg-white text-[#2a1f10] text-sm font-semibold rounded-2xl px-4 py-2 shadow-xl relative animate-fade-in-up"
-                      dir="rtl"
-                      style={{
-                        animation: 'fadeInUp 0.6s ease-out',
-                      }}
-                    >
-                      היי 👋 רוצה לקבוע תור?
-                      {/* Bubble tail */}
-                      <div
-                        className="absolute left-1/2 -bottom-1.5 w-3 h-3 bg-white rotate-45 -translate-x-1/2"
-                        aria-hidden="true"
-                      />
-                    </div>
-                  )}
+                      className="absolute left-1/2 -bottom-1.5 w-3 h-3 bg-white rotate-45 -translate-x-1/2"
+                      aria-hidden="true"
+                    />
+                  </div>
+                )}
 
+                <div className="flex items-center gap-3">
                   {/* Mia circle button */}
                   <button
                     type="button"
                     onClick={() => setCallStarted(true)}
-                    className="relative group"
+                    className="relative group shrink-0"
                     aria-label="דברי עם מיה"
                   >
                     {/* Pulse rings — only when awake */}
                     {awake && (
                       <>
-                        <span className="absolute inset-0 rounded-full bg-amber-400/30 animate-ping" />
+                        <span className="absolute inset-0 rounded-full bg-amber-400/40 animate-ping" />
                         <span
-                          className="absolute inset-0 rounded-full bg-amber-400/20 animate-ping"
+                          className="absolute inset-0 rounded-full bg-amber-400/25 animate-ping"
                           style={{ animationDelay: '0.6s' }}
                         />
                       </>
                     )}
 
                     <span
-                      className="relative block w-[150px] h-[150px] md:w-[180px] md:h-[180px] rounded-full shadow-2xl overflow-hidden bg-amber-100 transition-transform group-hover:scale-105"
+                      className="relative block w-[110px] h-[110px] md:w-[130px] md:h-[130px] rounded-full shadow-2xl overflow-hidden bg-amber-100 transition-transform group-hover:scale-105"
                       style={{ border: '4px solid #fbbf24' }}
                     >
                       <img
@@ -189,27 +196,28 @@ export function RealCustomerVideo() {
                     </span>
 
                     {/* LIVE badge */}
-                    <span className="absolute -top-2 -right-2 inline-flex items-center gap-1 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg">
+                    <span className="absolute -top-1 -right-1 inline-flex items-center gap-1 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg">
                       <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                       LIVE
                     </span>
                   </button>
 
-                  {/* CTA label below avatar */}
-                  <div
-                    className="bg-black/70 backdrop-blur-sm text-white text-sm font-semibold px-4 py-2 rounded-full shadow-xl cursor-pointer hover:bg-black/85 transition-colors"
+                  {/* CTA next to avatar */}
+                  <button
+                    type="button"
                     onClick={() => setCallStarted(true)}
+                    className="bg-amber-400 hover:bg-amber-300 text-[#2a1f10] text-sm font-bold px-4 py-2.5 rounded-full shadow-xl transition-colors"
                     dir="rtl"
                   >
-                    🎤 לחצי כדי לדבר איתי
-                  </div>
+                    🎤 לחצי לדבר איתי
+                  </button>
                 </div>
               </div>
             )}
 
             {/* Active call — full overlay */}
             {callStarted && (
-              <div className="absolute inset-0 z-30 bg-black/90 backdrop-blur-sm p-4 flex flex-col">
+              <div className="absolute inset-0 z-30 bg-black/95 backdrop-blur-sm p-4 flex flex-col">
                 <div className="flex items-center justify-between mb-3" dir="rtl">
                   <div className="flex items-center gap-2">
                     <span className="inline-flex items-center gap-1.5 bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">
@@ -243,7 +251,6 @@ export function RealCustomerVideo() {
         </div>
       </div>
 
-      {/* Inline keyframes for the speech bubble */}
       <style>{`
         @keyframes fadeInUp {
           0% { opacity: 0; transform: translateY(8px); }

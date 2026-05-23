@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   AvatarCall,
   AvatarVideo,
@@ -14,6 +14,8 @@ const BOT_SERVER_URL =
   (import.meta as any).env?.VITE_BOT_SERVER_URL || 'https://bot-vibk.onrender.com';
 const SALON_AVATAR_ID = '72860735-d02e-49af-9b5d-1020bc956ebc';
 const SALON_IMAGE = '/0e55ac1a-f33c-4d3c-8a42-37c6a40bfef0.png';
+const MIA_FACE = '/consultant-face.jpg'; // fallback face for idle state — swap if you have a Mia-specific image
+const VIDEO_SRC = '/shil.mp4';
 
 // ============================================================
 //  Inner avatar view (must be inside <AvatarCall>)
@@ -23,9 +25,9 @@ function MiaInnerView({ onEnd }: { onEnd: () => void }) {
   const isActive = session.state === 'active';
 
   return (
-    <div className="relative w-full h-full bg-black rounded-xl overflow-hidden">
+    <div className="relative w-full h-full bg-black rounded-2xl overflow-hidden">
       {!isActive && (
-        <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center gap-3 text-white z-10 pointer-events-none">
+        <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center gap-3 text-white z-10 pointer-events-none">
           <div className="w-10 h-10 border-4 border-amber-400/30 border-t-amber-400 rounded-full animate-spin" />
           <span className="text-sm">מתחברים למיה...</span>
           <span className="text-xs text-white/60">(עד 50 שניות בפעם הראשונה)</span>
@@ -54,15 +56,43 @@ function MiaInnerView({ onEnd }: { onEnd: () => void }) {
 // ============================================================
 export function RealCustomerVideo() {
   const [callStarted, setCallStarted] = useState(false);
+  const [awake, setAwake] = useState(false); // Mia "wakes up" when user scrolls into view
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Intersection observer — wake Mia when section is visible
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setAwake(true);
+            obs.disconnect(); // wake once, don't keep re-firing
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   return (
-    <section className="w-full py-16 px-4 md:px-8 bg-gradient-to-b from-[#0a0a1a] to-[#13131f]">
+    <section
+      ref={sectionRef}
+      className="w-full py-16 px-4 md:px-8 bg-gradient-to-b from-[#0a0a1a] to-[#13131f]"
+    >
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-10">
           <span className="inline-block text-amber-400 text-sm font-semibold uppercase tracking-widest mb-3">
             דמו חי
           </span>
-          <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight" dir="rtl">
+          <h2
+            className="text-3xl md:text-5xl font-black text-white tracking-tight"
+            dir="rtl"
+          >
             ככה זה נראה אצל לקוח אמיתי
           </h2>
           <p className="text-white/60 mt-3 max-w-2xl mx-auto" dir="rtl">
@@ -71,87 +101,127 @@ export function RealCustomerVideo() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 items-stretch">
-          {/* LEFT — beauty clinic image */}
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl min-h-[400px] md:min-h-[520px]">
+          {/* LEFT — video */}
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black min-h-[400px] md:min-h-[520px]">
+            <video
+              src={VIDEO_SRC}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full" dir="rtl">
+              דוגמה אמיתית
+            </div>
+          </div>
+
+          {/* RIGHT — salon image with Mia avatar in the middle */}
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl min-h-[400px] md:min-h-[520px] bg-[#1a1a2a]">
+            {/* Background salon image */}
             <img
               src={SALON_IMAGE}
               alt="קליניקת יופי"
               className="absolute inset-0 w-full h-full object-cover"
               onError={(e) => {
-                // fallback if image is missing
                 (e.target as HTMLImageElement).style.display = 'none';
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            <div className="absolute bottom-6 right-6 left-6 text-white" dir="rtl">
-              <div className="text-2xl font-bold mb-1">סלון יופי "אלגנט"</div>
-              <div className="text-white/80 text-sm">תל אביב • פתוח 9:00–20:00</div>
+
+            {/* Soft overlay so Mia is readable */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-black/30" />
+
+            {/* Salon name label bottom-right */}
+            <div className="absolute bottom-5 right-5 text-white z-10" dir="rtl">
+              <div className="text-xl font-bold drop-shadow-lg">סלון יופי "אלגנט"</div>
+              <div className="text-white/90 text-xs drop-shadow-lg">תל אביב • פתוח 9:00–20:00</div>
             </div>
-          </div>
 
-          {/* RIGHT — cream card with Mia */}
-          <div
-            className="rounded-2xl shadow-2xl bg-gradient-to-br from-[#f5ebd9] to-[#e8d9bf] p-6 md:p-8 flex flex-col min-h-[400px] md:min-h-[520px]"
-            dir="rtl"
-          >
-            {!callStarted ? (
-              <>
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="inline-flex items-center gap-1.5 bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                    LIVE
-                  </span>
-                  <span className="text-[#5a4a2a] text-sm font-medium">דמו זמין עכשיו</span>
+            {/* Mia avatar in the MIDDLE */}
+            {!callStarted && (
+              <div className="absolute inset-0 flex items-center justify-center z-20">
+                <div className="relative flex flex-col items-center gap-3">
+                  {/* Speech bubble — appears when awake */}
+                  {awake && (
+                    <div
+                      className="bg-white text-[#2a1f10] text-sm font-semibold rounded-2xl px-4 py-2 shadow-xl relative animate-fade-in-up"
+                      dir="rtl"
+                      style={{
+                        animation: 'fadeInUp 0.6s ease-out',
+                      }}
+                    >
+                      היי 👋 רוצה לקבוע תור?
+                      {/* Bubble tail */}
+                      <div
+                        className="absolute left-1/2 -bottom-1.5 w-3 h-3 bg-white rotate-45 -translate-x-1/2"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  )}
+
+                  {/* Mia circle button */}
+                  <button
+                    type="button"
+                    onClick={() => setCallStarted(true)}
+                    className="relative group"
+                    aria-label="דברי עם מיה"
+                  >
+                    {/* Pulse rings — only when awake */}
+                    {awake && (
+                      <>
+                        <span className="absolute inset-0 rounded-full bg-amber-400/30 animate-ping" />
+                        <span
+                          className="absolute inset-0 rounded-full bg-amber-400/20 animate-ping"
+                          style={{ animationDelay: '0.6s' }}
+                        />
+                      </>
+                    )}
+
+                    <span
+                      className="relative block w-[150px] h-[150px] md:w-[180px] md:h-[180px] rounded-full shadow-2xl overflow-hidden bg-amber-100 transition-transform group-hover:scale-105"
+                      style={{ border: '4px solid #fbbf24' }}
+                    >
+                      <img
+                        src={MIA_FACE}
+                        alt="מיה"
+                        className="w-full h-full object-cover"
+                      />
+                    </span>
+
+                    {/* LIVE badge */}
+                    <span className="absolute -top-2 -right-2 inline-flex items-center gap-1 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                      LIVE
+                    </span>
+                  </button>
+
+                  {/* CTA label below avatar */}
+                  <div
+                    className="bg-black/70 backdrop-blur-sm text-white text-sm font-semibold px-4 py-2 rounded-full shadow-xl cursor-pointer hover:bg-black/85 transition-colors"
+                    onClick={() => setCallStarted(true)}
+                    dir="rtl"
+                  >
+                    🎤 לחצי כדי לדבר איתי
+                  </div>
                 </div>
+              </div>
+            )}
 
-                <h3 className="text-3xl md:text-4xl font-black text-[#2a1f10] mb-3 leading-tight">
-                  מיה — מזכירה דיגיטלית
-                </h3>
-
-                <p className="text-[#5a4a2a] text-base leading-relaxed mb-6">
-                  היא עונה ללקוחות 24/7, מקבעת תורים ביומן, יודעת את כל מחירי הטיפולים, ולא לוקחת חופש. נסי לדבר איתה — לחצי על הכפתור.
-                </p>
-
-                <ul className="space-y-2 mb-8 text-[#3a2a14] text-sm">
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-700">✓</span>
-                    קובעת תורים אוטומטית בגוגל קלנדר
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-700">✓</span>
-                    מכירה את התפריט והמחירים
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-700">✓</span>
-                    זמינה גם ב-2 בלילה
-                  </li>
-                </ul>
-
-                <button
-                  type="button"
-                  onClick={() => setCallStarted(true)}
-                  className="mt-auto w-full rounded-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold py-4 text-lg shadow-lg transition-all hover:shadow-xl flex items-center justify-center gap-2"
-                >
-                  🎤 דברי עם מיה עכשיו
-                </button>
-                <div className="text-center text-[#5a4a2a]/70 text-xs mt-2">
-                  השיחה בקול. ודאי שהמיקרופון מאופשר.
-                </div>
-              </>
-            ) : (
-              <div className="flex flex-col h-full">
-                <div className="flex items-center justify-between mb-4">
+            {/* Active call — full overlay */}
+            {callStarted && (
+              <div className="absolute inset-0 z-30 bg-black/90 backdrop-blur-sm p-4 flex flex-col">
+                <div className="flex items-center justify-between mb-3" dir="rtl">
                   <div className="flex items-center gap-2">
                     <span className="inline-flex items-center gap-1.5 bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">
                       <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                       LIVE
                     </span>
-                    <span className="text-[#2a1f10] font-semibold">מיה</span>
+                    <span className="text-white font-semibold">מיה</span>
                   </div>
                   <button
                     type="button"
                     onClick={() => setCallStarted(false)}
-                    className="text-[#5a4a2a] hover:text-[#2a1f10] text-2xl leading-none"
+                    className="text-white/70 hover:text-white text-2xl leading-none"
                     aria-label="סגור"
                   >
                     ×
@@ -172,6 +242,14 @@ export function RealCustomerVideo() {
           </div>
         </div>
       </div>
+
+      {/* Inline keyframes for the speech bubble */}
+      <style>{`
+        @keyframes fadeInUp {
+          0% { opacity: 0; transform: translateY(8px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </section>
   );
 }

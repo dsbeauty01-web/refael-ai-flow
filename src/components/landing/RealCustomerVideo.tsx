@@ -1,636 +1,179 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useState } from 'react';
 import {
   AvatarCall,
   AvatarVideo,
   ControlBar,
   useAvatarSession,
-  useTranscript,
 } from '@runwayml/avatars-react';
 import '@runwayml/avatars-react/styles.css';
 
 // ============================================================
-//  CONFIG
+//  CONFIG — Mia (salon receptionist demo)
 // ============================================================
 const BOT_SERVER_URL =
   (import.meta as any).env?.VITE_BOT_SERVER_URL || 'https://bot-vibk.onrender.com';
-const AVATAR_ID = 'ec39dc74-e835-4dfd-8809-04495f398c99';
-
-// Two webhooks:
-//  - LEAD = simple lead capture (form fallback)
-//  - TEXT_CHAT = full Mika brain (n8n RAG agent) for text messages
-const N8N_LEAD_WEBHOOK = 'https://rafa5555.app.n8n.cloud/webhook/lead-email';
-const N8N_TEXT_CHAT =
-  (import.meta as any).env?.VITE_MIKA_TEXT_WEBHOOK ||
-  'https://rafa5555.app.n8n.cloud/webhook/sales-bot/v1/chat/completions';
-
-const FACE_SRC = '/consultant-face.jpg';
-const SESSION_KEY = 'rapo_session_id';
-const VISITED_KEY = 'rapo_visited_v1';            // first-time vs returning
-const AUTO_GREET_DELAY_MS = 12_000;               // 12s after page load → auto-greet
-const WARM_START_DELAY_MS = 3_000;                // 3s after page load → start warming Render
-const MAX_RECONNECT_ATTEMPTS = 3;
+const SALON_AVATAR_ID = '72860735-d02e-49af-9b5d-1020bc956ebc';
+const SALON_IMAGE = '/0e55ac1a-f33c-4d3c-8a42-37c6a40bfef0.png';
 
 // ============================================================
-//  HELPERS
+//  Inner avatar view (must be inside <AvatarCall>)
 // ============================================================
-function getSessionId(): string {
-  if (typeof window === 'undefined') return '';
-  let id = localStorage.getItem(SESSION_KEY);
-  if (!id) {
-    id =
-      (typeof crypto !== 'undefined' && (crypto as any).randomUUID?.()) ||
-      `rapo-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    localStorage.setItem(SESSION_KEY, id);
-  }
-  return id;
-}
-
-function fmt(ts: number) {
-  try {
-    return new Date(ts).toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' });
-  } catch {
-    return '';
-  }
-}
-
-// Best-effort: keep the Render free-tier server warm so first connect isn't 50s.
-async function warmRenderServer() {
-  try {
-    await fetch(`${BOT_SERVER_URL}/health`, {
-      method: 'GET',
-      cache: 'no-store',
-      signal: AbortSignal.timeout(30000),
-    });
-  } catch {
-    /* swallow — best effort */
-  }
-}
-
-type ChatRole = 'user' | 'bot';
-interface ChatMsg {
-  id: string;
-  role: ChatRole;
-  text: string;
-  ts: number;
-}
-
-// ============================================================
-//  TEXT CHAT PANEL — talks directly to n8n (separate brain from voice)
-// ============================================================
-function TextChatPanel({ sessionId }: { sessionId: string }) {
-  const [messages, setMessages] = useState<ChatMsg[]>([
-    {
-      id: 'greet',
-      role: 'bot',
-      text: 'היי, אני מיקה. אפשר לכתוב לי או ללחוץ על הכפתור הירוק לדבר איתי בקול.',
-      ts: Date.now(),
-    },
-  ]);
-  const [input, setInput] = useState('');
-  const [sending, setSending] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (el) el.scrollTop = el.scrollHeight;
-  }, [messages.length, sending]);
-
-  const send = async () => {
-    const text = input.trim();
-    if (!text || sending) return;
-    setInput('');
-    const userMsg: ChatMsg = {
-      id: `u-${Date.now()}`,
-      role: 'user',
-      text,
-      ts: Date.now(),
-    };
-    setMessages((m) => [...m, userMsg]);
-    setSending(true);
-    try {
-      const res = await fetch(N8N_TEXT_CHAT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: [{ role: 'user', content: text }],
-          session_id: sessionId,
-          source: 'text-chat-mika',
-        }),
-        signal: AbortSignal.timeout(30000),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      const reply =
-        data?.choices?.[0]?.message?.content ||
-        data?.reply ||
-        data?.output ||
-        data?.answer ||
-        '...';
-      setMessages((m) => [
-        ...m,
-        {
-          id: `b-${Date.now()}`,
-          role: 'bot',
-          text: String(reply),
-          ts: Date.now(),
-        },
-      ]);
-    } catch (err) {
-      setMessages((m) => [
-        ...m,
-        {
-          id: `e-${Date.now()}`,
-          role: 'bot',
-          text: 'סליחה, רגע קטן של בעיה. אפשר לנסות שוב או להשאיר פרטים בטופס למטה.',
-          ts: Date.now(),
-        },
-      ]);
-    } finally {
-      setSending(false);
-    }
-  };
-
-  return (
-    <div className="flex flex-col flex-1 min-h-0 bg-[#0a0a1a]" dir="rtl">
-      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto px-3 py-3 space-y-2">
-        {messages.map((m) => (
-          <div
-            key={m.id}
-            className={`flex flex-col ${m.role === 'user' ? 'items-end' : 'items-start'}`}
-          >
-            <div
-              className={`rounded-2xl px-3 py-2 max-w-[85%] text-sm leading-relaxed ${
-                m.role === 'user'
-                  ? 'bg-cyan-500 text-[#0a0a1a]'
-                  : 'bg-white/10 text-white'
-              }`}
-            >
-              {m.text}
-            </div>
-            <span className="text-[10px] text-white/40 mt-0.5 px-1">{fmt(m.ts)}</span>
-          </div>
-        ))}
-        {sending && (
-          <div className="flex items-start">
-            <div className="bg-white/10 text-white/70 rounded-2xl px-3 py-2 text-sm italic">
-              מקלידה...
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div className="flex gap-2 p-3 border-t border-white/10 bg-[#0a0a1a]">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              send();
-            }
-          }}
-          disabled={sending}
-          placeholder="כתבו הודעה..."
-          dir="rtl"
-          className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-cyan-400/60 disabled:opacity-50"
-        />
-        <button
-          type="button"
-          onClick={send}
-          disabled={sending || !input.trim()}
-          className="rounded-lg bg-cyan-500 text-[#0a0a1a] font-semibold px-4 py-2 text-sm hover:bg-cyan-400 transition-colors disabled:opacity-40"
-        >
-          שלח
-        </button>
-      </div>
-    </div>
-  );
-}
-
-// ============================================================
-//  TRANSCRIPT PANEL (only inside <AvatarCall>) — for VOICE mode
-// ============================================================
-function TranscriptPanel() {
-  const session = useAvatarSession();
-  const transcript = useTranscript({ interim: false }) as any[];
-  const isActive = session.state === 'active';
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const messages: ChatMsg[] = useMemo(() => {
-    if (!Array.isArray(transcript)) return [];
-    return transcript
-      .filter((e) => e && e.text && String(e.text).trim().length > 0)
-      .map((e: any, i: number) => {
-        const isUser =
-          e?.isUser === true ||
-          e?.isLocal === true ||
-          e?.role === 'user' ||
-          e?.participantIdentity === 'local' ||
-          e?.source === 'user';
-        return {
-          id: `t-${e?.id ?? i}`,
-          role: (isUser ? 'user' : 'bot') as ChatRole,
-          text: String(e.text),
-          ts: typeof e?.timestamp === 'number' ? e.timestamp : Date.now() + i,
-        };
-      });
-  }, [transcript]);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (el) el.scrollTop = el.scrollHeight;
-  }, [messages.length]);
-
-  return (
-    <div className="flex flex-col flex-1 min-h-0 bg-[#0a0a1a]" dir="rtl">
-      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto px-3 py-2 space-y-2">
-        {messages.length === 0 && (
-          <div className="text-center text-white/40 text-xs pt-4">
-            {isActive ? 'מיקה מקשיבה — דבר/י איתה דרך המיקרופון 🎤' : 'מתחבר...'}
-          </div>
-        )}
-        {messages.map((m) => (
-          <div
-            key={m.id}
-            className={`flex flex-col ${m.role === 'user' ? 'items-end' : 'items-start'}`}
-          >
-            <div
-              className={`rounded-xl px-3 py-2 max-w-[80%] text-sm leading-relaxed ${
-                m.role === 'user' ? 'bg-cyan-500 text-[#0a0a1a]' : 'bg-white/10 text-white'
-              }`}
-            >
-              {m.text}
-            </div>
-            <span className="text-[10px] text-white/40 mt-0.5 px-1">{fmt(m.ts)}</span>
-          </div>
-        ))}
-      </div>
-      <div className="px-3 py-2 border-t border-white/10 text-center text-[11px] text-white/40">
-        💬 השיחה הקולית מוצגת כאן כטקסט.
-      </div>
-    </div>
-  );
-}
-
-// ============================================================
-//  LEAD FORM (collapsed by default in voice/text view; full when standalone)
-// ============================================================
-function LeadForm({ sessionId, compact = false }: { sessionId: string; compact?: boolean }) {
-  const [name, setName] = useState('');
-  const [contact, setContact] = useState('');
-  const [businessText, setBusinessText] = useState('');
-  const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
-  const submitLead = async () => {
-    setErrorMsg(null);
-    const n = name.trim();
-    const c = contact.trim();
-    const b = businessText.trim();
-    if (!n || !c) {
-      setErrorMsg('שם וטלפון/אימייל הם שדות חובה');
-      return;
-    }
-    setSending(true);
-    try {
-      const res = await fetch(N8N_LEAD_WEBHOOK, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: n,
-          contact: c,
-          business: b,
-          sessionId,
-          source: compact ? 'text-mode-form' : 'text-fallback',
-          submittedAt: new Date().toISOString(),
-        }),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      setSent(true);
-    } catch (err) {
-      console.error('[lead] send failed:', err);
-      setErrorMsg('שליחה נכשלה. נסה שוב או צור קשר ישירות בוואטסאפ.');
-    } finally {
-      setSending(false);
-    }
-  };
-
-  if (sent) {
-    return (
-      <div
-        className="flex flex-col bg-[#0a0a1a] items-center justify-center px-6 py-6 text-center"
-        dir="rtl"
-      >
-        <div className="text-3xl mb-2">✅</div>
-        <div className="text-white text-sm font-semibold mb-0.5">קיבלנו את הפרטים</div>
-        <div className="text-white/60 text-xs">רפאל יחזור אלייך תוך שעתיים.</div>
-      </div>
-    );
-  }
-
-  return (
-    <div
-      className="flex flex-col bg-[#0a0a1a] px-4 py-3 gap-2 border-t border-white/10"
-      dir="rtl"
-    >
-      {!compact && (
-        <>
-          <div className="text-white text-sm font-semibold">השאר/י פרטים — רפאל יחזור אלייך</div>
-          <div className="text-white/50 text-xs">
-            או לחצ/י על הכפתור הירוק כדי לדבר עם מיקה.
-          </div>
-        </>
-      )}
-
-      <div className="flex gap-2">
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          disabled={sending}
-          placeholder="שם"
-          dir="rtl"
-          className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-cyan-400/60 disabled:opacity-50"
-        />
-        <input
-          value={contact}
-          onChange={(e) => setContact(e.target.value)}
-          disabled={sending}
-          placeholder="טלפון/אימייל"
-          dir="ltr"
-          className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-cyan-400/60 disabled:opacity-50"
-        />
-      </div>
-
-      {!compact && (
-        <textarea
-          value={businessText}
-          onChange={(e) => setBusinessText(e.target.value)}
-          disabled={sending}
-          rows={2}
-          placeholder="איזה עסק? (לא חובה)"
-          dir="rtl"
-          className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-cyan-400/60 disabled:opacity-50 resize-none"
-        />
-      )}
-
-      {errorMsg && (
-        <div className="text-amber-300 text-xs bg-amber-500/10 border border-amber-400/30 rounded-lg px-3 py-2">
-          {errorMsg}
-        </div>
-      )}
-
-      <button
-        type="button"
-        onClick={submitLead}
-        disabled={sending}
-        className="rounded-full bg-cyan-500 text-[#0a0a1a] font-semibold py-2 text-sm hover:bg-cyan-400 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
-      >
-        {sending ? (
-          <>
-            <span className="w-4 h-4 border-2 border-[#0a0a1a]/30 border-t-[#0a0a1a] rounded-full animate-spin" />
-            שולח...
-          </>
-        ) : (
-          'שלח/י פרטים'
-        )}
-      </button>
-    </div>
-  );
-}
-
-// ============================================================
-//  AVATAR VIEW (inside <AvatarCall>)
-// ============================================================
-function AvatarView({ onClose, onSessionEnd }: { onClose: () => void; onSessionEnd: () => void }) {
+function MiaInnerView({ onEnd }: { onEnd: () => void }) {
   const session = useAvatarSession();
   const isActive = session.state === 'active';
-  const state = session.state;
-
-  // Detect unexpected disconnect; signal parent to retry
-  useEffect(() => {
-    if (state === 'disconnected' || state === 'failed' || state === 'ended') {
-      onSessionEnd();
-    }
-  }, [state, onSessionEnd]);
 
   return (
-    <div className="flex flex-col h-full">
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-[#0a0a1a] shrink-0">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold text-white">מיקה</span>
-          {isActive && <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />}
-          {!isActive && <span className="text-[10px] text-cyan-300/80">מתחבר...</span>}
+    <div className="relative w-full h-full bg-black rounded-xl overflow-hidden">
+      {!isActive && (
+        <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center gap-3 text-white z-10 pointer-events-none">
+          <div className="w-10 h-10 border-4 border-amber-400/30 border-t-amber-400 rounded-full animate-spin" />
+          <span className="text-sm">מתחברים למיה...</span>
+          <span className="text-xs text-white/60">(עד 50 שניות בפעם הראשונה)</span>
         </div>
-        <button
-          type="button"
-          onClick={onClose}
-          className="text-white/60 hover:text-white text-2xl leading-none px-2"
-          aria-label="סגור"
-        >
-          ×
-        </button>
-      </div>
+      )}
+      <AvatarVideo />
 
-      {/* Video — bigger now (320px) and shows full face uncropped */}
-      <div className="relative bg-black h-[320px] shrink-0 flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-center bg-contain bg-no-repeat"
-          style={{ backgroundImage: `url(${FACE_SRC})` }}
-        />
-        {!isActive && (
-          <div className="absolute inset-0 bg-black/55 flex flex-col items-center justify-center gap-2 text-white pointer-events-none z-10">
-            <div className="w-8 h-8 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin" />
-            <span className="text-xs">מתחבר...</span>
-          </div>
-        )}
-        <AvatarVideo />
-      </div>
-
-      <div className="border-t border-white/10 bg-[#0a0a1a] shrink-0">
+      <div className="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-sm">
         <ControlBar />
+        <div className="px-3 pb-2 text-center">
+          <button
+            type="button"
+            onClick={onEnd}
+            className="text-white/70 hover:text-white text-xs underline"
+          >
+            סיים שיחה
+          </button>
+        </div>
       </div>
-
-      <TranscriptPanel />
     </div>
   );
 }
 
 // ============================================================
-//  ROOT
+//  ROOT — RealCustomerVideo section
 // ============================================================
-type Mode = 'text' | 'voice';
-
-export function FloatingAvatarWidget() {
-  const [open, setOpen] = useState(false);
-  const [mode, setMode] = useState<Mode>('text');
-  const [autoOpened, setAutoOpened] = useState(false);
-  const [reconnectKey, setReconnectKey] = useState(0); // bump to force re-mount of AvatarCall
-  const reconnectAttemptsRef = useRef(0);
-  const sessionId = useMemo(() => getSessionId(), []);
-
-  // ── EFFECT 1: warm Render server quickly so first session is fast
-  useEffect(() => {
-    const t = setTimeout(() => {
-      warmRenderServer();
-    }, WARM_START_DELAY_MS);
-    return () => clearTimeout(t);
-  }, []);
-
-  // ── EFFECT 2: auto-greet first-time visitors after delay
-  useEffect(() => {
-    const visited = localStorage.getItem(VISITED_KEY);
-    if (visited) return; // returning visitor — don't auto-open
-
-    const t = setTimeout(() => {
-      if (!document.hidden) {
-        setOpen(true);
-        setAutoOpened(true);
-        localStorage.setItem(VISITED_KEY, '1');
-      }
-    }, AUTO_GREET_DELAY_MS);
-
-    return () => clearTimeout(t);
-  }, []);
-
-  // ── Reconnect logic: when voice session ends unexpectedly while widget is open,
-  //    bump reconnectKey to remount <AvatarCall>. Cap at MAX_RECONNECT_ATTEMPTS.
-  const handleVoiceSessionEnd = () => {
-    if (mode !== 'voice' || !open) return;
-    if (reconnectAttemptsRef.current >= MAX_RECONNECT_ATTEMPTS) {
-      // Give up silently and fall back to text mode
-      reconnectAttemptsRef.current = 0;
-      setMode('text');
-      return;
-    }
-    reconnectAttemptsRef.current += 1;
-    setTimeout(() => setReconnectKey((k) => k + 1), 1500);
-  };
-
-  // Reset reconnect counter whenever mode changes back to text
-  useEffect(() => {
-    if (mode === 'text') reconnectAttemptsRef.current = 0;
-  }, [mode]);
-
-  const startVoice = () => {
-    reconnectAttemptsRef.current = 0;
-    setMode('voice');
-  };
-
-  const stopVoice = () => {
-    setMode('text');
-    reconnectAttemptsRef.current = 0;
-  };
+export function RealCustomerVideo() {
+  const [callStarted, setCallStarted] = useState(false);
 
   return (
-    <>
-      {/* Floating button (only when closed) */}
-      {!open && (
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="fixed bottom-5 right-5 z-[9999] flex items-center gap-3 bg-transparent border-0 p-0 cursor-pointer"
-          dir="rtl"
-          aria-label="דבר עם מיקה"
-        >
-          <span className="hidden sm:inline-block bg-[#0a0a1a]/90 text-white text-sm font-medium px-3 py-2 rounded-full shadow-lg backdrop-blur-sm whitespace-nowrap">
-            דבר איתי עכשיו
+    <section className="w-full py-16 px-4 md:px-8 bg-gradient-to-b from-[#0a0a1a] to-[#13131f]">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-10">
+          <span className="inline-block text-amber-400 text-sm font-semibold uppercase tracking-widest mb-3">
+            דמו חי
           </span>
-          <span
-            className="relative w-[130px] h-[130px] rounded-full shadow-xl"
-            style={{ border: '3px solid #00e5ff' }}
-          >
+          <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight" dir="rtl">
+            ככה זה נראה אצל לקוח אמיתי
+          </h2>
+          <p className="text-white/60 mt-3 max-w-2xl mx-auto" dir="rtl">
+            דברי עם מיה, המזכירה הדיגיטלית של מספרה. תזמיני תור, תשאלי על מחירים, תראי איך זה עובד.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6 items-stretch">
+          {/* LEFT — beauty clinic image */}
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl min-h-[400px] md:min-h-[520px]">
             <img
-              src={FACE_SRC}
-              alt="מיקה"
-              className="w-full h-full rounded-full object-cover"
+              src={SALON_IMAGE}
+              alt="קליניקת יופי"
+              className="absolute inset-0 w-full h-full object-cover"
+              onError={(e) => {
+                // fallback if image is missing
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
             />
-            <span className="absolute top-0 right-0 w-5 h-5 rounded-full bg-green-500 border-2 border-[#0a0a1a]" />
-          </span>
-        </button>
-      )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <div className="absolute bottom-6 right-6 left-6 text-white" dir="rtl">
+              <div className="text-2xl font-bold mb-1">סלון יופי "אלגנט"</div>
+              <div className="text-white/80 text-sm">תל אביב • פתוח 9:00–20:00</div>
+            </div>
+          </div>
 
-      {/* Modal — bigger panel: 460px wide × 720px tall on desktop */}
-      {open && (
-        <div
-          className="fixed inset-0 z-[9999] bg-black/40 backdrop-blur-sm flex items-end justify-end sm:p-5"
-          onClick={() => setOpen(false)}
-        >
+          {/* RIGHT — cream card with Mia */}
           <div
-            className="bg-[#0a0a1a] text-white w-full h-full sm:w-[460px] sm:h-[720px] sm:max-h-[90vh] sm:rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-white/10"
-            onClick={(e) => e.stopPropagation()}
+            className="rounded-2xl shadow-2xl bg-gradient-to-br from-[#f5ebd9] to-[#e8d9bf] p-6 md:p-8 flex flex-col min-h-[400px] md:min-h-[520px]"
             dir="rtl"
-            lang="he"
           >
-            {/* Voice mode */}
-            {mode === 'voice' && (
-              <AvatarCall
-                key={reconnectKey}
-                avatarId={AVATAR_ID}
-                connectUrl={`${BOT_SERVER_URL}/session`}
-                onEnd={() => handleVoiceSessionEnd()}
-              >
-                <AvatarView
-                  onClose={() => {
-                    setOpen(false);
-                    setMode('text');
-                  }}
-                  onSessionEnd={handleVoiceSessionEnd}
-                />
-              </AvatarCall>
-            )}
-
-            {/* Text mode (default) */}
-            {mode === 'text' && (
+            {!callStarted ? (
               <>
-                {/* Header */}
-                <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-[#0a0a1a] shrink-0">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="inline-flex items-center gap-1.5 bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                    LIVE
+                  </span>
+                  <span className="text-[#5a4a2a] text-sm font-medium">דמו זמין עכשיו</span>
+                </div>
+
+                <h3 className="text-3xl md:text-4xl font-black text-[#2a1f10] mb-3 leading-tight">
+                  מיה — מזכירה דיגיטלית
+                </h3>
+
+                <p className="text-[#5a4a2a] text-base leading-relaxed mb-6">
+                  היא עונה ללקוחות 24/7, מקבעת תורים ביומן, יודעת את כל מחירי הטיפולים, ולא לוקחת חופש. נסי לדבר איתה — לחצי על הכפתור.
+                </p>
+
+                <ul className="space-y-2 mb-8 text-[#3a2a14] text-sm">
+                  <li className="flex items-center gap-2">
+                    <span className="text-green-700">✓</span>
+                    קובעת תורים אוטומטית בגוגל קלנדר
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-green-700">✓</span>
+                    מכירה את התפריט והמחירים
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-green-700">✓</span>
+                    זמינה גם ב-2 בלילה
+                  </li>
+                </ul>
+
+                <button
+                  type="button"
+                  onClick={() => setCallStarted(true)}
+                  className="mt-auto w-full rounded-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold py-4 text-lg shadow-lg transition-all hover:shadow-xl flex items-center justify-center gap-2"
+                >
+                  🎤 דברי עם מיה עכשיו
+                </button>
+                <div className="text-center text-[#5a4a2a]/70 text-xs mt-2">
+                  השיחה בקול. ודאי שהמיקרופון מאופשר.
+                </div>
+              </>
+            ) : (
+              <div className="flex flex-col h-full">
+                <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
-                    <img
-                      src={FACE_SRC}
-                      alt="מיקה"
-                      className="w-9 h-9 rounded-full object-cover border-2 border-cyan-400"
-                    />
-                    <div>
-                      <div className="text-white font-semibold text-sm">מיקה</div>
-                      <div className="text-white/50 text-[11px]">העוזרת של רפאל</div>
-                    </div>
+                    <span className="inline-flex items-center gap-1.5 bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                      LIVE
+                    </span>
+                    <span className="text-[#2a1f10] font-semibold">מיה</span>
                   </div>
                   <button
                     type="button"
-                    onClick={() => setOpen(false)}
-                    className="text-white/60 hover:text-white text-2xl leading-none px-2"
+                    onClick={() => setCallStarted(false)}
+                    className="text-[#5a4a2a] hover:text-[#2a1f10] text-2xl leading-none"
                     aria-label="סגור"
                   >
                     ×
                   </button>
                 </div>
 
-                {/* Voice CTA */}
-                <div className="px-4 py-3 bg-[#0a0a1a] border-b border-white/10 shrink-0">
-                  <button
-                    type="button"
-                    onClick={startVoice}
-                    className="w-full rounded-full bg-green-500 text-[#0a0a1a] font-semibold py-2.5 text-sm hover:bg-green-400 transition-colors flex items-center justify-center gap-2"
+                <div className="flex-1 min-h-0">
+                  <AvatarCall
+                    avatarId={SALON_AVATAR_ID}
+                    connectUrl={`${BOT_SERVER_URL}/salon-session`}
+                    onEnd={() => setCallStarted(false)}
                   >
-                    🎤 דבר/י עם מיקה בקול
-                  </button>
+                    <MiaInnerView onEnd={() => setCallStarted(false)} />
+                  </AvatarCall>
                 </div>
-
-                {/* TEXT CHAT — main area */}
-                <TextChatPanel sessionId={sessionId} />
-
-                {/* Compact lead form at the bottom */}
-                <LeadForm sessionId={sessionId} compact />
-              </>
+              </div>
             )}
           </div>
         </div>
-      )}
-    </>
+      </div>
+    </section>
   );
 }
 
-export default FloatingAvatarWidget;
+export default RealCustomerVideo;

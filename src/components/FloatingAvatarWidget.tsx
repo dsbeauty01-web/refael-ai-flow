@@ -24,7 +24,6 @@ const FACE_SRC = '/consultant-face.jpg';
 const SESSION_KEY = 'rapo_session_id';
 const GREETED_KEY = 'rapo_greeted_v2';
 const TEASE_DELAY_MS = 10_000;
-const WARM_START_DELAY_MS = 2_000;
 const MAX_RECONNECT_ATTEMPTS = 3;
 
 // ============================================================
@@ -386,11 +385,26 @@ export function FloatingAvatarWidget() {
   const reconnectAttemptsRef = useRef(0);
   const sessionId = useMemo(() => getSessionId(), []);
 
-  // ── EFFECT 1: warm Render dyno 2s after load
+  // ── EFFECT 1: warm Render dyno IMMEDIATELY on mount (no delay)
+  //   Cold start is ~50s — every second counts. Pinging on page load
+  //   means by the time user clicks, server is awake or close to it.
   useEffect(() => {
-    const t = setTimeout(() => warmRenderServer(), WARM_START_DELAY_MS);
-    return () => clearTimeout(t);
+    warmRenderServer();
+    // Also re-ping every 4 min to keep dyno warm while user is on the page
+    const interval = setInterval(() => warmRenderServer(), 4 * 60 * 1000);
+    return () => clearInterval(interval);
   }, []);
+
+  // ── EFFECT 1b: close on ESC key (only acceptable close shortcut besides X)
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeAll();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
 
   // ── EFFECT 2: tease bubble for new visitors after 10s
   //   - Only first-time visitors (localStorage check)
@@ -493,15 +507,13 @@ export function FloatingAvatarWidget() {
         </button>
       )}
 
-      {/* Modal — bigger on desktop */}
+      {/* Modal — bigger on desktop. Stable: no backdrop-click close, only X or ESC */}
       {open && (
         <div
-          className="fixed inset-0 z-[9999] bg-black/40 backdrop-blur-sm flex items-end justify-end sm:p-5"
-          onClick={closeAll}
+          className="fixed inset-0 z-[9999] bg-black/40 backdrop-blur-sm flex items-end justify-end sm:p-5 pointer-events-none"
         >
           <div
-            className="bg-[#0a0a1a] text-white w-full h-full sm:w-[460px] sm:h-[760px] sm:max-h-[92vh] sm:rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-white/10"
-            onClick={(e) => e.stopPropagation()}
+            className="bg-[#0a0a1a] text-white w-full h-full sm:w-[460px] sm:h-[760px] sm:max-h-[92vh] sm:rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-white/10 pointer-events-auto"
             dir="rtl"
             lang="he"
           >

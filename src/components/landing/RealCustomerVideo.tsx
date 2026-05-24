@@ -14,10 +14,7 @@ const BOT_SERVER_URL =
   (import.meta as any).env?.VITE_BOT_SERVER_URL || 'https://bot-vibk.onrender.com';
 const SALON_AVATAR_ID = '72860735-d02e-49af-9b5d-1020bc956ebc';
 const SALON_IMAGE = '/0e55ac1a-f33c-4d3c-8a42-37c6a40bfef0.png';
-// URL-encoded because filename has spaces and underscores
-const MIA_FACE = encodeURI(
-  '/Nano Banana Pro - Friendly young woman 25 years old_ kids dance instructor_ stylized 3D render with.png'
-);
+const MIA_FACE = '/mia.png';
 const VIDEO_SRC = '/shil.mp4';
 
 // ============================================================
@@ -62,7 +59,6 @@ export function RealCustomerVideo() {
   const [awake, setAwake] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Intersection observer — wake Mia when section is visible
   useEffect(() => {
     const el = sectionRef.current;
     if (!el || typeof IntersectionObserver === 'undefined') return;
@@ -124,7 +120,6 @@ export function RealCustomerVideo() {
 
           {/* RIGHT — salon image with Mia at bottom */}
           <div className="relative rounded-2xl overflow-hidden shadow-2xl min-h-[400px] md:min-h-[520px] bg-[#1a1a2a]">
-            {/* Background salon image */}
             <img
               src={SALON_IMAGE}
               alt="קליניקת יופי"
@@ -134,10 +129,8 @@ export function RealCustomerVideo() {
               }}
             />
 
-            {/* Bottom gradient so Mia + label are readable */}
             <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/85 via-black/50 to-transparent" />
 
-            {/* Salon name label — top-right corner now (so it doesn't fight with Mia) */}
             <div className="absolute top-5 right-5 text-white z-10" dir="rtl">
               <div className="bg-black/40 backdrop-blur-sm rounded-lg px-3 py-1.5">
                 <div className="text-base font-bold drop-shadow-lg">סלון יופי "אלגנט"</div>
@@ -147,10 +140,8 @@ export function RealCustomerVideo() {
               </div>
             </div>
 
-            {/* Mia avatar — BOTTOM position, not center */}
             {!callStarted && (
               <div className="absolute bottom-6 left-0 right-0 z-20 flex flex-col items-center gap-2 px-4">
-                {/* Speech bubble — appears when awake */}
                 {awake && (
                   <div
                     className="bg-white text-[#2a1f10] text-sm font-semibold rounded-2xl px-4 py-2 shadow-xl relative"
@@ -166,14 +157,12 @@ export function RealCustomerVideo() {
                 )}
 
                 <div className="flex items-center gap-3">
-                  {/* Mia circle button */}
                   <button
                     type="button"
                     onClick={() => setCallStarted(true)}
                     className="relative group shrink-0"
                     aria-label="דברי עם מיה"
                   >
-                    {/* Pulse rings — only when awake */}
                     {awake && (
                       <>
                         <span className="absolute inset-0 rounded-full bg-amber-400/40 animate-ping" />
@@ -195,14 +184,12 @@ export function RealCustomerVideo() {
                       />
                     </span>
 
-                    {/* LIVE badge */}
                     <span className="absolute -top-1 -right-1 inline-flex items-center gap-1 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg">
                       <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                       LIVE
                     </span>
                   </button>
 
-                  {/* CTA next to avatar */}
                   <button
                     type="button"
                     onClick={() => setCallStarted(true)}
@@ -215,7 +202,6 @@ export function RealCustomerVideo() {
               </div>
             )}
 
-            {/* Active call — full overlay */}
             {callStarted && (
               <div className="absolute inset-0 z-30 bg-black/95 backdrop-blur-sm p-4 flex flex-col">
                 <div className="flex items-center justify-between mb-3" dir="rtl">

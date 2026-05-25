@@ -4,6 +4,7 @@ import {
   AvatarVideo,
   ControlBar,
   useAvatarSession,
+  useTranscript,
 } from '@runwayml/avatars-react';
 import '@runwayml/avatars-react/styles.css';
 
@@ -21,7 +22,7 @@ const N8N_MIA_CHAT =
   'https://rafa5555.app.n8n.cloud/webhook/salon-bot/v1/chat/completions';
 const MIA_USAGE_KEY = 'rapo_mia_usage_v1';
 const MIA_DAILY_LIMIT = 2;
-const MIA_SESSION_MAX_SEC = 30;
+const MIA_SESSION_MAX_SEC = 50;
 
 function todayKey() {
   return new Date().toISOString().slice(0, 10);
@@ -30,7 +31,7 @@ function todayKey() {
 function getMiaUsageToday(): number {
   try {
     if (localStorage.getItem('rapo_owner') === '1') return 0;
-    const raw = localStorage.getItem(MIA_USAGE_KEY);
+    const raw = sessionStorage.getItem(MIA_USAGE_KEY);
     if (!raw) return 0;
     const parsed = JSON.parse(raw);
     if (parsed?.date !== todayKey()) return 0;
@@ -44,7 +45,7 @@ function incrementMiaUsage() {
   try {
     if (localStorage.getItem('rapo_owner') === '1') return;
     const next = getMiaUsageToday() + 1;
-    localStorage.setItem(MIA_USAGE_KEY, JSON.stringify({ date: todayKey(), count: next }));
+    sessionStorage.setItem(MIA_USAGE_KEY, JSON.stringify({ date: todayKey(), count: next }));
   } catch {
     /* ignore */
   }
@@ -55,6 +56,7 @@ function incrementMiaUsage() {
 // ============================================================
 function MiaInnerView({ onEnd, onTimeUp }: { onEnd: () => void; onTimeUp: () => void }) {
   const session = useAvatarSession();
+  const transcript = useTranscript({ interim: false }) as any[];
   const isActive = session.state === 'active';
 
   const [elapsed, setElapsed] = useState(0);
@@ -65,9 +67,23 @@ function MiaInnerView({ onEnd, onTimeUp }: { onEnd: () => void; onTimeUp: () => 
   }, [isActive]);
 
   const [remaining, setRemaining] = useState(MIA_SESSION_MAX_SEC);
+  const [countdownStarted, setCountdownStarted] = useState(false);
+  const hasTranscript = Array.isArray(transcript) && transcript.some(
+    (e) => e && e.text && String(e.text).trim().length > 0
+  );
+
   useEffect(() => {
-    if (!isActive) return;
-    setRemaining(MIA_SESSION_MAX_SEC);
+    if (!isActive) {
+      setCountdownStarted(false);
+      setRemaining(MIA_SESSION_MAX_SEC);
+      return;
+    }
+    if (!hasTranscript || countdownStarted) return;
+    setCountdownStarted(true);
+  }, [isActive, hasTranscript, countdownStarted]);
+
+  useEffect(() => {
+    if (!countdownStarted) return;
     const t = setInterval(() => {
       setRemaining((s) => {
         if (s <= 1) {
@@ -79,7 +95,7 @@ function MiaInnerView({ onEnd, onTimeUp }: { onEnd: () => void; onTimeUp: () => 
       });
     }, 1000);
     return () => clearInterval(t);
-  }, [isActive, onTimeUp]);
+  }, [countdownStarted, onTimeUp]);
 
   const progressText = (() => {
     if (elapsed < 3) return 'מתחילה את השיחה...';
@@ -100,7 +116,7 @@ function MiaInnerView({ onEnd, onTimeUp }: { onEnd: () => void; onTimeUp: () => 
       )}
       <AvatarVideo />
 
-      {isActive && (
+      {isActive && countdownStarted && (
         <div className="absolute top-3 left-3 z-20 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full">
           ⏱ {remaining}s
         </div>
@@ -194,10 +210,12 @@ export function RealCustomerVideo() {
               <>
                 <video
                   src={VIDEO_SRC}
+                  poster={SALON_IMAGE}
                   autoPlay
                   muted
                   loop
                   playsInline
+                  preload="metadata"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
                 <div

@@ -16,24 +16,95 @@ const SALON_AVATAR_ID = '72860735-d02e-49af-9b5d-1020bc956ebc';
 const SALON_IMAGE = '/0e55ac1a-f33c-4d3c-8a42-37c6a40bfef0.png';
 const MIA_FACE = '/mia.png';
 const VIDEO_SRC = '/shil.mp4';
+const N8N_MIA_CHAT =
+  (import.meta as any).env?.VITE_MIA_TEXT_WEBHOOK ||
+  'https://rafa5555.app.n8n.cloud/webhook/salon-bot/v1/chat/completions';
+const MIA_USAGE_KEY = 'rapo_mia_usage_v1';
+const MIA_DAILY_LIMIT = 2;
+const MIA_SESSION_MAX_SEC = 30;
+
+function todayKey() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function getMiaUsageToday(): number {
+  try {
+    if (localStorage.getItem('rapo_owner') === '1') return 0;
+    const raw = localStorage.getItem(MIA_USAGE_KEY);
+    if (!raw) return 0;
+    const parsed = JSON.parse(raw);
+    if (parsed?.date !== todayKey()) return 0;
+    return Number(parsed.count) || 0;
+  } catch {
+    return 0;
+  }
+}
+
+function incrementMiaUsage() {
+  try {
+    if (localStorage.getItem('rapo_owner') === '1') return;
+    const next = getMiaUsageToday() + 1;
+    localStorage.setItem(MIA_USAGE_KEY, JSON.stringify({ date: todayKey(), count: next }));
+  } catch {
+    /* ignore */
+  }
+}
 
 // ============================================================
 //  Inner avatar view (must be inside <AvatarCall>)
 // ============================================================
-function MiaInnerView({ onEnd }: { onEnd: () => void }) {
+function MiaInnerView({ onEnd, onTimeUp }: { onEnd: () => void; onTimeUp: () => void }) {
   const session = useAvatarSession();
   const isActive = session.state === 'active';
+
+  const [elapsed, setElapsed] = useState(0);
+  useEffect(() => {
+    if (isActive) return;
+    const t = setInterval(() => setElapsed((s) => s + 1), 1000);
+    return () => clearInterval(t);
+  }, [isActive]);
+
+  const [remaining, setRemaining] = useState(MIA_SESSION_MAX_SEC);
+  useEffect(() => {
+    if (!isActive) return;
+    setRemaining(MIA_SESSION_MAX_SEC);
+    const t = setInterval(() => {
+      setRemaining((s) => {
+        if (s <= 1) {
+          clearInterval(t);
+          onTimeUp();
+          return 0;
+        }
+        return s - 1;
+      });
+    }, 1000);
+    return () => clearInterval(t);
+  }, [isActive, onTimeUp]);
+
+  const progressText = (() => {
+    if (elapsed < 3) return 'מתחילה את השיחה...';
+    if (elapsed < 8) return 'מתחברת אלייך...';
+    if (elapsed < 15) return 'כמעט שם...';
+    if (elapsed < 25) return 'עוד רגע, מתעוררת...';
+    return 'סבלנות קטנה...';
+  })();
 
   return (
     <div className="relative w-full h-full bg-black rounded-2xl overflow-hidden">
       {!isActive && (
         <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center gap-3 text-white z-10 pointer-events-none">
           <div className="w-10 h-10 border-4 border-amber-400/30 border-t-amber-400 rounded-full animate-spin" />
-          <span className="text-sm">מתחברים למיה...</span>
-          <span className="text-xs text-white/60">(עד 50 שניות בפעם הראשונה)</span>
+          <span className="text-sm font-medium">{progressText}</span>
+          <span className="text-[10px] text-white/50">{elapsed}s</span>
         </div>
       )}
       <AvatarVideo />
+
+      {isActive && (
+        <div className="absolute top-3 left-3 z-20 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+          ⏱ {remaining}s
+        </div>
+      )}
 
       <div className="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-sm">
         <ControlBar />
@@ -56,6 +127,23 @@ function MiaInnerView({ onEnd }: { onEnd: () => void }) {
 // ============================================================
 export function RealCustomerVideo() {
   const [callStarted, setCallStarted] = useState(false);
+  const [limitMsg, setLimitMsg] = useState<string | null>(null);
+
+  const startCall = () => {
+    const used = getMiaUsageToday();
+    if (used >= MIA_DAILY_LIMIT) {
+      setLimitMsg('הגעת למקסימום שיחות יומיות. השאר/י פרטים ונחזור אלייך.');
+      setTimeout(() => setLimitMsg(null), 5000);
+      return;
+    }
+    incrementMiaUsage();
+    setCallStarted(true);
+  };
+
+  const handleTimeUp = () => {
+    console.log('[mia] session time up');
+    setCallStarted(false);
+  };
   const [awake, setAwake] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -100,22 +188,101 @@ export function RealCustomerVideo() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 items-stretch">
-          {/* LEFT — video */}
+          {/* LEFT — video when idle, instruction card when Mia is active */}
           <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black min-h-[400px] md:min-h-[520px]">
-            <video
-              src={VIDEO_SRC}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div
-              className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full"
-              dir="rtl"
-            >
-              דוגמה אמיתית
-            </div>
+            {!callStarted ? (
+              <>
+                <video
+                  src={VIDEO_SRC}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div
+                  className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full"
+                  dir="rtl"
+                >
+                  דוגמה אמיתית
+                </div>
+              </>
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-[#1a1410] via-[#0f0a08] to-[#1a1410] p-6 md:p-8 flex flex-col" dir="rtl">
+                {/* Top badge */}
+                <div className="flex items-center justify-between mb-5">
+                  <span className="inline-flex items-center gap-1.5 bg-red-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-full">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                    LIVE DEMO
+                  </span>
+                  <span className="text-amber-400/70 text-[10px] font-semibold uppercase tracking-widest">
+                    מיה · Mia
+                  </span>
+                </div>
+
+                {/* Hero */}
+                <div className="mb-5">
+                  <h3 className="text-3xl md:text-4xl font-black text-white leading-tight">
+                    הכירו את מיה
+                  </h3>
+                  <p className="text-amber-300/90 text-base md:text-lg font-semibold mt-1">
+                    המזכירה הדיגיטלית
+                  </p>
+                </div>
+
+                {/* Time-limit warning card */}
+                <div className="bg-amber-500/15 border border-amber-400/30 rounded-xl p-3 mb-4 flex items-start gap-3">
+                  <div className="text-2xl shrink-0">⏱</div>
+                  <div className="flex-1">
+                    <div className="text-amber-200 text-sm font-bold">מוגבלת ל-30 שניות</div>
+                    <div className="text-amber-100/70 text-[11px] mt-0.5">
+                      (שומר לרפאל כסף 😉) אל תבזבזו על צ'יטצ'אט
+                    </div>
+                  </div>
+                </div>
+
+                {/* What you can do */}
+                <div className="space-y-3 mb-4 text-white/90 text-sm">
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-amber-400 text-base shrink-0 leading-tight">💬</span>
+                    <div>
+                      <div className="font-semibold">אפשר לשאול אותה</div>
+                      <div className="text-white/60 text-[12px]">מחירים, שעות, שירותים</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-amber-400 text-base shrink-0 leading-tight">📅</span>
+                    <div>
+                      <div className="font-semibold">או לקבוע תור</div>
+                      <div className="text-white/60 text-[12px]">תגידו שם + אימייל + מתי + שירות</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-amber-400 text-base shrink-0 leading-tight">✉️</span>
+                    <div>
+                      <div className="font-semibold">תקבלו מייל אמיתי</div>
+                      <div className="text-white/60 text-[12px]">בסיום השיחה, אישור לאימייל שלכם</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Services pill row */}
+                <div className="mt-auto pt-4 border-t border-white/10">
+                  <div className="flex flex-wrap gap-1.5 mb-2">
+                    <span className="bg-white/5 border border-white/10 text-white/80 text-[10px] px-2 py-1 rounded-full">💇 תספורות</span>
+                    <span className="bg-white/5 border border-white/10 text-white/80 text-[10px] px-2 py-1 rounded-full">🎨 צבע</span>
+                    <span className="bg-white/5 border border-white/10 text-white/80 text-[10px] px-2 py-1 rounded-full">💅 מניקור</span>
+                    <span className="bg-white/5 border border-white/10 text-white/80 text-[10px] px-2 py-1 rounded-full">✨ ג'ל</span>
+                    <span className="bg-white/5 border border-white/10 text-white/80 text-[10px] px-2 py-1 rounded-full">50–600 ₪</span>
+                  </div>
+
+                  {/* English helper */}
+                  <p className="text-white/40 text-[10px] leading-relaxed" dir="ltr">
+                    🇬🇧 30-sec limit. Try booking: say your name, email, time and any hair or nail service. You'll get a real email.
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* RIGHT — salon image with Mia at bottom */}
@@ -140,6 +307,13 @@ export function RealCustomerVideo() {
               </div>
             </div>
 
+            {/* Daily limit toast */}
+            {limitMsg && (
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 bg-amber-500/95 text-[#2a1f10] text-sm font-semibold px-5 py-3 rounded-2xl shadow-2xl max-w-xs text-center" dir="rtl">
+                {limitMsg}
+              </div>
+            )}
+
             {!callStarted && (
               <div className="absolute bottom-6 left-0 right-0 z-20 flex flex-col items-center gap-2 px-4">
                 {awake && (
@@ -159,7 +333,7 @@ export function RealCustomerVideo() {
                 <div className="flex items-center gap-3">
                   <button
                     type="button"
-                    onClick={() => setCallStarted(true)}
+                    onClick={startCall}
                     className="relative group shrink-0"
                     aria-label="דברי עם מיה"
                   >
@@ -192,7 +366,7 @@ export function RealCustomerVideo() {
 
                   <button
                     type="button"
-                    onClick={() => setCallStarted(true)}
+                    onClick={startCall}
                     className="bg-amber-400 hover:bg-amber-300 text-[#2a1f10] text-sm font-bold px-4 py-2.5 rounded-full shadow-xl transition-colors"
                     dir="rtl"
                   >
@@ -228,7 +402,7 @@ export function RealCustomerVideo() {
                     connectUrl={`${BOT_SERVER_URL}/salon-session`}
                     onEnd={() => setCallStarted(false)}
                   >
-                    <MiaInnerView onEnd={() => setCallStarted(false)} />
+                    <MiaInnerView onEnd={() => setCallStarted(false)} onTimeUp={handleTimeUp} />
                   </AvatarCall>
                 </div>
               </div>

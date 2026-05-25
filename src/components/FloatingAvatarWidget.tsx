@@ -23,6 +23,9 @@ const N8N_TEXT_CHAT =
 const FACE_SRC = '/consultant-face.jpg';
 const SESSION_KEY = 'rapo_session_id';
 const GREETED_KEY = 'rapo_greeted_v2';
+const MIKA_USAGE_KEY = 'rapo_mika_usage_v1'; // {date: 'YYYY-MM-DD', count: number}
+const MIKA_DAILY_LIMIT = 1;
+const MIKA_SESSION_MAX_SEC = 45;
 const TEASE_DELAY_MS = 10_000;
 const MAX_RECONNECT_ATTEMPTS = 3;
 
@@ -46,6 +49,35 @@ function fmt(ts: number) {
     return new Date(ts).toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' });
   } catch {
     return '';
+  }
+}
+
+// Daily usage tracking via localStorage
+function todayKey() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function getMikaUsageToday(): number {
+  try {
+    // Owner bypass: set localStorage.setItem('rapo_owner', '1') in dev console
+    if (localStorage.getItem('rapo_owner') === '1') return 0;
+    const raw = localStorage.getItem(MIKA_USAGE_KEY);
+    if (!raw) return 0;
+    const parsed = JSON.parse(raw);
+    if (parsed?.date !== todayKey()) return 0;
+    return Number(parsed.count) || 0;
+  } catch {
+    return 0;
+  }
+}
+
+function incrementMikaUsage() {
+  try {
+    if (localStorage.getItem('rapo_owner') === '1') return;
+    const next = getMikaUsageToday() + 1;
+    localStorage.setItem(MIKA_USAGE_KEY, JSON.stringify({ date: todayKey(), count: next }));
+  } catch {
+    /* ignore */
   }
 }
 
@@ -291,13 +323,39 @@ function LeadForm({ sessionId }: { sessionId: string }) {
 }
 
 // ============================================================
-//  VOICE PANE — avatar video + transcript (inside <AvatarCall>)
+//  VOICE PANE — avatar video + countdown + transcript
 // ============================================================
-function VoicePane() {
+function VoicePane({ onTimeUp }: { onTimeUp: () => void }) {
   const session = useAvatarSession();
   const transcript = useTranscript({ interim: false }) as any[];
   const isActive = session.state === 'active';
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Connection progress (when not active)
+  const [elapsed, setElapsed] = useState(0);
+  useEffect(() => {
+    if (isActive) return;
+    const t = setInterval(() => setElapsed((s) => s + 1), 1000);
+    return () => clearInterval(t);
+  }, [isActive]);
+
+  // Session countdown (when active)
+  const [remaining, setRemaining] = useState(MIKA_SESSION_MAX_SEC);
+  useEffect(() => {
+    if (!isActive) return;
+    setRemaining(MIKA_SESSION_MAX_SEC);
+    const t = setInterval(() => {
+      setRemaining((s) => {
+        if (s <= 1) {
+          clearInterval(t);
+          onTimeUp();
+          return 0;
+        }
+        return s - 1;
+      });
+    }, 1000);
+    return () => clearInterval(t);
+  }, [isActive, onTimeUp]);
 
   const messages: ChatMsg[] = useMemo(() => {
     if (!Array.isArray(transcript)) return [];
@@ -324,22 +382,38 @@ function VoicePane() {
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages.length]);
 
+  // Smart connection progress text
+  const progressText = useMemo(() => {
+    if (elapsed < 3) return 'מתחילים את השיחה...';
+    if (elapsed < 8) return 'מתחברים למיקה...';
+    if (elapsed < 15) return 'כמעט שם...';
+    if (elapsed < 25) return 'עוד רגע, מתעוררת...';
+    return 'מתחברים, סבלנות קטנה...';
+  }, [elapsed]);
+
   return (
     <div className="flex flex-col">
       {/* Avatar video */}
       <div className="relative bg-black h-[280px] shrink-0 flex items-center justify-center overflow-hidden">
         <div
-          className="absolute inset-0 bg-center bg-contain bg-no-repeat"
+          className="absolute inset-0 bg-center bg-contain bg-no-repeat opacity-90"
           style={{ backgroundImage: `url(${FACE_SRC})` }}
         />
         {!isActive && (
-          <div className="absolute inset-0 bg-black/55 flex flex-col items-center justify-center gap-2 text-white pointer-events-none z-10">
-            <div className="w-8 h-8 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin" />
-            <span className="text-xs">מתחברת...</span>
-            <span className="text-[10px] text-white/60">(עד 50 שניות בפעם הראשונה)</span>
+          <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center gap-2 text-white pointer-events-none z-10">
+            <div className="w-10 h-10 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin" />
+            <span className="text-sm font-medium">{progressText}</span>
+            <span className="text-[10px] text-white/50">{elapsed}s</span>
           </div>
         )}
         <AvatarVideo />
+
+        {/* Countdown badge when active */}
+        {isActive && (
+          <div className="absolute top-3 left-3 z-20 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+            ⏱ {remaining}s
+          </div>
+        )}
       </div>
 
       {/* Voice controls */}
@@ -347,7 +421,7 @@ function VoicePane() {
         <ControlBar />
       </div>
 
-      {/* Voice transcript — small, appears under controls */}
+      {/* Voice transcript */}
       {messages.length > 0 && (
         <div
           ref={scrollRef}
@@ -437,11 +511,27 @@ export function FloatingAvatarWidget() {
   };
 
   // Open widget + start voice immediately (one click, both running)
+  // Enforces daily limit; if reached, opens widget but shows lead form (no voice)
   const openAndStartVoice = () => {
     setShowTease(false);
     setOpen(true);
+    const used = getMikaUsageToday();
+    if (used >= MIKA_DAILY_LIMIT) {
+      // Limit reached - open text+lead only
+      setVoiceActive(false);
+      return;
+    }
+    incrementMikaUsage();
     setVoiceActive(true);
     reconnectAttemptsRef.current = 0;
+  };
+
+  const limitReached = open && getMikaUsageToday() >= MIKA_DAILY_LIMIT && !voiceActive;
+
+  // Auto-end when 45s timer expires
+  const handleTimeUp = () => {
+    console.log('[mika] session time up');
+    setVoiceActive(false);
   };
 
   const closeAll = () => {
@@ -553,8 +643,16 @@ export function FloatingAvatarWidget() {
                 connectUrl={`${BOT_SERVER_URL}/session`}
                 onEnd={handleVoiceEnd}
               >
-                <VoicePane />
+                <VoicePane onTimeUp={handleTimeUp} />
               </AvatarCall>
+            )}
+
+            {/* Limit reached banner */}
+            {limitReached && (
+              <div className="bg-amber-500/10 border-b border-amber-400/30 px-4 py-3" dir="rtl">
+                <div className="text-amber-200 text-sm font-semibold mb-1">השיחה היומית הסתיימה</div>
+                <div className="text-amber-100/70 text-xs">תוכל/י להמשיך בכתב או להשאיר פרטים.</div>
+              </div>
             )}
 
             {/* TEXT CHAT — main scrollable area */}

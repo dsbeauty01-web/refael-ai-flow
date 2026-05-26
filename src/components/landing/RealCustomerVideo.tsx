@@ -139,21 +139,175 @@ function MiaInnerView({ onEnd, onTimeUp }: { onEnd: () => void; onTimeUp: () => 
 }
 
 // ============================================================
+//  MIA CHAT PANEL — text-only chat via n8n (no avatar, no credits)
+// ============================================================
+type ChatMsg = { id: string; role: 'user' | 'bot'; text: string; ts: number };
+
+function MiaChatPanel({ onClose }: { onClose: () => void }) {
+  const [messages, setMessages] = useState<ChatMsg[]>([
+    {
+      id: 'greet',
+      role: 'bot',
+      text: 'היי, אני מיה! איך אפשר לעזור? אפשר לקבוע תור או לשאול על מחירים.',
+      ts: Date.now(),
+    },
+  ]);
+  const [input, setInput] = useState('');
+  const [sending, setSending] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const sessionIdRef = useRef<string>(
+    `mia-chat-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+  );
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [messages.length, sending]);
+
+  const send = async () => {
+    const text = input.trim();
+    if (!text || sending) return;
+    setInput('');
+    setMessages((m) => [
+      ...m,
+      { id: `u-${Date.now()}`, role: 'user', text, ts: Date.now() },
+    ]);
+    setSending(true);
+    try {
+      const res = await fetch(N8N_MIA_CHAT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [{ role: 'user', content: text }],
+          session_id: sessionIdRef.current,
+          source: 'mia-text-chat',
+        }),
+        signal: AbortSignal.timeout(30000),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const reply =
+        data?.choices?.[0]?.message?.content ||
+        data?.reply ||
+        data?.output ||
+        data?.answer ||
+        '...';
+      setMessages((m) => [
+        ...m,
+        { id: `b-${Date.now()}`, role: 'bot', text: String(reply), ts: Date.now() },
+      ]);
+    } catch {
+      setMessages((m) => [
+        ...m,
+        {
+          id: `e-${Date.now()}`,
+          role: 'bot',
+          text: 'סליחה, רגע של בעיה. אפשר לנסות שוב.',
+          ts: Date.now(),
+        },
+      ]);
+    } finally {
+      setSending(false);
+    }
+  };
+
+  return (
+    <div className="absolute inset-0 z-30 bg-[#0a0a1a] flex flex-col" dir="rtl">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 shrink-0">
+        <div className="flex items-center gap-2">
+          <img src={MIA_FACE} alt="מיה" className="w-9 h-9 rounded-full object-cover border-2 border-amber-400" />
+          <div>
+            <div className="text-white font-semibold text-sm">מיה</div>
+            <div className="text-white/50 text-[11px]">צ'אט (בלי מיקרופון)</div>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          className="text-white/60 hover:text-white text-2xl leading-none px-2"
+          aria-label="סגור"
+        >
+          ×
+        </button>
+      </div>
+
+      {/* Messages */}
+      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto px-3 py-3 space-y-2">
+        {messages.map((m) => (
+          <div
+            key={m.id}
+            className={`flex flex-col ${m.role === 'user' ? 'items-end' : 'items-start'}`}
+          >
+            <div
+              className={`rounded-2xl px-3 py-2 max-w-[85%] text-sm leading-relaxed ${
+                m.role === 'user' ? 'bg-amber-400 text-[#2a1f10]' : 'bg-white/10 text-white'
+              }`}
+            >
+              {m.text}
+            </div>
+          </div>
+        ))}
+        {sending && (
+          <div className="flex items-start">
+            <div className="bg-white/10 text-white/70 rounded-2xl px-3 py-2 text-sm italic">
+              מקלידה...
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Input */}
+      <div className="flex gap-2 p-3 border-t border-white/10 shrink-0">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              send();
+            }
+          }}
+          disabled={sending}
+          placeholder="כתבו הודעה..."
+          dir="rtl"
+          className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-amber-400/60 disabled:opacity-50"
+        />
+        <button
+          type="button"
+          onClick={send}
+          disabled={sending || !input.trim()}
+          className="rounded-lg bg-amber-400 text-[#2a1f10] font-semibold px-4 py-2 text-sm hover:bg-amber-300 transition-colors disabled:opacity-40"
+        >
+          שלח
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
 //  ROOT — RealCustomerVideo section
 // ============================================================
 export function RealCustomerVideo() {
   const [callStarted, setCallStarted] = useState(false);
+  const [chatStarted, setChatStarted] = useState(false);
   const [limitMsg, setLimitMsg] = useState<string | null>(null);
 
   const startCall = () => {
     const used = getMiaUsageToday();
     if (used >= MIA_DAILY_LIMIT) {
-      setLimitMsg('הגעת למקסימום שיחות יומיות. השאר/י פרטים ונחזור אלייך.');
+      setLimitMsg('הגעת למקסימום שיחות יומיות. נסי בצ\'אט במקום.');
       setTimeout(() => setLimitMsg(null), 5000);
       return;
     }
     incrementMiaUsage();
     setCallStarted(true);
+  };
+
+  const startChat = () => {
+    setChatStarted(true);
   };
 
   const handleTimeUp = () => {
@@ -163,6 +317,8 @@ export function RealCustomerVideo() {
   const [awake, setAwake] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  // Prewarm Render server when Mia section scrolls into view
+  // (cheap GET to /prewarm, no Runway session created)
   useEffect(() => {
     const el = sectionRef.current;
     if (!el || typeof IntersectionObserver === 'undefined') return;
@@ -172,6 +328,11 @@ export function RealCustomerVideo() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setAwake(true);
+            // Fire-and-forget prewarm
+            fetch(`${BOT_SERVER_URL}/prewarm`, {
+              method: 'GET',
+              cache: 'no-store',
+            }).catch(() => {});
             obs.disconnect();
           }
         });
@@ -382,16 +543,31 @@ export function RealCustomerVideo() {
                     </span>
                   </button>
 
-                  <button
-                    type="button"
-                    onClick={startCall}
-                    className="bg-amber-400 hover:bg-amber-300 text-[#2a1f10] text-sm font-bold px-4 py-2.5 rounded-full shadow-xl transition-colors"
-                    dir="rtl"
-                  >
-                    🎤 לחצי לדבר איתי
-                  </button>
+                  <div className="flex flex-col gap-2 items-stretch">
+                    <button
+                      type="button"
+                      onClick={startCall}
+                      className="bg-amber-400 hover:bg-amber-300 text-[#2a1f10] text-sm font-bold px-4 py-2.5 rounded-full shadow-xl transition-colors"
+                      dir="rtl"
+                    >
+                      🎤 לדבר איתי
+                    </button>
+                    <button
+                      type="button"
+                      onClick={startChat}
+                      className="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-4 py-2 rounded-full backdrop-blur-sm transition-colors border border-white/20"
+                      dir="rtl"
+                    >
+                      💬 או לכתוב לי בצ'אט
+                    </button>
+                  </div>
                 </div>
               </div>
+            )}
+
+            {/* Chat mode overlay */}
+            {chatStarted && !callStarted && (
+              <MiaChatPanel onClose={() => setChatStarted(false)} />
             )}
 
             {callStarted && (

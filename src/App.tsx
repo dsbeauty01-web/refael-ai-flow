@@ -5,9 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
-import AIChat from "./pages/AIChat";
 import NotFound from "./pages/NotFound";
-import { FloatingAvatarWidget } from "./components/FloatingAvatarWidget";
 
 const queryClient = new QueryClient();
 
@@ -20,10 +18,8 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/chat" element={<AIChat />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <FloatingAvatarWidget />
         </BrowserRouter>
       </TooltipProvider>
     </LanguageProvider>

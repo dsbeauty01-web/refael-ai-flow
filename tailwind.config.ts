@@ -14,8 +14,12 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Outfit', 'sans-serif'],
-        hebrew: ['Heebo', 'sans-serif'],
+        sans: ['Assistant', 'Inter', 'sans-serif'],
+        hebrew: ['Assistant', 'sans-serif'],
+        english: ['Inter', 'sans-serif'],
+        mono: ['IBM Plex Mono', 'ui-monospace', 'monospace'],
+        'display-he': ['Suez One', 'serif'],
+        'display-en': ['Space Grotesk', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -26,6 +30,13 @@ export default {
         coral: "hsl(var(--coral))",
         purple: "hsl(var(--purple))",
         navy: "hsl(var(--navy))",
+        live: {
+          a: "#4FD1E8",
+          b: "#8B7CF6",
+        },
+        offline: "#92A0B8",
+        surface: "#141B2E",
+        midnight: "#0B0F1A",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

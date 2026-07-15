@@ -32,7 +32,15 @@ function getNestedValue(obj: Record<string, any>, path: string): any {
 import { translations } from '@/lib/translations';
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('he');
+  const [language, setLanguageState] = useState<Language>(() => {
+    if (typeof window === 'undefined') return 'he';
+    const stored = window.localStorage.getItem('refael_lang');
+    return stored === 'en' || stored === 'he' ? stored : 'he';
+  });
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    try { window.localStorage.setItem('refael_lang', lang); } catch {}
+  };
 
   const dir = language === 'he' ? 'rtl' : 'ltr';
   const isHebrew = language === 'he';

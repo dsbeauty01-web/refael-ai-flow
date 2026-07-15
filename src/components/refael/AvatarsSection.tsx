@@ -83,11 +83,7 @@ function Row({ card, idx }: { card: Card; idx: number }) {
 
   return (
     <FadeUp>
-      <article
-        className={`grid gap-6 md:gap-10 md:grid-cols-2 items-center ${
-          reversed ? 'md:[direction:ltr]' : ''
-        }`}
-      >
+      <article className="grid gap-6 md:gap-10 md:grid-cols-2 items-center">
         <div
           className={`aspect-[4/3] rounded-2xl overflow-hidden border border-white/6 ${
             reversed ? 'md:order-2' : ''

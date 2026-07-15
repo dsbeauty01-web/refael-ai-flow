@@ -2,74 +2,159 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
-
 @layer base {
   :root {
-    /* Dark navy premium palette */
-    --background: 230 35% 7%;
-    --foreground: 220 30% 96%;
+    /* Refael.ai LIVE AVATAR palette */
+    --bg-raw: 222 40% 7%;             /* #0B0F1A midnight */
+    --surface-raw: 224 35% 13%;       /* #141B2E */
+    --text-raw: 220 40% 95%;          /* #EEF2F8 */
+    --text-muted-raw: 218 20% 64%;    /* #92A0B8 */
+    --live-a-raw: 188 78% 61%;        /* #4FD1E8 cyan */
+    --live-b-raw: 253 84% 73%;        /* #8B7CF6 violet */
+    --offline-raw: 218 20% 64%;
 
-    --card: 230 30% 11%;
-    --card-foreground: 220 30% 96%;
+    --background: var(--bg-raw);
+    --foreground: var(--text-raw);
 
-    --popover: 230 30% 11%;
-    --popover-foreground: 220 30% 96%;
+    --card: var(--surface-raw);
+    --card-foreground: var(--text-raw);
+    --popover: var(--surface-raw);
+    --popover-foreground: var(--text-raw);
 
-    --primary: 217 91% 62%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 188 78% 61%;
+    --primary-foreground: 222 40% 7%;
 
-    --secondary: 230 25% 14%;
-    --secondary-foreground: 220 30% 96%;
-
-    --muted: 230 25% 14%;
-    --muted-foreground: 220 15% 70%;
-
-    --accent: 263 75% 65%;
-    --accent-foreground: 0 0% 100%;
+    --secondary: 224 30% 16%;
+    --secondary-foreground: var(--text-raw);
+    --muted: 224 30% 16%;
+    --muted-foreground: var(--text-muted-raw);
+    --accent: 253 84% 73%;
+    --accent-foreground: 222 40% 7%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 230 25% 20%;
-    --input: 230 25% 18%;
-    --ring: 217 91% 62%;
+    --border: 220 20% 100% / 0.06;
+    --input: 224 30% 18%;
+    --ring: 188 78% 61%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
     --coral: 18 95% 58%;
     --purple: 263 75% 65%;
-    --navy: 230 35% 7%;
+    --navy: 222 40% 7%;
 
-    --sidebar-background: 230 30% 11%;
-    --sidebar-foreground: 220 30% 96%;
-    --sidebar-primary: 217 91% 62%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 230 25% 14%;
-    --sidebar-accent-foreground: 220 30% 96%;
-    --sidebar-border: 230 25% 20%;
-    --sidebar-ring: 217 91% 62%;
+    --sidebar-background: var(--surface-raw);
+    --sidebar-foreground: var(--text-raw);
+    --sidebar-primary: 188 78% 61%;
+    --sidebar-primary-foreground: 222 40% 7%;
+    --sidebar-accent: 224 30% 16%;
+    --sidebar-accent-foreground: var(--text-raw);
+    --sidebar-border: 224 20% 22%;
+    --sidebar-ring: 188 78% 61%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: rgba(255,255,255,0.06);
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-family: 'Outfit', sans-serif;
+    background-color: #0B0F1A;
+    color: #EEF2F8;
+    font-family: 'Assistant', 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
+
+  html[lang="en"] body { font-family: 'Inter', 'Assistant', sans-serif; }
 
   html {
     scroll-behavior: smooth;
   }
+
+  :focus-visible {
+    outline: 2px solid #4FD1E8;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
 }
 
 @layer utilities {
-  .font-hebrew {
-    font-family: 'Heebo', sans-serif;
+  .font-hebrew { font-family: 'Assistant', sans-serif; }
+  .font-display-he { font-family: 'Suez One', serif; font-weight: 400; letter-spacing: -0.01em; }
+  .font-display-en { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+  .font-mono-num { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+  .text-live-gradient {
+    background: linear-gradient(90deg, #4FD1E8, #8B7CF6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-live-gradient {
+    background: linear-gradient(90deg, #4FD1E8, #8B7CF6);
+  }
+
+  .border-live-gradient {
+    position: relative;
+    background: #141B2E;
+  }
+  .border-live-gradient::before {
+    content: '';
+    position: absolute; inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, #4FD1E8, #8B7CF6);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .surface {
+    background: #141B2E;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+  }
+
+  .hero-bg {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,209,232,0.12), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 100%, rgba(139,124,246,0.14), transparent 60%),
+      radial-gradient(ellipse at center, #141B2E 0%, #0B0F1A 70%);
+  }
+
+  @keyframes live-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(0.9); }
+  }
+  .animate-live-pulse { animation: live-pulse 2s ease-in-out infinite; }
+
+  @keyframes caret-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  .animate-caret { animation: caret-blink 1s step-end infinite; }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s linear infinite;
+  }
+
+  .fade-up-init { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up-in { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-live-pulse, .animate-caret, .shimmer { animation: none !important; }
+    .fade-up-init { opacity: 1 !important; transform: none !important; transition: none !important; }
   }
 
   .glass {

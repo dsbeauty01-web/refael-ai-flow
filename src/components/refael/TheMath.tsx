@@ -25,24 +25,26 @@ const ROWS = [
 export default function TheMath() {
   const { isHebrew, pick } = useT();
   return (
-    <section id="pricing-context" className="py-28 sm:py-36 px-5">
-      <div className="max-w-[1100px] mx-auto">
+    <section id="pricing-context" className="py-24 sm:py-32 px-5 bg-ink text-white">
+      <div className="max-w-[1160px] mx-auto">
         <FadeUp>
-          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.1] max-w-[800px]`}>
+          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] max-w-[800px]`}>
             {pick('אותה טכנולוגיה. סדר גודל אחר של מחיר.', 'Same technology. A different order of magnitude.')}
           </h2>
         </FadeUp>
 
         <FadeUp className="mt-14">
           {/* Desktop table */}
-          <div className="hidden md:block surface overflow-hidden">
+          <div className="hidden md:block surface-dark overflow-hidden">
             <table className="w-full">
               <tbody>
                 {ROWS.map((row) => (
-                  <tr key={row.label} className={`border-b border-white/5 last:border-0 ${row.highlight ? 'relative' : ''}`}>
-                    <td className="p-6 align-top w-[28%] text-foreground font-semibold text-[1rem]">{row.label}</td>
+                  <tr key={row.label} className={`border-b border-white/8 last:border-0 ${row.highlight ? 'bg-white/[0.06]' : ''}`}>
+                    <td className="p-6 align-top w-[28%] font-semibold text-[1rem]">
+                      {row.highlight ? <span className="text-live-gradient">{row.label}</span> : row.label}
+                    </td>
                     {(isHebrew ? row.he : row.en).map((cell, i) => (
-                      <td key={i} className={`p-6 align-top text-[0.95rem] ${i === 2 ? 'font-mono-num text-foreground' : 'text-muted-foreground'} ${row.highlight && i === 2 ? 'text-live-gradient font-semibold' : ''}`}>
+                      <td key={i} className={`p-6 align-top text-[0.95rem] ${i === 2 ? 'font-mono-num text-white' : 'text-white/60'} ${row.highlight && i === 2 ? 'text-live-gradient font-semibold' : ''}`}>
                         {cell}
                       </td>
                     ))}
@@ -55,13 +57,15 @@ export default function TheMath() {
           {/* Mobile cards */}
           <div className="md:hidden flex flex-col gap-4">
             {ROWS.map((row) => (
-              <div key={row.label} className={`surface p-5 ${row.highlight ? 'border-live-gradient' : ''}`}>
-                <p className="text-foreground font-semibold text-[1rem]">{row.label}</p>
+              <div key={row.label} className={`surface-dark p-5 ${row.highlight ? 'border-live-gradient' : ''}`}>
+                <p className="font-semibold text-[1rem]">
+                  {row.highlight ? <span className="text-live-gradient">{row.label}</span> : row.label}
+                </p>
                 <ul className="mt-3 space-y-2 text-[0.95rem]">
                   {(isHebrew ? row.he : row.en).map((cell, i) => (
                     <li
                       key={i}
-                      className={`${i === 2 ? 'font-mono-num text-foreground' : 'text-muted-foreground'} ${row.highlight && i === 2 ? 'text-live-gradient font-semibold' : ''}`}
+                      className={`${i === 2 ? 'font-mono-num text-white' : 'text-white/60'} ${row.highlight && i === 2 ? 'text-live-gradient font-semibold' : ''}`}
                     >
                       {cell}
                     </li>
@@ -73,7 +77,7 @@ export default function TheMath() {
         </FadeUp>
 
         <FadeUp className="mt-10">
-          <p className="text-[1rem] text-muted-foreground max-w-[720px] leading-[1.7]">
+          <p className="text-[1rem] text-white/60 max-w-[720px] leading-[1.7]">
             {pick(
               'נכון להיום, אף אחד בישראל לא מריץ שיחה קולית אמיתית מתחת לאווטאר בגוף מלא. אנחנו כן — ובמחיר קבוע.',
               'Right now, nobody in Israel runs a true voice conversation under a full-body avatar. We do — at a flat cost.'

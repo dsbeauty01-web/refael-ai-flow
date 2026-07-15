@@ -14,7 +14,7 @@ const Index = () => {
   return (
     <div
       key={language}
-      className={`min-h-screen bg-midnight text-foreground ${isHebrew ? 'font-hebrew' : 'font-english'}`}
+      className={`min-h-screen bg-paper text-ink ${isHebrew ? 'font-hebrew' : 'font-english'}`}
       dir={isHebrew ? 'rtl' : 'ltr'}
     >
       <Navbar />

@@ -27,21 +27,21 @@ const CASES = [
 export default function UseCases() {
   const { isHebrew, pick } = useT();
   return (
-    <section id="uses" className="py-28 sm:py-36 px-5 bg-surface/40">
-      <div className="max-w-[1100px] mx-auto">
+    <section id="uses" className="py-24 sm:py-32 px-5 bg-mist">
+      <div className="max-w-[1160px] mx-auto">
         <FadeUp>
-          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.1]`}>
+          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] text-ink`}>
             {pick('איפה זה עובד', 'Where it works')}
           </h2>
         </FadeUp>
 
-        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {CASES.map((c, i) => {
             const v = isHebrew ? c.he : c.en;
             return (
               <FadeUp key={i}>
-                <div className="surface p-6 h-full">
-                  <h3 className="text-[1.1rem] font-semibold text-foreground">{v.t}</h3>
+                <div className="surface p-6 h-full hover:-translate-y-1 hover:shadow-[0_20px_44px_-20px_rgba(14,19,32,0.18)] transition-all duration-300">
+                  <h3 className="text-[1.1rem] font-bold text-ink">{v.t}</h3>
                   <p className="mt-2 text-[0.95rem] text-muted-foreground leading-[1.6]">{v.b}</p>
                 </div>
               </FadeUp>

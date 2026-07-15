@@ -1,8 +1,15 @@
 # STATUS — Refael.ai LIVE AVATAR landing page
 
-_Last update: 2026-07-15 (CLI took over from Lovable — credits dead; repo is now the source of truth)_
+_Last update: 2026-07-15 evening (CLI took over from Lovable — credits dead; repo is now the source of truth)_
 
 ## DONE
+- **BRIGHT REDESIGN (CLI, 2026-07-15)** — full visual overhaul per Refael's "make it bright, use the videos" directive, following the anthropics/skills frontend-design skill:
+  - New palette: white paper / mist gray / ink navy, live gradient #00B8D9→#7C5CF0 still reserved for live+interactive. One dark ink band = the price-comparison section; footer dark to bookend.
+  - **Signature: the hero is a live demo.** Maya's real idle clip stands full-body on the page (studio-white footage feathered into the white bg with a CSS mask, `.blend-white`) and 5 gesture chips (נפנוף/ברוכים הבאים/הנהון/הצבעה/להתראות) play her real gesture clips on click, then return to idle.
+  - Real media transcoded into `public/media/` (~2.5MB total): maya_idle + 5 gestures (720p) from Refael's gestures_v2 pack, nova_close.mp4 (960², chest-up square clip), posters. Avatar cards now use real footage: Maya card = welcome loop, Nova close = square clip, Nova dance = /mia.png poster (no dance video yet).
+  - Verified with headless-Edge/puppeteer screenshots: desktop HE, desktop EN (mirrored correctly), mobile 390px (no horizontal overflow — probe in `scripts/overflow-probe.mjs`; `scripts/shot.mjs` takes screenshots against `vite preview`).
+
+## DONE (earlier)
 - **Prompt 1 (full page rebuild) LANDED** in commit `cf88caf` before Lovable credits died. All sections exist under `src/components/refael/`:
   navbar → hero (typed greeting + caret + 2 CTAs + capability strip) → "לא עוד סרטון מדבר" (4 differentiators) → "תכירו את השלושה" (3 alternating avatar cards) → comparison table (mono numbers, Refael row highlighted) → use cases (5) → pricing (₪9,500 / ₪1,490) → lead form (n8n webhook) → one-line footer.
 - **Non-negotiable demo logic** is in, verbatim: `src/config/avatars.ts` (all podUrl/kioskUrl = null) + `src/hooks/useAvatarStatus.ts` (3s abort, 60s poll). Card states: checking = shimmer, live = gradient pulse + "פתחו שיחה חיה" new tab (no iframe), offline = grey badge + muted looping video, missing video → named poster div. No dead states possible.

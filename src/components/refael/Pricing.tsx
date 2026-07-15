@@ -44,27 +44,27 @@ export default function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="py-28 sm:py-36 px-5">
-      <div className="max-w-[1100px] mx-auto">
+    <section id="pricing" className="py-24 sm:py-32 px-5 bg-paper">
+      <div className="max-w-[1160px] mx-auto">
         <FadeUp>
-          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.1] max-w-[820px]`}>
+          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] max-w-[820px] text-ink`}>
             {pick('הקמה חד-פעמית. מנוי חודשי. זהו.', 'One setup fee. One monthly fee. That\'s it.')}
           </h2>
         </FadeUp>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-2">
+        <div className="mt-14 grid gap-6 md:grid-cols-2 max-w-[900px]">
           {cards.map((c, i) => (
             <FadeUp key={i}>
-              <div className="surface p-8 h-full flex flex-col">
-                <p className="text-[0.85rem] tracking-widest uppercase text-muted-foreground">{c.title}</p>
+              <div className={`surface p-8 h-full flex flex-col ${i === 1 ? 'border-live-gradient' : ''}`}>
+                <p className="text-[0.8rem] tracking-[0.14em] uppercase text-muted-foreground font-semibold">{c.title}</p>
                 <div className="mt-4 flex items-baseline gap-3 flex-wrap">
-                  <span className="font-mono-num text-[clamp(2.25rem,5vw,3.25rem)] text-foreground leading-none">{c.price}</span>
+                  <span className="font-mono-num text-[clamp(2.25rem,5vw,3.25rem)] text-ink leading-none">{c.price}</span>
                   <span className="text-[0.95rem] text-muted-foreground">{c.period}</span>
                 </div>
-                <ul className="mt-8 space-y-3 text-[0.95rem] text-foreground/85">
+                <ul className="mt-8 space-y-3 text-[0.95rem] text-ink/80">
                   {c.bullets.map((b, j) => (
                     <li key={j} className="flex gap-3">
-                      <span className="mt-2 w-1 h-1 rounded-full bg-live-gradient flex-shrink-0" />
+                      <span className="mt-2 w-1.5 h-1.5 rounded-full bg-live-gradient flex-shrink-0" />
                       <span>{b}</span>
                     </li>
                   ))}

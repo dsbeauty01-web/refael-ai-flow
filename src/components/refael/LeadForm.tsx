@@ -32,13 +32,13 @@ export default function LeadForm() {
   }
 
   const inputCls =
-    'w-full bg-transparent border border-white/10 rounded-xl px-4 py-3 text-[0.95rem] text-foreground placeholder:text-muted-foreground/70 focus:border-live-a focus:outline-none';
+    'w-full bg-white border border-ink/12 rounded-xl px-4 py-3 text-[0.95rem] text-ink placeholder:text-muted-foreground/60 focus:border-live-a focus:outline-none transition-colors';
 
   return (
-    <section id="contact" className="py-28 sm:py-36 px-5 bg-surface/40">
-      <div className="max-w-[1100px] mx-auto">
+    <section id="contact" className="py-24 sm:py-32 px-5 bg-mist">
+      <div className="max-w-[1160px] mx-auto">
         <FadeUp>
-          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.1]`}>
+          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] text-ink`}>
             {pick('בואו נבנה לכם אחד', "Let's build you one")}
           </h2>
         </FadeUp>
@@ -47,19 +47,19 @@ export default function LeadForm() {
           <FadeUp className="w-full">
             <form onSubmit={onSubmit} className="surface p-6 sm:p-8 space-y-4 max-w-[640px]">
               <div>
-                <label className="block text-[0.8rem] text-muted-foreground mb-2">{pick('שם', 'Name')} *</label>
+                <label className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('שם', 'Name')} *</label>
                 <input required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className={inputCls} />
               </div>
               <div>
-                <label className="block text-[0.8rem] text-muted-foreground mb-2">{pick('טלפון', 'Phone')} *</label>
+                <label className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('טלפון', 'Phone')} *</label>
                 <input required type="tel" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} className={inputCls} />
               </div>
               <div>
-                <label className="block text-[0.8rem] text-muted-foreground mb-2">{pick('חברה', 'Company')}</label>
+                <label className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('חברה', 'Company')}</label>
                 <input value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} className={inputCls} />
               </div>
               <div>
-                <label className="block text-[0.8rem] text-muted-foreground mb-2">
+                <label className="block text-[0.8rem] font-semibold text-ink/70 mb-2">
                   {pick('איפה האווטאר יעבוד?', 'Where will the avatar work?')} *
                 </label>
                 <select
@@ -70,7 +70,7 @@ export default function LeadForm() {
                 >
                   <option value="" disabled>{pick('בחרו…', 'Select…')}</option>
                   {(isHebrew ? PLACES_HE : PLACES_EN).map((p, i) => (
-                    <option key={p} value={isHebrew ? PLACES_HE[i] : PLACES_EN[i]} className="bg-surface text-foreground">{p}</option>
+                    <option key={p} value={isHebrew ? PLACES_HE[i] : PLACES_EN[i]}>{p}</option>
                   ))}
                 </select>
               </div>
@@ -78,18 +78,18 @@ export default function LeadForm() {
               <button
                 type="submit"
                 disabled={state === 'submitting'}
-                className="w-full bg-live-gradient text-midnight font-semibold py-3.5 rounded-full text-[0.95rem] hover:brightness-110 transition disabled:opacity-60"
+                className="w-full bg-live-gradient text-white font-semibold py-3.5 rounded-full text-[0.95rem] shadow-[0_10px_28px_-10px_rgba(0,184,217,0.55)] hover:brightness-110 transition disabled:opacity-60"
               >
                 {state === 'submitting' ? pick('שולח…', 'Sending…') : pick('דברו איתנו', 'Talk to us')}
               </button>
 
               {state === 'success' && (
-                <p className="text-[0.9rem] text-live-a">{pick('קיבלנו! נחזור אליכם עוד היום.', "Got it! We'll get back to you today.")}</p>
+                <p className="text-[0.9rem] font-semibold text-live-gradient">{pick('קיבלנו! נחזור אליכם עוד היום.', "Got it! We'll get back to you today.")}</p>
               )}
               {state === 'error' && (
                 <div className="text-[0.9rem] text-muted-foreground">
                   {pick('משהו השתבש. אפשר גם פשוט בוואטסאפ:', 'Something went wrong. WhatsApp works too:')}{' '}
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-live-a underline">WhatsApp</a>
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-live-gradient font-semibold underline">WhatsApp</a>
                 </div>
               )}
             </form>
@@ -100,7 +100,7 @@ export default function LeadForm() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 border border-white/20 text-foreground px-8 py-5 rounded-full text-[1rem] hover:bg-white/5 transition"
+              className="inline-flex items-center gap-3 bg-ink text-white px-8 py-5 rounded-full text-[1rem] font-semibold hover:bg-ink/85 transition"
             >
               WhatsApp →
             </a>

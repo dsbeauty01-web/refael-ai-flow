@@ -23,22 +23,23 @@ const ITEMS = [
 export default function WhatItIs() {
   const { isHebrew, pick } = useT();
   return (
-    <section id="what" className="py-28 sm:py-36 px-5">
-      <div className="max-w-[1100px] mx-auto">
+    <section id="what" className="py-24 sm:py-32 px-5 bg-mist">
+      <div className="max-w-[1160px] mx-auto">
         <FadeUp>
-          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.1] max-w-[720px]`}>
+          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] max-w-[720px] text-ink`}>
             {pick('לא עוד סרטון מדבר', 'Not another talking video')}
           </h2>
         </FadeUp>
 
-        <div className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+        <div className="mt-14 grid gap-5 sm:grid-cols-2">
           {ITEMS.map((it, i) => {
             const v = isHebrew ? it.he : it.en;
             return (
               <FadeUp key={i}>
-                <div>
-                  <h3 className="text-[1.25rem] font-semibold text-foreground">{v.t}</h3>
-                  <p className="mt-3 text-[1rem] text-muted-foreground leading-[1.7]">{v.b}</p>
+                <div className="surface p-7 h-full">
+                  <span className="block w-8 h-1 rounded-full bg-live-gradient" aria-hidden />
+                  <h3 className="mt-4 text-[1.2rem] font-bold text-ink">{v.t}</h3>
+                  <p className="mt-2.5 text-[0.98rem] text-muted-foreground leading-[1.7]">{v.b}</p>
                 </div>
               </FadeUp>
             );

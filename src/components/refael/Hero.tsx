@@ -22,7 +22,7 @@ function useTyped(text: string, speed = 60) {
 
 export default function Hero() {
   const { isHebrew, pick, fontDisplay } = useT();
-  const greeting = pick('שלום, ברוכים הבאים.', 'Hello, welcome in.');
+  const greeting = pick('שלום, ברוכים הבאים.', 'Hello, welcome in.', 'สวัสดีค่ะ ยินดีต้อนรับ');
   const { out } = useTyped(greeting, 60);
   const [active, setActive] = useState<string | null>(null);
 
@@ -40,7 +40,7 @@ export default function Hero() {
       <div className="max-w-[1160px] mx-auto px-5 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] items-center">
         <div>
           <p className="text-[0.72rem] font-semibold tracking-[0.28em] text-muted-foreground uppercase mb-7">
-            {pick('REFAEL.AI · אווטארים חיים', 'REFAEL.AI · LIVE AVATARS')}
+            {pick('REFAEL.AI · אווטארים חיים', 'REFAEL.AI · LIVE AVATARS', 'REFAEL.AI · อวตารเสมือนจริง')}
           </p>
 
           <h1
@@ -58,14 +58,16 @@ export default function Hero() {
           <p className="mt-6 text-[1.2rem] sm:text-[1.35rem] text-ink/85 max-w-[640px] leading-[1.5]">
             {pick(
               'זה מה שהאווטאר שלכם יגיד לכל מי שנכנס. בקול. בזמן אמת. בלי תסריט.',
-              "That's what your avatar says to everyone who walks in. Out loud. In real time. No script."
+              "That's what your avatar says to everyone who walks in. Out loud. In real time. No script.",
+              'นี่คือสิ่งที่อวตารของคุณจะพูดกับทุกคนที่เดินเข้ามา ด้วยเสียงจริง แบบเรียลไทม์ ไม่มีบท'
             )}
           </p>
 
           <p className="mt-4 text-[1rem] text-muted-foreground max-w-[620px] leading-[1.7]">
             {pick(
               'Refael.ai בונה אווטארים חיים בגוף מלא שמנהלים שיחה קולית אמיתית בעברית או באנגלית — ללובי, למוזיאון, לאולם התצוגה או לאפליקציה שלכם.',
-              'Refael.ai builds full-body live avatars that hold a real voice conversation in Hebrew or English — for your lobby, museum, showroom, or app.'
+              'Refael.ai builds full-body live avatars that hold a real voice conversation in Hebrew or English — for your lobby, museum, showroom, or app.',
+              'Refael.ai สร้างอวตารเสมือนจริงแบบเต็มตัวที่สนทนาด้วยเสียงได้จริง สำหรับล็อบบี้ พิพิธภัณฑ์ โชว์รูม หรือแอปของคุณ'
             )}
           </p>
 
@@ -74,7 +76,7 @@ export default function Hero() {
               onClick={() => jump('#avatars')}
               className="bg-live-gradient text-white font-semibold px-7 py-3.5 rounded-full text-[0.95rem] shadow-[0_10px_28px_-10px_rgba(0,184,217,0.55)] hover:brightness-110 transition-all"
             >
-              {pick('לדבר עם אווטאר', 'Talk to an avatar')}
+              {pick('לדבר עם אווטאר', 'Talk to an avatar', 'พูดคุยกับอวตาร')}
             </button>
             <a
               href={WHATSAPP_URL}
@@ -82,13 +84,13 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="border border-ink/15 text-ink px-7 py-3.5 rounded-full text-[0.95rem] hover:bg-ink/5 transition-colors"
             >
-              {pick('לתאם דמו חי', 'Book a live demo')}
+              {pick('לתאם דמו חי', 'Book a live demo', 'นัดชมการสาธิตสด')}
             </a>
           </div>
 
           <div className="mt-10">
             <p className="text-[0.78rem] font-semibold tracking-[0.14em] uppercase text-muted-foreground">
-              {pick('נסו אותה — לחצו על תנועה והיא תבצע אותה', 'Try her — click a gesture and she performs it')}
+              {pick('נסו אותה — לחצו על תנועה והיא תבצע אותה', 'Try her — click a gesture and she performs it', 'ลองดูสิ คลิกเลือกท่าทาง แล้วเธอจะทำให้ดู')}
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {MAYA_GESTURES.map(g => (
@@ -101,14 +103,15 @@ export default function Hero() {
                       : 'border-ink/15 text-ink/80 hover:border-live-a hover:text-ink'
                   }`}
                 >
-                  {pick(g.he, g.en)}
+                  {pick(g.he, g.en, g.th)}
                 </button>
               ))}
             </div>
             <p className="mt-3 text-[0.82rem] text-muted-foreground/80">
               {pick(
                 'אלה קטעים אמיתיים מתוך המערכת — בשיחה חיה ה-AI בוחר את התנועות בעצמו.',
-                'These are real clips from the system — in a live conversation the AI picks the gestures itself.'
+                'These are real clips from the system — in a live conversation the AI picks the gestures itself.',
+                'คลิปเหล่านี้มาจากระบบจริง ในการสนทนาสด AI จะเลือกท่าทางเองโดยอัตโนมัติ'
               )}
             </p>
           </div>
@@ -116,7 +119,8 @@ export default function Hero() {
           <p className="mt-10 text-[0.85rem] text-muted-foreground tracking-wide">
             {pick(
               'גוף מלא · קול-מול-קול · עברית · תנועות שה-AI מפעיל לבד · מחיר חודשי קבוע',
-              'Full body · Voice-to-voice · Hebrew · Gestures the AI fires itself · Flat monthly cost'
+              'Full body · Voice-to-voice · Hebrew · Gestures the AI fires itself · Flat monthly cost',
+              'เต็มตัว · สนทนาด้วยเสียง · หลายภาษา · ท่าทางที่ AI สั่งเอง · ค่าบริการรายเดือนคงที่'
             )}
           </p>
         </div>
@@ -167,7 +171,7 @@ function GestureStage() {
       {showPoster ? (
         <img
           src={MAYA_POSTER}
-          alt={pick('מיה — אווטארית חיה בגוף מלא', 'Maya — a full-body live avatar')}
+          alt={pick('מיה — אווטארית חיה בגוף מלא', 'Maya — a full-body live avatar', 'มายา อวตารเสมือนจริงแบบเต็มตัว')}
           className="relative w-full h-auto blend-white"
         />
       ) : (
@@ -182,7 +186,7 @@ function GestureStage() {
           loop={clip === null}
           onEnded={() => setClip(null)}
           className="relative w-full h-auto blend-white"
-          aria-label={pick('מיה — אווטארית חיה בגוף מלא', 'Maya — a full-body live avatar')}
+          aria-label={pick('מיה — אווטארית חיה בגוף מלא', 'Maya — a full-body live avatar', 'มายา อวตารเสมือนจริงแบบเต็มตัว')}
         />
       )}
 

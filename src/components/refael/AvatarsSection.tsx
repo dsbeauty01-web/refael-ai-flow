@@ -7,9 +7,9 @@ import { useAvatarStatus } from '@/hooks/useAvatarStatus';
 
 type Card = {
   key: keyof typeof AVATARS;
-  name: { he: string; en: string };
-  role: { he: string; en: string };
-  body: { he: string; en: string };
+  name: { he: string; en: string; th: string };
+  role: { he: string; en: string; th: string };
+  body: { he: string; en: string; th: string };
   /** keeps the face in frame when the clip is cropped into the card */
   focus?: string;
 };
@@ -17,30 +17,33 @@ type Card = {
 const CARDS: Card[] = [
   {
     key: 'nova_v2',
-    name: { he: 'מיה — מארחת הלובי', en: 'Maya — The Lobby Host' },
-    role: { he: 'פוטוריאליסטית · עברית · גוף מלא', en: 'Photoreal · Hebrew · Full body' },
+    name: { he: 'מיה — מארחת הלובי', en: 'Maya — The Lobby Host', th: 'มายา พนักงานต้อนรับประจำล็อบบี้' },
+    role: { he: 'פוטוריאליסטית · עברית · גוף מלא', en: 'Photoreal · Hebrew · Full body', th: 'สมจริงระดับภาพถ่าย · ฮีบรู · เต็มตัว' },
     body: {
       he: 'מקבלת אורחים בעברית, עונה על שאלות, מנופפת, מהנהנת ומצביעה לכיוון הנכון — כל תנועה נורית על ידי ה-AI בעצמו תוך כדי שיחה.',
       en: 'Greets guests in Hebrew, answers questions, waves, nods, and points the right way — every gesture fired by the AI itself, mid-conversation.',
+      th: 'ต้อนรับผู้มาเยือนเป็นภาษาฮีบรู ตอบคำถาม โบกมือ พยักหน้า และชี้บอกทางได้ถูกต้อง ทุกท่าทางสั่งงานโดย AI เองระหว่างการสนทนา',
     },
     focus: 'object-top',
   },
   {
     key: 'nova_dance',
-    name: { he: 'נובה — מורת הריקוד', en: 'Nova — The Dance Teacher' },
-    role: { he: 'אנימציה בסגנון פיקסאר · אנגלית · לאפליקציות ילדים', en: 'Pixar-style animation · English · For kids\' apps' },
+    name: { he: 'נובה — מורת הריקוד', en: 'Nova — The Dance Teacher', th: 'โนวา ครูสอนเต้น' },
+    role: { he: 'אנימציה בסגנון פיקסאר · אנגלית · לאפליקציות ילדים', en: 'Pixar-style animation · English · For kids\' apps', th: 'แอนิเมชันสไตล์พิกซาร์ · อังกฤษ · สำหรับแอปเด็ก' },
     body: {
       he: 'דמות מונפשת שמלמדת ילדים לרקוד באנגלית: ידיים למעלה, מחיאות כפיים, פריז — והיא גם מדגימה בעצמה.',
       en: 'An animated character that teaches kids to dance in English: hands up, clap-clap, freeze — and she demonstrates the moves herself.',
+      th: 'ตัวละครแอนิเมชันที่สอนเด็ก ๆ เต้นเป็นภาษาอังกฤษ ยกมือขึ้น ปรบมือ หยุดนิ่ง และเธอทำให้ดูเป็นตัวอย่างด้วยตัวเอง',
     },
   },
   {
     key: 'nova_close',
-    name: { he: 'נובה מקרוב', en: 'Nova, up close' },
-    role: { he: 'קלוז-אפ · איכות שפתיים מקסימלית', en: 'Close-up · Maximum lip quality' },
+    name: { he: 'נובה מקרוב', en: 'Nova, up close', th: 'โนวา ระยะใกล้' },
+    role: { he: 'קלוז-אפ · איכות שפתיים מקסימלית', en: 'Close-up · Maximum lip quality', th: 'ระยะใกล้ · ริมฝีปากคมชัดที่สุด' },
     body: {
       he: 'אותה נובה, מצולמת חזה-ומעלה: הפנים גדולות פי שלושה, והשפתיים מסונכרנות ברמה של אפליקציות שיחה מהשורה הראשונה. לשיחות ארוכות — ולמעבר בין קלוז-אפ להדגמה בגוף מלא.',
       en: 'The same Nova, framed chest-up: the face is three times bigger, and the lip-sync reaches top conversation-app quality. Built for longer talks — and for cutting between close-up and full-body demonstration.',
+      th: 'โนวาคนเดิม ถ่ายในระยะครึ่งตัว ใบหน้าใหญ่ขึ้นสามเท่า และการขยับริมฝีปากคมชัดระดับแอปสนทนาชั้นนำ เหมาะกับการพูดคุยที่ยาวขึ้น และการสลับระหว่างภาพระยะใกล้กับการสาธิตแบบเต็มตัว',
     },
   },
 ];
@@ -96,19 +99,19 @@ function Row({ card, idx }: { card: Card; idx: number }) {
             reversed ? 'md:order-2' : ''
           } ${status === 'live' ? 'border-live-gradient' : ''}`}
         >
-          <Media status={status} cfg={cfg} name={pick(card.name.he, card.name.en)} focus={card.focus} />
+          <Media status={status} cfg={cfg} name={pick(card.name.he, card.name.en, card.name.th)} focus={card.focus} />
         </div>
 
         <div className={reversed ? 'md:order-1' : ''}>
           <StatusBadge status={status} />
           <h3 className={`mt-4 ${fontDisplay} text-[clamp(1.75rem,3vw,2.4rem)] leading-[1.15] text-ink`}>
-            {pick(card.name.he, card.name.en)}
+            {pick(card.name.he, card.name.en, card.name.th)}
           </h3>
           <p className="mt-2 text-[0.85rem] tracking-[0.12em] uppercase text-muted-foreground">
-            {pick(card.role.he, card.role.en)}
+            {pick(card.role.he, card.role.en, card.role.th)}
           </p>
           <p className="mt-5 text-[1.02rem] text-ink/75 leading-[1.7] max-w-[520px]">
-            {pick(card.body.he, card.body.en)}
+            {pick(card.body.he, card.body.en, card.body.th)}
           </p>
 
           <div className="mt-7">
@@ -119,7 +122,7 @@ function Row({ card, idx }: { card: Card; idx: number }) {
                 rel="noopener noreferrer"
                 className="inline-flex bg-live-gradient text-white font-semibold px-6 py-3 rounded-full text-[0.9rem] shadow-[0_10px_28px_-10px_rgba(0,184,217,0.55)] hover:brightness-110 transition"
               >
-                {pick('פתחו שיחה חיה', 'Open live conversation')}
+                {pick('פתחו שיחה חיה', 'Open live conversation', 'เริ่มสนทนาสด')}
               </a>
             ) : (
               <a
@@ -128,7 +131,7 @@ function Row({ card, idx }: { card: Card; idx: number }) {
                 rel="noopener noreferrer"
                 className="inline-flex border border-ink/15 text-ink px-6 py-3 rounded-full text-[0.9rem] hover:bg-ink/5 transition"
               >
-                {pick('לתאם שיחה חיה', 'Book a live session')}
+                {pick('לתאם שיחה חיה', 'Book a live session', 'นัดชมการสาธิตสด')}
               </a>
             )}
           </div>
@@ -145,12 +148,13 @@ export default function AvatarsSection() {
       <div className="max-w-[1160px] mx-auto">
         <FadeUp>
           <h2 className={`${fontDisplay} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] text-ink`}>
-            {pick('תכירו את השלושה', 'Meet the three')}
+            {pick('תכירו את השלושה', 'Meet the three', 'พบกับทั้งสาม')}
           </h2>
           <p className="mt-4 text-[1.1rem] text-muted-foreground max-w-[600px]">
             {pick(
               'אלה לא סרטוני תדמית. כשהם באוויר — אפשר לדבר איתם.',
-              "These aren't showreels. When they're live, you can talk to them."
+              "These aren't showreels. When they're live, you can talk to them.",
+              'นี่ไม่ใช่วิดีโอโปรโมต เมื่อพวกเขาออนไลน์ คุณคุยกับพวกเขาได้จริง'
             )}
           </p>
         </FadeUp>

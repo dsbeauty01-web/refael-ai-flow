@@ -6,9 +6,9 @@ export default function Pricing() {
 
   const cards = [
     {
-      title: pick('הקמת אווטאר', 'Avatar setup'),
+      title: pick('הקמת אווטאר', 'Avatar setup', 'ค่าติดตั้งอวตาร'),
       price: '₪9,500',
-      period: pick('חד-פעמי', 'one-time'),
+      period: pick('חד-פעמי', 'one-time', 'ครั้งเดียว'),
       bullets: pick(
         [
           'עיצוב הדמות או דיגיטציה של דמות קיימת',
@@ -21,13 +21,19 @@ export default function Pricing() {
           'Personality & knowledge build',
           'Custom gesture bank',
           'Full deployment',
+        ],
+        [
+          'ออกแบบตัวละคร หรือแปลงบุคคลที่มีอยู่ให้เป็นดิจิทัล',
+          'สร้างบุคลิกและฐานความรู้',
+          'คลังท่าทางเฉพาะของคุณ',
+          'ติดตั้งและใช้งานจริงครบวงจร',
         ]
       ),
     },
     {
-      title: pick('מנוי חודשי', 'Monthly'),
+      title: pick('מנוי חודשי', 'Monthly', 'ค่าบริการรายเดือน'),
       price: '₪1,490',
-      period: pick('לחודש', 'per month'),
+      period: pick('לחודש', 'per month', 'ต่อเดือน'),
       bullets: pick(
         [
           'שרת GPU ייעודי',
@@ -38,6 +44,11 @@ export default function Pricing() {
           'Dedicated GPU server',
           'Monitoring & upkeep',
           'Ongoing knowledge updates & improvements',
+        ],
+        [
+          'เซิร์ฟเวอร์ GPU เฉพาะของคุณ',
+          'เฝ้าระวังระบบและดูแลรักษา',
+          'อัปเดตฐานความรู้และพัฒนาต่อเนื่อง',
         ]
       ),
     },
@@ -48,7 +59,7 @@ export default function Pricing() {
       <div className="max-w-[1160px] mx-auto">
         <FadeUp>
           <h2 className={`${fontDisplay} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] max-w-[820px] text-ink`}>
-            {pick('הקמה חד-פעמית. מנוי חודשי. זהו.', 'One setup fee. One monthly fee. That\'s it.')}
+            {pick('הקמה חד-פעמית. מנוי חודשי. זהו.', 'One setup fee. One monthly fee. That\'s it.', 'จ่ายค่าติดตั้งครั้งเดียว แล้วจ่ายรายเดือน เท่านั้น')}
           </h2>
         </FadeUp>
 
@@ -78,7 +89,8 @@ export default function Pricing() {
           <p className="text-[0.9rem] text-muted-foreground max-w-[720px]">
             {pick(
               'לשם השוואה: פתרון Enterprise מקביל בחו״ל מתחיל בכ-$2,000 לחודש — עוד לפני ההקמה.',
-              'For scale: a comparable enterprise solution abroad starts around $2,000/month — before setup.'
+              'For scale: a comparable enterprise solution abroad starts around $2,000/month — before setup.',
+              'เทียบให้เห็นภาพ: โซลูชันระดับองค์กรที่ใกล้เคียงกันในต่างประเทศเริ่มต้นราว 2,000 ดอลลาร์ต่อเดือน ยังไม่รวมค่าติดตั้ง'
             )}
           </p>
         </FadeUp>

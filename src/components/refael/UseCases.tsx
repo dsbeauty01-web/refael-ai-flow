@@ -5,39 +5,44 @@ const CASES = [
   {
     he: { t: 'לובי משרדים', b: 'מקבל אורחים, מכוון לקומה הנכונה, עונה על שאלות בסיסיות.' },
     en: { t: 'Office lobby', b: 'Greets visitors, points them to the right floor, answers the basics.' },
+    th: { t: 'ล็อบบี้สำนักงาน', b: 'ต้อนรับผู้มาเยือน บอกทางไปยังชั้นที่ถูกต้อง และตอบคำถามพื้นฐาน' },
   },
   {
     he: { t: 'מוזיאון', b: 'מדריך אינטראקטיבי, או דמות היסטורית שאפשר לדבר איתה.' },
     en: { t: 'Museum', b: 'An interactive guide, or a historical figure you can actually talk to.' },
+    th: { t: 'พิพิธภัณฑ์', b: 'ไกด์แบบโต้ตอบ หรือบุคคลในประวัติศาสตร์ที่คุณพูดคุยด้วยได้จริง' },
   },
   {
     he: { t: 'אולם תצוגה', b: 'מציג את המוצר ועונה על שאלות של לקוחות — גם כשאין נציג פנוי.' },
     en: { t: 'Showroom', b: 'Presents the product and fields customer questions — even when no rep is free.' },
+    th: { t: 'โชว์รูม', b: 'นำเสนอสินค้าและตอบคำถามลูกค้า แม้ในเวลาที่ไม่มีพนักงานว่าง' },
   },
   {
     he: { t: 'קליניקה', b: 'צ׳ק-אין, הכוונה, ומענה סבלני לשאלות שחוזרות על עצמן.' },
     en: { t: 'Clinic', b: 'Check-in, wayfinding, and patient answers to the questions that repeat all day.' },
+    th: { t: 'คลินิก', b: 'ลงทะเบียนเข้ารับบริการ บอกเส้นทาง และตอบคำถามที่ถูกถามซ้ำตลอดวันอย่างใจเย็น' },
   },
   {
     he: { t: 'בתוך האפליקציה שלכם', b: 'דמות חיה כרכיב במוצר — כמו נובה, מורת הריקוד לילדים.' },
     en: { t: 'Inside your app', b: 'A live character as a product component — like Nova, the kids\' dance teacher.' },
+    th: { t: 'ภายในแอปของคุณ', b: 'ตัวละครเสมือนจริงในฐานะส่วนหนึ่งของผลิตภัณฑ์ เช่น Nova ครูสอนเต้นสำหรับเด็ก' },
   },
 ];
 
 export default function UseCases() {
-  const { isHebrew, pick, fontDisplay } = useT();
+  const { tr, pick, fontDisplay } = useT();
   return (
     <section id="uses" className="py-24 sm:py-32 px-5 bg-mist">
       <div className="max-w-[1160px] mx-auto">
         <FadeUp>
           <h2 className={`${fontDisplay} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] text-ink`}>
-            {pick('איפה זה עובד', 'Where it works')}
+            {pick('איפה זה עובד', 'Where it works', 'ใช้งานได้ที่ไหนบ้าง')}
           </h2>
         </FadeUp>
 
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {CASES.map((c, i) => {
-            const v = isHebrew ? c.he : c.en;
+            const v = tr(c);
             return (
               <FadeUp key={i}>
                 <div className="surface p-6 h-full hover:-translate-y-1 hover:shadow-[0_20px_44px_-20px_rgba(14,19,32,0.18)] transition-all duration-300">

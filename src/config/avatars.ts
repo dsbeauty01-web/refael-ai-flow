@@ -16,11 +16,11 @@ export const AVATARS: Record<string, AvatarConfig> = {
 export const MAYA_IDLE = "/media/maya_idle.mp4";
 export const MAYA_POSTER = "/media/maya_poster.jpg";
 export const MAYA_GESTURES = [
-  { key: "wave",       src: "/media/maya_wave.mp4",       he: "נפנוף",        en: "Wave" },
-  { key: "welcome",    src: "/media/maya_welcome.mp4",    he: "ברוכים הבאים", en: "Welcome" },
-  { key: "nod",        src: "/media/maya_nod.mp4",        he: "הנהון",        en: "Nod" },
-  { key: "point_left", src: "/media/maya_point_left.mp4", he: "הצבעה",        en: "Point" },
-  { key: "goodbye",    src: "/media/maya_goodbye.mp4",    he: "להתראות",      en: "Goodbye" },
+  { key: "wave",       src: "/media/maya_wave.mp4",       he: "נפנוף",        en: "Wave",    th: "โบกมือ" },
+  { key: "welcome",    src: "/media/maya_welcome.mp4",    he: "ברוכים הבאים", en: "Welcome", th: "ต้อนรับ" },
+  { key: "nod",        src: "/media/maya_nod.mp4",        he: "הנהון",        en: "Nod",     th: "พยักหน้า" },
+  { key: "point_left", src: "/media/maya_point_left.mp4", he: "הצבעה",        en: "Point",   th: "ชี้บอกทาง" },
+  { key: "goodbye",    src: "/media/maya_goodbye.mp4",    he: "להתראות",      en: "Goodbye", th: "ลาก่อน" },
 ] as const;
 
 export const WHATSAPP_URL = "https://wa.me/972533217125";

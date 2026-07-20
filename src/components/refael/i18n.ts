@@ -24,11 +24,21 @@ export function useT() {
     return en;
   };
 
+  /**
+   * Same idea as pick(), for the per-item content objects the card sections use:
+   * tr({ he, en, th }) returns the active language, falling back to English.
+   */
+  const tr = <T,>(o: { he: T; en: T; th?: T }): T => {
+    if (isHebrew) return o.he;
+    if (isThai) return o.th ?? o.en;
+    return o.en;
+  };
+
   // Hebrew and Thai each need their own display face; Latin uses the EN stack.
   const fontDisplay = isHebrew ? 'font-display-he' : isThai ? 'font-display-th' : 'font-display-en';
   const fontBody = isThai ? 'font-body-th' : '';
 
-  return { isHebrew, isThai, language, setLanguage, pick, fontDisplay, fontBody };
+  return { isHebrew, isThai, language, setLanguage, pick, tr, fontDisplay, fontBody };
 }
 
 export const NAV_LINKS = [

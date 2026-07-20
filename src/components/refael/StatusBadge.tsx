@@ -7,7 +7,7 @@ export default function StatusBadge({ status }: { status: AvatarStatus }) {
     return (
       <span className="inline-flex items-center gap-2 text-[0.72rem] tracking-widest uppercase text-muted-foreground">
         <span className="w-1.5 h-1.5 rounded-full bg-offline" />
-        {pick('בודק זמינות…', 'Checking availability…')}
+        {pick('בודק זמינות…', 'Checking availability…', 'กำลังตรวจสอบสถานะ…')}
       </span>
     );
   }
@@ -18,14 +18,14 @@ export default function StatusBadge({ status }: { status: AvatarStatus }) {
           <span className="absolute inset-0 rounded-full bg-live-gradient animate-live-pulse" />
           <span className="relative rounded-full w-2 h-2 bg-live-gradient" />
         </span>
-        <span className="text-live-gradient font-semibold">{pick('חי עכשיו', 'Live now')}</span>
+        <span className="text-live-gradient font-semibold">{pick('חי עכשיו', 'Live now', 'ออนไลน์อยู่')}</span>
       </span>
     );
   }
   return (
     <span className="inline-flex items-center gap-2 text-[0.72rem] tracking-widest uppercase text-muted-foreground">
       <span className="w-1.5 h-1.5 rounded-full bg-offline" />
-      {pick('דמו מוקלט · האווטאר החי זמין בתיאום', 'Recorded demo · live avatar available on request')}
+      {pick('דמו מוקלט · האווטאר החי זמין בתיאום', 'Recorded demo · live avatar available on request', 'คลิปสาธิต · นัดชมอวตารสดได้ตามคำขอ')}
     </span>
   );
 }

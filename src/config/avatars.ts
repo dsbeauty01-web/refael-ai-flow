@@ -23,8 +23,20 @@ export const MAYA_GESTURES = [
   { key: "goodbye",    src: "/media/maya_goodbye.mp4",    he: "להתראות",      en: "Goodbye" },
 ] as const;
 
-// TODO: replace with real WhatsApp number
-export const WHATSAPP_URL = "https://wa.me/972000000000";
+export const WHATSAPP_URL = "https://wa.me/972533217125";
+
+/** Single source of truth for the business details shown in legal pages + footer. */
+export const BUSINESS = {
+  name: 'Refael Sela',
+  nameHe: 'רפאל סלע',
+  /** עוסק פטור — sole proprietor, not an incorporated company. */
+  entityHe: 'עוסק פטור',
+  entityEn: 'Sole proprietor (Osek Patur)',
+  entityTh: 'ผู้ประกอบการรายบุคคล (Osek Patur)',
+  email: 'dsbeauty01@gmail.com',
+  phone: '+972-53-321-7125',
+  site: 'refael.ai',
+} as const;
 
 // Existing n8n lead webhook (reused from previous project wiring)
 export const N8N_LEAD_WEBHOOK = "https://rafa5555.app.n8n.cloud/webhook/lead-email";

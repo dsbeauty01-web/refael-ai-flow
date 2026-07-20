@@ -55,6 +55,18 @@
 
   html[lang="en"] body { font-family: 'Inter', 'Assistant', sans-serif; }
 
+  /* Thai stacks vowel + tone marks above and below the baseline, so the
+     Latin/Hebrew line-heights clip them. Loosen leading page-wide. */
+  html[lang="th"] body {
+    font-family: 'Noto Sans Thai', 'Assistant', sans-serif;
+    line-height: 1.75;
+  }
+  html[lang="th"] h1,
+  html[lang="th"] h2,
+  html[lang="th"] h3 {
+    line-height: 1.35;
+  }
+
   html {
     scroll-behavior: smooth;
   }

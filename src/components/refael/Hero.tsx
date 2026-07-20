@@ -21,7 +21,7 @@ function useTyped(text: string, speed = 60) {
 }
 
 export default function Hero() {
-  const { isHebrew, pick } = useT();
+  const { isHebrew, pick, fontDisplay } = useT();
   const greeting = pick('שלום, ברוכים הבאים.', 'Hello, welcome in.');
   const { out } = useTyped(greeting, 60);
   const [active, setActive] = useState<string | null>(null);
@@ -44,7 +44,7 @@ export default function Hero() {
           </p>
 
           <h1
-            className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.06] tracking-tight text-ink`}
+            className={`${fontDisplay} text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.06] tracking-tight text-ink`}
             style={{ minHeight: '1.15em' }}
             aria-label={greeting}
           >

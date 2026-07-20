@@ -83,7 +83,7 @@ function Media({ status, cfg, name, focus }: { status: 'checking' | 'live' | 'of
 }
 
 function Row({ card, idx }: { card: Card; idx: number }) {
-  const { isHebrew, pick } = useT();
+  const { isHebrew, pick, fontDisplay } = useT();
   const cfg = AVATARS[card.key];
   const status = useAvatarStatus(cfg.podUrl);
   const reversed = idx % 2 === 1;
@@ -101,7 +101,7 @@ function Row({ card, idx }: { card: Card; idx: number }) {
 
         <div className={reversed ? 'md:order-1' : ''}>
           <StatusBadge status={status} />
-          <h3 className={`mt-4 ${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(1.75rem,3vw,2.4rem)] leading-[1.15] text-ink`}>
+          <h3 className={`mt-4 ${fontDisplay} text-[clamp(1.75rem,3vw,2.4rem)] leading-[1.15] text-ink`}>
             {pick(card.name.he, card.name.en)}
           </h3>
           <p className="mt-2 text-[0.85rem] tracking-[0.12em] uppercase text-muted-foreground">
@@ -139,12 +139,12 @@ function Row({ card, idx }: { card: Card; idx: number }) {
 }
 
 export default function AvatarsSection() {
-  const { isHebrew, pick } = useT();
+  const { isHebrew, pick, fontDisplay } = useT();
   return (
     <section id="avatars" className="py-24 sm:py-32 px-5 bg-paper">
       <div className="max-w-[1160px] mx-auto">
         <FadeUp>
-          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] text-ink`}>
+          <h2 className={`${fontDisplay} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] text-ink`}>
             {pick('תכירו את השלושה', 'Meet the three')}
           </h2>
           <p className="mt-4 text-[1.1rem] text-muted-foreground max-w-[600px]">

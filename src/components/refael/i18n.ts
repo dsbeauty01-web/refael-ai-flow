@@ -1,14 +1,39 @@
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useLanguage, LANGUAGES, type Language } from '@/contexts/LanguageContext';
+
+/** Display label + html lang for the language switcher. */
+export const LANGUAGE_LABELS: Record<Language, string> = {
+  he: 'עב',
+  en: 'EN',
+  th: 'ไทย',
+};
+
+export { LANGUAGES };
+export type { Language };
 
 export function useT() {
-  const { isHebrew, language, setLanguage } = useLanguage();
-  const pick = <T,>(he: T, en: T) => (isHebrew ? he : en);
-  return { isHebrew, language, setLanguage, pick };
+  const { isHebrew, isThai, language, setLanguage } = useLanguage();
+
+  /**
+   * Pick the string for the active language.
+   * Thai is optional: until a line is translated it falls back to English,
+   * so the page never renders an empty slot mid-migration.
+   */
+  const pick = <T,>(he: T, en: T, th?: T): T => {
+    if (isHebrew) return he;
+    if (isThai) return th ?? en;
+    return en;
+  };
+
+  // Hebrew and Thai each need their own display face; Latin uses the EN stack.
+  const fontDisplay = isHebrew ? 'font-display-he' : isThai ? 'font-display-th' : 'font-display-en';
+  const fontBody = isThai ? 'font-body-th' : '';
+
+  return { isHebrew, isThai, language, setLanguage, pick, fontDisplay, fontBody };
 }
 
 export const NAV_LINKS = [
-  { href: '#what',     he: 'מה זה',      en: 'What it is' },
-  { href: '#avatars',  he: 'האווטארים',  en: 'The avatars' },
-  { href: '#pricing',  he: 'כמה זה עולה', en: 'Pricing' },
-  { href: '#contact',  he: 'דברו איתנו', en: 'Contact' },
+  { href: '#what',     he: 'מה זה',       en: 'What it is',  th: 'คืออะไร' },
+  { href: '#avatars',  he: 'האווטארים',   en: 'The avatars', th: 'อวตาร' },
+  { href: '#pricing',  he: 'כמה זה עולה', en: 'Pricing',     th: 'ราคา' },
+  { href: '#contact',  he: 'דברו איתנו',  en: 'Contact',     th: 'ติดต่อเรา' },
 ];

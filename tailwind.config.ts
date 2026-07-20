@@ -20,6 +20,8 @@ export default {
         mono: ['IBM Plex Mono', 'ui-monospace', 'monospace'],
         'display-he': ['Suez One', 'serif'],
         'display-en': ['Space Grotesk', 'sans-serif'],
+        'display-th': ['Kanit', 'Noto Sans Thai', 'sans-serif'],
+        'body-th': ['Noto Sans Thai', 'Assistant', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

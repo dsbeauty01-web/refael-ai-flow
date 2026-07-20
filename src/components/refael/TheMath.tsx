@@ -23,12 +23,12 @@ const ROWS = [
 ];
 
 export default function TheMath() {
-  const { isHebrew, pick } = useT();
+  const { isHebrew, pick, fontDisplay } = useT();
   return (
     <section id="pricing-context" className="py-24 sm:py-32 px-5 bg-ink text-white">
       <div className="max-w-[1160px] mx-auto">
         <FadeUp>
-          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] max-w-[800px]`}>
+          <h2 className={`${fontDisplay} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] max-w-[800px]`}>
             {pick('אותה טכנולוגיה. סדר גודל אחר של מחיר.', 'Same technology. A different order of magnitude.')}
           </h2>
         </FadeUp>

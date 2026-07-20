@@ -2,7 +2,7 @@ import { useT } from './i18n';
 import FadeUp from './FadeUp';
 
 export default function Pricing() {
-  const { isHebrew, pick } = useT();
+  const { isHebrew, pick, fontDisplay } = useT();
 
   const cards = [
     {
@@ -47,7 +47,7 @@ export default function Pricing() {
     <section id="pricing" className="py-24 sm:py-32 px-5 bg-paper">
       <div className="max-w-[1160px] mx-auto">
         <FadeUp>
-          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] max-w-[820px] text-ink`}>
+          <h2 className={`${fontDisplay} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] max-w-[820px] text-ink`}>
             {pick('הקמה חד-פעמית. מנוי חודשי. זהו.', 'One setup fee. One monthly fee. That\'s it.')}
           </h2>
         </FadeUp>

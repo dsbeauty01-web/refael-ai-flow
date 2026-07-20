@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { useT, NAV_LINKS } from './i18n';
+import { useT, NAV_LINKS, LANGUAGES, LANGUAGE_LABELS } from './i18n';
 
 export default function Navbar() {
   const { isHebrew, language, setLanguage, pick } = useT();
@@ -13,8 +13,6 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const toggle = () => setLanguage(language === 'he' ? 'en' : 'he');
 
   const jump = (href: string) => {
     setOpen(false);
@@ -39,24 +37,38 @@ export default function Navbar() {
               onClick={() => jump(l.href)}
               className="text-[0.9rem] text-muted-foreground hover:text-ink transition-colors"
             >
-              {pick(l.he, l.en)}
+              {pick(l.he, l.en, l.th)}
             </button>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={toggle}
-            className="text-[0.8rem] font-medium tracking-widest text-muted-foreground hover:text-ink border border-ink/15 rounded-full px-3 py-1 transition-colors"
-            aria-label="Toggle language"
+          <div
+            className="flex items-center gap-0.5 border border-ink/15 rounded-full p-0.5"
+            role="group"
+            aria-label="Language"
           >
-            {language === 'he' ? 'EN' : 'עב'}
-          </button>
+            {LANGUAGES.map(lng => (
+              <button
+                key={lng}
+                onClick={() => setLanguage(lng)}
+                aria-pressed={language === lng}
+                lang={lng}
+                className={`text-[0.75rem] font-medium rounded-full px-2.5 py-1 leading-none transition-colors ${
+                  language === lng
+                    ? 'bg-ink text-white'
+                    : 'text-muted-foreground hover:text-ink'
+                }`}
+              >
+                {LANGUAGE_LABELS[lng]}
+              </button>
+            ))}
+          </div>
           <button
             onClick={() => jump('#contact')}
             className="hidden sm:inline-flex bg-ink text-white text-[0.85rem] font-semibold px-4 py-1.5 rounded-full hover:bg-ink/85 transition-colors"
           >
-            {pick('דברו איתנו', 'Talk to us')}
+            {pick('דברו איתנו', 'Talk to us', 'ติดต่อเรา')}
           </button>
           <button
             className="md:hidden p-2 text-ink"
@@ -76,7 +88,7 @@ export default function Navbar() {
               onClick={() => jump(l.href)}
               className={`py-3 text-[0.95rem] text-ink/90 hover:text-ink ${isHebrew ? 'text-right' : 'text-left'}`}
             >
-              {pick(l.he, l.en)}
+              {pick(l.he, l.en, l.th)}
             </button>
           ))}
         </nav>

@@ -25,12 +25,12 @@ const CASES = [
 ];
 
 export default function UseCases() {
-  const { isHebrew, pick } = useT();
+  const { isHebrew, pick, fontDisplay } = useT();
   return (
     <section id="uses" className="py-24 sm:py-32 px-5 bg-mist">
       <div className="max-w-[1160px] mx-auto">
         <FadeUp>
-          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] text-ink`}>
+          <h2 className={`${fontDisplay} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] text-ink`}>
             {pick('איפה זה עובד', 'Where it works')}
           </h2>
         </FadeUp>

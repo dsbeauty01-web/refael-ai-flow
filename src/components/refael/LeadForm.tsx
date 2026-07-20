@@ -9,7 +9,7 @@ const PLACES_HE = ['לובי', 'מוזיאון', 'אולם תצוגה', 'קלי�
 const PLACES_EN = ['Lobby', 'Museum', 'Showroom', 'Clinic', 'App', 'Other'];
 
 export default function LeadForm() {
-  const { isHebrew, pick } = useT();
+  const { isHebrew, pick, fontDisplay } = useT();
   const [state, setState] = useState<State>('idle');
   const [form, setForm] = useState({ name: '', phone: '', company: '', place: '' });
 
@@ -38,7 +38,7 @@ export default function LeadForm() {
     <section id="contact" className="py-24 sm:py-32 px-5 bg-mist">
       <div className="max-w-[1160px] mx-auto">
         <FadeUp>
-          <h2 className={`${isHebrew ? 'font-display-he' : 'font-display-en'} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] text-ink`}>
+          <h2 className={`${fontDisplay} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] text-ink`}>
             {pick('בואו נבנה לכם אחד', "Let's build you one")}
           </h2>
         </FadeUp>

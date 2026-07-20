@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "sdk_version": "0.23.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "refael-ai-mcp",
+      "version": "0.1.0",
+      "title": "Refael.ai"
+    },
+    "tools": [
+      {
+        "name": "get_contact",
+        "title": "Get Refael.ai contact info",
+        "description": "Returns Refael.ai's public contact channels (Facebook Messenger, email, phone) so an assistant can direct an interested user to the right place.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_services",
+        "title": "List Refael.ai services",
+        "description": "Returns Refael.ai's public service offerings and pricing (live AI avatars, WhatsApp/Messenger bots, custom integrations) as marketed on the landing page.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "submit_lead",
+        "title": "Submit a lead to Refael.ai",
+        "description": "Send a prospective customer's name and WhatsApp/phone to Refael.ai so the team can reply within one hour. Use this only when the person has explicitly asked to be contacted.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Full name of the person to contact."
+            },
+            "phone": {
+              "type": "string",
+              "minLength": 6,
+              "description": "WhatsApp-capable phone number in international format, e.g. +9725XXXXXXXX."
+            },
+            "note": {
+              "type": "string",
+              "description": "Optional short message about what they want."
+            }
+          },
+          "required": [
+            "name",
+            "phone"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

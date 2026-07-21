@@ -9,7 +9,7 @@ export default function Footer() {
   const { language, pick } = useT();
 
   return (
-    <footer className="bg-mist border-t border-ink/10 pt-12 pb-9 px-5">
+    <footer className="bg-paper border-t border-ink/10 pt-12 pb-9 px-5">
       <div className="max-w-[1160px] mx-auto text-center">
         <p className="text-[0.95rem] text-ink/80">
           {pick(

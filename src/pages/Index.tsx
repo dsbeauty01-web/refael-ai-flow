@@ -9,6 +9,7 @@ import Comparison from '@/components/refael/Comparison';
 import TechTrust from '@/components/refael/TechTrust';
 import Pricing from '@/components/refael/Pricing';
 import RoiCalculator from '@/components/refael/RoiCalculator';
+import Services from '@/components/refael/Services';
 import Faq from '@/components/refael/Faq';
 import About from '@/components/refael/About';
 import LeadForm from '@/components/refael/LeadForm';
@@ -33,6 +34,7 @@ const Index = () => {
         <TechTrust />
         <Pricing />
         <RoiCalculator />
+        <Services />
         <Faq />
         <About />
         <LeadForm />

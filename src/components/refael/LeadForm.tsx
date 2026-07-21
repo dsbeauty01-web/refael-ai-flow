@@ -23,6 +23,18 @@ export default function LeadForm() {
   const [state, setState] = useState<State>('idle');
   const [form, setForm] = useState({ name: '', phone: '', company: '', place: '' });
 
+  /** Everything the visitor typed, as a WhatsApp message — the lifeboat below. */
+  function whatsappFallback() {
+    const lines = [
+      pick('היי רפאל, מילאתי את הטופס באתר:', 'Hi Refael, I filled in the form on your site:', 'สวัสดีค่ะราฟาเอล ฉันกรอกฟอร์มบนเว็บไซต์ของคุณแล้ว:'),
+      `${pick('שם', 'Name', 'ชื่อ')}: ${form.name}`,
+      `${pick('טלפון', 'Phone', 'โทร')}: ${form.phone}`,
+      form.company ? `${pick('חברה', 'Company', 'บริษัท')}: ${form.company}` : '',
+      `${pick('מיקום', 'Location', 'สถานที่')}: ${form.place}`,
+    ].filter(Boolean);
+    return `${WHATSAPP_URL}?text=${encodeURIComponent(lines.join('\n'))}`;
+  }
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.name || !form.phone || !form.place) return;
@@ -37,7 +49,11 @@ export default function LeadForm() {
       setState('success');
       setForm({ name: '', phone: '', company: '', place: '' });
     } catch {
+      // A dead webhook must never swallow a lead. Hand the visitor to WhatsApp
+      // with everything they typed already written out, so the worst case is
+      // one extra tap instead of an enquiry that silently vanishes.
       setState('error');
+      window.open(whatsappFallback(), '_blank', 'noopener,noreferrer');
     }
   }
 
@@ -45,7 +61,7 @@ export default function LeadForm() {
     'w-full bg-paper/70 border border-ink/15 rounded-xl px-4 py-3 text-[0.95rem] text-ink placeholder:text-muted-foreground/60 focus:border-live-a focus:outline-none transition-colors [color-scheme:dark]';
 
   return (
-    <section id="contact" className="py-24 sm:py-32 px-5 bg-paper">
+    <section id="contact" className="py-24 sm:py-32 px-5 bg-mist">
       <div className="max-w-[1160px] mx-auto">
         <FadeUp>
           <h2 className={`${fontDisplay} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] text-ink`}>
@@ -98,8 +114,12 @@ export default function LeadForm() {
               )}
               {state === 'error' && (
                 <div className="text-[0.9rem] text-muted-foreground">
-                  {pick('משהו השתבש. אפשר גם פשוט בוואטסאפ:', 'Something went wrong. WhatsApp works too:', 'เกิดข้อผิดพลาด ติดต่อทาง WhatsApp ได้เช่นกัน:')}{' '}
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-live-gradient font-semibold underline">WhatsApp</a>
+                  {pick(
+                    'פתחנו לכם וואטסאפ עם הפרטים — רק תשלחו. אם לא נפתח:',
+                    "We opened WhatsApp with your details — just hit send. If it didn't open:",
+                    'เราเปิด WhatsApp พร้อมข้อมูลของคุณแล้ว กดส่งได้เลย หากไม่เปิดขึ้นมา:'
+                  )}{' '}
+                  <a href={whatsappFallback()} target="_blank" rel="noopener noreferrer" className="text-live-gradient font-semibold underline">WhatsApp</a>
                 </div>
               )}
             </form>
@@ -110,7 +130,7 @@ export default function LeadForm() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-ink text-white px-8 py-5 rounded-full text-[1rem] font-semibold hover:bg-ink/85 transition"
+              className="inline-flex items-center gap-3 bg-ink text-paper px-8 py-5 rounded-full text-[1rem] font-semibold hover:bg-ink/85 transition"
             >
               WhatsApp →
             </a>

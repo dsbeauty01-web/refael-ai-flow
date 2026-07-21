@@ -6,7 +6,7 @@ export default function About() {
   const { pick, fontDisplay } = useT();
 
   return (
-    <section id="about" className="py-24 sm:py-32 px-5 bg-mist">
+    <section id="about" className="py-24 sm:py-32 px-5 bg-paper">
       <div className="max-w-[860px] mx-auto">
         <FadeUp>
           <p className="text-[0.72rem] font-semibold tracking-[0.28em] text-muted-foreground uppercase">

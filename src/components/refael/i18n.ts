@@ -46,6 +46,7 @@ export const NAV_LINKS = [
   { href: '#how',        he: 'איך זה עובד', en: 'How it works', th: 'ทำงานอย่างไร' },
   { href: '#difference', he: 'למה אנחנו',   en: 'Why us',      th: 'ทำไมต้องเรา' },
   { href: '#pricing',    he: 'כמה זה עולה', en: 'Pricing',     th: 'ราคา' },
+  { href: '#services',   he: 'שירותים',     en: 'Services',    th: 'บริการ' },
   { href: '#faq',        he: 'שאלות',       en: 'FAQ',         th: 'คำถามที่พบบ่อย' },
   { href: '#contact',    he: 'דברו איתנו',  en: 'Contact',     th: 'ติดต่อเรา' },
 ];

@@ -76,7 +76,7 @@ export default function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-24 sm:py-32 px-5 bg-paper">
+    <section id="faq" className="py-24 sm:py-32 px-5 bg-mist">
       <div className="max-w-[860px] mx-auto">
         <FadeUp>
           <h2 className={`${fontDisplay} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] text-ink`}>

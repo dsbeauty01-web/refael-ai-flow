@@ -14,7 +14,7 @@ await page.goto('http://localhost:4173/', { waitUntil: 'networkidle0' });
 await new Promise(r => setTimeout(r, 1500));
 
 const result = await page.evaluate(() => {
-  const wanted = ['avatars', 'how', 'uses', 'difference', 'tech', 'pricing', 'roi', 'faq', 'about', 'contact'];
+  const wanted = ['avatars', 'how', 'uses', 'difference', 'tech', 'pricing', 'roi', 'services', 'faq', 'about', 'contact'];
   return {
     nav: [...document.querySelectorAll('header nav button')].map(b => b.textContent.trim()),
     missing: wanted.filter(i => !document.getElementById(i)),

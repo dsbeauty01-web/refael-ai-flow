@@ -6,6 +6,7 @@ import {
   MAYA_POSTER,
   MAYA_GESTURES,
   MAYA_SPEAKING,
+  MAYA_SPEAKING_SCRIPT,
 } from '@/config/avatars';
 
 export default function Hero() {
@@ -82,6 +83,20 @@ export default function Hero() {
               'เปิดเสียงด้วย นี่คือเสียงของเธอจริง ๆ ไม่ใช่เสียงพากย์'
             )}
           </p>
+
+          {/* The accessibility remedy for the only clip here that carries
+              meaning in audio. A disclosure, not always-on text, so it does not
+              spoil the reveal — collapsed content is hidden from assistive tech
+              too, but <details> announces itself as expandable and is keyboard
+              reachable, which is what the accessibility statement promises. */}
+          <details className="mt-3 max-w-[620px] group">
+            <summary className="text-[0.82rem] text-muted-foreground hover:text-ink cursor-pointer transition-colors marker:text-live-a">
+              {pick('מה היא אומרת (תמלול)', 'What she says (transcript)', 'เธอพูดว่าอะไร (ถอดความ)')}
+            </summary>
+            <p className="mt-2 text-[0.88rem] text-ink/70 leading-[1.7] border-s-2 border-live-a/40 ps-4">
+              {pick(MAYA_SPEAKING_SCRIPT.he, MAYA_SPEAKING_SCRIPT.en, MAYA_SPEAKING_SCRIPT.th)}
+            </p>
+          </details>
 
         </div>
 

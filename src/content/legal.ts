@@ -39,7 +39,7 @@ export const LEGAL: Record<LegalSlug, Record<Language, LegalDoc>> = {
         ]},
         { h: 'שיחות קוליות עם אווטאר', p: [
           'הדגמה חיה עם אווטאר מתבצעת בעמוד נפרד ודורשת את אישורכם לגישה למיקרופון. האישור ניתן על ידכם בדפדפן וניתן לביטול בכל רגע.',
-          'הקול מעובד בזמן אמת לצורך ניהול השיחה. אין להזין בשיחת הדגמה מידע אישי רגיש.',
+          'הקול מעובד בזמן אמת לצורך ניהול השיחה בלבד. איננו מקליטים ואיננו שומרים את השיחה, והיא אינה משמשת לאימון מודלים. אין להזין בשיחת הדגמה מידע אישי רגיש.',
         ]},
         { h: 'למה המידע משמש', p: [
           'יצירת קשר חוזר בעקבות פנייה, מתן הצעת מחיר, ותיאום הדגמה.',
@@ -72,7 +72,7 @@ export const LEGAL: Record<LegalSlug, Record<Language, LegalDoc>> = {
         ]},
         { h: 'Voice conversations with an avatar', p: [
           'Live avatar demos open in a separate page and require your explicit microphone permission. You grant it in your browser and can revoke it at any time.',
-          'Audio is processed in real time to conduct the conversation. Please do not share sensitive personal information during a demo conversation.',
+          'Audio is processed in real time solely to conduct the conversation. We do not record or store it, and it is never used to train models. Please do not share sensitive personal information during a demo conversation.',
         ]},
         { h: 'How the information is used', p: [
           'To respond to your enquiry, provide a quote, and schedule a demo.',
@@ -105,7 +105,7 @@ export const LEGAL: Record<LegalSlug, Record<Language, LegalDoc>> = {
         ]},
         { h: 'การสนทนาด้วยเสียงกับอวตาร', p: [
           'การสาธิตอวตารแบบสดจะเปิดในหน้าต่างแยก และต้องได้รับอนุญาตให้เข้าถึงไมโครโฟนจากคุณ คุณสามารถเพิกถอนสิทธิ์นี้ได้ตลอดเวลาในเบราว์เซอร์',
-          'เสียงจะถูกประมวลผลแบบเรียลไทม์เพื่อดำเนินการสนทนา กรุณาอย่าเปิดเผยข้อมูลส่วนบุคคลที่ละเอียดอ่อนระหว่างการสาธิต',
+          'เสียงจะถูกประมวลผลแบบเรียลไทม์เพื่อดำเนินการสนทนาเท่านั้น เราไม่บันทึกและไม่จัดเก็บเสียง และไม่นำไปใช้ฝึกโมเดลใด ๆ กรุณาอย่าเปิดเผยข้อมูลส่วนบุคคลที่ละเอียดอ่อนระหว่างการสาธิต',
         ]},
         { h: 'วัตถุประสงค์การใช้ข้อมูล', p: [
           'เพื่อติดต่อกลับ เสนอราคา และนัดหมายการสาธิต',
@@ -234,7 +234,7 @@ export const LEGAL: Record<LegalSlug, Record<Language, LegalDoc>> = {
           'תמיכה בהעדפת המערכת להפחתת תנועה (prefers-reduced-motion): כאשר ההעדפה פעילה, אנימציות, הבהובים ואפקט ההקלדה מבוטלים ותוכן מוצג באופן מיידי.',
           'מבנה כותרות היררכי, טקסט חלופי לתמונות, ותוויות לשדות בטופס יצירת הקשר.',
           'האתר נתמך בשלוש שפות — עברית, אנגלית ותאית — עם כיווניות טקסט מותאמת.',
-          'סרטוני האווטאר באתר הם קטעי תנועה ללא פס קול, ואינם נושאים מידע קולי הדרוש להבנת התוכן.',
+          'רוב סרטוני האווטאר באתר הם קטעי תנועה ללא פס קול. הסרטון שבו מאיה מדברת כולל דיבור, ולצידו מופיע תמלול מלא בעמוד הבית ("מה היא אומרת"), כך שאין צורך לשמוע כדי להבין את התוכן.',
         ]},
         { h: 'מגבלות ידועות', p: [
           'הדגמת שיחה חיה עם אווטאר מבוססת על קול, ובשלב זה אינה כוללת תמלול בזמן אמת. אנו בוחנים הוספת תמלול.',
@@ -260,7 +260,7 @@ export const LEGAL: Record<LegalSlug, Record<Language, LegalDoc>> = {
           'Support for the reduced-motion system preference: when enabled, animations, pulsing, and the typing effect are disabled and content is shown immediately.',
           'Hierarchical heading structure, alternative text for images, and labels on all contact-form fields.',
           'The site is available in three languages — Hebrew, English, and Thai — with correct text direction for each.',
-          'Avatar videos on this page are silent motion clips; they carry no audio information required to understand the content.',
+          'Most avatar videos on this site are silent motion clips. The one clip in which Maya speaks carries speech, and a full transcript sits beside it on the home page ("What she says"), so hearing it is never required to understand the content.',
         ]},
         { h: 'Known limitations', p: [
           'The live avatar conversation demo is voice-based and does not currently include real-time captioning. We are evaluating adding it.',
@@ -286,7 +286,7 @@ export const LEGAL: Record<LegalSlug, Record<Language, LegalDoc>> = {
           'รองรับการตั้งค่าลดการเคลื่อนไหวของระบบ (prefers-reduced-motion) เมื่อเปิดใช้งาน ภาพเคลื่อนไหวและเอฟเฟกต์การพิมพ์จะถูกปิด และแสดงเนื้อหาทันที',
           'โครงสร้างหัวข้อเป็นลำดับชั้น มีข้อความทางเลือกสำหรับรูปภาพ และมีป้ายกำกับสำหรับทุกช่องในแบบฟอร์มติดต่อ',
           'เว็บไซต์รองรับสามภาษา ได้แก่ ฮีบรู อังกฤษ และไทย พร้อมทิศทางการอ่านที่ถูกต้องในแต่ละภาษา',
-          'วิดีโออวตารบนหน้านี้เป็นคลิปเคลื่อนไหวที่ไม่มีเสียง จึงไม่มีข้อมูลเสียงที่จำเป็นต่อการเข้าใจเนื้อหา',
+          'วิดีโออวตารส่วนใหญ่บนเว็บไซต์นี้เป็นคลิปเคลื่อนไหวที่ไม่มีเสียง ส่วนคลิปที่มายาพูดนั้นมีเสียงพูด และมีคำถอดความฉบับเต็มอยู่ข้าง ๆ บนหน้าแรก ("เธอพูดว่าอะไร") จึงไม่จำเป็นต้องได้ยินเสียงเพื่อเข้าใจเนื้อหา',
         ]},
         { h: 'ข้อจำกัดที่ทราบ', p: [
           'การสาธิตสนทนากับอวตารแบบสดใช้เสียงเป็นหลัก และยังไม่มีคำบรรยายแบบเรียลไทม์ในขณะนี้ เรากำลังพิจารณาเพิ่มฟีเจอร์ดังกล่าว',

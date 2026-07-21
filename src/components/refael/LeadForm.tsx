@@ -42,10 +42,10 @@ export default function LeadForm() {
   }
 
   const inputCls =
-    'w-full bg-white border border-ink/12 rounded-xl px-4 py-3 text-[0.95rem] text-ink placeholder:text-muted-foreground/60 focus:border-live-a focus:outline-none transition-colors';
+    'w-full bg-paper/70 border border-ink/15 rounded-xl px-4 py-3 text-[0.95rem] text-ink placeholder:text-muted-foreground/60 focus:border-live-a focus:outline-none transition-colors [color-scheme:dark]';
 
   return (
-    <section id="contact" className="py-24 sm:py-32 px-5 bg-mist">
+    <section id="contact" className="py-24 sm:py-32 px-5 bg-paper">
       <div className="max-w-[1160px] mx-auto">
         <FadeUp>
           <h2 className={`${fontDisplay} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] text-ink`}>

@@ -53,7 +53,7 @@ function Media({ status, cfg, name, focus }: { status: 'checking' | 'live' | 'of
 
   if (status === 'checking') {
     return (
-      <div className="w-full h-full bg-mist relative overflow-hidden">
+      <div className="w-full h-full relative overflow-hidden">
         <div className="absolute inset-0 shimmer" />
       </div>
     );
@@ -63,8 +63,8 @@ function Media({ status, cfg, name, focus }: { status: 'checking' | 'live' | 'of
     return cfg.posterUrl ? (
       <img src={cfg.posterUrl} alt={name} className={`w-full h-full object-cover ${focus ?? ''}`} />
     ) : (
-      <div className="w-full h-full bg-mist flex items-center justify-center">
-        <span className="text-muted-foreground text-[1.25rem] font-display-en tracking-tight">{name}</span>
+      <div className="w-full h-full flex items-center justify-center">
+        <span className="text-midnight/50 text-[1.25rem] font-display-en tracking-tight">{name}</span>
       </div>
     );
   }
@@ -95,7 +95,7 @@ function Row({ card, idx }: { card: Card; idx: number }) {
     <FadeUp>
       <article className="grid gap-6 md:gap-12 md:grid-cols-2 items-center">
         <div
-          className={`aspect-[4/3] rounded-3xl overflow-hidden bg-white ring-1 ring-ink/8 shadow-[0_20px_50px_-24px_rgba(14,19,32,0.18)] ${
+          className={`relative aspect-[4/3] stage overflow-hidden ${
             reversed ? 'md:order-2' : ''
           } ${status === 'live' ? 'border-live-gradient' : ''}`}
         >

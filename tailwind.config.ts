@@ -33,12 +33,14 @@ export default {
           a: "#00B8D9",
           b: "#7C5CF0",
         },
-        offline: "#8A94A6",
-        ink: "#0E1320",
-        mist: "#F1F4F9",
-        paper: "#FFFFFF",
-        surface: "#FFFFFF",
-        midnight: "#0E1320",
+        offline: "#7A8699",
+        /* Dark premium palette. `paper` is the page, `ink` is the type on it —
+           the names stay so every existing component inverts with the theme. */
+        ink: "#E8EEF7",
+        mist: "#141B29",
+        paper: "#080B12",
+        surface: "#101725",
+        midnight: "#080B12",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

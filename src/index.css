@@ -4,13 +4,15 @@
 
 @layer base {
   :root {
-    /* Refael.ai LIVE AVATAR — bright studio palette
-       ink #0E1320 · paper #FFFFFF · mist #F1F4F9 · muted #5C6779
-       live gradient #00B8D9 → #7C5CF0 (reserved for live/interactive) */
-    --ink-raw: 222 39% 9%;
-    --paper-raw: 0 0% 100%;
-    --mist-raw: 218 33% 96%;
-    --muted-raw: 218 14% 42%;
+    /* Refael.ai LIVE AVATAR — dark premium palette
+       paper #080B12 (page) · ink #E8EEF7 (type) · mist #141B29 (raised)
+       live gradient #00B8D9 → #7C5CF0, reserved for live/interactive only.
+       The avatar footage is studio-WHITE, so it is never composited straight
+       onto the page — it sits inside a .stage panel (see below). */
+    --ink-raw: 214 47% 94%;
+    --paper-raw: 222 43% 5%;
+    --mist-raw: 222 33% 12%;
+    --muted-raw: 216 18% 64%;
 
     --background: var(--paper-raw);
     --foreground: var(--ink-raw);
@@ -21,11 +23,11 @@
     --popover-foreground: var(--ink-raw);
 
     --primary: 190 100% 43%;
-    --primary-foreground: 0 0% 100%;
+    --primary-foreground: 222 43% 5%;
 
-    --secondary: 218 33% 96%;
+    --secondary: 222 33% 12%;
     --secondary-foreground: var(--ink-raw);
-    --muted: 218 33% 94%;
+    --muted: 222 33% 14%;
     --muted-foreground: var(--muted-raw);
     --accent: 253 84% 65%;
     --accent-foreground: 0 0% 100%;
@@ -33,8 +35,8 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 222 20% 9% / 0.08;
-    --input: 218 25% 90%;
+    --border: 214 47% 94% / 0.1;
+    --input: 222 30% 18%;
     --ring: 190 100% 43%;
 
     --radius: 1rem;
@@ -43,15 +45,17 @@
 
 @layer base {
   * {
-    border-color: rgba(14, 19, 32, 0.08);
+    border-color: rgba(232, 238, 247, 0.1);
   }
 
   body {
-    background-color: #ffffff;
-    color: #0e1320;
+    background-color: #080b12;
+    color: #e8eef7;
     font-family: 'Assistant', 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
   }
+
+  ::selection { background: rgba(0, 184, 217, 0.3); color: #ffffff; }
 
   html[lang="en"] body { font-family: 'Inter', 'Assistant', sans-serif; }
 
@@ -113,10 +117,10 @@
   }
 
   .surface {
-    background: #ffffff;
-    border: 1px solid rgba(14, 19, 32, 0.08);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.022));
+    border: 1px solid rgba(232, 238, 247, 0.1);
     border-radius: 20px;
-    box-shadow: 0 1px 2px rgba(14, 19, 32, 0.04), 0 12px 32px -16px rgba(14, 19, 32, 0.1);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 24px 48px -28px rgba(0, 0, 0, 0.8);
   }
 
   .surface-dark {
@@ -125,15 +129,45 @@
     border-radius: 20px;
   }
 
-  /* bright studio hero: white with faint holographic tints at the edges */
-  .hero-bg {
-    background:
-      radial-gradient(ellipse 70% 55% at 85% 10%, rgba(0, 184, 217, 0.09), transparent 60%),
-      radial-gradient(ellipse 60% 50% at 10% 90%, rgba(124, 92, 240, 0.08), transparent 60%),
-      #ffffff;
+  /* Every avatar clip is shot on studio white. Dropped straight onto a dark
+     page that reads as a glowing rectangle, and luma-keying it out would eat
+     her white silk top. So the footage lives inside a lit panel instead —
+     which is literally the product: a screen standing in a lobby. */
+  .stage {
+    background: radial-gradient(ellipse 75% 60% at 50% 22%, #ffffff 0%, #f4f7fb 55%, #e9eff7 100%);
+    border-radius: 24px;
+    box-shadow:
+      0 0 0 1px rgba(232, 238, 247, 0.12),
+      0 0 60px -12px rgba(0, 184, 217, 0.35),
+      0 40px 80px -40px rgba(0, 0, 0, 0.9);
   }
 
-  /* feather the edges of studio-white footage so it melts into the white page */
+  /* the cyan light spill a real screen throws onto the dark room around it */
+  .stage-glow {
+    background: radial-gradient(ellipse 70% 55% at 50% 50%, rgba(0, 184, 217, 0.22), rgba(124, 92, 240, 0.12) 45%, transparent 72%);
+    filter: blur(28px);
+  }
+
+  /* dark room, lit from where the avatar screen stands */
+  .hero-bg {
+    background:
+      radial-gradient(ellipse 55% 60% at 28% 38%, rgba(0, 184, 217, 0.16), transparent 62%),
+      radial-gradient(ellipse 60% 50% at 88% 8%, rgba(124, 92, 240, 0.14), transparent 60%),
+      radial-gradient(ellipse 90% 60% at 50% 100%, rgba(0, 184, 217, 0.06), transparent 70%),
+      #080b12;
+  }
+
+  /* hairline grid, barely there — gives the dark page depth instead of flat black */
+  .grid-veil {
+    background-image:
+      linear-gradient(rgba(232, 238, 247, 0.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232, 238, 247, 0.028) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000, transparent 78%);
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000, transparent 78%);
+  }
+
+  /* feather the edges of studio-white footage so it melts into the .stage panel */
   .blend-white {
     -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 24%, #000 76%, transparent 100%),
                         linear-gradient(to bottom, transparent 0%, #000 9%, #000 94%, transparent 100%);
@@ -164,6 +198,35 @@
     50% { opacity: 0; }
   }
   .animate-caret { animation: caret-blink 1s step-end infinite; }
+
+  /* ROI slider — styled in both engines, RTL-safe (the track is symmetrical) */
+  .roi-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #00b8d9, #7c5cf0);
+    outline: none;
+  }
+  .roi-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid #00b8d9;
+    cursor: pointer;
+    box-shadow: 0 4px 14px -4px rgba(0, 184, 217, 0.8);
+  }
+  .roi-slider::-moz-range-thumb {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid #00b8d9;
+    cursor: pointer;
+  }
 
   /* live audio meter shown while the avatar is actually speaking out loud */
   @keyframes voice-bar {

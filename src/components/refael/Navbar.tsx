@@ -22,7 +22,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all ${
-        scrolled ? 'bg-white/85 backdrop-blur-md border-b border-ink/8 shadow-[0_1px_12px_rgba(14,19,32,0.05)]' : 'bg-transparent'
+        scrolled ? 'bg-paper/80 backdrop-blur-xl border-b border-ink/10' : 'bg-transparent'
       }`}
     >
       <div className="max-w-[1160px] mx-auto flex items-center justify-between px-5 h-16">
@@ -56,7 +56,7 @@ export default function Navbar() {
                 lang={lng}
                 className={`text-[0.75rem] font-medium rounded-full px-2.5 py-1 leading-none transition-colors ${
                   language === lng
-                    ? 'bg-ink text-white'
+                    ? 'bg-ink text-paper'
                     : 'text-muted-foreground hover:text-ink'
                 }`}
               >
@@ -66,7 +66,7 @@ export default function Navbar() {
           </div>
           <button
             onClick={() => jump('#contact')}
-            className="hidden sm:inline-flex bg-ink text-white text-[0.85rem] font-semibold px-4 py-1.5 rounded-full hover:bg-ink/85 transition-colors"
+            className="hidden sm:inline-flex bg-ink text-paper text-[0.85rem] font-semibold px-4 py-1.5 rounded-full hover:bg-ink/85 transition-colors"
           >
             {pick('דברו איתנו', 'Talk to us', 'ติดต่อเรา')}
           </button>
@@ -81,7 +81,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <nav className="md:hidden bg-white border-t border-ink/8 px-5 py-4 flex flex-col gap-1 shadow-lg">
+        <nav className="md:hidden bg-paper border-t border-ink/10 px-5 py-4 flex flex-col gap-1 shadow-lg">
           {NAV_LINKS.map(l => (
             <button
               key={l.href}

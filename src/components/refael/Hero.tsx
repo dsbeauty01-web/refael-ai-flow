@@ -8,28 +8,8 @@ import {
   MAYA_SPEAKING,
 } from '@/config/avatars';
 
-function useTyped(text: string, speed = 60) {
-  const [out, setOut] = useState('');
-  const [done, setDone] = useState(false);
-  useEffect(() => {
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) { setOut(text); setDone(true); return; }
-    setOut(''); setDone(false);
-    let i = 0;
-    const id = setInterval(() => {
-      i++;
-      setOut(text.slice(0, i));
-      if (i >= text.length) { clearInterval(id); setDone(true); }
-    }, speed);
-    return () => clearInterval(id);
-  }, [text, speed]);
-  return { out, done };
-}
-
 export default function Hero() {
-  const { isHebrew, pick, fontDisplay } = useT();
-  const greeting = pick('שלום, ברוכים הבאים.', 'Hello, welcome in.', 'สวัสดีค่ะ ยินดีต้อนรับ');
-  const { out } = useTyped(greeting, 60);
+  const { pick, fontDisplay } = useT();
   const [active, setActive] = useState<string | null>(null);
 
   // The chips and the stage talk through a tiny event, keeping GestureStage self-contained
@@ -39,44 +19,42 @@ export default function Hero() {
     window.setTimeout(() => setActive(null), 5200);
   };
 
-  const jump = (id: string) => document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
-
   // The one button that proves the pitch: it makes her talk, out loud, right here.
   const speak = () => window.dispatchEvent(new CustomEvent('maya-speak'));
 
   return (
     <section className="relative hero-bg overflow-hidden pt-28 pb-16 lg:pt-32 lg:pb-20">
-      <div className="max-w-[1160px] mx-auto px-5 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] items-center">
-        <div>
+      <div className="absolute inset-0 grid-veil pointer-events-none" aria-hidden />
+      {/* On phones she must come straight after the pitch — the avatar IS the
+          argument, and burying her under three paragraphs loses the visitor.
+          On desktop the explicit row/col placement rebuilds the two columns. */}
+      <div className="relative max-w-[1160px] mx-auto px-5 grid gap-10 lg:gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+        <div className="lg:col-start-1 lg:row-start-1">
           <p className="text-[0.72rem] font-semibold tracking-[0.28em] text-muted-foreground uppercase mb-7">
             {pick('REFAEL.AI · אווטארים חיים', 'REFAEL.AI · LIVE AVATARS', 'REFAEL.AI · อวตารเสมือนจริง')}
           </p>
 
-          <h1
-            className={`${fontDisplay} text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.06] tracking-tight text-ink`}
-            style={{ minHeight: '1.15em' }}
-            aria-label={greeting}
-          >
-            <span>{out}</span>
-            <span
-              aria-hidden
-              className="inline-block align-baseline w-[0.06em] h-[0.9em] -mb-[0.05em] mx-[0.05em] bg-live-gradient animate-caret"
-            />
+          <h1 className={`${fontDisplay} text-[clamp(2.4rem,5.6vw,4.4rem)] leading-[1.07] tracking-tight text-ink`}>
+            {pick('אווטארים חיים', 'Live avatars', 'อวตารเสมือนจริง')}
+            <br />
+            <span className="text-live-gradient">
+              {pick('שמדברים עברית.', 'that speak Hebrew.', 'ที่พูดภาษาฮีบรูได้')}
+            </span>
           </h1>
 
-          <p className="mt-6 text-[1.2rem] sm:text-[1.35rem] text-ink/85 max-w-[640px] leading-[1.5]">
+          <p className="mt-6 text-[1.15rem] sm:text-[1.3rem] text-ink/85 max-w-[640px] leading-[1.55]">
             {pick(
-              'זה מה שהאווטאר שלכם יגיד לכל מי שנכנס. בקול. בזמן אמת. בלי תסריט.',
-              "That's what your avatar says to everyone who walks in. Out loud. In real time. No script.",
-              'นี่คือสิ่งที่อวตารของคุณจะพูดกับทุกคนที่เดินเข้ามา ด้วยเสียงจริง แบบเรียลไทม์ ไม่มีบท'
+              'פקידת קבלה, מדריכת מוזיאון, מורה לילדים — דמות בגודל מלא שרואה, שומעת, עונה ומזמנת פגישות. באמת.',
+              'A receptionist, a museum guide, a teacher for kids — a full-size figure that sees, hears, answers and books meetings. For real.',
+              'พนักงานต้อนรับ ไกด์พิพิธภัณฑ์ ครูสอนเด็ก ตัวละครขนาดเท่าคนจริงที่มองเห็น ได้ยิน ตอบคำถาม และนัดหมายให้ได้จริง'
             )}
           </p>
 
           <p className="mt-4 text-[1rem] text-muted-foreground max-w-[620px] leading-[1.7]">
             {pick(
-              'Refael.ai בונה אווטארים חיים בגוף מלא שמנהלים שיחה קולית אמיתית בעברית או באנגלית — ללובי, למוזיאון, לאולם התצוגה או לאפליקציה שלכם.',
-              'Refael.ai builds full-body live avatars that hold a real voice conversation in Hebrew or English — for your lobby, museum, showroom, or app.',
-              'Refael.ai สร้างอวตารเสมือนจริงแบบเต็มตัวที่สนทนาด้วยเสียงได้จริง สำหรับล็อบบี้ พิพิธภัณฑ์ โชว์รูม หรือแอปของคุณ'
+              'גוף מלא, קול-לקול אמיתי, על תשתית משלנו — בלי תשלום לפי דקה.',
+              'Full body, true voice-to-voice, on our own infrastructure — with no per-minute meter.',
+              'เต็มตัว สนทนาด้วยเสียงจริง บนโครงสร้างพื้นฐานของเราเอง โดยไม่คิดค่าบริการรายนาที'
             )}
           </p>
 
@@ -105,7 +83,14 @@ export default function Hero() {
             )}
           </p>
 
-          <div className="mt-10">
+        </div>
+
+        <div className="lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center">
+          <GestureStage />
+        </div>
+
+        <div className="lg:col-start-1 lg:row-start-2">
+          <div>
             <p className="text-[0.78rem] font-semibold tracking-[0.14em] uppercase text-muted-foreground">
               {pick('נסו אותה — לחצו על תנועה והיא תבצע אותה', 'Try her — click a gesture and she performs it', 'ลองดูสิ คลิกเลือกท่าทาง แล้วเธอจะทำให้ดู')}
             </p>
@@ -133,7 +118,7 @@ export default function Hero() {
             </p>
           </div>
 
-          <p className="mt-10 text-[0.85rem] text-muted-foreground tracking-wide">
+          <p className="mt-10 text-[0.85rem] text-muted-foreground/90 tracking-wide">
             {pick(
               'גוף מלא · קול-מול-קול · עברית · תנועות שה-AI מפעיל לבד · מחיר חודשי קבוע',
               'Full body · Voice-to-voice · Hebrew · Gestures the AI fires itself · Flat monthly cost',
@@ -141,8 +126,6 @@ export default function Hero() {
             )}
           </p>
         </div>
-
-        <GestureStage />
       </div>
     </section>
   );
@@ -237,53 +220,56 @@ function GestureStage() {
   const showPoster = reduce && !started;
 
   return (
-    <div className="relative mx-auto w-[min(78vw,340px)] sm:w-[360px] lg:w-[400px]">
-      <div className="absolute -inset-x-16 top-6 bottom-10 avatar-halo pointer-events-none" aria-hidden />
+    <div className="relative mx-auto w-[min(80vw,350px)] sm:w-[380px] lg:w-[420px]">
+      {/* light the dark room around the screen */}
+      <div className="absolute -inset-10 stage-glow pointer-events-none" aria-hidden />
 
-      {showPoster ? (
-        <img
-          src={MAYA_POSTER}
-          alt={pick('מיה — אווטארית חיה בגוף מלא', 'Maya — a full-body live avatar', 'มายา อวตารเสมือนจริงแบบเต็มตัว')}
-          className="relative w-full h-auto blend-white"
-        />
-      ) : (
-        <video
-          ref={videoRef}
-          key={speaking ? 'speaking' : clip ?? 'idle'}
-          src={speaking ? MAYA_SPEAKING : clip ?? MAYA_IDLE}
-          poster={MAYA_POSTER}
-          autoPlay
-          muted={!speaking}
-          playsInline
-          loop={!speaking && clip === null}
-          onEnded={() => { setClip(null); setSpeaking(false); }}
-          className="relative w-full h-auto blend-white"
-          aria-label={pick('מיה — אווטארית חיה בגוף מלא', 'Maya — a full-body live avatar', 'มายา อวตารเสมือนจริงแบบเต็มตัว')}
-        />
-      )}
+      <div className="relative stage px-4 pt-4 overflow-hidden">
+        {showPoster ? (
+          <img
+            src={MAYA_POSTER}
+            alt={pick('מיה — אווטארית חיה בגוף מלא', 'Maya — a full-body live avatar', 'มายา อวตารเสมือนจริงแบบเต็มตัว')}
+            className="relative w-full h-auto blend-white"
+          />
+        ) : (
+          <video
+            ref={videoRef}
+            key={speaking ? 'speaking' : clip ?? 'idle'}
+            src={speaking ? MAYA_SPEAKING : clip ?? MAYA_IDLE}
+            poster={MAYA_POSTER}
+            autoPlay
+            muted={!speaking}
+            playsInline
+            loop={!speaking && clip === null}
+            onEnded={() => { setClip(null); setSpeaking(false); }}
+            className="relative w-full h-auto blend-white"
+            aria-label={pick('מיה — אווטארית חיה בגוף מלא', 'Maya — a full-body live avatar', 'มายา อวตารเสมือนจริงแบบเต็มตัว')}
+          />
+        )}
 
-      {speaking && !blocked && (
-        <div className="absolute top-3 inset-x-0 flex justify-center pointer-events-none">
-          <span className="inline-flex items-center gap-2 bg-live-gradient text-white text-[0.78rem] font-semibold px-3.5 py-1.5 rounded-full shadow-[0_8px_20px_-8px_rgba(0,184,217,0.6)]">
-            <VoiceBars />
-            {pick('הקול שלה — חי', 'Her real voice', 'เสียงจริงของเธอ')}
-          </span>
-        </div>
-      )}
+        {speaking && !blocked && (
+          <div className="absolute top-3 inset-x-0 flex justify-center pointer-events-none">
+            <span className="inline-flex items-center gap-2 bg-live-gradient text-white text-[0.78rem] font-semibold px-3.5 py-1.5 rounded-full shadow-[0_8px_20px_-8px_rgba(0,184,217,0.6)]">
+              <VoiceBars />
+              {pick('הקול שלה — חי', 'Her real voice', 'เสียงจริงของเธอ')}
+            </span>
+          </div>
+        )}
 
-      {blocked && (
-        <div className="absolute inset-x-0 top-3 flex justify-center px-4">
-          <button
-            onClick={() => { const v = videoRef.current; if (v) { v.muted = false; v.play().then(() => setBlocked(false)).catch(() => {}); } }}
-            className="inline-flex items-center gap-2 bg-ink text-white text-[0.78rem] font-semibold px-3.5 py-1.5 rounded-full"
-          >
-            <SpeakerIcon />
-            {pick('הדפדפן חסם את הקול — הקישו להפעלה', 'Your browser blocked the sound — tap to play', 'เบราว์เซอร์บล็อกเสียง แตะเพื่อเล่น')}
-          </button>
-        </div>
-      )}
+        {blocked && (
+          <div className="absolute inset-x-0 top-3 flex justify-center px-4">
+            <button
+              onClick={() => { const v = videoRef.current; if (v) { v.muted = false; v.play().then(() => setBlocked(false)).catch(() => {}); } }}
+              className="inline-flex items-center gap-2 bg-paper text-ink text-[0.78rem] font-semibold px-3.5 py-1.5 rounded-full shadow-lg"
+            >
+              <SpeakerIcon />
+              {pick('הדפדפן חסם את הקול — הקישו להפעלה', 'Your browser blocked the sound — tap to play', 'เบราว์เซอร์บล็อกเสียง แตะเพื่อเล่น')}
+            </button>
+          </div>
+        )}
 
-      <div className="absolute inset-x-8 -bottom-2 h-7 avatar-floor pointer-events-none" aria-hidden />
+        <div className="absolute inset-x-10 bottom-3 h-6 avatar-floor pointer-events-none" aria-hidden />
+      </div>
     </div>
   );
 }

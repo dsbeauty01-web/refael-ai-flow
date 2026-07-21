@@ -1,11 +1,16 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import Navbar from '@/components/refael/Navbar';
 import Hero from '@/components/refael/Hero';
-import WhatItIs from '@/components/refael/WhatItIs';
 import AvatarsSection from '@/components/refael/AvatarsSection';
-import TheMath from '@/components/refael/TheMath';
+import WhatItIs from '@/components/refael/WhatItIs';
+import HowItWorks from '@/components/refael/HowItWorks';
 import UseCases from '@/components/refael/UseCases';
+import Comparison from '@/components/refael/Comparison';
+import TechTrust from '@/components/refael/TechTrust';
 import Pricing from '@/components/refael/Pricing';
+import RoiCalculator from '@/components/refael/RoiCalculator';
+import Faq from '@/components/refael/Faq';
+import About from '@/components/refael/About';
 import LeadForm from '@/components/refael/LeadForm';
 import Footer from '@/components/refael/Footer';
 
@@ -20,11 +25,16 @@ const Index = () => {
       <Navbar />
       <main>
         <Hero />
-        <WhatItIs />
         <AvatarsSection />
-        <TheMath />
+        <WhatItIs />
+        <HowItWorks />
         <UseCases />
+        <Comparison />
+        <TechTrust />
         <Pricing />
+        <RoiCalculator />
+        <Faq />
+        <About />
         <LeadForm />
       </main>
       <Footer />

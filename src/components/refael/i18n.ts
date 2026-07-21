@@ -42,8 +42,10 @@ export function useT() {
 }
 
 export const NAV_LINKS = [
-  { href: '#what',     he: 'מה זה',       en: 'What it is',  th: 'คืออะไร' },
-  { href: '#avatars',  he: 'האווטארים',   en: 'The avatars', th: 'อวตาร' },
-  { href: '#pricing',  he: 'כמה זה עולה', en: 'Pricing',     th: 'ราคา' },
-  { href: '#contact',  he: 'דברו איתנו',  en: 'Contact',     th: 'ติดต่อเรา' },
+  { href: '#avatars',    he: 'האווטארים',   en: 'The avatars', th: 'อวตาร' },
+  { href: '#how',        he: 'איך זה עובד', en: 'How it works', th: 'ทำงานอย่างไร' },
+  { href: '#difference', he: 'למה אנחנו',   en: 'Why us',      th: 'ทำไมต้องเรา' },
+  { href: '#pricing',    he: 'כמה זה עולה', en: 'Pricing',     th: 'ราคา' },
+  { href: '#faq',        he: 'שאלות',       en: 'FAQ',         th: 'คำถามที่พบบ่อย' },
+  { href: '#contact',    he: 'דברו איתנו',  en: 'Contact',     th: 'ติดต่อเรา' },
 ];

@@ -1,31 +1,43 @@
 import { useT } from './i18n';
 import FadeUp from './FadeUp';
 
+/** Each card closes on the money line — the reason this room needs her. */
 const CASES = [
   {
-    he: { t: 'לובי משרדים', b: 'מקבל אורחים, מכוון לקומה הנכונה, עונה על שאלות בסיסיות.' },
-    en: { t: 'Office lobby', b: 'Greets visitors, points them to the right floor, answers the basics.' },
-    th: { t: 'ล็อบบี้สำนักงาน', b: 'ต้อนรับผู้มาเยือน บอกทางไปยังชั้นที่ถูกต้อง และตอบคำถามพื้นฐาน' },
+    icon: '🏢',
+    he: { t: 'לובי משרדים', b: 'מקבלת אורחים, מכוונת לקומה הנכונה, ומודיעה שהגעתם.', roi: 'רושם שאי אפשר לשכוח.' },
+    en: { t: 'Office lobby', b: 'Greets visitors, points them to the right floor, announces their arrival.', roi: 'An impression nobody forgets.' },
+    th: { t: 'ล็อบบี้สำนักงาน', b: 'ต้อนรับผู้มาเยือน บอกทางไปยังชั้นที่ถูกต้อง และแจ้งว่าคุณมาถึงแล้ว', roi: 'ความประทับใจที่ไม่มีใครลืม' },
   },
   {
-    he: { t: 'מוזיאון', b: 'מדריך אינטראקטיבי, או דמות היסטורית שאפשר לדבר איתה.' },
-    en: { t: 'Museum', b: 'An interactive guide, or a historical figure you can actually talk to.' },
-    th: { t: 'พิพิธภัณฑ์', b: 'ไกด์แบบโต้ตอบ หรือบุคคลในประวัติศาสตร์ที่คุณพูดคุยด้วยได้จริง' },
+    icon: '🏥',
+    he: { t: 'קליניקות', b: 'מזמנת תורים מסביב לשעון, בלי להחזיק פקידה על הטלפון.', roi: 'תור שלא נקבע = כסף שהלך.' },
+    en: { t: 'Clinics', b: 'Books appointments around the clock, without keeping someone on the phone.', roi: 'An appointment not booked is money gone.' },
+    th: { t: 'คลินิก', b: 'นัดหมายได้ตลอดเวลา โดยไม่ต้องมีพนักงานคอยรับสาย', roi: 'นัดที่ไม่ได้จอง คือเงินที่หายไป' },
   },
   {
-    he: { t: 'אולם תצוגה', b: 'מציג את המוצר ועונה על שאלות של לקוחות — גם כשאין נציג פנוי.' },
-    en: { t: 'Showroom', b: 'Presents the product and fields customer questions — even when no rep is free.' },
-    th: { t: 'โชว์รูม', b: 'นำเสนอสินค้าและตอบคำถามลูกค้า แม้ในเวลาที่ไม่มีพนักงานว่าง' },
+    icon: '🏛️',
+    he: { t: 'מוזיאונים', b: 'דמות היסטורית שעונה על כל שאלה, בגובה העיניים.', roi: 'התערוכה שמדברת.' },
+    en: { t: 'Museums', b: 'A historical figure that answers any question, at eye level.', roi: 'The exhibit that talks back.' },
+    th: { t: 'พิพิธภัณฑ์', b: 'บุคคลในประวัติศาสตร์ที่ตอบทุกคำถามได้ ในระดับสายตา', roi: 'นิทรรศการที่พูดโต้ตอบได้' },
   },
   {
-    he: { t: 'קליניקה', b: 'צ׳ק-אין, הכוונה, ומענה סבלני לשאלות שחוזרות על עצמן.' },
-    en: { t: 'Clinic', b: 'Check-in, wayfinding, and patient answers to the questions that repeat all day.' },
-    th: { t: 'คลินิก', b: 'ลงทะเบียนเข้ารับบริการ บอกเส้นทาง และตอบคำถามที่ถูกถามซ้ำตลอดวันอย่างใจเย็น' },
+    icon: '🛍️',
+    he: { t: 'אולמות תצוגה', b: 'מציגה מוצרים, עונה על שאלות ומפנה לנציג כשצריך.', roi: 'מוכרת שלא מתעייפת.' },
+    en: { t: 'Showrooms', b: 'Presents products, answers questions, hands over to a rep when needed.', roi: 'A salesperson who never tires.' },
+    th: { t: 'โชว์รูม', b: 'นำเสนอสินค้า ตอบคำถาม และส่งต่อให้พนักงานเมื่อจำเป็น', roi: 'พนักงานขายที่ไม่มีวันเหนื่อย' },
   },
   {
-    he: { t: 'בתוך האפליקציה שלכם', b: 'דמות חיה כרכיב במוצר — כמו נובה, מורת הריקוד לילדים.' },
-    en: { t: 'Inside your app', b: 'A live character as a product component — like Nova, the kids\' dance teacher.' },
-    th: { t: 'ภายในแอปของคุณ', b: 'ตัวละครเสมือนจริงในฐานะส่วนหนึ่งของผลิตภัณฑ์ เช่น Nova ครูสอนเต้นสำหรับเด็ก' },
+    icon: '👧',
+    he: { t: 'אפליקציות חינוך', b: 'מורה בגוף מלא שרואה את הילד ומגיבה אליו בזמן אמת.', roi: 'הקסם שאין לאף מתחרה.' },
+    en: { t: 'Education apps', b: 'A full-body teacher that sees the child and reacts in real time.', roi: 'Magic no competitor has.' },
+    th: { t: 'แอปการศึกษา', b: 'ครูแบบเต็มตัวที่มองเห็นเด็กและตอบสนองแบบเรียลไทม์', roi: 'ความมหัศจรรย์ที่คู่แข่งไม่มี' },
+  },
+  {
+    icon: '🎪',
+    he: { t: 'כנסים ואירועים', b: 'הולוגרמה שמקבלת את האורחים בשמם.', roi: 'הדבר שכולם מצלמים.' },
+    en: { t: 'Conferences & events', b: 'A hologram that greets guests by name.', roi: 'The thing everyone films.' },
+    th: { t: 'งานประชุมและอีเวนต์', b: 'โฮโลแกรมที่ทักทายแขกด้วยชื่อของพวกเขา', roi: 'สิ่งที่ทุกคนหยิบมือถือขึ้นมาถ่าย' },
   },
 ];
 
@@ -36,7 +48,7 @@ export default function UseCases() {
       <div className="max-w-[1160px] mx-auto">
         <FadeUp>
           <h2 className={`${fontDisplay} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] text-ink`}>
-            {pick('איפה זה עובד', 'Where it works', 'ใช้งานได้ที่ไหนบ้าง')}
+            {pick('איפה היא עומדת', 'Where she stands', 'เธอยืนอยู่ตรงไหนได้บ้าง')}
           </h2>
         </FadeUp>
 
@@ -45,9 +57,13 @@ export default function UseCases() {
             const v = tr(c);
             return (
               <FadeUp key={i}>
-                <div className="surface p-6 h-full hover:-translate-y-1 hover:shadow-[0_20px_44px_-20px_rgba(14,19,32,0.18)] transition-all duration-300">
-                  <h3 className="text-[1.1rem] font-bold text-ink">{v.t}</h3>
-                  <p className="mt-2 text-[0.95rem] text-muted-foreground leading-[1.6]">{v.b}</p>
+                <div className="surface p-6 h-full flex flex-col hover:-translate-y-1 hover:border-live-a/40 transition-all duration-300">
+                  <span className="text-[1.6rem] leading-none" aria-hidden>{c.icon}</span>
+                  <h3 className="mt-4 text-[1.1rem] font-bold text-ink">{v.t}</h3>
+                  <p className="mt-2 text-[0.95rem] text-muted-foreground leading-[1.65] flex-1">{v.b}</p>
+                  <p className="mt-4 pt-4 border-t border-ink/10 text-[0.92rem] text-live-gradient font-semibold">
+                    {v.roi}
+                  </p>
                 </div>
               </FadeUp>
             );

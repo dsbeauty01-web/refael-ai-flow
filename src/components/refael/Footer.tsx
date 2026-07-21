@@ -9,9 +9,9 @@ export default function Footer() {
   const { language, pick } = useT();
 
   return (
-    <footer className="bg-ink pt-12 pb-9 px-5">
+    <footer className="bg-mist border-t border-ink/10 pt-12 pb-9 px-5">
       <div className="max-w-[1160px] mx-auto text-center">
-        <p className="text-[0.95rem] text-white/80">
+        <p className="text-[0.95rem] text-ink/80">
           {pick(
             'Refael.ai · אווטארים חיים לעסקים',
             'Refael.ai · Live avatars for business',
@@ -24,7 +24,7 @@ export default function Footer() {
             <Link
               key={s}
               to={`/legal/${s}`}
-              className="text-[0.85rem] text-white/55 hover:text-white underline underline-offset-4 transition-colors"
+              className="text-[0.85rem] text-ink/55 hover:text-ink underline underline-offset-4 transition-colors"
             >
               {LEGAL[s][language].title}
             </Link>
@@ -33,19 +33,19 @@ export default function Footer() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[0.85rem] text-white/55 hover:text-white underline underline-offset-4 transition-colors"
+            className="text-[0.85rem] text-ink/55 hover:text-ink underline underline-offset-4 transition-colors"
           >
             WhatsApp
           </a>
           <a
             href={`mailto:${BUSINESS.email}`}
-            className="text-[0.85rem] text-white/55 hover:text-white underline underline-offset-4 transition-colors"
+            className="text-[0.85rem] text-ink/55 hover:text-ink underline underline-offset-4 transition-colors"
           >
             {BUSINESS.email}
           </a>
         </nav>
 
-        <p className="mt-7 text-[0.78rem] text-white/35">
+        <p className="mt-7 text-[0.78rem] text-ink/40">
           {pick(
             `© ${new Date().getFullYear()} ${BUSINESS.nameHe} · ${BUSINESS.entityHe}`,
             `© ${new Date().getFullYear()} ${BUSINESS.name} · ${BUSINESS.entityEn}`,

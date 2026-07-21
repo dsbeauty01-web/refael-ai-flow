@@ -165,6 +165,16 @@
   }
   .animate-caret { animation: caret-blink 1s step-end infinite; }
 
+  /* live audio meter shown while the avatar is actually speaking out loud */
+  @keyframes voice-bar {
+    0%, 100% { transform: scaleY(0.28); }
+    50%      { transform: scaleY(1); }
+  }
+  .voice-bar {
+    transform-origin: center;
+    animation: voice-bar 0.7s ease-in-out infinite alternate;
+  }
+
   @keyframes shimmer {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
@@ -179,7 +189,7 @@
   .fade-up-in { opacity: 1; transform: translateY(0); }
 
   @media (prefers-reduced-motion: reduce) {
-    .animate-live-pulse, .animate-caret, .shimmer { animation: none !important; }
+    .animate-live-pulse, .animate-caret, .shimmer, .voice-bar { animation: none !important; }
     .fade-up-init { opacity: 1 !important; transform: none !important; transition: none !important; }
     html { scroll-behavior: auto; }
   }

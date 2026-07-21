@@ -15,6 +15,15 @@ export const AVATARS: Record<string, AvatarConfig> = {
 // Maya's gesture bank — real clips from the production system, used by the interactive hero
 export const MAYA_IDLE = "/media/maya_idle.mp4";
 export const MAYA_POSTER = "/media/maya_poster.jpg";
+
+/**
+ * The one clip on this site with sound: Maya actually talking, lip-synced.
+ * The whole pitch is voice-to-voice, so the visitor has to be able to HEAR her.
+ * Recorded off the production DITTO pipeline; background is already pure white,
+ * so it takes the same .blend-white treatment as the silent gesture clips.
+ */
+export const MAYA_SPEAKING = "/media/maya_speaking.mp4";
+export const MAYA_SPEAKING_POSTER = "/media/maya_speaking_poster.jpg";
 export const MAYA_GESTURES = [
   { key: "wave",       src: "/media/maya_wave.mp4",       he: "נפנוף",        en: "Wave",    th: "โบกมือ" },
   { key: "welcome",    src: "/media/maya_welcome.mp4",    he: "ברוכים הבאים", en: "Welcome", th: "ต้อนรับ" },

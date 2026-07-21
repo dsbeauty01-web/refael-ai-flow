@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { useT } from './i18n';
-import { WHATSAPP_URL, MAYA_IDLE, MAYA_POSTER, MAYA_GESTURES } from '@/config/avatars';
+import {
+  WHATSAPP_URL,
+  MAYA_IDLE,
+  MAYA_POSTER,
+  MAYA_GESTURES,
+  MAYA_SPEAKING,
+} from '@/config/avatars';
 
 function useTyped(text: string, speed = 60) {
   const [out, setOut] = useState('');
@@ -34,6 +40,9 @@ export default function Hero() {
   };
 
   const jump = (id: string) => document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
+
+  // The one button that proves the pitch: it makes her talk, out loud, right here.
+  const speak = () => window.dispatchEvent(new CustomEvent('maya-speak'));
 
   return (
     <section className="relative hero-bg overflow-hidden pt-28 pb-16 lg:pt-32 lg:pb-20">
@@ -73,10 +82,11 @@ export default function Hero() {
 
           <div className="mt-9 flex flex-wrap gap-3">
             <button
-              onClick={() => jump('#avatars')}
-              className="bg-live-gradient text-white font-semibold px-7 py-3.5 rounded-full text-[0.95rem] shadow-[0_10px_28px_-10px_rgba(0,184,217,0.55)] hover:brightness-110 transition-all"
+              onClick={speak}
+              className="group inline-flex items-center gap-2.5 bg-live-gradient text-white font-semibold px-7 py-3.5 rounded-full text-[0.95rem] shadow-[0_10px_28px_-10px_rgba(0,184,217,0.55)] hover:brightness-110 transition-all"
             >
-              {pick('לדבר עם אווטאר', 'Talk to an avatar', 'พูดคุยกับอวตาร')}
+              <SpeakerIcon />
+              {pick('שמעו אותה מדברת', 'Hear her speak', 'ฟังเธอพูด')}
             </button>
             <a
               href={WHATSAPP_URL}
@@ -87,6 +97,13 @@ export default function Hero() {
               {pick('לתאם דמו חי', 'Book a live demo', 'นัดชมการสาธิตสด')}
             </a>
           </div>
+          <p className="mt-3 text-[0.82rem] text-muted-foreground">
+            {pick(
+              'הפעילו את הרמקולים — זו ההקלטה שלה, לא קריינות.',
+              "Turn your sound on — that's her, not a voice-over.",
+              'เปิดเสียงด้วย นี่คือเสียงของเธอจริง ๆ ไม่ใช่เสียงพากย์'
+            )}
+          </p>
 
           <div className="mt-10">
             <p className="text-[0.78rem] font-semibold tracking-[0.14em] uppercase text-muted-foreground">
@@ -131,25 +148,80 @@ export default function Hero() {
   );
 }
 
-/** Wraps MayaStage and listens for gesture events fired by the chips. */
+function SpeakerIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M11 5 6 9H2v6h4l5 4V5z" />
+      <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+      <path d="M19 5a9 9 0 0 1 0 14" />
+    </svg>
+  );
+}
+
+/** Live audio meter — only ever shown while sound is genuinely playing. */
+function VoiceBars() {
+  return (
+    <span className="flex items-end gap-[2px] h-3.5" aria-hidden>
+      {[0, 1, 2, 3].map(i => (
+        <span
+          key={i}
+          className="voice-bar w-[2.5px] h-full rounded-full bg-white"
+          style={{ animationDelay: `${i * 0.12}s`, animationDuration: `${0.55 + i * 0.1}s` }}
+        />
+      ))}
+    </span>
+  );
+}
+
+/** Wraps MayaStage: listens for gesture chips, and for the "hear her speak" button. */
 function GestureStage() {
   const { pick } = useT();
   const [clip, setClip] = useState<string | null>(null);
+  const [speaking, setSpeaking] = useState(false);
+  const [blocked, setBlocked] = useState(false);
   const [reduce, setReduce] = useState(false);
   const [started, setStarted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setReduce(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
     const onGesture = (e: Event) => {
       const src = (e as CustomEvent<string>).detail;
       setStarted(true);
+      setSpeaking(false);
       setClip(null);
       requestAnimationFrame(() => setClip(src));
     };
+    const onSpeak = () => {
+      setStarted(true);
+      setBlocked(false);
+      setClip(null);
+      setSpeaking(true);
+    };
+
     window.addEventListener('maya-gesture', onGesture);
-    return () => window.removeEventListener('maya-gesture', onGesture);
+    window.addEventListener('maya-speak', onSpeak);
+    return () => {
+      window.removeEventListener('maya-gesture', onGesture);
+      window.removeEventListener('maya-speak', onSpeak);
+    };
   }, []);
+
+  /**
+   * Autoplay policy: a click grants permission, but the play() promise can still
+   * reject (background tab, iOS low-power). Never swallow it — if sound is refused
+   * we say so instead of silently playing a mute clip and looking broken.
+   */
+  useEffect(() => {
+    if (!speaking) return;
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = false;
+    v.volume = 1;
+    v.currentTime = 0;
+    v.play().catch(() => setBlocked(true));
+  }, [speaking]);
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -177,17 +249,38 @@ function GestureStage() {
       ) : (
         <video
           ref={videoRef}
-          key={clip ?? 'idle'}
-          src={clip ?? MAYA_IDLE}
+          key={speaking ? 'speaking' : clip ?? 'idle'}
+          src={speaking ? MAYA_SPEAKING : clip ?? MAYA_IDLE}
           poster={MAYA_POSTER}
           autoPlay
-          muted
+          muted={!speaking}
           playsInline
-          loop={clip === null}
-          onEnded={() => setClip(null)}
+          loop={!speaking && clip === null}
+          onEnded={() => { setClip(null); setSpeaking(false); }}
           className="relative w-full h-auto blend-white"
           aria-label={pick('מיה — אווטארית חיה בגוף מלא', 'Maya — a full-body live avatar', 'มายา อวตารเสมือนจริงแบบเต็มตัว')}
         />
+      )}
+
+      {speaking && !blocked && (
+        <div className="absolute top-3 inset-x-0 flex justify-center pointer-events-none">
+          <span className="inline-flex items-center gap-2 bg-live-gradient text-white text-[0.78rem] font-semibold px-3.5 py-1.5 rounded-full shadow-[0_8px_20px_-8px_rgba(0,184,217,0.6)]">
+            <VoiceBars />
+            {pick('הקול שלה — חי', 'Her real voice', 'เสียงจริงของเธอ')}
+          </span>
+        </div>
+      )}
+
+      {blocked && (
+        <div className="absolute inset-x-0 top-3 flex justify-center px-4">
+          <button
+            onClick={() => { const v = videoRef.current; if (v) { v.muted = false; v.play().then(() => setBlocked(false)).catch(() => {}); } }}
+            className="inline-flex items-center gap-2 bg-ink text-white text-[0.78rem] font-semibold px-3.5 py-1.5 rounded-full"
+          >
+            <SpeakerIcon />
+            {pick('הדפדפן חסם את הקול — הקישו להפעלה', 'Your browser blocked the sound — tap to play', 'เบราว์เซอร์บล็อกเสียง แตะเพื่อเล่น')}
+          </button>
+        </div>
       )}
 
       <div className="absolute inset-x-8 -bottom-2 h-7 avatar-floor pointer-events-none" aria-hidden />

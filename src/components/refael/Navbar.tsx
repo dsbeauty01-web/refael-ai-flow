@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useT, NAV_LINKS, LANGUAGES, LANGUAGE_LABELS } from './i18n';
 
@@ -31,6 +32,12 @@ export default function Navbar() {
         </a>
 
         <nav className="hidden md:flex items-center gap-7">
+          <Link
+            to="/maya"
+            className="text-[0.9rem] font-semibold text-live-gradient hover:brightness-110 transition"
+          >
+            {pick('מאיה · הדגל', 'Maya · Flagship', 'มายา · เรือธง')}
+          </Link>
           {NAV_LINKS.map(l => (
             <button
               key={l.href}
@@ -82,6 +89,13 @@ export default function Navbar() {
 
       {open && (
         <nav className="md:hidden bg-paper border-t border-ink/10 px-5 py-4 flex flex-col gap-1 shadow-lg">
+          <Link
+            to="/maya"
+            onClick={() => setOpen(false)}
+            className={`py-3 text-[0.95rem] font-semibold text-live-gradient ${isHebrew ? 'text-right' : 'text-left'}`}
+          >
+            {pick('מאיה · הדגל', 'Maya · Flagship', 'มายา · เรือธง')}
+          </Link>
           {NAV_LINKS.map(l => (
             <button
               key={l.href}

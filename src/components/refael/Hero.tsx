@@ -173,7 +173,8 @@ function VoiceBars() {
 
 /** Wraps MayaStage: listens for gesture chips, and for the "hear her speak" button. */
 function GestureStage() {
-  const { pick } = useT();
+  const { pick, language } = useT();
+  const speakingSrc = MAYA_SPEAKING[language];
   const [clip, setClip] = useState<string | null>(null);
   const [speaking, setSpeaking] = useState(false);
   const [blocked, setBlocked] = useState(false);
@@ -250,7 +251,7 @@ function GestureStage() {
           <video
             ref={videoRef}
             key={speaking ? 'speaking' : clip ?? 'idle'}
-            src={speaking ? MAYA_SPEAKING : clip ?? MAYA_IDLE}
+            src={speaking ? speakingSrc : clip ?? MAYA_IDLE}
             poster={MAYA_POSTER}
             autoPlay
             muted={!speaking}

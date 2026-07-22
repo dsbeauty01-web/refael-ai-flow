@@ -17,12 +17,22 @@ export const MAYA_IDLE = "/media/maya_idle.mp4";
 export const MAYA_POSTER = "/media/maya_poster.jpg";
 
 /**
- * The one clip on this site with sound: Maya actually talking, lip-synced.
- * The whole pitch is voice-to-voice, so the visitor has to be able to HEAR her.
- * Recorded off the production DITTO pipeline; background is already pure white,
- * so it takes the same .blend-white treatment as the silent gesture clips.
+ * The clips on this site with sound: Maya actually talking, lip-synced — one per
+ * language, so a visitor hears her in THEIR language. The whole pitch is
+ * voice-to-voice, so the visitor has to be able to HEAR her.
+ *
+ * Voices: OpenAI gpt-4o-mini-tts — Hebrew "shimmer", English "coral" — lip-synced
+ * onto her own moving footage via fal sync-lipsync/v2. Background is already pure
+ * white, so they take the same .blend-white treatment as the silent gesture clips.
+ *
+ * Thai falls back to the Hebrew clip until fal has credit to render its own take
+ * (the Thai "coral" audio is already generated and waiting).
  */
-export const MAYA_SPEAKING = "/media/maya_speaking.mp4";
+export const MAYA_SPEAKING: Record<'he' | 'en' | 'th', string> = {
+  he: "/media/maya_speaking_he.mp4",
+  en: "/media/maya_speaking_en.mp4",
+  th: "/media/maya_speaking_he.mp4", // TODO: swap to /media/maya_speaking_th.mp4 once fal balance is topped up
+};
 export const MAYA_SPEAKING_POSTER = "/media/maya_speaking_poster.jpg";
 
 /**

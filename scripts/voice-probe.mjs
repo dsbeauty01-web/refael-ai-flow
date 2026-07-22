@@ -23,7 +23,7 @@ const ok = [];
 
 // 1. the speaking clip must actually be served, with an audio track
 const head = await page.evaluate(async () => {
-  const r = await fetch('/media/maya_speaking.mp4', { method: 'HEAD' });
+  const r = await fetch('/media/maya_speaking_he.mp4', { method: 'HEAD' });
   return { status: r.status, type: r.headers.get('content-type'), len: r.headers.get('content-length') };
 });
 head.status === 200 && +head.len > 100000

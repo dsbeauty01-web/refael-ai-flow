@@ -41,6 +41,18 @@ export default function MayaStage({
     if (!speakOnWake) return;
     setBlocked(false);
     setSpeaking(true);
+    // Mobile (iOS/Android) only grants sound if the unmuted play() starts inside
+    // the tap's own call stack — so swap the source and play here, synchronously,
+    // not in a follow-up effect. The effect below stays as a desktop/edge fallback.
+    const v = videoRef.current;
+    if (v) {
+      v.muted = false;
+      v.volume = 1;
+      v.loop = false;
+      v.src = speakingSrc;
+      v.load();
+      v.play().catch(() => setBlocked(true));
+    }
   };
 
   const src = speaking ? speakingSrc : clip ?? MAYA_IDLE;
@@ -52,7 +64,6 @@ export default function MayaStage({
       <div className="relative stage px-4 pt-4 overflow-hidden">
         <video
           ref={videoRef}
-          key={speaking ? 'speaking' : clip ?? 'idle'}
           src={src}
           poster={MAYA_POSTER}
           autoPlay

@@ -181,6 +181,10 @@ function GestureStage() {
   const [reduce, setReduce] = useState(false);
   const [started, setStarted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  // The listeners below live in a mount-once effect, so keep the current
+  // language's clip in a ref they can read without going stale.
+  const speakingSrcRef = useRef(speakingSrc);
+  speakingSrcRef.current = speakingSrc;
 
   useEffect(() => {
     setReduce(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -197,6 +201,17 @@ function GestureStage() {
       setBlocked(false);
       setClip(null);
       setSpeaking(true);
+      // dispatchEvent is synchronous, so we are still inside the button tap here:
+      // start unmuted playback now so mobile grants the sound.
+      const v = videoRef.current;
+      if (v) {
+        v.muted = false;
+        v.volume = 1;
+        v.loop = false;
+        v.src = speakingSrcRef.current;
+        v.load();
+        v.play().catch(() => setBlocked(true));
+      }
     };
 
     window.addEventListener('maya-gesture', onGesture);
@@ -250,7 +265,6 @@ function GestureStage() {
         ) : (
           <video
             ref={videoRef}
-            key={speaking ? 'speaking' : clip ?? 'idle'}
             src={speaking ? speakingSrc : clip ?? MAYA_IDLE}
             poster={MAYA_POSTER}
             autoPlay

@@ -38,6 +38,12 @@ export default function Navbar() {
           >
             {pick('מאיה · הדגל', 'Maya · Flagship', 'มายา · เรือธง')}
           </Link>
+          <Link
+            to="/voices"
+            className="text-[0.9rem] font-semibold text-ink/70 hover:text-ink transition"
+          >
+            {pick('קולות חיים', 'Live Voices', 'Live Voices')}
+          </Link>
           {NAV_LINKS.map(l => (
             <button
               key={l.href}
@@ -95,6 +101,13 @@ export default function Navbar() {
             className={`py-3 text-[0.95rem] font-semibold text-live-gradient ${isHebrew ? 'text-right' : 'text-left'}`}
           >
             {pick('מאיה · הדגל', 'Maya · Flagship', 'มายา · เรือธง')}
+          </Link>
+          <Link
+            to="/voices"
+            onClick={() => setOpen(false)}
+            className={`py-3 text-[0.95rem] font-semibold text-ink/80 ${isHebrew ? 'text-right' : 'text-left'}`}
+          >
+            {pick('קולות חיים', 'Live Voices', 'Live Voices')}
           </Link>
           {NAV_LINKS.map(l => (
             <button

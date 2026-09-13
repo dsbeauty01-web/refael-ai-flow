@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import Maya from "./pages/Maya";
+import Voices from "./pages/Voices";
 import Legal from "./pages/Legal";
 import NotFound from "./pages/NotFound";
 
@@ -21,6 +22,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/maya" element={<Maya />} />
+            <Route path="/voices" element={<Voices />} />
             <Route path="/legal/:slug" element={<Legal />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

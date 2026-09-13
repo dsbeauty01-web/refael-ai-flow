@@ -21,7 +21,9 @@ type Character = {
   id: string;
   agentId: string;
   icon: typeof BookOpen;
-  /** orb gradient stops — the character's visual identity */
+  /** stylized 3D portrait in /public/voices */
+  img: string;
+  /** gradient stops — the character's glow palette */
   orb: [string, string, string];
   name: [string, string];
   role: [string, string];
@@ -34,6 +36,7 @@ const CHARACTERS: Character[] = [
     id: 'storyteller',
     agentId: 'agent_6501m2ddnmd0ewks4mcayy2e54h4',
     icon: BookOpen,
+    img: '/voices/storyteller.webp',
     orb: ['#F2C179', '#C77B3A', '#5C3212'],
     name: ['הסבא המספר', 'The Storyteller'],
     role: ['בן שבעים וחמש, זיכרון של שכונה שלמה', '75 years old, a whole neighborhood in his memory'],
@@ -47,6 +50,7 @@ const CHARACTERS: Character[] = [
     id: 'michal',
     agentId: 'agent_8101m2ddns2dfpe9bm80ejkj3ts8',
     icon: CalendarCheck,
+    img: '/voices/michal.webp',
     orb: ['#7FE3DC', '#2FA8A0', '#0D4B47'],
     name: ['מיכל', 'Michal'],
     role: ['קבלה במרפאה — חדה, יעילה, חמה', 'Clinic reception — sharp, efficient, warm'],
@@ -60,6 +64,7 @@ const CHARACTERS: Character[] = [
     id: 'host-female',
     agentId: 'agent_9101m2b9ep1bem6ssxch9d9j5131',
     icon: Mic,
+    img: '/voices/host-female.webp',
     orb: ['#D9A4F5', '#8B4FD8', '#3A1566'],
     name: ['המארחת', 'The Host'],
     role: ['שידור חי, אנרגיה של מכירה', 'Live broadcast, sales energy'],
@@ -73,6 +78,7 @@ const CHARACTERS: Character[] = [
     id: 'host-male',
     agentId: 'agent_5501m2d2yc4jfwjtg17nz05w9xwm',
     icon: Radio,
+    img: '/voices/host-male.webp',
     orb: ['#8FC7F2', '#3D7FC4', '#12365E'],
     name: ['המארח', 'The Host (male)'],
     role: ['שידור חי, נוכחות רגועה', 'Live broadcast, calm presence'],
@@ -98,29 +104,40 @@ function useConvaiScript(active: boolean) {
   }, [active]);
 }
 
-function Orb({ colors, Icon }: { colors: [string, string, string]; Icon: typeof BookOpen }) {
-  const [a, b, c] = colors;
+function Portrait({
+  src,
+  alt,
+  colors,
+  Icon,
+}: {
+  src: string;
+  alt: string;
+  colors: [string, string, string];
+  Icon: typeof BookOpen;
+}) {
+  const [, b, c] = colors;
   return (
-    <div className="relative mx-auto w-36 h-36 md:w-40 md:h-40">
+    <div className="relative mx-auto w-40 h-40 md:w-44 md:h-44">
       <div
-        className="absolute inset-0 rounded-full blur-2xl opacity-40 motion-safe:animate-pulse"
+        className="absolute -inset-3 rounded-full blur-2xl opacity-45 motion-safe:animate-pulse"
         style={{ background: `radial-gradient(circle at 50% 50%, ${b}, transparent 70%)` }}
         aria-hidden
       />
-      <div
-        className="relative w-full h-full rounded-full border border-ink/10"
-        style={{
-          background: `radial-gradient(circle at 32% 28%, ${a} 0%, ${b} 48%, ${c} 100%)`,
-          boxShadow: `inset 0 -14px 30px rgba(0,0,0,.35), 0 8px 40px ${c}66`,
-        }}
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        width={640}
+        height={640}
+        className="relative w-full h-full rounded-full object-cover border-2"
+        style={{ borderColor: `${b}88`, boxShadow: `0 8px 40px ${c}88` }}
+      />
+      <span
+        className="absolute bottom-1 end-1 grid place-items-center w-9 h-9 rounded-full bg-paper/85 border border-ink/15 backdrop-blur"
+        aria-hidden
       >
-        <span
-          className="absolute bottom-1 end-1 grid place-items-center w-9 h-9 rounded-full bg-paper/85 border border-ink/15 backdrop-blur"
-          aria-hidden
-        >
-          <Icon className="w-4.5 h-4.5 text-ink/80" size={18} />
-        </span>
-      </div>
+        <Icon className="text-ink/80" size={18} />
+      </span>
     </div>
   );
 }
@@ -179,7 +196,12 @@ const Voices = () => {
                 className={`rounded-2xl border bg-ink/[0.03] p-6 pt-8 flex flex-col gap-4 text-center transition
                   ${isActive ? 'border-ink/40' : 'border-ink/10 hover:border-ink/25'}`}
               >
-                <Orb colors={ch.orb} Icon={Icon} />
+                <Portrait
+                  src={ch.img}
+                  alt={pick(ch.name[0], ch.name[1], ch.name[1])}
+                  colors={ch.orb}
+                  Icon={Icon}
+                />
                 <div>
                   <h2 className="text-xl font-bold">{pick(ch.name[0], ch.name[1], ch.name[1])}</h2>
                   <p className="mt-1 text-[0.85rem] font-semibold text-ink/55">

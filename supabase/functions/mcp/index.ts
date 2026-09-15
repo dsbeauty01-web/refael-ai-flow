@@ -2,7 +2,97 @@
 // To take ownership, delete this banner line; the plugin then leaves the file alone.
 // supabase function: mcp
 // Bundled from src/lib/mcp/index.ts by @lovable.dev/mcp-js.
+// src/lib/mcp/index.ts
+import { defineMcp } from "npm:@lovable.dev/mcp-js@2.0.4";
+
+// src/lib/mcp/tools/get-contact.ts
+import { defineTool } from "npm:@lovable.dev/mcp-js@2.0.4";
+var get_contact_default = defineTool({
+  name: "get_contact",
+  title: "Get Refael.ai contact info",
+  description: "Returns Refael.ai's public contact channels (Facebook Messenger, email, phone) so an assistant can direct an interested user to the right place.",
+  inputSchema: {},
+  annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+  handler: () => ({
+    content: [{
+      type: "text",
+      text: JSON.stringify({
+        messenger: "https://www.facebook.com/refael.silanikove",
+        email: "dsbeauty01@gmail.com",
+        phone: "+972-53-332-7125",
+        offer: "Free 15-minute consultation \u2014 reply within 1 hour"
+      }, null, 2)
+    }]
+  })
+});
+
+// src/lib/mcp/tools/get-services.ts
+import { defineTool as defineTool2 } from "npm:@lovable.dev/mcp-js@2.0.4";
+var get_services_default = defineTool2({
+  name: "get_services",
+  title: "List Refael.ai services",
+  description: "Returns Refael.ai's public service offerings and pricing (live AI avatars, WhatsApp/Messenger bots, custom integrations) as marketed on the landing page.",
+  inputSchema: {},
+  annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+  handler: () => ({
+    content: [{
+      type: "text",
+      text: JSON.stringify({
+        services: [
+          { name: "Website avatar", description: "A live full-body avatar holding a real Hebrew voice conversation on your site.", setup_ils: 2900, monthly_ils: 290 },
+          { name: "Business station", description: "The avatar plus hands: real calendar booking, CRM/WhatsApp/Sheets via n8n, custom gestures, monthly analytics.", setup_ils: 6900, monthly_ils: 690 },
+          { name: "Physical installation", description: "Full-size screen or hologram for a lobby, museum or showroom, with gestures calibrated to the room. Quoted per project.", setup_ils: 14900, monthly_ils: 990 },
+          { name: "WhatsApp / Messenger AI Bot", description: "Automated chat bot connected to your business flows.", pricing: "on request" },
+          { name: "Custom AI integrations", description: "n8n workflows, RAG, kiosk deployments.", pricing: "on request" }
+        ],
+        currency: "ILS",
+        includes_free_consultation: true
+      }, null, 2)
+    }]
+  })
+});
+
+// src/lib/mcp/tools/submit-lead.ts
+import { defineTool as defineTool3 } from "npm:@lovable.dev/mcp-js@2.0.4";
+import { z } from "npm:zod@^3.25.76";
+var N8N_LEAD_WEBHOOK = "https://rafa5555.app.n8n.cloud/webhook/lead-email";
+var submit_lead_default = defineTool3({
+  name: "submit_lead",
+  title: "Submit a lead to Refael.ai",
+  description: "Send a prospective customer's name and WhatsApp/phone to Refael.ai so the team can reply within one hour. Use this only when the person has explicitly asked to be contacted.",
+  inputSchema: {
+    name: z.string().min(1).describe("Full name of the person to contact."),
+    phone: z.string().min(6).describe("WhatsApp-capable phone number in international format, e.g. +9725XXXXXXXX."),
+    note: z.string().optional().describe("Optional short message about what they want.")
+  },
+  annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: true },
+  handler: async ({ name, phone, note }) => {
+    const res = await fetch(N8N_LEAD_WEBHOOK, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, phone, note: note ?? "", source: "mcp" })
+    });
+    if (!res.ok) {
+      return {
+        content: [{ type: "text", text: `Failed to submit lead: ${res.status} ${res.statusText}` }],
+        isError: true
+      };
+    }
+    return {
+      content: [{ type: "text", text: `Lead received for ${name}. Refael will reply within one hour.` }]
+    };
+  }
+});
+
+// src/lib/mcp/index.ts
+var mcp_default = defineMcp({
+  name: "refael-ai-mcp",
+  title: "Refael.ai",
+  version: "0.1.0",
+  instructions: "Public MCP for Refael.ai \u2014 a Hebrew/English AI agency landing page. Use `get_services` to describe offerings and pricing, `get_contact` for contact channels, and `submit_lead` only when the user explicitly asks to be contacted.",
+  tools: [get_contact_default, get_services_default, submit_lead_default]
+});
+
 // lovable-mcp-supabase-entry.ts
-import mcp from "npm:C:\\Users\\ADMIN\\projects\\refael-ai-flow\\src\\lib\\mcp\\index.ts";
-import { createSupabaseHandler } from "npm:@lovable.dev/mcp-js@0.23.0/stacks/supabase";
-Deno.serve(createSupabaseHandler(mcp, { functionName: "mcp" }));
+import { createSupabaseHandler } from "npm:@lovable.dev/mcp-js@2.0.4/stacks/supabase";
+Deno.serve(createSupabaseHandler(mcp_default, { functionName: "mcp" }));

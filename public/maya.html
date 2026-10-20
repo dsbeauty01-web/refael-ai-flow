@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>מיה | דמות AI שמוכרת בשידור חי</title>
+<meta name="description" content="מיה עולה לשידור חי, מציגה מוצרים ועונה לכל צופה בשם, בקול, תוך כמה שניות. 15 שידורים אמיתיים בפייסבוק.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="הבוט שלך ישן. מיה מוכרת.">
+<meta property="og:description" content="דמות AI בשידור חי שעונה לכל צופה בשם, בקול. צפו ב-20 שניות.">
+<meta property="og:image" content="https://refael-ai-flow.lovable.app/maya/og.jpg">
+<meta property="og:url" content="https://refael-ai-flow.lovable.app/maya.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#120e0b;--card:#1d1814;--ink:#fff;--mute:#a59c92;--amber:#fbbf24;--green:#25d366;--line:#2e2620}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:Heebo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  main{max-width:520px;margin:0 auto;padding:22px 16px 120px}
+  .kicker{color:var(--mute);font-weight:500;font-size:17px;text-align:center}
+  h1{font-weight:900;font-size:clamp(30px,8.4vw,42px);line-height:1.12;text-align:center;margin:6px 0 18px}
+  h1 span{color:var(--amber)}
+  .video{position:relative;border-radius:22px;overflow:hidden;border:3px solid var(--amber);box-shadow:0 0 40px rgba(251,191,36,.25);background:#000;aspect-ratio:4/5}
+  .video video{width:100%;height:100%;display:block;object-fit:cover}
+  .live{position:absolute;top:12px;right:12px;background:#e63946;color:#fff;font-weight:800;font-size:14px;padding:5px 12px;border-radius:9px;display:flex;align-items:center;gap:7px;pointer-events:none}
+  .live i{width:9px;height:9px;border-radius:50%;background:#fff;display:block;animation:p 1.2s infinite}
+  @keyframes p{50%{opacity:.25}}
+  .sound{display:block;width:100%;margin-top:12px;background:var(--card);color:var(--ink);border:1px solid var(--amber);font:800 17px Heebo,sans-serif;padding:13px;border-radius:14px;cursor:pointer}
+  .proof{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center}
+  .stat b{display:block;font-size:30px;font-weight:900;color:var(--amber);line-height:1}
+  .stat small{color:var(--mute);font-size:14px}
+  ul{list-style:none;display:grid;gap:10px;margin:6px 0 22px}
+  li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-size:16.5px;line-height:1.45}
+  li b{color:var(--amber)}
+  .roles{text-align:center;color:var(--mute);font-size:15.5px;margin-bottom:20px}
+  .cta{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--green);color:#06210f;font-weight:900;font-size:20px;text-decoration:none;padding:17px;border-radius:16px}
+  .cta svg{width:24px;height:24px}
+  .sub{text-align:center;color:var(--mute);font-size:14px;margin-top:9px}
+  .sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 35%);display:none}
+  .sticky .cta{max-width:520px;margin:0 auto;font-size:18px;padding:15px}
+  footer{text-align:center;color:#6e665e;font-size:13px;margin-top:30px}
+  footer a{color:#8a8178}
+</style>
+</head>
+<body>
+<main>
+  <p class="kicker">הבוט שלך ישן.</p>
+  <h1>מיה <span>מוכרת בשידור חי.</span></h1>
+
+  <div class="video">
+    <video id="v" src="/maya/maya-live.mp4" poster="/maya/maya-live-poster.jpg" playsinline autoplay muted loop preload="metadata"></video>
+  </div>
+  <button class="sound" id="snd" type="button">🔊 לחצו לשמוע אותה</button>
+
+  <div class="proof">
+    <div class="stat"><b>15</b><small>שידורים אמיתיים בפייסבוק</small></div>
+    <div class="stat"><b>10/10</b><small>תגובות נענו, כל אחת בשם</small></div>
+  </div>
+
+  <ul>
+    <li><b>קוראת את הצ׳אט</b> בזמן אמת, בזמן שהשידור רץ</li>
+    <li><b>עונה בקול, בשם</b> של מי ששאל, תוך כמה שניות</li>
+    <li><b>מציגה מוצר ומחיר</b> ושולחת קישור למי שכותב "אני"</li>
+  </ul>
+
+  <p class="roles">מוכרת · מנחה · מורה · פרזנטורית<br>אותה דמות, תפקיד אחר</p>
+
+  <a class="cta" id="cta" href="https://wa.me/972533217125?text=%D7%94%D7%99%D7%99%20%D7%A8%D7%A4%D7%90%D7%9C%2C%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%90%D7%AA%20%D7%9E%D7%99%D7%94.%20%D7%94%D7%A2%D7%A1%D7%A7%20%D7%A9%D7%9C%D7%99%3A%20" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg>
+    ספרו לי מה העסק שלכם
+  </a>
+  <p class="sub">וואטסאפ ישיר אליי, רפאל. אראה לכם איך מיה נראית עם המוצר שלכם.</p>
+
+  <footer>רפאל סלע · refael.ai · <a href="/">לאתר</a></footer>
+</main>
+
+<div class="sticky" id="sticky"><a class="cta" href="#" id="cta2">ספרו לי מה העסק שלכם</a></div>
+
+<script>
+  var v = document.getElementById('v'), snd = document.getElementById('snd');
+  snd.addEventListener('click', function () {
+    try { v.muted = false; v.currentTime = 0; v.play(); } catch (e) {}
+    snd.style.display = 'none';
+  });
+  var cta = document.getElementById('cta'), cta2 = document.getElementById('cta2'), sticky = document.getElementById('sticky');
+  cta2.href = cta.href; cta2.target = '_blank'; cta2.rel = 'noopener';
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (e) { sticky.style.display = e[0].isIntersecting ? 'none' : 'block'; })
+      .observe(cta);
+  }
+</script>
+</body>
+</html>

@@ -22,6 +22,9 @@
   html,body{background:var(--bg);color:var(--ink);font-family:Heebo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
   main{max-width:560px;margin:0 auto;padding:22px 16px 110px}
   section{margin-top:44px}
+  .langbar{display:flex;justify-content:flex-start;gap:8px;font-size:13px}
+  .langbar a{color:var(--mute);text-decoration:none;border:1px solid var(--line);border-radius:30px;padding:4px 12px}
+  .langbar a.on{color:#1d1814;background:var(--amber);border-color:var(--amber);font-weight:800}
   .kicker{color:var(--mute);font-weight:500;font-size:17px;text-align:center}
   h1{font-weight:900;font-size:clamp(30px,8.4vw,42px);line-height:1.12;text-align:center;margin:6px 0 10px}
   h1 span,h2 span{color:var(--amber)}
@@ -85,10 +88,14 @@
   footer a{color:#8a8178}
 </style>
 <link rel="canonical" href="https://refael-ai-flow.lovable.app/maya.html">
+<link rel="alternate" hreflang="he" href="https://refael-ai-flow.lovable.app/maya.html">
+<link rel="alternate" hreflang="en" href="https://refael-ai-flow.lovable.app/maya-en.html">
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Service", "name": "מיה: מנחה AI ללייב מכירות", "description": "דמות AI שעולה לשידור חי, מציגה מוצרים ועונה לכל צופה בשם, בקול, תוך כמה שניות.", "provider": {"@type": "ProfessionalService", "name": "Refael.ai", "url": "https://refael-ai-flow.lovable.app", "address": {"@type": "PostalAddress", "addressLocality": "Tel Aviv", "addressCountry": "IL"}}, "areaServed": "IL", "availableLanguage": ["he", "en"]}, {"@context": "https://schema.org", "@type": "VideoObject", "name": "מיה עונה לצופים בשם בלייב אמיתי", "description": "קטע מלייב אמיתי בפייסבוק: מיה קוראת תגובות ועונה בשם, בקול.", "thumbnailUrl": "https://refael-ai-flow.lovable.app/maya/maya-live-poster.jpg", "contentUrl": "https://refael-ai-flow.lovable.app/maya/maya-live.mp4", "uploadDate": "2026-10-17"}]</script>
 </head>
 <body>
 <main>
+
+  <div class="langbar"><a href="/maya.html" class="on">עברית</a><a href="/maya-en.html">English</a></div>
 
   <!-- HERO -->
   <p class="kicker">הבוט שלך ישן.</p>

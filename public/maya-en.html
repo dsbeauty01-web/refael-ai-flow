@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maya | the AI character that sells on live</title>
+<meta name="description" content="Maya goes live, presents your products and answers every viewer by name, out loud, within seconds. 15 real Facebook lives. Send a product photo and see 10 seconds of Maya presenting it live.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Your bot is asleep. Maya sells.">
+<meta property="og:description" content="A live AI character that answers every viewer by name, out loud. Send a product photo and watch her present it.">
+<meta property="og:image" content="https://refael-ai-flow.lovable.app/maya/og.jpg">
+<meta property="og:url" content="https://refael-ai-flow.lovable.app/maya-en.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#120e0b;--card:#1d1814;--card2:#251f1a;--ink:#fff;--mute:#a59c92;--dim:#776e65;--amber:#fbbf24;--green:#25d366;--line:#2e2620;--purple:#7c3aed}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  html,body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  main{max-width:560px;margin:0 auto;padding:22px 16px 110px}
+  section{margin-top:44px}
+  .langbar{display:flex;justify-content:flex-end;gap:8px;font-size:13px}
+  .langbar a{color:var(--mute);text-decoration:none;border:1px solid var(--line);border-radius:30px;padding:4px 12px}
+  .langbar a.on{color:#1d1814;background:var(--amber);border-color:var(--amber);font-weight:800}
+  .kicker{color:var(--mute);font-weight:500;font-size:17px;text-align:center}
+  h1{font-weight:900;font-size:clamp(30px,8.4vw,42px);line-height:1.12;text-align:center;margin:6px 0 10px}
+  h1 span,h2 span{color:var(--amber)}
+  .lead{text-align:center;color:#d8d0c6;font-size:17px;line-height:1.5;margin-bottom:18px}
+  h2{font-weight:900;font-size:27px;line-height:1.2;margin-bottom:8px}
+  .h2sub{color:var(--mute);font-size:16px;line-height:1.5;margin-bottom:16px}
+  .video{position:relative;border-radius:22px;overflow:hidden;border:3px solid var(--amber);box-shadow:0 0 40px rgba(251,191,36,.22);background:#000}
+  .video video{width:100%;display:block}
+  .v45{aspect-ratio:4/5}.v916{aspect-ratio:9/16;max-height:78vh;margin:0 auto}
+  .v45 video,.v916 video{height:100%;object-fit:cover}
+  .sound{display:block;width:100%;margin-top:12px;background:var(--card);color:var(--ink);border:1px solid var(--amber);font:800 17px Inter,sans-serif;padding:13px;border-radius:14px;cursor:pointer}
+  .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 6px;text-align:center}
+  .stat b{display:block;font-size:26px;font-weight:900;color:var(--amber);line-height:1.05}
+  .stat small{color:var(--mute);font-size:13px;line-height:1.3;display:block;margin-top:4px}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
+  .feat h3{font-size:19px;font-weight:800;margin-bottom:4px;display:flex;gap:9px;align-items:center}
+  .feat h3 i{font-style:normal;font-size:20px}
+  .feat p{color:#cfc7bd;font-size:15.5px;line-height:1.5}
+  .chat{margin-top:11px;display:grid;gap:7px}
+  .msg{max-width:88%;padding:9px 13px;border-radius:16px;font-size:15px;line-height:1.4}
+  .msg small{display:block;font-size:12px;font-weight:800;opacity:.75;margin-bottom:1px}
+  .viewer{background:#f2efe9;color:#1d1814;justify-self:start;border-bottom-left-radius:5px}
+  .host{background:#2c2219;border:1px solid #5a4317;color:var(--amber);justify-self:end;border-bottom-right-radius:5px;font-weight:500}
+  .host small{color:#e9c873}
+  .card-prod{margin-top:11px;display:flex;align-items:center;gap:12px;background:#fff;color:#1d1814;border-radius:14px;padding:10px 12px}
+  .card-prod .ph{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#c8823f,#8a4b1c);flex:none}
+  .card-prod b{display:block;font-size:15px}
+  .card-prod .pr{font-weight:900;font-size:21px;color:#e11d48}
+  .card-prod s{color:#999;font-size:14px;margin-inline-start:6px}
+  .nova{background:linear-gradient(180deg,#2a1a47,#1d1430);border:1px solid #4c3480;border-radius:22px;padding:18px 14px}
+  .nova .video{border-color:#a78bfa;box-shadow:0 0 40px rgba(167,139,250,.25)}
+  .tabs{display:flex;gap:8px;justify-content:center;margin:12px 0}
+  .tabs button{font:800 15px Inter,sans-serif;padding:8px 16px;border-radius:30px;border:1px solid #6b52a8;background:transparent;color:#d9ccff;cursor:pointer}
+  .tabs button.on{background:#a78bfa;color:#1d1430;border-color:#a78bfa}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:12px}
+  .tag{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#e6ddff;font-size:14px;padding:6px 11px;border-radius:30px}
+  .where{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .where div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px;font-size:15.5px;line-height:1.35}
+  .where b{display:block;font-size:16.5px;margin-bottom:2px}
+  .steps{counter-reset:s;display:grid;gap:10px}
+  .step{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;gap:13px;align-items:flex-start}
+  .step::before{content:counter(s);flex:none;width:34px;height:34px;border-radius:50%;background:var(--amber);color:#1d1814;font-weight:900;font-size:18px;display:grid;place-items:center}
+  .step b{display:block;font-size:17px;margin-bottom:2px}
+  .step span{color:#cfc7bd;font-size:15px;line-height:1.45}
+  .offer{background:linear-gradient(180deg,#2b2112,#1d1814);border:2px solid var(--amber);border-radius:22px;padding:20px 16px;text-align:center}
+  .offer h2{margin-bottom:6px}
+  .offer p{color:#e2d9cd;font-size:16px;line-height:1.5;margin-bottom:16px}
+  .cta{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--green);color:#06210f;font-weight:900;font-size:19px;text-decoration:none;padding:16px;border-radius:16px;line-height:1.2}
+  .cta svg{width:24px;height:24px;flex:none}
+  .sub{text-align:center;color:var(--mute);font-size:14px;margin-top:9px}
+  details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:9px}
+  summary{font-weight:800;font-size:16.5px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";flex:none;color:var(--amber);font-weight:900}
+  details[open] summary::after{content:"−"}
+  details p{color:#cfc7bd;font-size:15.5px;line-height:1.5;margin-top:8px}
+  .sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 35%);display:none;z-index:5}
+  .sticky .cta{max-width:560px;margin:0 auto;font-size:17px;padding:14px}
+  footer{text-align:center;color:var(--dim);font-size:13px;margin-top:36px;line-height:1.7}
+  footer a{color:#8a8178}
+</style>
+<link rel="canonical" href="https://refael-ai-flow.lovable.app/maya-en.html">
+<link rel="alternate" hreflang="he" href="https://refael-ai-flow.lovable.app/maya.html">
+<link rel="alternate" hreflang="en" href="https://refael-ai-flow.lovable.app/maya-en.html">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Service", "name": "Maya: AI host for live selling", "description": "An AI character that goes live, presents products and answers every viewer by name, out loud, within seconds.", "provider": {"@type": "ProfessionalService", "name": "Refael.ai", "url": "https://refael-ai-flow.lovable.app"}, "availableLanguage": ["en", "he"]}, {"@context": "https://schema.org", "@type": "VideoObject", "name": "Maya answers viewers by name on a real live", "description": "A clip from a real Facebook live: Maya reads comments and answers by name, out loud.", "thumbnailUrl": "https://refael-ai-flow.lovable.app/maya/maya-live-poster.jpg", "contentUrl": "https://refael-ai-flow.lovable.app/maya/maya-live.mp4", "uploadDate": "2026-10-17"}]</script>
+</head>
+<body>
+<main>
+
+  <div class="langbar"><a href="/maya.html">עברית</a><a href="/maya-en.html" class="on">English</a></div>
+
+  <!-- HERO -->
+  <p class="kicker">Your bot is asleep.</p>
+  <h1>Maya <span>sells on live.</span></h1>
+  <p class="lead">An AI character that goes live, presents your products and reads the chat. Everyone who comments gets an answer out loud, by their name, within seconds.</p>
+
+  <div class="video v45">
+    <video id="v-maya" src="/maya/maya-live.mp4" poster="/maya/maya-live-poster.jpg" playsinline autoplay muted loop preload="metadata"></video>
+  </div>
+  <button class="sound" data-v="v-maya" type="button">🔊 Tap to hear her</button>
+
+  <div class="proof">
+    <div class="stat"><b>15</b><small>real Facebook lives</small></div>
+    <div class="stat"><b>10/10</b><small>comments answered, each by name</small></div>
+    <div class="stat"><b>~5</b><small>seconds from comment to answer</small></div>
+  </div>
+
+  <!-- FEATURES -->
+  <section>
+    <h2>What she <span>does on live</span></h2>
+    <p class="h2sub">You handle the product. She handles the crowd.</p>
+
+    <div class="feat">
+      <h3><i>💬</i>Reads the chat in real time</h3>
+      <p>Every comment in the live reaches her within seconds. Questions on price, sizes, shipping, colors. No question gets lost in the scroll.</p>
+      <div class="chat">
+        <div class="msg viewer"><small>Dana</small>How much is the brown bag?</div>
+        <div class="msg host"><small>Maya, out loud</small>Dana, it's $129 instead of $179, this live only. Link's in the chat.</div>
+      </div>
+    </div>
+
+    <div class="feat">
+      <h3><i>🗣️</i>Answers out loud, by name</h3>
+      <p>Not canned text. She calls each viewer by their name, in natural speech, and her lips move with the words. People stay in a live when you talk to them.</p>
+    </div>
+
+    <div class="feat">
+      <h3><i>🛍️</i>Shows product and price on screen</h3>
+      <p>A product card with image, price and pre-discount price. She moves between products in your order, or by what the crowd is asking.</p>
+      <div class="card-prod"><div class="ph"></div><div><b>Cognac leather bag</b><span class="pr">$129</span><s>$179</s></div></div>
+    </div>
+
+    <div class="feat">
+      <h3><i>⚡</i>"Me!" turns into an order</h3>
+      <p>Anyone who types "me" or "want" gets a buy link from her right away, while they're still excited.</p>
+      <div class="chat">
+        <div class="msg viewer"><small>Moran</small>me!!</div>
+        <div class="msg host"><small>Maya, out loud</small>Moran, perfect! Sent you a link, it's waiting in the chat.</div>
+      </div>
+    </div>
+
+    <div class="feat">
+      <h3><i>🙋</i>Knows when to hand off to you</h3>
+      <p>A sensitive question, a special order or a complaint? She doesn't make things up. She says you'll get back to them, and flags the comment for you.</p>
+    </div>
+
+    <div class="feat">
+      <h3><i>📊</i>A report after every live</h3>
+      <p>What they asked, who wanted to buy, which products drew interest, and what to change for the next one.</p>
+    </div>
+  </section>
+
+  <!-- NOVA -->
+  <section class="nova">
+    <h2 style="text-align:center">Not just Maya. <span style="color:#c4b5fd">Meet Nova.</span></h2>
+    <p class="h2sub" style="text-align:center;color:#cbbdf0">Same tech, different character. Nova presents a kids' science kit, answers parents by name, and sends a link. In English and Hebrew.</p>
+    <div class="tabs">
+      <button type="button" data-src="/maya/nova-he.mp4" data-poster="/maya/nova-he.jpg">עברית</button>
+      <button type="button" class="on" data-src="/maya/nova-en.mp4" data-poster="/maya/nova-en.jpg">English</button>
+    </div>
+    <div class="video v916">
+      <video id="v-nova" src="/maya/nova-en.mp4" poster="/maya/nova-en.jpg" playsinline muted loop preload="none"></video>
+    </div>
+    <button class="sound" data-v="v-nova" type="button" style="border-color:#a78bfa">▶️ Play with sound</button>
+    <div class="tags">
+      <span class="tag">Kids' brands</span><span class="tag">Toys</span><span class="tag">Learning apps</span><span class="tag">Museums</span><span class="tag">Brand mascots</span>
+    </div>
+    <p class="h2sub" style="text-align:center;margin:14px 0 0;color:#cbbdf0">We can build a character around your brand: look, personality, voice. Even an existing mascot.</p>
+  </section>
+
+  <!-- WHERE -->
+  <section>
+    <h2>Where <span>she works</span></h2>
+    <p class="h2sub">Same character, anywhere there's a camera and an audience.</p>
+    <div class="where">
+      <div><b>📺 Facebook Live</b>Live selling, with the audience you already have</div>
+      <div><b>▶️ YouTube Live</b>Launches, product demos, Q&amp;A</div>
+      <div><b>🎓 Class or webinar</b>A host who teaches and answers questions</div>
+      <div><b>🏬 Screen in a store or lobby</b>Greets guests and tells them about the products</div>
+      <div><b>📱 Social videos</b>Short clips from the lives, ready for Reels</div>
+      <div><b>🌍 English and Hebrew</b>Same character, two languages</div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section>
+    <h2>How to <span>start</span></h2>
+    <div class="steps">
+      <div class="step"><div><b>Send a product photo</b><span>A phone snap, a name and a price. On WhatsApp, a minute of work.</span></div></div>
+      <div class="step"><div><b>See 10 seconds of a live with your product</b><span>Maya presents the product, says the price and answers a viewer by name. Just like a real live, only with your product.</span></div></div>
+      <div class="step"><div><b>Go live</b><span>Upload your product list and common questions, and she goes live for the first time.</span></div></div>
+    </div>
+  </section>
+
+  <!-- OFFER -->
+  <section class="offer" id="offer">
+    <h2>Send a photo. <span>Watch Maya sell it.</span></h2>
+    <p>Snap one product you sell and send it to me on WhatsApp. You'll get back 10 seconds of Maya presenting it live, with the price on screen and an answer to a viewer by name.<br><b style="color:var(--amber)">No commitment, no forms.</b></p>
+    <a class="cta" id="cta" href="https://wa.me/972533217125?text=Hi%20Refael%2C%20I%20saw%20Maya.%20Sending%20you%20a%20product%20photo%2C%20I%27d%20love%20to%20see%2010%20seconds%20of%20her%20presenting%20it%20live.%20I%20sell%3A%20" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg>
+      📸 Send a photo on WhatsApp
+    </a>
+    <p class="sub">Direct WhatsApp to me, Refael Sela.</p>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <h2>Questions <span>that come up</span></h2>
+    <details><summary>Is it really live, or a recorded video?</summary><p>Live. She reads the comments during the stream and answers in real time, usually within about 5 seconds. In our last live she answered 10 out of 10 comments, each by the commenter's name.</p></details>
+    <details><summary>Do I have to be on camera?</summary><p>No. She can host the live on her own, or work alongside you: you show the product, she answers the chat.</p></details>
+    <details><summary>What if someone asks her something she doesn't know?</summary><p>She doesn't make things up. She answers only from what you prepared (products, prices, shipping, returns), and anything beyond that she hands to you.</p></details>
+    <details><summary>Can I get a different character, or my own voice?</summary><p>Yes. Maya and Nova are examples. We can build a character around your brand, and clone your own voice (with your permission).</p></details>
+    <details><summary>How much does it cost?</summary><p>It depends on the number of products and lives. Send me a product photo on WhatsApp, see it live, and I'll tell you exactly.</p></details>
+  </section>
+
+  <footer>Refael Sela · refael.ai<br><a href="/maya.html">עברית</a> · <a href="/">Main site</a></footer>
+</main>
+
+<div class="sticky" id="sticky"><a class="cta" href="#offer">📸 Send a photo, see her live</a></div>
+
+<script>
+  // tap-to-hear buttons
+  document.querySelectorAll('.sound').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var v = document.getElementById(b.dataset.v);
+      try { v.muted = false; v.currentTime = 0; v.play(); } catch (e) {}
+      b.style.display = 'none';
+    });
+  });
+  // Nova language tabs
+  var nova = document.getElementById('v-nova');
+  document.querySelectorAll('.tabs button').forEach(function (t) {
+    t.addEventListener('click', function () {
+      document.querySelectorAll('.tabs button').forEach(function (x) { x.classList.remove('on'); });
+      t.classList.add('on');
+      var wasMuted = nova.muted;
+      nova.src = t.dataset.src; nova.poster = t.dataset.poster; nova.muted = wasMuted;
+      nova.play().catch(function () {});
+    });
+  });
+  // start Nova muted when it scrolls into view; pause off-screen videos
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { e.target.play().catch(function () {}); } else { e.target.pause(); }
+      });
+    }, { threshold: 0.35 });
+    io.observe(nova); io.observe(document.getElementById('v-maya'));
+    var sticky = document.getElementById('sticky'), offer = document.getElementById('offer');
+    window.addEventListener('scroll', function () {
+      var r = offer.getBoundingClientRect(), vis = r.top < innerHeight && r.bottom > 0;
+      sticky.style.display = (!vis && window.scrollY > 500) ? 'block' : 'none';
+    }, { passive: true });
+  }
+</script>
+</body>
+</html>

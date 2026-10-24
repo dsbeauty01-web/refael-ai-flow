@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, CalendarCheck, Mic, Radio, PhoneCall } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { BookOpen, CalendarCheck, Mic, Radio, PhoneCall } from 'lucide-react';
 import { useT } from '@/components/refael/i18n';
-import Footer from '@/components/refael/Footer';
+import SiteLayout from '@/components/site/SiteLayout';
+import { useSeo, breadcrumbLd } from '@/components/site/Seo';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -143,45 +142,29 @@ function Portrait({
 }
 
 const Voices = () => {
-  const { language, isHebrew } = useLanguage();
-  const { pick } = useT();
+  const { pick, language, fontDisplay } = useT();
+  useSeo({
+    path: '/voices',
+    jsonLd: [breadcrumbLd([{ name: 'Refael.ai', path: '/' }, { name: pick('קולות חיים', 'Live voices', 'เสียง AI สด'), path: '/voices' }], language)],
+  });
   const [activeAgent, setActiveAgent] = useState<string | null>(null);
   useConvaiScript(activeAgent !== null);
 
   return (
-    <div
-      key={language}
-      className={`min-h-screen bg-paper text-ink ${isHebrew ? 'font-hebrew' : 'font-english'}`}
-      dir={isHebrew ? 'rtl' : 'ltr'}
-    >
-      <header className="fixed top-0 inset-x-0 z-50 bg-paper/80 backdrop-blur-xl border-b border-ink/10">
-        <div className="max-w-[1160px] mx-auto flex items-center justify-between px-5 h-16">
-          <Link to="/" className="text-[1.1rem] font-bold tracking-tight text-ink">
-            Refael<span className="text-live-gradient">.ai</span>
-          </Link>
-          <Link
-            to="/"
-            className="flex items-center gap-1.5 text-[0.9rem] font-semibold text-ink/70 hover:text-ink transition"
-          >
-            {pick('חזרה לעמוד הראשי', 'Back to home', 'Back to home')}
-            <ArrowRight className={`w-4 h-4 ${isHebrew ? 'rotate-180' : ''}`} />
-          </Link>
-        </div>
-      </header>
-
-      <main className="pt-28 pb-20">
+    <SiteLayout>
+      <div className="pt-28 pb-20">
         <section className="max-w-[1160px] mx-auto px-5 text-center">
           <p className="text-[0.85rem] font-semibold tracking-widest uppercase text-ink/50">
-            {pick('קטלוג הקולות', 'Voice catalog', 'Voice catalog')}
+            {pick('קטלוג הקולות', 'Voice catalog', 'แคตตาล็อกเสียง')}
           </p>
-          <h1 className={`mt-3 text-4xl md:text-5xl ${isHebrew ? 'font-display-he' : 'font-display-en'}`}>
-            {pick('דמויות שמדברות. באמת.', 'Characters that talk. Really.', 'Characters that talk. Really.')}
+          <h1 className={`mt-3 text-4xl md:text-5xl ${fontDisplay}`}>
+            {pick('דמויות שמדברות. באמת.', 'Characters that talk. Really.', 'ตัวละครที่คุยได้จริง')}
           </h1>
           <p className="mt-4 max-w-[52ch] mx-auto text-ink/65 leading-relaxed">
             {pick(
               'כל דמות כאן חיה — לוחצים, מדברים, והיא עונה בעברית בקול שלה ובאופי שלה. אלה הקולות שאנחנו בונים ללקוחות.',
               'Every character here is live — click, speak, and it answers in Hebrew with its own voice and temperament. These are the voices we build for clients.',
-              'Every character here is live — click, speak, and it answers in Hebrew with its own voice and temperament.'
+              'ตัวละครทุกตัวในหน้านี้คุยได้จริง กดแล้วพูด แล้วมันจะตอบเป็นภาษาฮีบรูด้วยเสียงและบุคลิกของตัวเอง นี่คือเสียงที่เราสร้างให้ลูกค้า'
             )}
           </p>
         </section>
@@ -223,8 +206,8 @@ const Voices = () => {
                   >
                     <PhoneCall className="w-4 h-4" />
                     {isActive
-                      ? pick('בשיחה — לסגור', 'In call — close', 'In call — close')
-                      : pick('לדבר איתי עכשיו', 'Talk to me now', 'Talk to me now')}
+                      ? pick('בשיחה — לסגור', 'In call — close', 'กำลังคุย แตะเพื่อปิด')
+                      : pick('לדבר איתי עכשיו', 'Talk to me now', 'คุยกับฉันตอนนี้')}
                   </button>
                   <a
                     href={`https://elevenlabs.io/app/talk-to?agent_id=${ch.agentId}`}
@@ -232,7 +215,7 @@ const Voices = () => {
                     rel="noopener noreferrer"
                     className="text-[0.8rem] text-ink/45 hover:text-ink/70 transition"
                   >
-                    {pick('או בחלון נפרד ↗', 'or in a separate window ↗', 'or in a separate window ↗')}
+                    {pick('או בחלון נפרד ↗', 'or in a separate window ↗', 'หรือเปิดในหน้าต่างใหม่ ↗')}
                   </a>
                 </div>
               </article>
@@ -246,16 +229,14 @@ const Voices = () => {
               {pick(
                 'החיבור נפתח בפינת המסך — אשרו גישה למיקרופון ודברו.',
                 'The call opens at the corner of the screen — allow the microphone and speak.',
-                'The call opens at the corner of the screen — allow the microphone and speak.'
+                'หน้าต่างสนทนาจะเปิดที่มุมจอ อนุญาตไมโครโฟนแล้วพูดได้เลย'
               )}
             </p>
             <elevenlabs-convai key={activeAgent} agent-id={activeAgent} />
           </>
         )}
-      </main>
-
-      <Footer />
-    </div>
+      </div>
+    </SiteLayout>
   );
 };
 

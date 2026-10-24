@@ -1,5 +1,3 @@
-import { useLanguage } from '@/contexts/LanguageContext';
-import Navbar from '@/components/refael/Navbar';
 import Hero from '@/components/refael/Hero';
 import AvatarsSection from '@/components/refael/AvatarsSection';
 import WhatItIs from '@/components/refael/WhatItIs';
@@ -13,34 +11,37 @@ import Services from '@/components/refael/Services';
 import Faq from '@/components/refael/Faq';
 import About from '@/components/refael/About';
 import LeadForm from '@/components/refael/LeadForm';
-import Footer from '@/components/refael/Footer';
+import SiteLayout from '@/components/site/SiteLayout';
+import ProductsGrid from '@/components/site/ProductsGrid';
+import { useSeo } from '@/components/site/Seo';
+import { SHOW_PRICES } from '@/config/site';
+
+const SECTIONS = [
+  { href: '#products', he: 'המוצרים', en: 'Products', th: 'ผลิตภัณฑ์' },
+  { href: '#how', he: 'איך זה עובד', en: 'How it works', th: 'ทำงานอย่างไร' },
+  { href: '#uses', he: 'איפה זה עובד', en: 'Where it works', th: 'ใช้งานที่ไหน' },
+  { href: '#faq', he: 'שאלות', en: 'FAQ', th: 'คำถาม' },
+];
 
 const Index = () => {
-  const { language, isHebrew } = useLanguage();
+  useSeo({ path: '/' });
   return (
-    <div
-      key={language}
-      className={`min-h-screen bg-paper text-ink ${isHebrew ? 'font-hebrew' : 'font-english'}`}
-      dir={isHebrew ? 'rtl' : 'ltr'}
-    >
-      <Navbar />
-      <main>
-        <Hero />
-        <AvatarsSection />
-        <WhatItIs />
-        <HowItWorks />
-        <UseCases />
-        <Comparison />
-        <TechTrust />
-        <Pricing />
-        <RoiCalculator />
-        <Services />
-        <Faq />
-        <About />
-        <LeadForm />
-      </main>
-      <Footer />
-    </div>
+    <SiteLayout sections={SECTIONS}>
+      <Hero />
+      <ProductsGrid />
+      <AvatarsSection />
+      <WhatItIs />
+      <HowItWorks />
+      <UseCases />
+      <Comparison />
+      <TechTrust />
+      <Pricing />
+      {SHOW_PRICES && <RoiCalculator />}
+      <Services />
+      <Faq />
+      <About />
+      <LeadForm />
+    </SiteLayout>
   );
 };
 

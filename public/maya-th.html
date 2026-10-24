@@ -2,268 +2,35 @@
 <html lang="th" dir="ltr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Maya | ตัวละคร AI ที่ขายของสดบนไลฟ์</title>
-<meta name="description" content="Maya ขึ้นไลฟ์ นำเสนอสินค้าของคุณ และตอบผู้ชมทุกคนด้วยชื่อ ด้วยเสียง ภายในไม่กี่วินาที ไลฟ์จริงบน Facebook 15 ครั้ง ส่งรูปสินค้ามาแล้วดู 10 วินาทีที่ Maya นำเสนอบนไลฟ์">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>พิธีกร AI | ตัวละคร AI ที่ขายของสดบนไลฟ์</title>
+<meta name="description" content="ตัวละคร AI สดที่ตอบผู้ชมทุกคนด้วยชื่อ ด้วยเสียง ส่งรูปสินค้ามาแล้วดูเธอนำเสนอ">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://refael-ai-flow.lovable.app/live-selling?lang=th">
 <meta property="og:type" content="website">
-<meta property="og:locale" content="th_TH">
-<meta property="og:title" content="บอทของคุณกำลังหลับ Maya ขายของ">
+<meta property="og:site_name" content="Refael.ai">
+<meta property="og:title" content="บอทของคุณกำลังหลับ พิธีกร AI ขายของแทนคุณ">
 <meta property="og:description" content="ตัวละคร AI สดที่ตอบผู้ชมทุกคนด้วยชื่อ ด้วยเสียง ส่งรูปสินค้ามาแล้วดูเธอนำเสนอ">
-<meta property="og:image" content="https://refael-ai-flow.lovable.app/maya/og.jpg">
+<meta property="og:image" content="https://refael-ai-flow.lovable.app/og/live-selling-th.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="https://refael-ai-flow.lovable.app/maya-th.html">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;800;900&family=Inter:wght@400;500;800;900&display=swap" rel="stylesheet">
-<style>
-  :root{--bg:#120e0b;--card:#1d1814;--card2:#251f1a;--ink:#fff;--mute:#a59c92;--dim:#776e65;--amber:#fbbf24;--green:#25d366;--line:#2e2620;--purple:#7c3aed}
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  html,body{background:var(--bg);color:var(--ink);font-family:"Noto Sans Thai",Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-  main{max-width:560px;margin:0 auto;padding:22px 16px 110px}
-  section{margin-top:44px}
-  .langbar{display:flex;justify-content:flex-end;gap:8px;font-size:13px}
-  .langbar a{color:var(--mute);text-decoration:none;border:1px solid var(--line);border-radius:30px;padding:4px 12px}
-  .langbar a.on{color:#1d1814;background:var(--amber);border-color:var(--amber);font-weight:800}
-  .kicker{color:var(--mute);font-weight:500;font-size:17px;text-align:center}
-  h1{font-weight:900;font-size:clamp(28px,8vw,40px);line-height:1.18;text-align:center;margin:6px 0 10px}
-  h1 span,h2 span{color:var(--amber)}
-  .lead{text-align:center;color:#d8d0c6;font-size:17px;line-height:1.6;margin-bottom:18px}
-  h2{font-weight:900;font-size:26px;line-height:1.3;margin-bottom:8px}
-  .h2sub{color:var(--mute);font-size:16px;line-height:1.6;margin-bottom:16px}
-  .video{position:relative;border-radius:22px;overflow:hidden;border:3px solid var(--amber);box-shadow:0 0 40px rgba(251,191,36,.22);background:#000}
-  .video video{width:100%;display:block}
-  .v45{aspect-ratio:4/5}.v916{aspect-ratio:9/16;max-height:78vh;margin:0 auto}
-  .v45 video,.v916 video{height:100%;object-fit:cover}
-  .sound{display:block;width:100%;margin-top:12px;background:var(--card);color:var(--ink);border:1px solid var(--amber);font:800 17px "Noto Sans Thai",sans-serif;padding:13px;border-radius:14px;cursor:pointer}
-  .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
-  .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 6px;text-align:center}
-  .stat b{display:block;font-size:26px;font-weight:900;color:var(--amber);line-height:1.05}
-  .stat small{color:var(--mute);font-size:13px;line-height:1.4;display:block;margin-top:4px}
-  .feat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
-  .feat h3{font-size:19px;font-weight:800;margin-bottom:4px;display:flex;gap:9px;align-items:center}
-  .feat h3 i{font-style:normal;font-size:20px}
-  .feat p{color:#cfc7bd;font-size:15.5px;line-height:1.6}
-  .chat{margin-top:11px;display:grid;gap:7px}
-  .msg{max-width:88%;padding:9px 13px;border-radius:16px;font-size:15px;line-height:1.5}
-  .msg small{display:block;font-size:12px;font-weight:800;opacity:.75;margin-bottom:1px}
-  .viewer{background:#f2efe9;color:#1d1814;justify-self:start;border-bottom-left-radius:5px}
-  .host{background:#2c2219;border:1px solid #5a4317;color:var(--amber);justify-self:end;border-bottom-right-radius:5px;font-weight:500}
-  .host small{color:#e9c873}
-  .card-prod{margin-top:11px;display:flex;align-items:center;gap:12px;background:#fff;color:#1d1814;border-radius:14px;padding:10px 12px}
-  .card-prod .ph{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#c8823f,#8a4b1c);flex:none}
-  .card-prod b{display:block;font-size:15px}
-  .card-prod .pr{font-weight:900;font-size:21px;color:#e11d48}
-  .card-prod s{color:#999;font-size:14px;margin-inline-start:6px}
-  .nova{background:linear-gradient(180deg,#2a1a47,#1d1430);border:1px solid #4c3480;border-radius:22px;padding:18px 14px}
-  .nova .video{border-color:#a78bfa;box-shadow:0 0 40px rgba(167,139,250,.25)}
-  .tabs{display:flex;gap:8px;justify-content:center;margin:12px 0}
-  .tabs button{font:800 15px "Noto Sans Thai",sans-serif;padding:8px 16px;border-radius:30px;border:1px solid #6b52a8;background:transparent;color:#d9ccff;cursor:pointer}
-  .tabs button.on{background:#a78bfa;color:#1d1430;border-color:#a78bfa}
-  .tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:12px}
-  .tag{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#e6ddff;font-size:14px;padding:6px 11px;border-radius:30px}
-  .where{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-  .where div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px;font-size:15.5px;line-height:1.45}
-  .where b{display:block;font-size:16.5px;margin-bottom:2px}
-  .steps{counter-reset:s;display:grid;gap:10px}
-  .step{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;gap:13px;align-items:flex-start}
-  .step::before{content:counter(s);flex:none;width:34px;height:34px;border-radius:50%;background:var(--amber);color:#1d1814;font-weight:900;font-size:18px;display:grid;place-items:center}
-  .step b{display:block;font-size:17px;margin-bottom:2px}
-  .step span{color:#cfc7bd;font-size:15px;line-height:1.55}
-  .offer{background:linear-gradient(180deg,#2b2112,#1d1814);border:2px solid var(--amber);border-radius:22px;padding:20px 16px;text-align:center}
-  .offer h2{margin-bottom:6px}
-  .offer p{color:#e2d9cd;font-size:16px;line-height:1.6;margin-bottom:16px}
-  .cta{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--green);color:#06210f;font-weight:900;font-size:18px;text-decoration:none;padding:16px;border-radius:16px;line-height:1.3}
-  .cta svg{width:24px;height:24px;flex:none}
-  .sub{text-align:center;color:var(--mute);font-size:14px;margin-top:9px}
-  details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:9px}
-  summary{font-weight:800;font-size:16.5px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
-  summary::-webkit-details-marker{display:none}
-  summary::after{content:"+";flex:none;color:var(--amber);font-weight:900}
-  details[open] summary::after{content:"−"}
-  details p{color:#cfc7bd;font-size:15.5px;line-height:1.6;margin-top:8px}
-  .sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 35%);display:none;z-index:5}
-  .sticky .cta{max-width:560px;margin:0 auto;font-size:17px;padding:14px}
-  footer{text-align:center;color:var(--dim);font-size:13px;margin-top:36px;line-height:1.7}
-  footer a{color:#8a8178}
-</style>
-<link rel="canonical" href="https://refael-ai-flow.lovable.app/maya-th.html">
-<link rel="alternate" hreflang="th" href="https://refael-ai-flow.lovable.app/maya-th.html">
-<link rel="alternate" hreflang="en" href="https://refael-ai-flow.lovable.app/maya-en.html">
-<link rel="alternate" hreflang="he" href="https://refael-ai-flow.lovable.app/maya.html">
+<meta name="theme-color" content="#080B12">
+<script>
+  // Moved into the main site. Keep the visitor's ?utm/fbclid and #hash.
+  (function () {
+    var clean = false;
+    var to = clean ? "" : "/live-selling";
+    var p = new URLSearchParams(location.search);
+    if (!p.has('lang')) p.set('lang', "th");
+    var q = p.toString();
+    location.replace(to + (q ? '?' + q : '') + location.hash);
+  })();
+</script>
+<style>html,body{margin:0;background:#080B12;color:#E8EEF7;font:16px system-ui,sans-serif}a{color:#00B8D9}main{min-height:100vh;display:grid;place-items:center}</style>
 </head>
 <body>
-<main>
-
-  <div class="langbar"><a href="/maya.html">עברית</a><a href="/maya-en.html">English</a><a href="/maya-th.html" class="on">ไทย</a></div>
-
-  <!-- HERO -->
-  <p class="kicker">บอทของคุณกำลังหลับ</p>
-  <h1>Maya <span>ขายของบนไลฟ์</span></h1>
-  <p class="lead">ตัวละคร AI ที่ขึ้นไลฟ์ นำเสนอสินค้าของคุณ และอ่านแชท ทุกคนที่คอมเมนต์จะได้คำตอบด้วยเสียง เรียกชื่อ ภายในไม่กี่วินาที</p>
-
-  <div class="video v45">
-    <video id="v-maya" src="/maya/maya-live.mp4" poster="/maya/maya-live-poster.jpg" playsinline autoplay muted loop preload="metadata"></video>
-  </div>
-  <button class="sound" data-v="v-maya" type="button">🔊 แตะเพื่อฟังเสียงเธอ</button>
-
-  <div class="proof">
-    <div class="stat"><b>15</b><small>ไลฟ์จริงบน Facebook</small></div>
-    <div class="stat"><b>10/10</b><small>คอมเมนต์ที่ตอบ เรียกชื่อทุกคน</small></div>
-    <div class="stat"><b>~5</b><small>วินาทีจากคอมเมนต์ถึงคำตอบ</small></div>
-  </div>
-
-  <!-- FEATURES -->
-  <section>
-    <h2>เธอ<span>ทำอะไรบนไลฟ์</span></h2>
-    <p class="h2sub">คุณดูแลสินค้า เธอดูแลผู้ชม</p>
-
-    <div class="feat">
-      <h3><i>💬</i>อ่านแชทแบบเรียลไทม์</h3>
-      <p>ทุกคอมเมนต์ในไลฟ์ไปถึงเธอภายในไม่กี่วินาที คำถามเรื่องราคา ไซซ์ การจัดส่ง สี ไม่มีคำถามไหนหายไปในแชท</p>
-      <div class="chat">
-        <div class="msg viewer"><small>ดาว</small>กระเป๋าสีน้ำตาลราคาเท่าไหร่คะ?</div>
-        <div class="msg host"><small>Maya, ด้วยเสียง</small>คุณดาว ราคา 1,290 แทน 1,790 เฉพาะไลฟ์นี้เท่านั้น ลิงก์อยู่ในแชทค่ะ</div>
-      </div>
-    </div>
-
-    <div class="feat">
-      <h3><i>🗣️</i>ตอบด้วยเสียง และเรียกชื่อ</h3>
-      <p>ไม่ใช่ข้อความอัตโนมัติ เธอเรียกผู้ชมด้วยชื่อ พูดภาษาไทยเป็นธรรมชาติ และริมฝีปากขยับตามคำพูด คนอยู่ในไลฟ์นานขึ้นเมื่อมีคนพูดกับเขา</p>
-    </div>
-
-    <div class="feat">
-      <h3><i>🛍️</i>แสดงสินค้าและราคาบนจอ</h3>
-      <p>การ์ดสินค้าพร้อมรูป ราคา และราคาก่อนลด เธอเลื่อนระหว่างสินค้าตามลำดับของคุณ หรือตามที่ผู้ชมถาม</p>
-      <div class="card-prod"><div class="ph"></div><div><b>กระเป๋าหนังสีคอนญัก</b><span class="pr">฿1,290</span><s>฿1,790</s></div></div>
-    </div>
-
-    <div class="feat">
-      <h3><i>⚡</i>"เอา!" กลายเป็นออเดอร์</h3>
-      <p>ใครที่พิมพ์ "เอา" หรือ "สนใจ" จะได้ลิงก์สั่งซื้อจากเธอทันที ตอนที่ยังตื่นเต้นอยู่</p>
-      <div class="chat">
-        <div class="msg viewer"><small>มล</small>เอาค่ะ!!</div>
-        <div class="msg host"><small>Maya, ด้วยเสียง</small>คุณมล เยี่ยมเลย! ส่งลิงก์ให้แล้ว รออยู่ในแชทนะคะ</div>
-      </div>
-    </div>
-
-    <div class="feat">
-      <h3><i>🙋</i>รู้ว่าเมื่อไหร่ควรส่งต่อให้คุณ</h3>
-      <p>คำถามละเอียดอ่อน ออเดอร์พิเศษ หรือข้อร้องเรียน? เธอไม่แต่งเรื่อง เธอบอกว่าคุณจะติดต่อกลับ และทำเครื่องหมายคอมเมนต์ไว้ให้คุณ</p>
-    </div>
-
-    <div class="feat">
-      <h3><i>📊</i>รายงานหลังจบทุกไลฟ์</h3>
-      <p>ลูกค้าถามอะไร ใครอยากซื้อ สินค้าไหนน่าสนใจ และควรปรับอะไรในไลฟ์ครั้งต่อไป</p>
-    </div>
-  </section>
-
-  <!-- NOVA -->
-  <section class="nova">
-    <h2 style="text-align:center">ไม่ใช่แค่ Maya <span style="color:#c4b5fd">พบกับ Nova</span></h2>
-    <p class="h2sub" style="text-align:center;color:#cbbdf0">เทคโนโลยีเดียวกัน ตัวละครต่างกัน Nova นำเสนอชุดทดลองวิทยาศาสตร์สำหรับเด็ก ตอบผู้ปกครองด้วยชื่อ และส่งลิงก์ รองรับหลายภาษา</p>
-    <div class="tabs">
-      <button type="button" class="on" data-src="/maya/nova-en.mp4" data-poster="/maya/nova-en.jpg">English</button>
-      <button type="button" data-src="/maya/nova-he.mp4" data-poster="/maya/nova-he.jpg">עברית</button>
-    </div>
-    <div class="video v916">
-      <video id="v-nova" src="/maya/nova-en.mp4" poster="/maya/nova-en.jpg" playsinline muted loop preload="none"></video>
-    </div>
-    <button class="sound" data-v="v-nova" type="button" style="border-color:#a78bfa">▶️ เล่นพร้อมเสียง</button>
-    <div class="tags">
-      <span class="tag">แบรนด์เด็ก</span><span class="tag">ของเล่น</span><span class="tag">แอปการเรียนรู้</span><span class="tag">พิพิธภัณฑ์</span><span class="tag">มาสคอตแบรนด์</span>
-    </div>
-    <p class="h2sub" style="text-align:center;margin:14px 0 0;color:#cbbdf0">เราสร้างตัวละครตามแบรนด์ของคุณได้ ทั้งหน้าตา บุคลิก เสียง แม้แต่มาสคอตที่มีอยู่แล้ว</p>
-  </section>
-
-  <!-- WHERE -->
-  <section>
-    <h2>เธอ<span>ทำงานที่ไหน</span></h2>
-    <p class="h2sub">ตัวละครเดียวกัน ทุกที่ที่มีกล้องและผู้ชม</p>
-    <div class="where">
-      <div><b>📺 Facebook Live</b>ขายสดกับผู้ติดตามที่คุณมีอยู่</div>
-      <div><b>▶️ YouTube Live</b>เปิดตัว สาธิตสินค้า ถาม-ตอบ</div>
-      <div><b>🎓 คลาสหรือเว็บบินาร์</b>ผู้นำเสนอที่สอนและตอบคำถาม</div>
-      <div><b>🏬 จอในร้านหรือล็อบบี้</b>ต้อนรับแขกและเล่าเรื่องสินค้า</div>
-      <div><b>📱 วิดีโอสำหรับโซเชียล</b>คลิปสั้นจากไลฟ์ พร้อมสำหรับ Reels</div>
-      <div><b>🌍 ไทยและอังกฤษ</b>ตัวละครเดียวกัน สองภาษา</div>
-    </div>
-  </section>
-
-  <!-- HOW -->
-  <section>
-    <h2>เริ่ม<span>ต้นยังไง</span></h2>
-    <div class="steps">
-      <div class="step"><div><b>ส่งรูปสินค้า</b><span>ถ่ายจากมือถือ ชื่อและราคา ทาง WhatsApp ใช้เวลาแค่นาทีเดียว</span></div></div>
-      <div class="step"><div><b>ดูไลฟ์ 10 วินาทีกับสินค้าของคุณ</b><span>Maya นำเสนอสินค้า บอกราคา และตอบผู้ชมด้วยชื่อ เหมือนไลฟ์จริง แค่เป็นสินค้าของคุณ</span></div></div>
-      <div class="step"><div><b>ขึ้นไลฟ์</b><span>อัปโหลดรายการสินค้าและคำถามที่พบบ่อย แล้วเธอจะขึ้นไลฟ์ครั้งแรกของคุณ</span></div></div>
-    </div>
-  </section>
-
-  <!-- OFFER -->
-  <section class="offer" id="offer">
-    <h2>ส่งรูปมา <span>ดู Maya ขายให้</span></h2>
-    <p>ถ่ายรูปสินค้าหนึ่งชิ้นที่คุณขาย แล้วส่งมาทาง WhatsApp คุณจะได้คลิป 10 วินาทีของ Maya นำเสนอสินค้านั้นบนไลฟ์ พร้อมราคาบนจอและคำตอบให้ผู้ชมด้วยชื่อ<br><b style="color:var(--amber)">ไม่มีข้อผูกมัด ไม่มีแบบฟอร์ม</b></p>
-    <a class="cta" id="cta" href="https://wa.me/972533217125" data-msg="สวัสดีครับคุณ Refael ผมเห็น Maya ส่งรูปสินค้าให้ครับ อยากดู 10 วินาทีที่เธอนำเสนอบนไลฟ์ ผมขาย: " target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg>
-      📸 ส่งรูปทาง WhatsApp
-    </a>
-    <p class="sub">WhatsApp ตรงถึงผม Refael Sela</p>
-  </section>
-
-  <!-- FAQ -->
-  <section>
-    <h2>คำถาม<span>ที่พบบ่อย</span></h2>
-    <details><summary>สดจริงหรือเป็นวิดีโออัด?</summary><p>สดจริง เธออ่านคอมเมนต์ระหว่างไลฟ์และตอบแบบเรียลไทม์ ปกติภายในประมาณ 5 วินาที ในไลฟ์ล่าสุดเธอตอบ 10 จาก 10 คอมเมนต์ เรียกชื่อผู้ถามทุกคน</p></details>
-    <details><summary>ผมต้องอยู่หน้ากล้องไหม?</summary><p>ไม่ต้อง เธอดำเนินไลฟ์เองได้ หรือทำงานร่วมกับคุณ คุณนำเสนอสินค้า เธอตอบแชท</p></details>
-    <details><summary>ถ้ามีคนถามสิ่งที่เธอไม่รู้ล่ะ?</summary><p>เธอไม่แต่งเรื่อง เธอตอบเฉพาะจากสิ่งที่คุณเตรียมไว้ (สินค้า ราคา การจัดส่ง การคืนสินค้า) ส่วนที่เกินจากนั้นเธอส่งต่อให้คุณ</p></details>
-    <details><summary>ขอตัวละครอื่น หรือเสียงของผมได้ไหม?</summary><p>ได้ Maya และ Nova เป็นตัวอย่าง เราสร้างตัวละครตามแบรนด์ของคุณได้ และโคลนเสียงของคุณได้ (โดยได้รับอนุญาตจากคุณ)</p></details>
-    <details><summary>ราคาเท่าไหร่?</summary><p>ขึ้นอยู่กับจำนวนสินค้าและไลฟ์ ส่งรูปสินค้ามาทาง WhatsApp ดูเธอบนไลฟ์ แล้วผมจะบอกราคาที่แน่นอน</p></details>
-  </section>
-
-  <footer>Refael Sela · refael.ai<br><a href="/maya-en.html">English</a> · <a href="/maya.html">עברית</a> · <a href="/">Main site</a></footer>
-</main>
-
-<div class="sticky" id="sticky"><a class="cta" href="#offer">📸 ส่งรูป ดูเธอบนไลฟ์</a></div>
-
-<script>
-  // build the WhatsApp link with a Thai prefilled message (safe encoding)
-  (function () {
-    var cta = document.getElementById('cta');
-    if (cta && cta.dataset.msg) { cta.href = 'https://wa.me/972533217125?text=' + encodeURIComponent(cta.dataset.msg); }
-  })();
-  // tap-to-hear buttons
-  document.querySelectorAll('.sound').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var v = document.getElementById(b.dataset.v);
-      try { v.muted = false; v.currentTime = 0; v.play(); } catch (e) {}
-      b.style.display = 'none';
-    });
-  });
-  // Nova language tabs
-  var nova = document.getElementById('v-nova');
-  document.querySelectorAll('.tabs button').forEach(function (t) {
-    t.addEventListener('click', function () {
-      document.querySelectorAll('.tabs button').forEach(function (x) { x.classList.remove('on'); });
-      t.classList.add('on');
-      var wasMuted = nova.muted;
-      nova.src = t.dataset.src; nova.poster = t.dataset.poster; nova.muted = wasMuted;
-      nova.play().catch(function () {});
-    });
-  });
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (e.isIntersecting) { e.target.play().catch(function () {}); } else { e.target.pause(); }
-      });
-    }, { threshold: 0.35 });
-    io.observe(nova); io.observe(document.getElementById('v-maya'));
-    var sticky = document.getElementById('sticky'), offer = document.getElementById('offer');
-    window.addEventListener('scroll', function () {
-      var r = offer.getBoundingClientRect(), vis = r.top < innerHeight && r.bottom > 0;
-      sticky.style.display = (!vis && window.scrollY > 500) ? 'block' : 'none';
-    }, { passive: true });
-  }
-</script>
+<main><a href="/live-selling?lang=th">ไปต่อ</a></main>
 </body>
 </html>

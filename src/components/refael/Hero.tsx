@@ -31,15 +31,11 @@ export default function Hero() {
           On desktop the explicit row/col placement rebuilds the two columns. */}
       <div className="relative max-w-[1160px] mx-auto px-5 grid gap-10 lg:gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
         <div className="lg:col-start-1 lg:row-start-1">
-          <p className="text-[0.72rem] font-semibold tracking-[0.28em] text-muted-foreground uppercase mb-7">
-            {pick('REFAEL.AI · אווטארים חיים', 'REFAEL.AI · LIVE AVATARS', 'REFAEL.AI · อวตารเสมือนจริง')}
-          </p>
-
-          <h1 className={`${fontDisplay} text-[clamp(2.4rem,5.6vw,4.4rem)] leading-[1.07] tracking-tight text-ink`}>
+                    <h1 className={`${fontDisplay} text-[clamp(2.4rem,5.6vw,4.4rem)] leading-[1.07] tracking-tight text-ink`}>
             {pick('אווטארים חיים', 'Live avatars', 'อวตารเสมือนจริง')}
             <br />
             <span className="text-live-gradient">
-              {pick('שמדברים עברית.', 'that speak Hebrew.', 'ที่พูดภาษาฮีบรูได้')}
+              {pick('שמדברים עברית.', 'that talk to your customers.', 'ที่คุยกับลูกค้าของคุณได้จริง')}
             </span>
           </h1>
 

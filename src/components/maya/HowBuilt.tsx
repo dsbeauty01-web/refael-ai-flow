@@ -1,4 +1,5 @@
 import { useT } from '@/components/refael/i18n';
+import Price from '@/components/site/Price';
 import FadeUp from '@/components/refael/FadeUp';
 import { Check } from 'lucide-react';
 
@@ -57,15 +58,15 @@ export default function HowBuilt() {
           <FadeUp>
             <div className="surface p-7 border-live-gradient">
               <p className="text-[0.75rem] font-semibold tracking-[0.18em] uppercase text-live-a">{pick('פרויקט מלא', 'Full project')}</p>
-              <div className="mt-3 flex items-baseline gap-2">
+              <Price fallback={<p className="mt-3 text-[1.35rem] font-semibold text-ink">{pick('הצעת מחיר אחרי שיחה קצרה', 'Quoted after a short call')}</p>}><div className="mt-3 flex items-baseline gap-2">
                 <span className={`${fontDisplay} text-[2.6rem] text-ink`}>₪29,900</span>
-              </div>
+              </div></Price>
               <p className="text-[0.9rem] text-muted-foreground">{pick('חד-פעמי · חודשיים · מסירה בשלבים', 'One-off · two months · staged delivery')}</p>
               <div className="mt-5 pt-5 border-t border-ink/10">
-                <div className="flex items-baseline gap-2">
+                <Price fallback={null}><div className="flex items-baseline gap-2">
                   <span className={`${fontDisplay} text-[1.7rem] text-ink`}>₪990</span>
                   <span className="text-[0.9rem] text-muted-foreground">{pick('לחודש', '/ month')}</span>
-                </div>
+                </div></Price>
                 <p className="text-[0.85rem] text-muted-foreground mt-1">{pick('תשתית GPU ייעודית, תחזוקה, עדכוני ידע', 'Dedicated GPU infra, maintenance, knowledge updates')}</p>
               </div>
               <a href="#contact" className="mt-6 block text-center bg-live-gradient text-white font-semibold py-3 rounded-full text-[0.95rem] shadow-[0_10px_28px_-10px_rgba(0,184,217,0.55)] hover:brightness-110 transition">
@@ -94,11 +95,11 @@ export default function HowBuilt() {
           <div className="mt-8 grid sm:grid-cols-2 gap-4">
             <div className="surface-dark p-5">
               <p className="font-semibold text-ink">{pick('אווטאר לאתר', 'Website avatar')}</p>
-              <p className="text-[0.9rem] text-muted-foreground mt-1">₪2,900 + ₪290{pick(' לחודש', ' / mo')}</p>
+              <Price><p className="text-[0.9rem] text-muted-foreground mt-1">₪2,900 + ₪290{pick(' לחודש', ' / mo')}</p></Price>
             </div>
             <div className="surface-dark p-5">
               <p className="font-semibold text-ink">{pick('עמדת עסק (מאיה של היום)', 'Business station (today\'s Maya)')}</p>
-              <p className="text-[0.9rem] text-muted-foreground mt-1">₪6,900 + ₪690{pick(' לחודש', ' / mo')}</p>
+              <Price><p className="text-[0.9rem] text-muted-foreground mt-1">₪6,900 + ₪690{pick(' לחודש', ' / mo')}</p></Price>
             </div>
           </div>
           <p className="mt-4 text-center text-[0.85rem] text-muted-foreground">{pick('הדגל = הכול, עד הקצה.', 'The flagship = everything, all the way.')}</p>

@@ -1,6 +1,7 @@
 import { useT } from './i18n';
 import FadeUp from './FadeUp';
 import { WHATSAPP_URL } from '@/config/avatars';
+import Price, { SHOW_PRICES } from '@/components/site/Price';
 
 /**
  * Three products, not one avatar. The middle tier is the one meant to sell —
@@ -136,14 +137,22 @@ export default function Pricing() {
       <div className="max-w-[1160px] mx-auto">
         <FadeUp>
           <h2 className={`${fontDisplay} text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.1] max-w-[820px] text-ink`}>
-            {pick('שלושה מוצרים. מחיר אחד לכל אחד.', 'Three products. One price each.', 'สามผลิตภัณฑ์ ราคาชัดเจนของแต่ละแบบ')}
+            {SHOW_PRICES
+              ? pick('שלושה מוצרים. מחיר אחד לכל אחד.', 'Three products. One price each.', 'สามผลิตภัณฑ์ ราคาชัดเจนของแต่ละแบบ')
+              : pick('שלוש חבילות. הצעה אחת ברורה.', 'Three packages. One clear quote.', 'สามแพ็กเกจ ใบเสนอราคาเดียวที่ชัดเจน')}
           </h2>
           <p className="mt-4 text-[1.05rem] text-muted-foreground max-w-[640px] leading-[1.7]">
-            {pick(
-              'הקמה חד-פעמית ומנוי חודשי קבוע. בלי מונה, בלי תשלום לפי דקה, בלי הפתעות בסוף החודש.',
-              'A one-time setup and a flat monthly fee. No meter, no per-minute billing, no surprise at the end of the month.',
-              'ค่าติดตั้งครั้งเดียวและค่าบริการรายเดือนคงที่ ไม่มีมิเตอร์ ไม่คิดตามนาที ไม่มีบิลเซอร์ไพรส์ปลายเดือน'
-            )}
+            {SHOW_PRICES
+              ? pick(
+                  'הקמה חד-פעמית ומנוי חודשי קבוע. בלי מונה, בלי תשלום לפי דקה, בלי הפתעות בסוף החודש.',
+                  'A one-time setup and a flat monthly fee. No meter, no per-minute billing, no surprise at the end of the month.',
+                  'ค่าติดตั้งครั้งเดียวและค่าบริการรายเดือนคงที่ ไม่มีมิเตอร์ ไม่คิดตามนาที ไม่มีบิลเซอร์ไพรส์ปลายเดือน'
+                )
+              : pick(
+                  'קודם רואים אותה עובדת עם המוצר או העסק שלכם, ורק אז מקבלים הצעה אחת ברורה. בלי תשלום לפי דקה ובלי הפתעות.',
+                  'First you see her working with your product or business, then you get one clear quote. No per-minute billing, no surprises.',
+                  'คุณได้เห็นเธอทำงานกับสินค้าหรือธุรกิจของคุณก่อน แล้วจึงได้รับใบเสนอราคาเดียวที่ชัดเจน ไม่คิดตามนาที ไม่มีค่าใช้จ่ายแอบแฝง'
+                )}
           </p>
         </FadeUp>
 
@@ -165,6 +174,8 @@ export default function Pricing() {
                   {pick(t.title.he, t.title.en, t.title.th)}
                 </p>
 
+                <Price>
+                <>
                 <div className="mt-4 flex items-baseline gap-2 flex-wrap">
                   <span className="font-mono-num text-[clamp(2rem,4vw,2.75rem)] text-ink leading-none">{t.setup}</span>
                   <span className="text-[0.9rem] text-muted-foreground">
@@ -175,6 +186,8 @@ export default function Pricing() {
                   <span className="font-mono-num text-live-gradient font-semibold">{t.monthly}</span>{' '}
                   <span className="text-muted-foreground text-[0.92rem]">{pick('לחודש', 'per month', 'ต่อเดือน')}</span>
                 </p>
+                </>
+                </Price>
 
                 <p className="mt-5 text-[0.95rem] text-ink/75 leading-[1.65]">
                   {pick(t.pitch.he, t.pitch.en, t.pitch.th)}
@@ -192,10 +205,14 @@ export default function Pricing() {
                 {t.featured && (
                   <div className="mt-7 rounded-2xl bg-live-a/10 border border-live-a/25 p-4">
                     <p className="text-[0.9rem] text-ink leading-[1.65]">
-                      {pick(
+                      {SHOW_PRICES ? pick(
                         'פקידת קבלה עולה ₪7,000–9,000 בחודש. מאיה עולה ₪690 — והיא לא חולה, לא מתעייפת, ועונה גם ב-23:00.',
                         'A receptionist costs ₪7,000–9,000 a month. Maya costs ₪690 — and she never calls in sick, never tires, and still answers at 11pm.',
                         'พนักงานต้อนรับมีค่าใช้จ่าย 7,000–9,000 ₪ ต่อเดือน ส่วนมายาอยู่ที่ 690 ₪ และเธอไม่ลาป่วย ไม่เหนื่อย และยังตอบตอนห้าทุ่ม'
+                      ) : pick(
+                        'פקידת קבלה עובדת משמרת אחת. מאיה עונה גם ב-23:00, לא חולה ולא מתעייפת.',
+                        'A receptionist works one shift. Maya still answers at 11pm, never calls in sick and never tires.',
+                        'พนักงานต้อนรับทำงานได้กะเดียว มายายังตอบได้ตอนห้าทุ่ม ไม่ลาป่วย และไม่เหนื่อย'
                       )}
                     </p>
                   </div>
@@ -218,6 +235,7 @@ export default function Pricing() {
           ))}
         </div>
 
+        {SHOW_PRICES && (
         <FadeUp className="mt-8">
           <p className="text-[0.88rem] text-muted-foreground max-w-[760px] leading-[1.7]">
             {pick(
@@ -227,6 +245,7 @@ export default function Pricing() {
             )}
           </p>
         </FadeUp>
+        )}
       </div>
     </section>
   );

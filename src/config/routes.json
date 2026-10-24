@@ -1,0 +1,100 @@
+{
+  "siteUrl": "https://refael-ai-flow.lovable.app",
+  "languages": ["he", "en", "th"],
+  "defaultLanguage": "he",
+  "routes": [
+    {
+      "path": "/",
+      "priority": 1.0,
+      "changefreq": "weekly",
+      "title": {
+        "he": "Refael.ai | אווטארים ודמויות AI חיות לעסקים",
+        "en": "Refael.ai | Live AI avatars and characters for business",
+        "th": "Refael.ai | อวตารและตัวละคร AI สำหรับธุรกิจ"
+      },
+      "description": {
+        "he": "דמויות AI שמדברות בקול, עונות ללקוחות בשם, מוכרות בלייב ומקבלות אורחים בלובי. בעברית, באנגלית ובתאית.",
+        "en": "AI characters that talk out loud, answer customers by name, sell on live streams and greet visitors in your lobby. In Hebrew, English and Thai.",
+        "th": "ตัวละคร AI ที่พูดด้วยเสียง ตอบลูกค้าด้วยชื่อ ขายของบนไลฟ์ และต้อนรับแขกในล็อบบี้ รองรับภาษาฮีบรู อังกฤษ และไทย"
+      }
+    },
+    {
+      "path": "/live-selling",
+      "priority": 0.9,
+      "changefreq": "weekly",
+      "title": {
+        "he": "מנחה AI ללייב מכירות שעונה לכל צופה בשם | מיה | Refael.ai",
+        "en": "AI host for live selling that answers every viewer by name | Maya | Refael.ai",
+        "th": "พิธีกร AI สำหรับไลฟ์ขายของ ตอบผู้ชมทุกคนด้วยชื่อ | Refael.ai"
+      },
+      "description": {
+        "he": "מיה עולה לשידור חי, מציגה מוצרים ועונה לכל צופה בשם, בקול, תוך כמה שניות. 15 שידורים אמיתיים בפייסבוק. שלחו תמונה של מוצר וראו 10 שניות שלה מציגה אותו.",
+        "en": "Maya goes live, presents your products and answers every viewer by name, out loud, within seconds. 15 real Facebook lives. Send a product photo and see 10 seconds of her presenting it.",
+        "th": "พิธีกร AI ขึ้นไลฟ์ นำเสนอสินค้า และตอบผู้ชมทุกคนด้วยชื่อ ด้วยเสียง ภายในไม่กี่วินาที ส่งรูปสินค้ามาแล้วดูคลิป 10 วินาทีที่เธอนำเสนอสินค้าของคุณ"
+      }
+    },
+    {
+      "path": "/live-avatar",
+      "priority": 0.8,
+      "changefreq": "monthly",
+      "title": {
+        "he": "מאיה | אווטארית חיה בגוף מלא ללובי, למוזיאון ולאולם תצוגה | Refael.ai",
+        "en": "Maya | A full-body live avatar for your lobby, museum or showroom | Refael.ai",
+        "th": "มายา | อวตารเต็มตัวสำหรับล็อบบี้ พิพิธภัณฑ์ และโชว์รูม | Refael.ai"
+      },
+      "description": {
+        "he": "אווטארית בגוף מלא שרואה, שומעת ומדברת עברית אמיתית. מקבלת אורחים, עונה על שאלות ומזמנת פגישות ישירות ליומן.",
+        "en": "A full-body avatar that sees, hears and speaks. She greets visitors, answers questions and books meetings straight into your calendar.",
+        "th": "อวตารเต็มตัวที่มองเห็น ได้ยิน และพูดได้ ต้อนรับแขก ตอบคำถาม และนัดหมายลงปฏิทินของคุณโดยตรง"
+      }
+    },
+    {
+      "path": "/ai-avatar",
+      "priority": 0.8,
+      "changefreq": "monthly",
+      "title": {
+        "he": "אווטאר AI מדבר לעסקים בעברית | דמות דיגיטלית שמוכרת | Refael.ai",
+        "en": "Talking AI avatar for business | A digital character that sells | Refael.ai",
+        "th": "อวตาร AI ที่พูดได้สำหรับธุรกิจ | ตัวละครดิจิทัลที่ช่วยขาย | Refael.ai"
+      },
+      "description": {
+        "he": "אווטאר AI שמדבר עברית בקול טבעי, עם שפתיים מסונכרנות, מציג מוצרים ועונה ללקוחות בזמן אמת. לייב, סרטונים ומסכים בעסק.",
+        "en": "An AI avatar that speaks in a natural voice with synced lips, presents products and answers customers in real time. Live streams, videos and screens in your business.",
+        "th": "อวตาร AI ที่พูดด้วยเสียงธรรมชาติ ปากขยับตามคำพูด นำเสนอสินค้า และตอบลูกค้าแบบเรียลไทม์ ใช้ได้ทั้งไลฟ์ วิดีโอ และจอในร้าน"
+      }
+    },
+    {
+      "path": "/brand-character",
+      "priority": 0.8,
+      "changefreq": "monthly",
+      "title": {
+        "he": "דמות AI למותג | קמע דיגיטלי שמדבר עם לקוחות | Refael.ai",
+        "en": "AI brand character | A digital mascot that talks to your customers | Refael.ai",
+        "th": "ตัวละคร AI สำหรับแบรนด์ | มาสคอตดิจิทัลที่คุยกับลูกค้า | Refael.ai"
+      },
+      "description": {
+        "he": "דמות AI מצוירת או תלת ממדית למותג שלכם: מציגה מוצרים, עונה לילדים ולהורים בשם, בעברית ובאנגלית. מתאים לצעצועים, אפליקציות ומוזיאונים.",
+        "en": "An illustrated or 3D AI character for your brand: presents products and answers kids and parents by name. Built for toys, learning apps and museums.",
+        "th": "ตัวละคร AI แบบการ์ตูนหรือ 3 มิติสำหรับแบรนด์ของคุณ นำเสนอสินค้า ตอบเด็กและผู้ปกครองด้วยชื่อ เหมาะกับของเล่น แอปการเรียนรู้ และพิพิธภัณฑ์"
+      }
+    },
+    {
+      "path": "/voices",
+      "priority": 0.7,
+      "changefreq": "monthly",
+      "title": {
+        "he": "קולות חיים | סוכני קול AI שמדברים עברית | Refael.ai",
+        "en": "Live voices | AI voice agents you can talk to now | Refael.ai",
+        "th": "เสียง AI สด | เอเจนต์เสียงที่คุยได้ทันที | Refael.ai"
+      },
+      "description": {
+        "he": "דברו עכשיו עם סוכני הקול שלנו: פקידת קבלה במרפאה, מספר סיפורים, ומנחי שידור חי. כל אחד עם קול ואופי משלו.",
+        "en": "Talk right now with our voice agents: a clinic receptionist, a storyteller and live-broadcast hosts, each with its own voice and temperament.",
+        "th": "คุยกับเอเจนต์เสียงของเราได้ทันที ทั้งพนักงานต้อนรับคลินิก นักเล่าเรื่อง และพิธีกรไลฟ์ แต่ละตัวมีเสียงและบุคลิกของตัวเอง"
+      }
+    },
+    { "path": "/legal/privacy", "priority": 0.3, "changefreq": "yearly" },
+    { "path": "/legal/terms", "priority": 0.3, "changefreq": "yearly" },
+    { "path": "/legal/accessibility", "priority": 0.3, "changefreq": "yearly" }
+  ]
+}

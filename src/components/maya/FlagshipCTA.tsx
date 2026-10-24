@@ -7,26 +7,26 @@ type State = 'idle' | 'submitting' | 'success' | 'error';
 
 /** Submitted by English value so leads stay comparable in the inbox. */
 const FIELDS = [
-  { value: 'Clinic',   he: 'מרפאה',   en: 'Clinic' },
-  { value: 'Office',   he: 'משרד',    en: 'Office' },
-  { value: 'Store',    he: 'חנות',    en: 'Store' },
-  { value: 'Museum',   he: 'מוזיאון', en: 'Museum' },
-  { value: 'Other',    he: 'אחר',     en: 'Other' },
+  { value: 'Clinic',   he: 'מרפאה',   en: 'Clinic', th: 'คลินิก' },
+  { value: 'Office',   he: 'משרד',    en: 'Office', th: 'สำนักงาน' },
+  { value: 'Store',    he: 'חנות',    en: 'Store', th: 'ร้านค้า' },
+  { value: 'Museum',   he: 'מוזיאון', en: 'Museum', th: 'พิพิธภัณฑ์' },
+  { value: 'Other',    he: 'אחר',     en: 'Other', th: 'อื่นๆ' },
 ];
 
 export default function FlagshipCTA() {
-  const { pick, fontDisplay, language } = useT();
+  const { pick, tr, fontDisplay, language } = useT();
   const [state, setState] = useState<State>('idle');
   const [form, setForm] = useState({ name: '', company: '', field: '', phone: '', use: '' });
 
   function whatsappFallback() {
     const lines = [
-      pick('היי רפאל, אני רוצה מאיה:', 'Hi Refael, I want a Maya:'),
-      `${pick('שם', 'Name')}: ${form.name}`,
-      `${pick('עסק', 'Business')}: ${form.company}`,
-      `${pick('תחום', 'Field')}: ${form.field}`,
-      `${pick('טלפון', 'Phone')}: ${form.phone}`,
-      form.use ? `${pick('מה היא תעשה אצלי', 'What she\'ll do')}: ${form.use}` : '',
+      pick('היי רפאל, אני רוצה מאיה:', 'Hi Refael, I want a Maya:', 'สวัสดีคุณราฟาเอล สนใจอยากได้มายา:'),
+      `${pick('שם', 'Name', 'ชื่อ')}: ${form.name}`,
+      `${pick('עסק', 'Business', 'ธุรกิจ')}: ${form.company}`,
+      `${pick('תחום', 'Field', 'ประเภทธุรกิจ')}: ${form.field}`,
+      `${pick('טלפון', 'Phone', 'โทรศัพท์')}: ${form.phone}`,
+      form.use ? `${pick('מה היא תעשה אצלי', 'What she\'ll do', 'งานที่อยากให้มายาทำ')}: ${form.use}` : '',
     ].filter(Boolean);
     return `${WHATSAPP_URL}?text=${encodeURIComponent(lines.join('\n'))}`;
   }
@@ -61,10 +61,10 @@ export default function FlagshipCTA() {
       <div className="relative max-w-[720px] mx-auto text-center">
         <FadeUp>
           <h2 className={`${fontDisplay} text-[clamp(2.1rem,5vw,3.4rem)] leading-[1.1] text-ink`}>
-            {pick('רוצים מאיה משלכם?', 'Want your own Maya?')}
+            {pick('רוצים מאיה משלכם?', 'Want your own Maya?', 'อยากมีมายาเป็นของตัวเองไหม?')}
           </h2>
           <p className="mt-4 text-[1.05rem] text-muted-foreground">
-            {pick('ספרו לנו על העסק — ומאיה עצמה תחזור אליכם. באמת.', 'Tell us about your business — and Maya herself will call you back. Really.')}
+            {pick('ספרו לנו על העסק — ומאיה עצמה תחזור אליכם. באמת.', 'Tell us about your business — and Maya herself will call you back. Really.', 'เล่าเรื่องธุรกิจของคุณให้เราฟัง แล้วมายาจะเป็นคนโทรกลับหาคุณเอง ไม่ได้พูดเล่น')}
           </p>
         </FadeUp>
 
@@ -72,36 +72,36 @@ export default function FlagshipCTA() {
           <form onSubmit={onSubmit} className="surface p-6 sm:p-8 mt-10 space-y-4 text-start">
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('שם', 'Name')} *</label>
-                <input required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className={inputCls} />
+                <label htmlFor="fc-name" className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('שם', 'Name', 'ชื่อ')} *</label>
+                <input id="fc-name" required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className={inputCls} />
               </div>
               <div>
-                <label className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('עסק', 'Business')}</label>
-                <input value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} className={inputCls} />
+                <label htmlFor="fc-company" className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('עסק', 'Business', 'ธุรกิจ')}</label>
+                <input id="fc-company" value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} className={inputCls} />
               </div>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('תחום', 'Field')} *</label>
-                <select required value={form.field} onChange={e => setForm(f => ({ ...f, field: e.target.value }))} className={`${inputCls} appearance-none`}>
-                  <option value="" disabled>{pick('בחרו…', 'Select…')}</option>
-                  {FIELDS.map(p => <option key={p.value} value={p.value}>{pick(p.he, p.en)}</option>)}
+                <label htmlFor="fc-field" className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('תחום', 'Field', 'ประเภทธุรกิจ')} *</label>
+                <select id="fc-field" required value={form.field} onChange={e => setForm(f => ({ ...f, field: e.target.value }))} className={`${inputCls} appearance-none`}>
+                  <option value="" disabled>{pick('בחרו…', 'Select…', 'เลือก…')}</option>
+                  {FIELDS.map(p => <option key={p.value} value={p.value}>{tr(p)}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('טלפון', 'Phone')} *</label>
-                <input required type="tel" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} className={inputCls} />
+                <label htmlFor="fc-phone" className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('טלפון', 'Phone', 'โทรศัพท์')} *</label>
+                <input id="fc-phone" required type="tel" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} className={inputCls} />
               </div>
             </div>
             <div>
-              <label className="block text-[0.8rem] font-semibold text-ink/70 mb-2">
-                {pick('מה היא תעשה אצלכם?', 'What will she do for you?')}
+              <label htmlFor="fc-message" className="block text-[0.8rem] font-semibold text-ink/70 mb-2">
+                {pick('מה היא תעשה אצלכם?', 'What will she do for you?', 'อยากให้มายาช่วยงานอะไร?')}
               </label>
-              <textarea
+              <textarea id="fc-message"
                 rows={3}
                 value={form.use}
                 onChange={e => setForm(f => ({ ...f, use: e.target.value }))}
-                placeholder={pick('למשל: מקבלת מטופלים בקליניקה, קובעת תורים, עונה על שאלות…', 'e.g. greets patients at the clinic, books appointments, answers questions…')}
+                placeholder={pick('למשל: מקבלת מטופלים בקליניקה, קובעת תורים, עונה על שאלות…', 'e.g. greets patients at the clinic, books appointments, answers questions…', 'เช่น ต้อนรับคนไข้ที่คลินิก นัดหมาย ตอบคำถาม…')}
                 className={`${inputCls} resize-none`}
               />
             </div>
@@ -111,15 +111,15 @@ export default function FlagshipCTA() {
               disabled={state === 'submitting'}
               className="w-full bg-live-gradient text-white font-semibold py-3.5 rounded-full text-[0.95rem] shadow-[0_10px_28px_-10px_rgba(0,184,217,0.55)] hover:brightness-110 transition disabled:opacity-60"
             >
-              {state === 'submitting' ? pick('שולח…', 'Sending…') : pick('היא תחזור אליכם', 'She\'ll call you back')}
+              {state === 'submitting' ? pick('שולח…', 'Sending…', 'กำลังส่ง…') : pick('היא תחזור אליכם', 'She\'ll call you back', 'ให้มายาโทรกลับ')}
             </button>
 
             {state === 'success' && (
-              <p className="text-[0.9rem] font-semibold text-live-gradient">{pick('קיבלנו! נחזור אליכם עוד היום.', 'Got it! We\'ll get back to you today.')}</p>
+              <p className="text-[0.9rem] font-semibold text-live-gradient">{pick('קיבלנו! נחזור אליכם עוד היום.', 'Got it! We\'ll get back to you today.', 'ได้รับข้อมูลแล้ว! เราจะติดต่อกลับภายในวันนี้')}</p>
             )}
             {state === 'error' && (
               <div className="text-[0.9rem] text-muted-foreground">
-                {pick('פתחנו לכם וואטסאפ עם הפרטים — רק תשלחו. אם לא נפתח:', 'We opened WhatsApp with your details — just hit send. If it didn\'t open:')}{' '}
+                {pick('פתחנו לכם וואטסאפ עם הפרטים — רק תשלחו. אם לא נפתח:', 'We opened WhatsApp with your details — just hit send. If it didn\'t open:', 'เราเปิด WhatsApp พร้อมข้อมูลของคุณไว้แล้ว แค่กดส่ง หากหน้าต่างไม่เปิดขึ้นมา:')}{' '}
                 <a href={whatsappFallback()} target="_blank" rel="noopener noreferrer" className="text-live-gradient font-semibold underline">WhatsApp</a>
               </div>
             )}
@@ -130,7 +130,7 @@ export default function FlagshipCTA() {
           <p className="mt-8 text-[0.82rem] text-muted-foreground tracking-wide">
             {pick(
               'נבנה בישראל · קוד פתוח · הדמות והידע בבעלות הלקוח · אפס נעילה לספק',
-              'Built in Israel · open source · the figure and knowledge are the client\'s · zero vendor lock-in'
+              'Built in Israel · open source · the figure and knowledge are the client\'s · zero vendor lock-in', 'พัฒนาในอิสราเอล · โอเพนซอร์ส · ตัวละครและข้อมูลความรู้เป็นของลูกค้า · ไม่ผูกขาดกับผู้ให้บริการรายใด'
             )}
           </p>
         </FadeUp>

@@ -43,7 +43,11 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [language, setLanguageState] = useState<Language>(() => {
     if (typeof window === 'undefined') return 'he';
     const fromUrl = new URLSearchParams(window.location.search).get('lang') as Language | null;
-    if (fromUrl && LANGUAGES.includes(fromUrl)) return fromUrl;
+    if (fromUrl && LANGUAGES.includes(fromUrl)) {
+      // remember it, so a reload or an internal link without ?lang keeps the language
+      try { window.localStorage.setItem('refael_lang', fromUrl); } catch {}
+      return fromUrl;
+    }
     let stored: Language | null = null;
     try { stored = window.localStorage.getItem('refael_lang') as Language | null; } catch {}
     return stored && LANGUAGES.includes(stored) ? stored : 'he';

@@ -39,15 +39,18 @@ export default function RouteEffects() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
-  // language -> URL. If the visitor switched language, the state wins; if they only
-  // navigated, a ?lang already in the URL wins (the effect above adopts it).
+  // language -> URL. Runs on every navigation (incl. same-page links that drop the
+  // query), so a non-Hebrew page always carries its ?lang and survives a reload or a
+  // share. If the visitor switched language, the state wins; if a link brought a
+  // different ?lang, the effect above adopts it first and this run waits for it.
+  // ?lang=he is the default, so it is stripped (canonical URLs carry no ?lang for he).
   const prevLang = useRef(language);
   useEffect(() => {
     const switched = prevLang.current !== language;
     prevLang.current = language;
     const params = new URLSearchParams(search);
     const current = params.get('lang') as Language | null;
-    if (!switched && current && LANGUAGES.includes(current)) return;
+    if (!switched && current && LANGUAGES.includes(current) && current !== language) return;
     const wanted = language === DEFAULT_LANGUAGE ? null : language;
     if (current === wanted) return;
     if (wanted) params.set('lang', wanted);
@@ -55,7 +58,7 @@ export default function RouteEffects() {
     const qs = params.toString();
     navigate({ pathname, search: qs ? `?${qs}` : '', hash }, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [language, pathname]);
+  }, [language, pathname, search, hash]);
 
   return null;
 }

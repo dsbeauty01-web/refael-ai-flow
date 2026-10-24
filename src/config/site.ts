@@ -34,9 +34,9 @@ export function routeMeta(path: string): RouteMeta | undefined {
 
 /** 1200x630 social cards (public/og/, rendered by scripts/og-cards). One per language. */
 export const OG_IMAGE: Record<Language, string> = {
-  he: `${SITE_URL}/maya/og.jpg`,
-  en: `${SITE_URL}/site/maya-boutique.jpg`,
-  th: `${SITE_URL}/site/thai-host-boutique.jpg`,
+  he: `${SITE_URL}/og/site-he.jpg`,
+  en: `${SITE_URL}/og/site-en.jpg`,
+  th: `${SITE_URL}/og/site-th.jpg`,
 };
 
 export type Product = {

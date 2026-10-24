@@ -24,9 +24,9 @@ type Character = {
   img: string;
   /** gradient stops — the character's glow palette */
   orb: [string, string, string];
-  name: [string, string];
-  role: [string, string];
-  desc: [string, string];
+  name: [string, string, string];
+  role: [string, string, string];
+  desc: [string, string, string];
   quote: string;
 };
 
@@ -37,11 +37,12 @@ const CHARACTERS: Character[] = [
     icon: BookOpen,
     img: '/voices/storyteller.webp',
     orb: ['#F2C179', '#C77B3A', '#5C3212'],
-    name: ['הסבא המספר', 'The Storyteller'],
-    role: ['בן שבעים וחמש, זיכרון של שכונה שלמה', '75 years old, a whole neighborhood in his memory'],
+    name: ['הסבא המספר', 'The Storyteller', 'คุณตานักเล่าเรื่อง'],
+    role: ['בן שבעים וחמש, זיכרון של שכונה שלמה', '75 years old, a whole neighborhood in his memory', 'อายุเจ็ดสิบห้า ความทรงจำของทั้งชุมชน'],
     desc: [
       'מדבר לאט, עוצר בדיוק במקום הנכון, ותמיד יש לו עוד סיפור אחד מהשוק, מהצבא, מהחתונה של הדודה. שאלו אותו איך קוראים לכם — ותנו לו לקחת אתכם.',
       'Speaks slowly, pauses in exactly the right place, and always has one more story — the market, the army, the aunt’s wedding. Tell him your name and let him take you along.',
+      'พูดช้าๆ หยุดตรงจังหวะพอดี และมีเรื่องเล่าอีกเรื่องเสมอ ทั้งเรื่องตลาด ทหาร และงานแต่งงานของป้า บอกชื่อคุณแล้วให้เขาพาคุณไป',
     ],
     quote: '״בוא, שב לידי רגע. בגילי כבר לא ממהרים לשום מקום…״',
   },
@@ -51,11 +52,12 @@ const CHARACTERS: Character[] = [
     icon: CalendarCheck,
     img: '/voices/michal.webp',
     orb: ['#7FE3DC', '#2FA8A0', '#0D4B47'],
-    name: ['מיכל', 'Michal'],
-    role: ['קבלה במרפאה — חדה, יעילה, חמה', 'Clinic reception — sharp, efficient, warm'],
+    name: ['מיכל', 'Michal', 'มิคาล'],
+    role: ['קבלה במרפאה: חדה, יעילה, חמה', 'Clinic reception: sharp, efficient, warm', 'พนักงานต้อนรับคลินิก ฉับไว มีประสิทธิภาพ และอบอุ่น'],
     desc: [
       'עונה מהשנייה הראשונה, קובעת תור, אומרת בדיוק מה להביא — וכל המספרים והשעות במילים, כמו בן אדם. נסו לבקש תור ליום שלישי.',
       'Answers from the first second, books the appointment, tells you exactly what to bring — every number and hour spoken in words, like a person. Try booking a Tuesday slot.',
+      'รับสายตั้งแต่วินาทีแรก นัดหมายให้ บอกชัดเจนว่าต้องเตรียมอะไรมา และพูดตัวเลขกับเวลาเป็นคำเหมือนคนจริง ลองขอนัดวันอังคารดูสิ',
     ],
     quote: '״שלום, הגעתם למרפאת כהן, מדברת מיכל. איך אפשר לעזור?״',
   },
@@ -65,11 +67,12 @@ const CHARACTERS: Character[] = [
     icon: Mic,
     img: '/voices/host-female.webp',
     orb: ['#D9A4F5', '#8B4FD8', '#3A1566'],
-    name: ['המארחת', 'The Host'],
-    role: ['שידור חי, אנרגיה של מכירה', 'Live broadcast, sales energy'],
+    name: ['המארחת', 'The Host', 'พิธีกรหญิง'],
+    role: ['שידור חי, אנרגיה של מכירה', 'Live broadcast, sales energy', 'ไลฟ์สด พลังงานของการขาย'],
     desc: [
       'קול משוכפל מהקלטה אמיתית. חמה, מהירה, יודעת להחזיק שיחה — הבסיס לכל סוכנת מכירה חיה שנבנה ללקוח.',
       'A voice cloned from a real recording. Warm, quick, holds a conversation — the base for every live sales agent we build for a client.',
+      'เสียงที่โคลนจากการบันทึกจริง อบอุ่น ฉับไว คุยต่อเนื่องได้ เป็นพื้นฐานของเอเจนต์ขายสดทุกตัวที่เราสร้างให้ลูกค้า',
     ],
     quote: '״שלום! איזה כיף שהתקשרת. ספרי לי רגע מה את מחפשת…״',
   },
@@ -79,11 +82,12 @@ const CHARACTERS: Character[] = [
     icon: Radio,
     img: '/voices/host-male.webp',
     orb: ['#8FC7F2', '#3D7FC4', '#12365E'],
-    name: ['המארח', 'The Host (male)'],
-    role: ['שידור חי, נוכחות רגועה', 'Live broadcast, calm presence'],
+    name: ['המארח', 'The Host (male)', 'พิธีกรชาย'],
+    role: ['שידור חי, נוכחות רגועה', 'Live broadcast, calm presence', 'ไลฟ์สด สุขุม มั่นคง'],
     desc: [
       'הגרסה הגברית — אותה טכנולוגיה, טמפרמנט אחר. יציב, סבלני, מתאים לשירות, ייעוץ והנחיה.',
       'The male counterpart — same technology, different temperament. Steady, patient; fits service, consulting and guidance.',
+      'เวอร์ชันเสียงผู้ชาย เทคโนโลยีเดียวกัน บุคลิกต่างกัน มั่นคง อดทน เหมาะกับงานบริการ ให้คำปรึกษา และการนำเสนอ',
     ],
     quote: '״שלום! כיף שהצטרפת. מה תרצו לשאול אותי?״',
   },
@@ -181,18 +185,18 @@ const Voices = () => {
               >
                 <Portrait
                   src={ch.img}
-                  alt={pick(ch.name[0], ch.name[1], ch.name[1])}
+                  alt={pick(ch.name[0], ch.name[1], ch.name[2])}
                   colors={ch.orb}
                   Icon={Icon}
                 />
                 <div>
-                  <h2 className="text-xl font-bold">{pick(ch.name[0], ch.name[1], ch.name[1])}</h2>
+                  <h2 className="text-xl font-bold">{pick(ch.name[0], ch.name[1], ch.name[2])}</h2>
                   <p className="mt-1 text-[0.85rem] font-semibold text-ink/55">
-                    {pick(ch.role[0], ch.role[1], ch.role[1])}
+                    {pick(ch.role[0], ch.role[1], ch.role[2])}
                   </p>
                 </div>
                 <p className="text-[0.9rem] leading-relaxed text-ink/70">
-                  {pick(ch.desc[0], ch.desc[1], ch.desc[1])}
+                  {pick(ch.desc[0], ch.desc[1], ch.desc[2])}
                 </p>
                 <p dir="rtl" lang="he" className="text-[0.9rem] text-ink/85 bg-ink/[0.05] rounded-xl px-4 py-3">
                   {ch.quote}
@@ -206,7 +210,7 @@ const Voices = () => {
                   >
                     <PhoneCall className="w-4 h-4" />
                     {isActive
-                      ? pick('בשיחה — לסגור', 'In call — close', 'กำลังคุย แตะเพื่อปิด')
+                      ? pick('בשיחה, לחצו לסגירה', 'In call, tap to close', 'กำลังคุย แตะเพื่อปิด')
                       : pick('לדבר איתי עכשיו', 'Talk to me now', 'คุยกับฉันตอนนี้')}
                   </button>
                   <a

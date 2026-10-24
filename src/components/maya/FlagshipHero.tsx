@@ -15,26 +15,26 @@ export default function FlagshipHero() {
       <div className="relative max-w-[1160px] mx-auto px-5 grid gap-10 lg:gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div>
           <p className="text-[0.72rem] font-semibold tracking-[0.28em] text-muted-foreground uppercase mb-7">
-            {pick('REFAEL.AI · פרויקט הדגל', 'REFAEL.AI · THE FLAGSHIP')}
+            {pick('REFAEL.AI · פרויקט הדגל', 'REFAEL.AI · THE FLAGSHIP', 'REFAEL.AI · โปรเจกต์เรือธง')}
           </p>
 
           <h1 className={`${fontDisplay} text-[clamp(2.3rem,5.4vw,4.2rem)] leading-[1.07] tracking-tight text-ink`}>
-            {pick('הפקידה שהלקוחות שלך', 'The receptionist your')}
+            {pick('הפקידה שהלקוחות שלך', 'The receptionist your', 'พนักงานต้อนรับที่ลูกค้าของคุณ')}
             <br />
             <span className="text-live-gradient">
-              {pick('יצלמו בסטורי.', 'customers film for their story.')}
+              {pick('יצלמו בסטורי.', 'customers film for their story.', 'ต้องหยิบมือถือมาถ่ายลงสตอรี่')}
             </span>
           </h1>
 
           <p className="mt-6 text-[1.15rem] sm:text-[1.28rem] text-ink/85 max-w-[640px] leading-[1.55]">
             {pick(
               'מאיה — עובדת קבלה דיגיטלית בגודל מלא. רואה את הלקוח נכנס, מברכת אותו לפני שהוא מדבר, קובעת לו תור אמיתי ביומן, שולחת אישור למייל — ומצביעה לו איפה לחכות.',
-              'Maya — a full-size digital receptionist. She sees the customer walk in, greets them before they speak, books a real appointment in the calendar, emails the confirmation — and points them to where to wait.'
+              'Maya — a full-size digital receptionist. She sees the customer walk in, greets them before they speak, books a real appointment in the calendar, emails the confirmation — and points them to where to wait.', 'มายา พนักงานต้อนรับดิจิทัลขนาดเท่าคนจริง เห็นลูกค้าเดินเข้ามา ทักทายก่อนที่ลูกค้าจะเอ่ยปาก นัดหมายลงปฏิทินจริง ส่งอีเมลยืนยัน แล้วชี้บอกว่าให้นั่งรอตรงไหน'
             )}
           </p>
 
           <p className="mt-4 text-[1rem] text-muted-foreground max-w-[620px] leading-[1.7]">
-            {pick('בעברית. בקול. בלי מונה לפי דקה.', 'In Hebrew. Out loud. With no per-minute meter.')}
+            {pick('בעברית. בקול. בלי מונה לפי דקה.', 'In Hebrew. Out loud. With no per-minute meter.', 'พูดภาษาฮีบรูด้วยเสียงจริง และไม่มีค่าบริการคิดรายนาที')}
           </p>
 
           <div className="mt-9 flex flex-wrap gap-3">
@@ -42,7 +42,7 @@ export default function FlagshipHero() {
               href="#contact"
               className="inline-flex items-center gap-2.5 border border-ink/15 text-ink px-7 py-3.5 rounded-full text-[0.95rem] hover:bg-ink/5 transition-colors"
             >
-              {pick('רוצים אחת כזו לעסק? השאירו פרטים', 'Want one for your business? Leave your details')}
+              {pick('רוצים אחת כזו לעסק? השאירו פרטים', 'Want one for your business? Leave your details', 'อยากได้แบบนี้สำหรับธุรกิจของคุณ? ฝากข้อมูลไว้ได้เลย')}
               <span aria-hidden>←</span>
             </a>
             <a
@@ -58,7 +58,7 @@ export default function FlagshipHero() {
           <p className="mt-6 text-[0.82rem] text-muted-foreground">
             {pick(
               'הפעילו את הרמקולים ולחצו "דברו איתה עכשיו" — זו ההקלטה שלה, לא קריינות.',
-              'Turn your sound on and press "Talk to her now" — that\'s her, not a voice-over.'
+              'Turn your sound on and press "Talk to her now" — that\'s her, not a voice-over.', 'เปิดเสียงแล้วกด "คุยกับมายาตอนนี้" นี่คือเสียงของเธอเอง ไม่ใช่เสียงพากย์'
             )}
           </p>
         </div>

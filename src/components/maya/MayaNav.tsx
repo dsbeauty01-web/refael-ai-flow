@@ -4,14 +4,14 @@ import { Menu, X } from 'lucide-react';
 import { useT, LANGUAGES, LANGUAGE_LABELS } from '@/components/refael/i18n';
 
 const LINKS = [
-  { href: '#what',  he: 'מה היא עושה', en: 'What she does' },
-  { href: '#build', he: 'איך זה נבנה', en: 'How it\'s built' },
-  { href: '#star',  he: 'הכוכבת', en: 'The Star', star: true },
-  { href: '#tech',  he: 'הטכנולוגיה', en: 'The tech' },
+  { href: '#what',  he: 'מה היא עושה', en: 'What she does', th: 'มายาทำอะไรได้' },
+  { href: '#build', he: 'איך זה נבנה', en: 'How it\'s built', th: 'สร้างอย่างไร' },
+  { href: '#star',  he: 'הכוכבת', en: 'The Star', th: 'เดอะสตาร์', star: true },
+  { href: '#tech',  he: 'הטכנולוגיה', en: 'The tech', th: 'เทคโนโลยี' },
 ];
 
 export default function MayaNav() {
-  const { language, setLanguage, pick, isHebrew } = useT();
+  const { language, setLanguage, pick, tr, isHebrew } = useT();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -34,13 +34,13 @@ export default function MayaNav() {
           <Link to="/" className="text-[1.1rem] font-bold tracking-tight text-ink">
             Refael<span className="text-live-gradient">.ai</span>
           </Link>
-          <span className="hidden sm:inline text-[0.75rem] font-semibold tracking-[0.16em] uppercase text-muted-foreground">{pick('מאיה · הדגל', 'Maya · Flagship')}</span>
+          <span className="hidden sm:inline text-[0.75rem] font-semibold tracking-[0.16em] uppercase text-muted-foreground">{pick('מאיה · הדגל', 'Maya · Flagship', 'มายา · เรือธง')}</span>
         </div>
 
         <nav className="hidden md:flex items-center gap-7">
           {LINKS.map(l => (
             <button key={l.href} onClick={() => jump(l.href)} className="text-[0.9rem] text-muted-foreground hover:text-ink transition-colors">
-              {pick(l.he, l.en)}
+              {tr(l)}
             </button>
           ))}
         </nav>
@@ -60,7 +60,7 @@ export default function MayaNav() {
             ))}
           </div>
           <button onClick={() => jump('#contact')} className="hidden sm:inline-flex bg-ink text-paper text-[0.85rem] font-semibold px-4 py-1.5 rounded-full hover:bg-ink/85 transition-colors">
-            {pick('רוצים אחת כזו?', 'Want one?')}
+            {pick('רוצים אחת כזו?', 'Want one?', 'สนใจไหม?')}
           </button>
           <button
             className="md:hidden p-2 text-ink"
@@ -80,14 +80,14 @@ export default function MayaNav() {
               onClick={() => jump(l.href)}
               className={`py-3 text-[0.95rem] ${l.star ? 'font-semibold text-live-gradient' : 'text-ink/90 hover:text-ink'} ${isHebrew ? 'text-right' : 'text-left'}`}
             >
-              {pick(l.he, l.en)}
+              {tr(l)}
             </button>
           ))}
           <button
             onClick={() => jump('#contact')}
             className={`mt-2 bg-ink text-paper text-[0.95rem] font-semibold py-3 rounded-full ${isHebrew ? 'text-center' : 'text-center'}`}
           >
-            {pick('רוצים אחת כזו?', 'Want one?')}
+            {pick('רוצים אחת כזו?', 'Want one?', 'สนใจไหม?')}
           </button>
         </nav>
       )}

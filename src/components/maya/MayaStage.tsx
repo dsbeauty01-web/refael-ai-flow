@@ -72,7 +72,7 @@ export default function MayaStage({
           loop={!speaking}
           onEnded={() => setSpeaking(false)}
           className="relative w-full h-auto blend-white"
-          aria-label={pick('מיה — אווטארית חיה בגוף מלא', 'Maya — a full-body live avatar')}
+          aria-label={pick('מיה — אווטארית חיה בגוף מלא', 'Maya — a full-body live avatar', 'มายา อวตารเสมือนจริงแบบเต็มตัว')}
         />
 
         {overlay}
@@ -81,7 +81,7 @@ export default function MayaStage({
           <div className="absolute top-3 inset-x-0 flex justify-center pointer-events-none">
             <span className="inline-flex items-center gap-2 bg-live-gradient text-white text-[0.78rem] font-semibold px-3.5 py-1.5 rounded-full shadow-[0_8px_20px_-8px_rgba(0,184,217,0.6)]">
               <VoiceBars />
-              {pick('הקול שלה — חי', 'Her real voice')}
+              {pick('הקול שלה — חי', 'Her real voice', 'เสียงจริงของมายา')}
             </span>
           </div>
         )}
@@ -92,7 +92,7 @@ export default function MayaStage({
               onClick={() => { const v = videoRef.current; if (v) { v.muted = false; v.play().then(() => setBlocked(false)).catch(() => {}); } }}
               className="inline-flex items-center gap-2 bg-paper text-ink text-[0.78rem] font-semibold px-3.5 py-1.5 rounded-full shadow-lg"
             >
-              {pick('הדפדפן חסם את הקול — הקישו להפעלה', 'Your browser blocked the sound — tap to play')}
+              {pick('הדפדפן חסם את הקול — הקישו להפעלה', 'Your browser blocked the sound — tap to play', 'เบราว์เซอร์บล็อกเสียงไว้ แตะเพื่อเล่น')}
             </button>
           </div>
         )}
@@ -107,7 +107,7 @@ export default function MayaStage({
             className="group inline-flex items-center gap-2.5 bg-live-gradient text-white font-semibold px-7 py-3.5 rounded-full text-[0.95rem] shadow-[0_10px_28px_-10px_rgba(0,184,217,0.55)] hover:brightness-110 transition-all"
           >
             <MicIcon />
-            {pick('דברו איתה עכשיו', 'Talk to her now')}
+            {pick('דברו איתה עכשיו', 'Talk to her now', 'คุยกับมายาตอนนี้')}
           </button>
         </div>
       )}

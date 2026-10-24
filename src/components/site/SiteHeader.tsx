@@ -44,6 +44,8 @@ export default function SiteHeader({ sections = [] }: { sections?: SectionLink[]
     return () => { document.body.style.overflow = ''; };
   }, [menu]);
 
+  const closeAll = () => { setMenu(false); setProducts(false); };
+
   const jump = (href: string) => {
     setMenu(false);
     document.getElementById(href.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -58,7 +60,7 @@ export default function SiteHeader({ sections = [] }: { sections?: SectionLink[]
       }`}
     >
       <div className="max-w-[1200px] mx-auto flex items-center gap-6 px-5 h-16">
-        <Link to="/" className="text-[1.12rem] font-bold tracking-tight text-ink shrink-0" aria-label="Refael.ai">
+        <Link to="/" onClick={closeAll} className="text-[1.12rem] font-bold tracking-tight text-ink shrink-0" aria-label="Refael.ai">
           Refael<span className="text-live-gradient">.ai</span>
         </Link>
 
@@ -83,6 +85,7 @@ export default function SiteHeader({ sections = [] }: { sections?: SectionLink[]
                   <Link
                     key={p.path}
                     to={p.path}
+                    onClick={closeAll}
                     className={`group flex gap-3.5 rounded-xl p-3 transition-colors hover:bg-ink/[0.06] ${pathname === p.path ? 'bg-ink/[0.05]' : ''}`}
                   >
                     <img src={tr(p.image)} alt="" loading="lazy" className="w-14 h-14 rounded-lg object-cover object-top shrink-0 bg-ink/10" />
@@ -92,7 +95,7 @@ export default function SiteHeader({ sections = [] }: { sections?: SectionLink[]
                     </span>
                   </Link>
                 ))}
-                <Link to="/#products" className="flex items-center justify-center rounded-xl p-3 text-[0.88rem] text-ink/70 hover:text-ink hover:bg-ink/[0.06] transition-colors">
+                <Link to="/#products" onClick={closeAll} className="flex items-center justify-center rounded-xl p-3 text-[0.88rem] text-ink/70 hover:text-ink hover:bg-ink/[0.06] transition-colors">
                   {pick('כל המוצרים בעמוד הבית', 'All products on the homepage', 'ผลิตภัณฑ์ทั้งหมดในหน้าแรก')}
                 </Link>
               </div>
@@ -156,7 +159,7 @@ export default function SiteHeader({ sections = [] }: { sections?: SectionLink[]
           <ul className="space-y-1">
             {PRODUCTS.map(p => (
               <li key={p.path}>
-                <Link to={p.path} className="flex items-center gap-3 rounded-xl p-2.5 hover:bg-ink/[0.05]">
+                <Link to={p.path} onClick={closeAll} className="flex items-center gap-3 rounded-xl p-2.5 hover:bg-ink/[0.05]">
                   <img src={tr(p.image)} alt="" loading="lazy" className="w-11 h-11 rounded-lg object-cover object-top bg-ink/10 shrink-0" />
                   <span className="text-[1rem] font-semibold text-ink">{tr(p.name)}</span>
                 </Link>

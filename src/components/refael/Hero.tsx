@@ -60,21 +60,22 @@ export default function Hero() {
           </p>
 
           <div className="mt-9 flex flex-wrap gap-3">
-            <button
-              onClick={speak}
-              className="group inline-flex items-center gap-2.5 bg-live-gradient text-white font-semibold px-7 py-3.5 rounded-full text-[0.95rem] shadow-[0_10px_28px_-10px_rgba(0,184,217,0.55)] hover:brightness-110 transition-all"
-            >
-              <SpeakerIcon />
-              {pick('שמעו אותה מדברת', 'Hear her speak', 'ฟังเธอพูด')}
-            </button>
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-ink/15 text-ink px-7 py-3.5 rounded-full text-[0.95rem] hover:bg-ink/5 transition-colors"
+              className="group inline-flex items-center gap-2.5 bg-live-gradient text-white font-semibold px-7 py-3.5 rounded-full text-[0.95rem] shadow-[0_10px_28px_-10px_rgba(0,184,217,0.55)] hover:brightness-110 transition-all"
             >
-              {pick('לתאם דמו חי', 'Book a live demo', 'นัดชมการสาธิตสด')}
+              <WhatsAppIcon />
+              {pick('דברו איתנו בוואטסאפ', 'Talk to us on WhatsApp', 'แชทกับเราทาง WhatsApp')}
             </a>
+            <button
+              onClick={speak}
+              className="inline-flex items-center gap-2.5 border border-ink/15 text-ink px-7 py-3.5 rounded-full text-[0.95rem] hover:bg-ink/5 transition-colors"
+            >
+              <SpeakerIcon />
+              {pick('שמעו אותה מדברת', 'Hear her speak', 'ฟังเธอพูด')}
+            </button>
           </div>
           <p className="mt-3 text-[0.82rem] text-muted-foreground">
             {pick(
@@ -152,6 +153,14 @@ function SpeakerIcon() {
       <path d="M11 5 6 9H2v6h4l5 4V5z" />
       <path d="M15.5 8.5a5 5 0 0 1 0 7" />
       <path d="M19 5a9 9 0 0 1 0 14" />
+    </svg>
+  );
+}
+
+function WhatsAppIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z" />
     </svg>
   );
 }

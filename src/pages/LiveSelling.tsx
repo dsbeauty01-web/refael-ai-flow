@@ -125,7 +125,7 @@ export default function LiveSelling() {
                             : 'justify-self-start bg-[#f2efe9] text-[#1d1814] rounded-es-md'
                         }`}
                       >
-                        <span className={`block text-[0.72rem] font-bold mb-0.5 ${m.host ? 'text-live-a' : 'opacity-60'}`}>{tr(m.who)}</span>
+                        <span className={`block text-[0.72rem] font-bold mb-0.5 ${m.host ? 'text-live-a' : 'text-[#5b534c]'}`}>{tr(m.who)}</span>
                         {tr(m.text)}
                       </div>
                     ))}
@@ -138,7 +138,7 @@ export default function LiveSelling() {
                     <div>
                       <span className="block text-[0.95rem] font-semibold">{tr(PRODUCT_CARD.name)}</span>
                       <span className="text-[1.3rem] font-black text-[#e11d48]">{tr(PRODUCT_CARD.price)}</span>
-                      <s className="ms-2 text-[0.9rem] text-[#999]">{tr(PRODUCT_CARD.was)}</s>
+                      <s className="ms-2 text-[0.9rem] text-[#6b6b6b]">{tr(PRODUCT_CARD.was)}</s>
                     </div>
                   </div>
                 )}

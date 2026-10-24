@@ -73,22 +73,24 @@ export default function LeadForm() {
           <FadeUp className="w-full">
             <form onSubmit={onSubmit} className="surface p-6 sm:p-8 space-y-4 max-w-[640px]">
               <div>
-                <label className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('שם', 'Name', 'ชื่อ')} *</label>
-                <input required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className={inputCls} />
+                <label htmlFor="lf-name" className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('שם', 'Name', 'ชื่อ')} *</label>
+                <input id="lf-name" name="name" autoComplete="name" required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className={inputCls} />
               </div>
               <div>
-                <label className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('טלפון', 'Phone', 'เบอร์โทรศัพท์')} *</label>
-                <input required type="tel" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} className={inputCls} />
+                <label htmlFor="lf-phone" className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('טלפון', 'Phone', 'เบอร์โทรศัพท์')} *</label>
+                <input id="lf-phone" name="phone" required type="tel" autoComplete="tel" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} className={inputCls} />
               </div>
               <div>
-                <label className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('חברה', 'Company', 'บริษัท')}</label>
-                <input value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} className={inputCls} />
+                <label htmlFor="lf-company" className="block text-[0.8rem] font-semibold text-ink/70 mb-2">{pick('חברה', 'Company', 'บริษัท')}</label>
+                <input id="lf-company" name="company" value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} className={inputCls} />
               </div>
               <div>
-                <label className="block text-[0.8rem] font-semibold text-ink/70 mb-2">
+                <label htmlFor="lf-place" className="block text-[0.8rem] font-semibold text-ink/70 mb-2">
                   {pick('איפה האווטאר יעבוד?', 'Where will the avatar work?', 'อวตารจะทำงานที่ไหน?')} *
                 </label>
                 <select
+                  id="lf-place"
+                  name="place"
                   required
                   value={form.place}
                   onChange={e => setForm(f => ({ ...f, place: e.target.value }))}

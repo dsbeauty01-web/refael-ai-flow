@@ -97,7 +97,7 @@ export default function SiteFooter() {
           </nav>
         </div>
 
-        <p className="mt-14 pt-6 border-t border-ink/10 text-[0.8rem] text-ink/40">
+        <p className="mt-14 pt-6 border-t border-ink/10 text-[0.8rem] text-ink/60">
           {pick(
             `© ${new Date().getFullYear()} ${BUSINESS.nameHe}, ${BUSINESS.entityHe}`,
             `© ${new Date().getFullYear()} ${BUSINESS.name}, ${BUSINESS.entityEn}`,

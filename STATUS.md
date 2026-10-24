@@ -1,33 +1,68 @@
-# STATUS — Refael.ai LIVE AVATAR landing page
+# Refael.ai website: how it is built
 
-_Last update: 2026-07-15 evening (CLI took over from Lovable — credits dead; repo is now the source of truth)_
+_Last update: 2026-10-24 (site v2: one shell, all landing pages in the app, SEO)._
+Live: https://refael-ai-flow.lovable.app · Repo is the source of truth; Lovable builds `main` when you hit Publish.
 
-## DONE
-- **BRIGHT REDESIGN (CLI, 2026-07-15)** — full visual overhaul per Refael's "make it bright, use the videos" directive, following the anthropics/skills frontend-design skill:
-  - New palette: white paper / mist gray / ink navy, live gradient #00B8D9→#7C5CF0 still reserved for live+interactive. One dark ink band = the price-comparison section; footer dark to bookend.
-  - **Signature: the hero is a live demo.** Maya's real idle clip stands full-body on the page (studio-white footage feathered into the white bg with a CSS mask, `.blend-white`) and 5 gesture chips (נפנוף/ברוכים הבאים/הנהון/הצבעה/להתראות) play her real gesture clips on click, then return to idle.
-  - Real media transcoded into `public/media/` (~2.5MB total): maya_idle + 5 gestures (720p) from Refael's gestures_v2 pack, nova_close.mp4 (960², chest-up square clip), posters. Avatar cards now use real footage: Maya card = welcome loop, Nova close = square clip, Nova dance = /mia.png poster (no dance video yet).
-  - Verified with headless-Edge/puppeteer screenshots: desktop HE, desktop EN (mirrored correctly), mobile 390px (no horizontal overflow — probe in `scripts/overflow-probe.mjs`; `scripts/shot.mjs` takes screenshots against `vite preview`).
+## Pages (site map)
 
-## DONE (earlier)
-- **Prompt 1 (full page rebuild) LANDED** in commit `cf88caf` before Lovable credits died. All sections exist under `src/components/refael/`:
-  navbar → hero (typed greeting + caret + 2 CTAs + capability strip) → "לא עוד סרטון מדבר" (4 differentiators) → "תכירו את השלושה" (3 alternating avatar cards) → comparison table (mono numbers, Refael row highlighted) → use cases (5) → pricing (₪9,500 / ₪1,490) → lead form (n8n webhook) → one-line footer.
-- **Non-negotiable demo logic** is in, verbatim: `src/config/avatars.ts` (all podUrl/kioskUrl = null) + `src/hooks/useAvatarStatus.ts` (3s abort, 60s poll). Card states: checking = shimmer, live = gradient pulse + "פתחו שיחה חיה" new tab (no iframe), offline = grey badge + muted looping video, missing video → named poster div. No dead states possible.
-- **Design system**: midnight/surface/hologram-gradient tokens in `index.css` + `tailwind.config.ts`; gradient reserved for live/interactive elements; Suez One / Assistant / Space Grotesk / Inter / IBM Plex Mono loaded in `index.html`.
-- **i18n**: Hebrew default, EN/עב toggle in navbar, persisted to `localStorage("refael_lang")`, `document.documentElement.dir/lang` kept in sync.
-- **prefers-reduced-motion**: typed greeting renders instantly; pulse/caret/shimmer/fade-up disabled in CSS.
-- **RTL fix (CLI, 2026-07-15)**: removed `md:[direction:ltr]` hack in `AvatarsSection.tsx` — it broke card alternation in Hebrew and forced LTR direction onto Hebrew text in reversed rows. Order classes alone now handle alternation in both languages.
-- Old generalist-site components still exist under `src/components/` (landing/, portfolio/, etc.) but are **not routed** — `Index.tsx` renders only the new refael page. Left in place (ship > polish); safe to delete later.
+| URL | What | File |
+|---|---|---|
+| `/` | Homepage: hero (live Maya demo), product hub, how it works, use cases, packages, FAQ, contact | `src/pages/Index.tsx` |
+| `/live-selling` | Maya, AI host for live selling. The funnel page every post/DM points to. Thai shows the Thai host. | `src/pages/LiveSelling.tsx` + `src/content/liveSelling.ts` |
+| `/live-avatar` | Flagship: Maya as a full-body lobby/museum/showroom avatar | `src/pages/Maya.tsx` + `src/components/maya/*` |
+| `/ai-avatar` | Keyword page: talking AI avatar for business | `src/pages/Landing.tsx` + `src/content/landings.ts` |
+| `/brand-character` | Keyword page: AI brand character / mascot (Nova) | same as above |
+| `/voices` | Live voice agents you can call from the page | `src/pages/Voices.tsx` |
+| `/legal/privacy` `/legal/terms` `/legal/accessibility` | Legal | `src/pages/Legal.tsx` + `src/content/legal.ts` |
 
-## NEXT
-1. `npm run build` verify → commit → push → **Refael hits Publish in Lovable** (free) to flip the live URL.
-2. Drop the 3 demo videos into `public/demos/` as `maya.mp4`, `nova_dance.mp4`, `nova_close.mp4` (until then every card shows the named-poster fallback — by design, looks intentional).
-3. When a pod is up: paste its proxy URL + kiosk URL into `src/config/avatars.ts` (one file, nothing else to touch). Pod must serve `GET /health` → 200 + `Access-Control-Allow-Origin: *`.
+Every page is in Hebrew (default), English and Thai: add `?lang=en` or `?lang=th`.
 
-## BLOCKED / WAITING ON REFAEL
-- **`lovable-rebuild-prompts.md` is NOT in the repo or on this machine** — copy could not be verified verbatim against the pack, and Prompt 3 (polish spec) is unknown. Send the file if anything reads off.
-- Real WhatsApp number (placeholder `wa.me/972000000000` in `src/config/avatars.ts`).
-- Confirm pricing ₪9,500 / ₪1,490 (placeholders, already on the page).
-- Keep or rename "מיה" (Maya).
-- Hologram-lobby hero image (hero currently uses the gradient `hero-bg`; swap slot ready).
-- Lead form posts to the old n8n webhook `rafa5555.app.n8n.cloud/webhook/lead-email` — confirm it's still live.
+## Old URLs (do not delete these files)
+
+| Old | Goes to |
+|---|---|
+| `/maya.html` (in FB posts, comments, DMs) | `/live-selling` |
+| `/maya-en.html`, `/maya-th.html` | `/live-selling?lang=en` / `?lang=th` |
+| `/maya` (old nav link) | `/live-avatar` |
+| `/ai-live-host.html`, `/ai-avatar-business.html`, `/ai-brand-character.html` | `/live-selling`, `/ai-avatar`, `/brand-character` |
+
+The `.html` files are redirect stubs that keep their Facebook preview card, and `?utm`/`fbclid` survive the
+redirect. **Share `maya.html` / `maya-en.html` / `maya-th.html` on Facebook**: Facebook's preview bot does not run
+JavaScript, so these stubs are what give the right card per language.
+`public/privacy.html` is NOT a stub: it is the privacy + data-deletion URL registered with the Meta app.
+
+## How to change things
+
+- **Copy** for a page: the matching file in `src/content/` (every string has `he`, `en`, `th`). No em dashes.
+- **Products** (header menu, homepage hub, footer): `PRODUCTS` in `src/config/site.ts`.
+- **SEO titles/descriptions**: `src/config/routes.json`. Then run `npm run seo` to regenerate `public/sitemap.xml`
+  and the redirect stubs.
+- **Prices**: hidden site-wide (`SHOW_PRICES = false` in `src/config/site.ts`, Refael's rule: no public or monthly
+  prices). Set it to `true` and every price comes back.
+- **A new page**: add the route in `src/App.tsx`, its entry in `routes.json`, call `useSeo({ path })` in the page,
+  wrap it in `<SiteLayout sections={...}>`, add it to `PRODUCTS` if it is a product, then `npm run seo`.
+- **Social preview cards** (`public/og/*.jpg`, 1200x630): `scripts/og-cards.mjs` (instructions at the top).
+
+## Building blocks
+
+- `src/components/site/SiteLayout.tsx`: header + footer + floating WhatsApp, used by every page.
+- `SiteHeader.tsx`: Products menu, the page's own section links, language switch, WhatsApp button, mobile menu.
+- `SiteFooter.tsx`: the site map (products, site sections, languages, legal).
+- `Seo.tsx`: `useSeo()` sets title, description, canonical, Open Graph, hreflang (he/en/th/x-default) and JSON-LD.
+- `RouteEffects.tsx`: keeps `?lang=` in sync with the chosen language; scroll to top / to `#section` on navigation.
+- `blocks.tsx`: `SpeakingVideo` (tap for sound, pauses off-screen), `FaqList`, `RelatedProducts`.
+- `Price.tsx`: every price renders through it.
+
+## Checks
+
+- `npm run build` must pass (Lovable runs it).
+- `npm run qa -- <outDir> "/,/live-selling" "he,en,th"` against `vite preview` (port 4173): screenshots every page x
+  language x desktop/mobile and reports console errors, horizontal overflow and broken internal links.
+
+## Known gaps
+
+- `/live-avatar` (flagship) and its sections are Hebrew + English only; Thai visitors see English there.
+- English live-selling clip is Maya's general English pitch; a dedicated English live-selling clip needs fal credit.
+- Search Console: verify the site and submit `https://refael-ai-flow.lovable.app/sitemap.xml` (needs Refael's Google login).
+- Old generalist components under `src/components/landing/`, `portfolio/` and the root `components/*.tsx` are not routed
+  (dead code, safe to delete later).

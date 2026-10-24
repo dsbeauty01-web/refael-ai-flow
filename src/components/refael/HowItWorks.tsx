@@ -45,17 +45,15 @@ export default function HowItWorks() {
 
         <ol className="mt-14 grid gap-6 md:grid-cols-3">
           {STEPS.map(s => (
-            <FadeUp key={s.n}>
-              <li className="surface p-8 h-full list-none">
-                <span className="font-mono-num text-[0.95rem] text-live-gradient font-semibold">{s.n}</span>
-                <h3 className={`mt-4 ${fontDisplay} text-[1.5rem] leading-[1.2] text-ink`}>
-                  {pick(s.title.he, s.title.en, s.title.th)}
-                </h3>
-                <p className="mt-3 text-[0.98rem] text-ink/75 leading-[1.7]">
-                  {pick(s.body.he, s.body.en, s.body.th)}
-                </p>
-              </li>
-            </FadeUp>
+            <li key={s.n} className="surface p-8 h-full list-none">
+              <span className="font-mono-num text-[0.95rem] text-live-gradient font-semibold">{s.n}</span>
+              <h3 className={`mt-4 ${fontDisplay} text-[1.5rem] leading-[1.2] text-ink`}>
+                {pick(s.title.he, s.title.en, s.title.th)}
+              </h3>
+              <p className="mt-3 text-[0.98rem] text-ink/75 leading-[1.7]">
+                {pick(s.body.he, s.body.en, s.body.th)}
+              </p>
+            </li>
           ))}
         </ol>
       </div>

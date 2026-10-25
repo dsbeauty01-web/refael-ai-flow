@@ -24,8 +24,8 @@ const STEPS = [
     n: '03',
     title: { he: 'מחברים ידיים', en: 'Connect her hands', th: 'ต่อมือให้เธอ' },
     body: {
-      he: 'יומן, מייל, CRM, וואטסאפ. היא לא רק עונה — היא מבצעת.',
-      en: "Calendar, email, CRM, WhatsApp. She doesn't just answer — she acts.",
+      he: 'יומן, מייל, CRM, וואטסאפ. היא לא רק עונה, היא מבצעת.',
+      en: "Calendar, email, CRM, WhatsApp. She doesn't just answer, she acts.",
       th: 'ปฏิทิน อีเมล CRM WhatsApp เธอไม่ได้แค่ตอบ แต่ลงมือทำจริง',
     },
   },

@@ -117,8 +117,8 @@ export default function LeadForm() {
               {state === 'error' && (
                 <div className="text-[0.9rem] text-muted-foreground">
                   {pick(
-                    'פתחנו לכם וואטסאפ עם הפרטים — רק תשלחו. אם לא נפתח:',
-                    "We opened WhatsApp with your details — just hit send. If it didn't open:",
+                    'פתחנו לכם וואטסאפ עם הפרטים, רק תשלחו. אם לא נפתח:',
+                    "We opened WhatsApp with your details, just hit send. If it didn't open:",
                     'เราเปิด WhatsApp พร้อมข้อมูลของคุณแล้ว กดส่งได้เลย หากไม่เปิดขึ้นมา:'
                   )}{' '}
                   <a href={whatsappFallback()} target="_blank" rel="noopener noreferrer" className="text-live-gradient font-semibold underline">WhatsApp</a>

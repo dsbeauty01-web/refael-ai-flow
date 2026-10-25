@@ -4,7 +4,7 @@ import FadeUp from '@/components/refael/FadeUp';
 import { Check } from 'lucide-react';
 
 const MILESTONES: { weeks: string; he: string; en: string; th: string }[] = [
-  { weeks: '1–2', he: 'עיצוב הדמות (מראה, לבוש, קול — כולל אופציית קול משובט) ובניית מוח הידע מחומרי העסק', en: 'Designing the figure (look, wardrobe, voice — incl. cloned-voice option) and building the knowledge brain from your material', th: 'ออกแบบตัวละคร (หน้าตา ชุด เสียง รวมถึงตัวเลือกโคลนเสียง) และสร้างคลังความรู้จากข้อมูลธุรกิจของคุณ' },
+  { weeks: '1–2', he: 'עיצוב הדמות (מראה, לבוש, קול, כולל אופציית קול משובט) ובניית מוח הידע מחומרי העסק', en: 'Designing the figure (look, wardrobe, voice, incl. cloned-voice option) and building the knowledge brain from your material', th: 'ออกแบบตัวละคร (หน้าตา ชุด เสียง รวมถึงตัวเลือกโคลนเสียง) และสร้างคลังความรู้จากข้อมูลธุรกิจของคุณ' },
   { weeks: '3–4', he: 'חיבור הידיים: יומן, מייל, CRM, וואטסאפ · תרחישי שיחה · גבולות ברזל', en: 'Wiring the hands: calendar, email, CRM, WhatsApp · conversation flows · iron limits', th: 'เชื่อมต่อระบบ: ปฏิทิน อีเมล CRM WhatsApp · ออกแบบบทสนทนา · กำหนดขอบเขตที่เข้มงวด' },
   { weeks: '5–6', he: 'מנוע הנוכחות: מחוות, כיול הצבעה לחלל, מסך/עמדה, מצב המשיכה', en: 'The presence engine: gestures, pointing calibration, screen/kiosk, the pull mode', th: 'ระบบการแสดงตัว: ท่าทาง การปรับเทียบให้ชี้ทิศทางตรงกับพื้นที่จริง จอหรือตู้คีออสก์ และโหมดดึงดูดลูกค้า' },
   { weeks: '7', he: 'פיילוט חי בעסק + כיוונון על שיחות אמיתיות', en: 'A live pilot on-site + tuning on real conversations', th: 'ทดลองใช้งานจริงที่ธุรกิจของคุณ พร้อมปรับจูนจากบทสนทนาจริง' },
@@ -19,7 +19,7 @@ export default function HowBuilt() {
     pick('דמות בבעלותכם', 'A figure you own', 'ตัวละครที่เป็นของคุณเอง'),
     pick('עד 1,500 דקות שיחה בחודש', 'Up to 1,500 conversation minutes a month', 'สนทนาได้สูงสุด 1,500 นาทีต่อเดือน'),
     pick('SLA והתאוששות אוטומטית', 'SLA and automatic recovery', 'SLA และระบบกู้คืนอัตโนมัติ'),
-    pick('עדכוני מנועים שוטפים — אתם מקבלים אותם ראשונים', 'Ongoing engine upgrades — you get them first', 'อัปเกรดเอนจินอย่างต่อเนื่อง คุณได้ใช้ก่อนใคร'),
+    pick('עדכוני מנועים שוטפים, אתם מקבלים אותם ראשונים', 'Ongoing engine upgrades, you get them first', 'อัปเกรดเอนจินอย่างต่อเนื่อง คุณได้ใช้ก่อนใคร'),
   ];
 
   return (
@@ -31,7 +31,7 @@ export default function HowBuilt() {
             {pick('איך זה נבנה', 'How it\'s built', 'สร้างขึ้นอย่างไร')}
           </p>
           <h2 className={`${fontDisplay} mt-3 text-[clamp(2rem,4.6vw,3.2rem)] leading-[1.12] text-ink`}>
-            {pick('פרויקט הדגל — הכול, עד הקצה.', 'The flagship — everything, all the way.', 'โปรเจกต์เรือธง ครบทุกอย่าง จัดเต็มสุดทาง')}
+            {pick('פרויקט הדגל, הכול, עד הקצה.', 'The flagship, everything, all the way.', 'โปรเจกต์เรือธง ครบทุกอย่าง จัดเต็มสุดทาง')}
           </h2>
         </FadeUp>
 

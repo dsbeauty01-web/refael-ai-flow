@@ -55,7 +55,7 @@ const LiveDemos = () => {
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">Try It Live</h2>
         <p className="text-muted-foreground text-center mb-16 max-w-xl mx-auto">
-          These are real AI assistants — interact with them right now
+          These are real AI assistants, interact with them right now
         </p>
         <div
           className={`grid lg:grid-cols-2 gap-8 transition-all duration-700 ${
@@ -70,7 +70,7 @@ const LiveDemos = () => {
           />
           <DemoCard
             title="Salon Receptionist"
-            subtitle="Book an appointment by voice — try the 🎤 button"
+            subtitle="Book an appointment by voice, try the 🎤 button"
             src="https://dsbeauty01-web.github.io/salon/"
             hint="💡 Say 'I want to book a haircut for tomorrow at 3pm'"
           />

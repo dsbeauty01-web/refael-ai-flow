@@ -41,8 +41,8 @@ const TechSection = () => {
             <div className="glass rounded-2xl p-6">
               <p className={`text-[1.1rem] leading-relaxed ${isHebrew ? 'font-hebrew' : ''}`}>
                 {isHebrew
-                  ? 'דמיין בוט תמיכה שמכיר כל מוצר בקטלוג של 10,000 פריטים — ועונה תוך 5 שניות.'
-                  : 'Imagine a support bot that knows every detail of your 10,000-item catalog — and answers in 5 seconds.'}
+                  ? 'דמיין בוט תמיכה שמכיר כל מוצר בקטלוג של 10,000 פריטים, ועונה תוך 5 שניות.'
+                  : 'Imagine a support bot that knows every detail of your 10,000-item catalog, and answers in 5 seconds.'}
               </p>
             </div>
           </div>

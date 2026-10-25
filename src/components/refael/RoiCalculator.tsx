@@ -76,7 +76,7 @@ export default function RoiCalculator() {
                     : pick('הפרש חודשי', 'Monthly difference', 'ส่วนต่างต่อเดือน')}
                 </p>
                 <p className={`mt-2 font-mono-num text-[1.75rem] ${worthIt ? 'text-live-gradient font-semibold' : 'text-muted-foreground'}`}>
-                  {worthIt ? ils(saving) : '—'}
+                  {worthIt ? ils(saving) : ', '}
                 </p>
               </div>
             </div>
@@ -89,8 +89,8 @@ export default function RoiCalculator() {
                     `ที่ปริมาณเท่านี้ มายาคืนทุนตัวเองและเหลือให้คุณ ${ils(saving)} ต่อเดือน`
                   )
                 : pick(
-                    'בנפח הזה עוד לא בטוח שזה משתלם לכם — ונגיד לכם את זה גם בשיחה. אווטאר לאתר ב-₪290 כנראה מתאים יותר.',
-                    "At this volume it may not pay off yet — and we'll say so on the call. The ₪290 website avatar is probably the better fit.",
+                    'בנפח הזה עוד לא בטוח שזה משתלם לכם, ונגיד לכם את זה גם בשיחה. אווטאר לאתר ב-₪290 כנראה מתאים יותר.',
+                    "At this volume it may not pay off yet, and we'll say so on the call. The ₪290 website avatar is probably the better fit.",
                     'ที่ปริมาณเท่านี้อาจยังไม่คุ้ม และเราจะบอกคุณตรง ๆ ตอนคุยกัน แพ็กเกจเว็บไซต์ 290 ₪ น่าจะเหมาะกว่า'
                   )}
             </p>

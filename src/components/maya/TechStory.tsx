@@ -22,15 +22,15 @@ export default function TechStory() {
             {pick('הסיפור הטכנולוגי', 'The technology', 'เทคโนโลยี')}
           </p>
           <h2 className={`${fontDisplay} mt-3 text-[clamp(1.8rem,4vw,2.6rem)] leading-[1.2] text-ink`}>
-            {pick('לשכור טכנולוגיה — או לבנות נכס.', 'Renting technology — or building an asset.', 'เช่าเทคโนโลยี หรือสร้างสินทรัพย์ของคุณเอง')}
+            {pick('לשכור טכנולוגיה, או לבנות נכס.', 'Renting technology, or building an asset.', 'เช่าเทคโนโลยี หรือสร้างสินทรัพย์ของคุณเอง')}
           </h2>
         </FadeUp>
 
         <FadeUp>
           <p className="mt-6 text-[1.08rem] text-ink/80 leading-[1.8] max-w-[720px] mx-auto">
             {pick(
-              'מאיה רצה על אותה משפחת מנועים שמאחורי מעבדות ה-AI הגדולות בעולם — בקוד פתוח, על שרתי GPU ייעודיים שלנו. בלי תשלום לפי דקה לספק זר, בלי שהנתונים שלכם מאמנים מודל של מישהו אחר. כשיוצא מנוע טוב יותר — והוא יוצא, כל חודש — מאיה משתדרגת.',
-              'Maya runs on the same family of engines behind the world\'s biggest AI labs — open source, on our own dedicated GPU servers. No per-minute fee to a foreign vendor, and your data never trains someone else\'s model. When a better engine ships — and one does, every month — Maya upgrades.', 'มายาทำงานบนเอนจินตระกูลเดียวกับที่ห้องแล็บ AI ระดับโลกใช้ เป็นโอเพนซอร์ส และรันบนเซิร์ฟเวอร์ GPU เฉพาะของเราเอง ไม่ต้องจ่ายค่าบริการรายนาทีให้ผู้ให้บริการต่างประเทศ และข้อมูลของคุณจะไม่ถูกนำไปฝึกโมเดลของใคร เมื่อมีเอนจินที่ดีกว่าออกมา ซึ่งมีออกมาใหม่ทุกเดือน มายาก็อัปเกรดตามทันที'
+              'מאיה רצה על אותה משפחת מנועים שמאחורי מעבדות ה-AI הגדולות בעולם, בקוד פתוח, על שרתי GPU ייעודיים שלנו. בלי תשלום לפי דקה לספק זר, בלי שהנתונים שלכם מאמנים מודל של מישהו אחר. כשיוצא מנוע טוב יותר, והוא יוצא, כל חודש, מאיה משתדרגת.',
+              'Maya runs on the same family of engines behind the world\'s biggest AI labs, open source, on our own dedicated GPU servers. No per-minute fee to a foreign vendor, and your data never trains someone else\'s model. When a better engine ships, and one does, every month, Maya upgrades.', 'มายาทำงานบนเอนจินตระกูลเดียวกับที่ห้องแล็บ AI ระดับโลกใช้ เป็นโอเพนซอร์ส และรันบนเซิร์ฟเวอร์ GPU เฉพาะของเราเอง ไม่ต้องจ่ายค่าบริการรายนาทีให้ผู้ให้บริการต่างประเทศ และข้อมูลของคุณจะไม่ถูกนำไปฝึกโมเดลของใคร เมื่อมีเอนจินที่ดีกว่าออกมา ซึ่งมีออกมาใหม่ทุกเดือน มายาก็อัปเกรดตามทันที'
             )}
           </p>
         </FadeUp>

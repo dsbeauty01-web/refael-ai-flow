@@ -70,8 +70,8 @@ const HeroSection = () => {
 
           <p className={`text-[1.25rem] text-muted-foreground mb-10 leading-relaxed max-w-xl ${isHebrew ? 'font-hebrew' : ''}`}>
             {isHebrew
-              ? 'אני בונה בוטים חכמים עם פנים אמיתיות שעונים ללקוחות, קובעים תורים, ומוכרים — גם ב-3 בלילה. מה שחברות גדולות משלמות עליו עשרות אלפים, אני בונה תוך ימים.'
-              : 'I build AI bots with real talking faces that answer customers, book appointments, and sell — even at 3am. What big companies pay $10K+ for, I build in days.'}
+              ? 'אני בונה בוטים חכמים עם פנים אמיתיות שעונים ללקוחות, קובעים תורים, ומוכרים, גם ב-3 בלילה. מה שחברות גדולות משלמות עליו עשרות אלפים, אני בונה תוך ימים.'
+              : 'I build AI bots with real talking faces that answer customers, book appointments, and sell, even at 3am. What big companies pay $10K+ for, I build in days.'}
           </p>
 
           <div className={`flex flex-col sm:flex-row gap-3 ${isHebrew ? 'justify-end' : 'justify-start'}`}>

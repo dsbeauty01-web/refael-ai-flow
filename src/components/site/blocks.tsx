@@ -132,10 +132,10 @@ export function RelatedProducts({ current }: { current: string }) {
         <h2 className={`${fontDisplay} text-[clamp(1.6rem,3.4vw,2.2rem)] text-ink`}>
           {pick('עוד דרכים להשתמש בזה', 'Other ways to use it', 'วิธีใช้งานแบบอื่น')}
         </h2>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {others.map(p => (
-            <Link key={p.path} to={p.path} className="group flex gap-4 rounded-2xl border border-ink/10 bg-mist p-3 hover:border-ink/25 transition-colors">
-              <img src={tr(p.image)} alt="" loading="lazy" className="w-16 h-16 rounded-xl object-cover object-top bg-ink/10 shrink-0" />
+            <Link key={p.path} to={p.path} className="group flex lg:flex-col gap-4 lg:gap-3 rounded-2xl border border-ink/10 bg-mist p-3 hover:border-ink/25 transition-colors">
+              <img src={tr(p.image)} alt="" loading="lazy" className="w-16 h-16 lg:w-full lg:h-32 rounded-xl object-cover object-top bg-ink/10 shrink-0" />
               <span className="py-1">
                 <span className="block text-[0.98rem] font-semibold text-ink leading-snug">{tr(p.name)}</span>
                 <span className="block text-[0.82rem] text-ink/55 mt-1 line-clamp-2">{tr(p.blurb)}</span>

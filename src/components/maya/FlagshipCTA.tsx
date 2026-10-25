@@ -64,7 +64,7 @@ export default function FlagshipCTA() {
             {pick('רוצים מאיה משלכם?', 'Want your own Maya?', 'อยากมีมายาเป็นของตัวเองไหม?')}
           </h2>
           <p className="mt-4 text-[1.05rem] text-muted-foreground">
-            {pick('ספרו לנו על העסק — ומאיה עצמה תחזור אליכם. באמת.', 'Tell us about your business — and Maya herself will call you back. Really.', 'เล่าเรื่องธุรกิจของคุณให้เราฟัง แล้วมายาจะเป็นคนโทรกลับหาคุณเอง ไม่ได้พูดเล่น')}
+            {pick('ספרו לנו על העסק, ומאיה עצמה תחזור אליכם. באמת.', 'Tell us about your business, and Maya herself will call you back. Really.', 'เล่าเรื่องธุรกิจของคุณให้เราฟัง แล้วมายาจะเป็นคนโทรกลับหาคุณเอง ไม่ได้พูดเล่น')}
           </p>
         </FadeUp>
 
@@ -119,7 +119,7 @@ export default function FlagshipCTA() {
             )}
             {state === 'error' && (
               <div className="text-[0.9rem] text-muted-foreground">
-                {pick('פתחנו לכם וואטסאפ עם הפרטים — רק תשלחו. אם לא נפתח:', 'We opened WhatsApp with your details — just hit send. If it didn\'t open:', 'เราเปิด WhatsApp พร้อมข้อมูลของคุณไว้แล้ว แค่กดส่ง หากหน้าต่างไม่เปิดขึ้นมา:')}{' '}
+                {pick('פתחנו לכם וואטסאפ עם הפרטים, רק תשלחו. אם לא נפתח:', 'We opened WhatsApp with your details, just hit send. If it didn\'t open:', 'เราเปิด WhatsApp พร้อมข้อมูลของคุณไว้แล้ว แค่กดส่ง หากหน้าต่างไม่เปิดขึ้นมา:')}{' '}
                 <a href={whatsappFallback()} target="_blank" rel="noopener noreferrer" className="text-live-gradient font-semibold underline">WhatsApp</a>
               </div>
             )}

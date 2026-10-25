@@ -17,8 +17,8 @@ export default function About() {
           </h2>
           <p className="mt-6 text-[1.08rem] text-ink/80 leading-[1.8]">
             {pick(
-              'בונה אוטומציות ובוטים לעסקים ישראליים מאז 2025. את מערך האווטארים בניתי בעצמי, מנוע-מנוע, על אותה ארכיטקטורה שהענקים מוכרים — כי האמנתי שעסק ישראלי לא צריך לשלם דולרים לדקה כדי שתהיה לו פקידה דיגיטלית שמדברת עברית.',
-              "Building automations and bots for Israeli businesses since 2025. I built the avatar stack myself, engine by engine, on the same architecture the giants sell — because I believed an Israeli business shouldn't have to pay dollars per minute to have a digital receptionist that speaks Hebrew.",
+              'בונה אוטומציות ובוטים לעסקים ישראליים מאז 2025. את מערך האווטארים בניתי בעצמי, מנוע-מנוע, על אותה ארכיטקטורה שהענקים מוכרים, כי האמנתי שעסק ישראלי לא צריך לשלם דולרים לדקה כדי שתהיה לו פקידה דיגיטלית שמדברת עברית.',
+              "Building automations and bots for Israeli businesses since 2025. I built the avatar stack myself, engine by engine, on the same architecture the giants sell, because I believed an Israeli business shouldn't have to pay dollars per minute to have a digital receptionist that speaks Hebrew.",
               'สร้างระบบอัตโนมัติและบอทให้ธุรกิจอิสราเอลตั้งแต่ปี 2025 ผมสร้างระบบอวตารนี้ด้วยตัวเอง ทีละเอนจิน บนสถาปัตยกรรมเดียวกับที่บริษัทยักษ์ใหญ่ขาย เพราะผมเชื่อว่าธุรกิจอิสราเอลไม่ควรต้องจ่ายเป็นดอลลาร์ต่อนาที เพียงเพื่อให้มีพนักงานต้อนรับดิจิทัลที่พูดภาษาฮีบรูได้'
             )}
           </p>

@@ -33,19 +33,19 @@ const RealCustomerVideo = () => {
   const t = isHebrew
     ? {
         sectionTitle: 'ככה זה נראה אצל לקוחות אמיתיים',
-        cardTitle: 'מאיה — מזכירה דיגיטלית',
+        cardTitle: 'מאיה, מזכירה דיגיטלית',
         cardSubtitle: 'דמו חי של בוט לקליניקת יופי',
         cardBody:
           'לחצו על הבועה של מאיה למטה כדי לדבר איתה. היא קובעת תורים, עונה על שאלות מחירים ושעות, ופועלת 24/7.',
-        hint: '👀 הסתכלו בפינה למטה — מאיה כבר שם',
+        hint: '👀 הסתכלו בפינה למטה, מאיה כבר שם',
       }
     : {
         sectionTitle: 'Real customers, real results',
-        cardTitle: 'Maya — Digital Receptionist',
+        cardTitle: 'Maya: Digital Receptionist',
         cardSubtitle: 'Live demo of a beauty clinic bot',
         cardBody:
           "Click Maya's bubble below to chat. She books appointments, answers price/hours questions, runs 24/7.",
-        hint: '👀 Look at the corner below — Maya is already there',
+        hint: '👀 Look at the corner below, Maya is already there',
       };
 
   return (

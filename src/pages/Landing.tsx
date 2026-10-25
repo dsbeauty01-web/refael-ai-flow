@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Check } from 'lucide-react';
+import { Check, UserRound, Mic, MessageCircle } from 'lucide-react';
 import { useT } from '@/components/refael/i18n';
 import SiteLayout from '@/components/site/SiteLayout';
 import { SpeakingVideo, FaqList, RelatedProducts, playWithSound } from '@/components/site/blocks';
@@ -15,6 +15,12 @@ const SECTIONS = [
   { href: '#about', he: 'על הפתרון', en: 'Overview', th: 'ภาพรวม' },
   { href: '#faq', he: 'שאלות', en: 'FAQ', th: 'คำถาม' },
 ];
+const SECTIONS_FULL = [
+  { href: '#modes', he: 'אווטאר, קול או צ׳אט', en: 'Avatar, voice or chat', th: 'อวตาร เสียง หรือแชท' },
+  { href: '#tools', he: 'מה מחובר', en: "What it's wired into", th: 'เชื่อมกับอะไรบ้าง' },
+  ...SECTIONS,
+];
+const MODE_ICON = { avatar: UserRound, voice: Mic, chat: MessageCircle };
 
 /** Keyword landing pages (/ai-avatar, /brand-character), driven by content/landings.ts. */
 export default function Landing() {
@@ -23,7 +29,9 @@ export default function Landing() {
   const { language, pick, tr, fontDisplay } = useT();
   const meta = routeMeta(page?.path ?? pathname);
   const media = page?.media[language];
-  const wa = `${WHATSAPP_URL}?text=${encodeURIComponent(tr(OFFER.message))}`;
+  const offer = page?.offer ?? { ...OFFER, cta: HERO.cta };
+  const proof = page?.proof ?? PROOF;
+  const wa = `${WHATSAPP_URL}?text=${encodeURIComponent(tr(offer.message))}`;
 
   useSeo({
     path: page?.path ?? pathname,
@@ -39,7 +47,7 @@ export default function Landing() {
   if (!page || !media) return <NotFound />;
 
   return (
-    <SiteLayout sections={SECTIONS} whatsappMessage={tr(OFFER.message)}>
+    <SiteLayout sections={page.modes ? SECTIONS_FULL : SECTIONS} whatsappMessage={tr(offer.message)}>
       <section className="relative hero-bg overflow-hidden px-5 pt-28 pb-20 lg:pt-36 lg:pb-24">
         <div className="absolute inset-0 grid-veil pointer-events-none" aria-hidden />
         <div className="relative max-w-[1200px] mx-auto grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -61,7 +69,7 @@ export default function Landing() {
                 className="inline-flex items-center gap-2.5 rounded-full bg-[#25D366] text-[#06210f] font-bold px-7 py-3.5 text-[1rem] shadow-[0_14px_34px_-12px_rgba(37,211,102,0.75)] hover:brightness-105 transition"
               >
                 <WhatsAppGlyph className="w-5 h-5" />
-                {tr(HERO.cta)}
+                {tr(offer.cta)}
               </a>
               <button
                 type="button"
@@ -73,8 +81,8 @@ export default function Landing() {
               </button>
             </div>
             <dl className="mt-11 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 max-w-[560px]">
-              {PROOF.map(p => (
-                <div key={p.n} className="bg-paper/90 px-4 py-4">
+              {proof.map(p => (
+                <div key={p.n + tr(p.label)} className="bg-paper/90 px-4 py-4">
                   <dt className="sr-only">{tr(p.label)}</dt>
                   <dd>
                     <span className="block font-mono-num text-[1.6rem] font-semibold text-ink leading-none">{p.n}</span>
@@ -94,6 +102,60 @@ export default function Landing() {
           />
         </div>
       </section>
+
+      {page.modes && (
+        <section id="modes" className="px-5 py-24 bg-paper scroll-mt-16">
+          <div className="max-w-[1200px] mx-auto">
+            <h2 className={`${fontDisplay} text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.12] text-ink max-w-[22ch]`}>
+              {pick('אותו מוח. אתם בוחרים את הפנים.', 'One brain. You choose the face.', 'สมองเดียวกัน คุณเลือกหน้าตาได้')}
+            </h2>
+            <p className="mt-4 text-[1.05rem] text-muted-foreground max-w-[60ch] leading-[1.7]">
+              {pick(
+                'הידע, הכלים והאופי זהים בכל שלוש הדרכים. אפשר להתחיל באחת ולהוסיף את השאר בלי לבנות מחדש.',
+                'The knowledge, tools and personality are the same in all three. Start with one and add the others without rebuilding.',
+                'ข้อมูล เครื่องมือ และบุคลิกเหมือนกันทั้งสามแบบ เริ่มจากแบบเดียวแล้วค่อยเพิ่มแบบอื่นได้โดยไม่ต้องสร้างใหม่'
+              )}
+            </p>
+            <div className="mt-12 grid gap-4 md:grid-cols-3">
+              {page.modes.map(m => {
+                const Icon = MODE_ICON[m.icon];
+                return (
+                  <div key={m.icon} className="rounded-[22px] border border-ink/10 bg-mist p-7 flex flex-col">
+                    <span className="w-12 h-12 rounded-2xl bg-live-gradient grid place-items-center text-white" aria-hidden>
+                      <Icon className="w-6 h-6" />
+                    </span>
+                    <h3 className="mt-5 text-[1.3rem] font-bold text-ink">{tr(m.title)}</h3>
+                    <p className="mt-2 text-[1rem] leading-[1.65] text-ink/75">{tr(m.body)}</p>
+                    <p className="mt-auto pt-5 text-[0.88rem] text-ink/55">{tr(m.where)}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {page.tools && (
+        <section id="tools" className="px-5 py-24 hero-bg relative overflow-hidden scroll-mt-16">
+          <div className="absolute inset-0 grid-veil pointer-events-none" aria-hidden />
+          <div className="relative max-w-[1200px] mx-auto">
+            <h2 className={`${fontDisplay} text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.12] text-ink max-w-[22ch]`}>
+              {pick('לא רק עונה. עושה.', "It doesn't just answer. It acts.", 'ไม่ได้แค่ตอบ แต่ลงมือทำให้ด้วย')}
+            </h2>
+            <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {page.tools.map((t, i) => (
+                <li key={i} className="rounded-2xl border border-ink/15 bg-paper/70 backdrop-blur p-6">
+                  <p className="flex items-center gap-2.5 text-[1.08rem] font-semibold text-ink">
+                    <Check className="w-5 h-5 text-live-a shrink-0" aria-hidden />
+                    {tr(t.title)}
+                  </p>
+                  <p className="mt-2 text-[0.96rem] leading-[1.65] text-ink/70">{tr(t.body)}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       <section id="about" className="px-5 py-24 bg-mist scroll-mt-16">
         <div className="max-w-[1100px] mx-auto space-y-16">
@@ -122,9 +184,9 @@ export default function Landing() {
 
       <section className="relative px-5 py-24 hero-bg overflow-hidden">
         <div className="relative max-w-[820px] mx-auto text-center">
-          <h2 className={`${fontDisplay} text-[clamp(2rem,4.8vw,3.3rem)] leading-[1.1] text-ink`}>{tr(OFFER.title)}</h2>
-          <p className="mt-5 text-[1.1rem] leading-[1.7] text-ink/80">{tr(OFFER.body)}</p>
-          <p className="mt-2 text-[1.02rem] font-semibold text-live-a">{tr(OFFER.promise)}</p>
+          <h2 className={`${fontDisplay} text-[clamp(2rem,4.8vw,3.3rem)] leading-[1.1] text-ink`}>{tr(offer.title)}</h2>
+          <p className="mt-5 text-[1.1rem] leading-[1.7] text-ink/80">{tr(offer.body)}</p>
+          <p className="mt-2 text-[1.02rem] font-semibold text-live-a">{tr(offer.promise)}</p>
           <a
             href={wa}
             target="_blank"
@@ -132,7 +194,7 @@ export default function Landing() {
             className="mt-9 inline-flex items-center gap-3 rounded-full bg-[#25D366] text-[#06210f] font-bold px-9 py-4 text-[1.1rem] shadow-[0_18px_44px_-14px_rgba(37,211,102,0.8)] hover:brightness-105 transition"
           >
             <WhatsAppGlyph className="w-6 h-6" />
-            {tr(OFFER.button)}
+            {tr(offer.button)}
           </a>
         </div>
       </section>

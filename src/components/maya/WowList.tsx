@@ -113,7 +113,7 @@ export default function WowList() {
             {pick('מה היא יודעת לעשות', 'What she can do', 'มายาทำอะไรได้บ้าง')}
           </p>
           <h2 className={`${fontDisplay} mt-3 text-[clamp(2rem,4.6vw,3.2rem)] leading-[1.12] text-ink max-w-[760px]`}>
-            {pick('כל שורה כאן היא פיצ׳ר אמיתי — לא הבטחה.', 'Every line here is a real feature — not a promise.', 'ทุกบรรทัดตรงนี้คือฟีเจอร์ที่ใช้งานได้จริง ไม่ใช่แค่คำสัญญา')}
+            {pick('כל שורה כאן היא פיצ׳ר אמיתי, לא הבטחה.', 'Every line here is a real feature, not a promise.', 'ทุกบรรทัดตรงนี้คือฟีเจอร์ที่ใช้งานได้จริง ไม่ใช่แค่คำสัญญา')}
           </h2>
         </FadeUp>
 
@@ -124,8 +124,8 @@ export default function WowList() {
             kicker={pick('היא רואה אותך', 'She sees you', 'เธอมองเห็นคุณ')}
             title={pick('מברכת אותך לפני שאמרת מילה', 'She greets you before you say a word', 'ทักทายคุณก่อนที่คุณจะเอ่ยปาก')}
             body={pick(
-              'מצלמה דיסקרטית מעל המסך. לקוח מתקרב — מאיה מזדקפת, מנופפת ומברכת. לקוח קבוע? היא מזהה לפי היומן: "שלום מר כהן! ד״ר לוי מחכה לך ב-10."',
-              'A discreet camera above the screen. A customer approaches — Maya straightens, waves and greets them. A regular? She recognises them from the calendar: "Hello Mr. Cohen! Dr. Levi is expecting you at 10."', 'กล้องขนาดเล็กติดอยู่เหนือจอ เมื่อลูกค้าเดินเข้ามาใกล้ มายาจะยืดตัวตรง โบกมือ และทักทาย ถ้าเป็นลูกค้าประจำ เธอจำได้จากปฏิทินนัด: "สวัสดีค่ะคุณโคเฮน คุณหมอเลวีรอคุณอยู่ตอน 10 โมงค่ะ"'
+              'מצלמה דיסקרטית מעל המסך. לקוח מתקרב, מאיה מזדקפת, מנופפת ומברכת. לקוח קבוע? היא מזהה לפי היומן: "שלום מר כהן! ד״ר לוי מחכה לך ב-10."',
+              'A discreet camera above the screen. A customer approaches, Maya straightens, waves and greets them. A regular? She recognises them from the calendar: "Hello Mr. Cohen! Dr. Levi is expecting you at 10."', 'กล้องขนาดเล็กติดอยู่เหนือจอ เมื่อลูกค้าเดินเข้ามาใกล้ มายาจะยืดตัวตรง โบกมือ และทักทาย ถ้าเป็นลูกค้าประจำ เธอจำได้จากปฏิทินนัด: "สวัสดีค่ะคุณโคเฮน คุณหมอเลวีรอคุณอยู่ตอน 10 โมงค่ะ"'
             )}
             clip={<Clip src="/media/maya_welcome.mp4" />}
           />
@@ -134,10 +134,10 @@ export default function WowList() {
             flip
             icon={<Wand2 className="w-5 h-5" />}
             kicker={pick('השלט החי', 'The living sign', 'ป้ายมีชีวิต')}
-            title={pick('היא מרימה כרטיס — והמידע שלך מופיע עליו בזמן אמת', 'She lifts a card — and your live data appears on it', 'เธอยกการ์ดขึ้นมา แล้วข้อมูลสดของคุณก็ปรากฏบนการ์ดทันที')}
+            title={pick('היא מרימה כרטיס, והמידע שלך מופיע עליו בזמן אמת', 'She lifts a card, and your live data appears on it', 'เธอยกการ์ดขึ้นมา แล้วข้อมูลสดของคุณก็ปรากฏบนการ์ดทันที')}
             body={pick(
-              'תנועה אנושית ומידע חי, בשוט אחד: מספר התור שלך, QR לטופס, הוראות הגעה. הפיצ׳ר שאין לאף אחד בעולם — והלקוחות מצלמים אותו.',
-              'Human motion and live data in a single shot: your queue number, a QR to the form, directions. The feature no one else in the world has — and customers film it.', 'การเคลื่อนไหวแบบมนุษย์กับข้อมูลสดในช็อตเดียว: หมายเลขคิวของคุณ QR สำหรับกรอกแบบฟอร์ม และเส้นทางการเดินทาง ฟีเจอร์ที่ยังไม่มีใครในโลกมี และลูกค้าต้องหยิบมือถือขึ้นมาถ่าย'
+              'תנועה אנושית ומידע חי, בשוט אחד: מספר התור שלך, QR לטופס, הוראות הגעה. הפיצ׳ר שאין לאף אחד בעולם, והלקוחות מצלמים אותו.',
+              'Human motion and live data in a single shot: your queue number, a QR to the form, directions. The feature no one else in the world has, and customers film it.', 'การเคลื่อนไหวแบบมนุษย์กับข้อมูลสดในช็อตเดียว: หมายเลขคิวของคุณ QR สำหรับกรอกแบบฟอร์ม และเส้นทางการเดินทาง ฟีเจอร์ที่ยังไม่มีใครในโลกมี และลูกค้าต้องหยิบมือถือขึ้นมาถ่าย'
             )}
             clip={<Clip src="/media/maya_nod.mp4" overlay={<LiveSignOverlay />} />}
           />
@@ -145,7 +145,7 @@ export default function WowList() {
           <FeatureRow
             icon={<Navigation className="w-5 h-5" />}
             kicker={pick('היא מצביעה על העולם האמיתי', 'She points at the real world', 'เธอชี้ไปยังโลกจริง')}
-            title={pick('"חדר ההמתנה? שם משמאל" — והיד מצביעה לכיוון הנכון', '"The waiting room? Just there on the left" — and her hand points the right way', '"ห้องรอใช่ไหมคะ? อยู่ทางซ้ายมือค่ะ" แล้วมือของเธอก็ชี้ไปถูกทิศ')}
+            title={pick('"חדר ההמתנה? שם משמאל", והיד מצביעה לכיוון הנכון', '"The waiting room? Just there on the left", and her hand points the right way', '"ห้องรอใช่ไหมคะ? อยู่ทางซ้ายมือค่ะ" แล้วมือของเธอก็ชี้ไปถูกทิศ')}
             body={pick(
               'כיול חד-פעמי בהתקנה מלמד אותה את החלל שלכם. הדמות הדיגיטלית הופכת לחלק מהמרחב הפיזי.',
               'A one-time calibration at install teaches her your space. The digital figure becomes part of the physical room.', 'การปรับเทียบเพียงครั้งเดียวตอนติดตั้งทำให้เธอรู้จักพื้นที่ของคุณ ตัวละครดิจิทัลจึงกลายเป็นส่วนหนึ่งของพื้นที่จริง'
@@ -156,32 +156,32 @@ export default function WowList() {
 
         {/* The rest, as a capability grid */}
         <div className="mt-24 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          <Card icon={<MessageSquare className="w-5 h-5" />} title={pick('היא מדברת — לא מקריאה', 'She speaks — she doesn\'t read aloud', 'เธอพูดคุย ไม่ใช่อ่านบท')}>
+          <Card icon={<MessageSquare className="w-5 h-5" />} title={pick('היא מדברת, לא מקריאה', 'She speaks, she doesn\'t read aloud', 'เธอพูดคุย ไม่ใช่อ่านบท')}>
             <p>{pick(
-              'קול-לקול אמיתי: שומעת, חושבת ועונה בקול ישראלי טבעי. אפשר להתפרץ לה באמצע משפט — היא עוצרת ומקשיבה, כמו בן אדם.',
-              'True voice-to-voice: she hears, thinks and answers in a natural Israeli voice. Interrupt her mid-sentence — she stops and listens, like a person.', 'สนทนาด้วยเสียงแบบเรียลไทม์: ฟัง คิด และตอบด้วยสำเนียงอิสราเอลที่เป็นธรรมชาติ พูดแทรกกลางประโยคได้ เธอจะหยุดและฟัง เหมือนคนจริงๆ'
+              'קול-לקול אמיתי: שומעת, חושבת ועונה בקול ישראלי טבעי. אפשר להתפרץ לה באמצע משפט, היא עוצרת ומקשיבה, כמו בן אדם.',
+              'True voice-to-voice: she hears, thinks and answers in a natural Israeli voice. Interrupt her mid-sentence, she stops and listens, like a person.', 'สนทนาด้วยเสียงแบบเรียลไทม์: ฟัง คิด และตอบด้วยสำเนียงอิสราเอลที่เป็นธรรมชาติ พูดแทรกกลางประโยคได้ เธอจะหยุดและฟัง เหมือนคนจริงๆ'
             )}</p>
             <p className="text-[0.85rem] text-muted-foreground">{pick(
-              'עברית · אנגלית · רוסית — עוברת שפה לבד לפי הלקוח. פרימיום: קול משובט ייחודי לעסק, שלכם לנצח.',
-              'Hebrew · English · Russian — she switches by herself to match the customer. Premium: a unique cloned voice for your business, yours forever.', 'ฮีบรู · อังกฤษ · รัสเซีย สลับภาษาเองตามลูกค้า ระดับพรีเมียม: เสียงโคลนเฉพาะสำหรับธุรกิจของคุณ เป็นของคุณตลอดไป'
+              'עברית · אנגלית · רוסית, עוברת שפה לבד לפי הלקוח. פרימיום: קול משובט ייחודי לעסק, שלכם לנצח.',
+              'Hebrew · English · Russian, she switches by herself to match the customer. Premium: a unique cloned voice for your business, yours forever.', 'ฮีบรู · อังกฤษ · รัสเซีย สลับภาษาเองตามลูกค้า ระดับพรีเมียม: เสียงโคลนเฉพาะสำหรับธุรกิจของคุณ เป็นของคุณตลอดไป'
             )}</p>
           </Card>
 
-          <Card icon={<Brain className="w-5 h-5" />} title={pick('היא יודעת את העסק שלכם — ורק אותו', 'She knows your business — and only it', 'รู้จักธุรกิจของคุณ และรู้เฉพาะเรื่องของคุณ')}>
+          <Card icon={<Brain className="w-5 h-5" />} title={pick('היא יודעת את העסק שלכם, ורק אותו', 'She knows your business, and only it', 'รู้จักธุรกิจของคุณ และรู้เฉพาะเรื่องของคุณ')}>
             <p>{pick(
-              'מוח ידע שנבנה מהחומרים שלכם: שירותים, מחירים, שעות, מדיניות, שאלות נפוצות. עונה אך ורק ממנו — בלי המצאות.',
-              'A knowledge brain built from your own material: services, prices, hours, policy, FAQs. She answers only from it — no making things up.', 'คลังความรู้ที่สร้างจากข้อมูลของคุณเอง: บริการ ราคา เวลาทำการ นโยบาย คำถามที่พบบ่อย เธอตอบจากข้อมูลนี้เท่านั้น ไม่แต่งเรื่องขึ้นมาเอง'
+              'מוח ידע שנבנה מהחומרים שלכם: שירותים, מחירים, שעות, מדיניות, שאלות נפוצות. עונה אך ורק ממנו, בלי המצאות.',
+              'A knowledge brain built from your own material: services, prices, hours, policy, FAQs. She answers only from it, no making things up.', 'คลังความรู้ที่สร้างจากข้อมูลของคุณเอง: บริการ ราคา เวลาทำการ นโยบาย คำถามที่พบบ่อย เธอตอบจากข้อมูลนี้เท่านั้น ไม่แต่งเรื่องขึ้นมาเอง'
             )}</p>
             <p className="text-[0.85rem] text-muted-foreground">{pick('עדכון ידע = דקות, לא פיתוח.', 'Updating her knowledge takes minutes, not development.', 'อัปเดตความรู้ใช้เวลาแค่ไม่กี่นาที ไม่ต้องพัฒนาระบบใหม่')}</p>
           </Card>
 
-          <Card icon={<Hand className="w-5 h-5" />} title={pick('ידיים אמיתיות — היא מבצעת, לא רק עונה', 'Real hands — she acts, not just answers', 'ลงมือทำได้จริง ไม่ใช่แค่ตอบคำถาม')}>
+          <Card icon={<Hand className="w-5 h-5" />} title={pick('ידיים אמיתיות, היא מבצעת, לא רק עונה', 'Real hands, she acts, not just answers', 'ลงมือทำได้จริง ไม่ใช่แค่ตอบคำถาม')}>
             <ul className="space-y-1.5 text-[0.92rem]">
               {[
                 [<Calendar className="w-4 h-4" key="c" />, pick('קובעת תור אמיתי ביומן', 'Books a real appointment in the calendar', 'นัดหมายลงปฏิทินจริง')],
                 [<RefreshCw className="w-4 h-4" key="r" />, pick('מבטלת ומזיזה תורים', 'Cancels and reschedules', 'ยกเลิกและเลื่อนนัด')],
                 [<Mail className="w-4 h-4" key="m" />, pick('שולחת אישור + תזכורת', 'Sends confirmation + reminder', 'ส่งข้อความยืนยัน + แจ้งเตือน')],
-                [<Database className="w-4 h-4" key="d" />, pick('רושמת כל פנייה ל-CRM — אפס לידים אבודים', 'Logs every enquiry to the CRM — zero lost leads', 'บันทึกทุกการติดต่อลง CRM ไม่มีลีดหลุดแม้แต่รายเดียว')],
+                [<Database className="w-4 h-4" key="d" />, pick('רושמת כל פנייה ל-CRM, אפס לידים אבודים', 'Logs every enquiry to the CRM, zero lost leads', 'บันทึกทุกการติดต่อลง CRM ไม่มีลีดหลุดแม้แต่รายเดียว')],
                 [<MessageSquare className="w-4 h-4" key="w" />, pick('מזעיקה אדם בוואטסאפ כשצריך', 'Escalates to a human on WhatsApp when needed', 'ส่งต่อให้พนักงานทาง WhatsApp เมื่อจำเป็น')],
                 [<Plug className="w-4 h-4" key="p" />, pick('מתחברת ליומן, וואטסאפ, CRM, טפסים (n8n)', 'Connects to calendar, WhatsApp, CRM, forms (n8n)', 'เชื่อมต่อปฏิทิน WhatsApp CRM และแบบฟอร์ม (n8n)')],
               ].map(([ic, tx], i) => (
@@ -195,29 +195,29 @@ export default function WowList() {
               'מהנהנת כשאתם מדברים · "בודקת ביומן, שנייה..." · מהנהנת רגע לפני "קבעתי" · מנפנפת רק בשלום ולהתראות · אף פעם לא קופאת.',
               'Nods while you talk · "checking the calendar, one sec..." · nods just before "booked" · waves only on hello and goodbye · never freezes.', 'พยักหน้าตอนคุณพูด · "ขอเช็กปฏิทินสักครู่นะคะ..." · พยักหน้าก่อนบอกว่า "นัดให้แล้วค่ะ" · โบกมือเฉพาะตอนทักทายและบอกลา · ไม่เคยค้าง'
             )}</p>
-            <p className="text-[0.85rem] text-muted-foreground">{pick('עשר דקות מולה — ולא תתפסו את הלולאה.', 'Ten minutes with her — and you won\'t catch the loop.', 'คุยกับเธอสิบนาที คุณก็ยังจับไม่ได้ว่าเป็นวิดีโอวนซ้ำ')}</p>
+            <p className="text-[0.85rem] text-muted-foreground">{pick('עשר דקות מולה, ולא תתפסו את הלולאה.', 'Ten minutes with her, and you won\'t catch the loop.', 'คุยกับเธอสิบนาที คุณก็ยังจับไม่ได้ว่าเป็นวิดีโอวนซ้ำ')}</p>
           </Card>
 
           <Card icon={<Smile className="w-5 h-5" />} title={pick('היא מרגישה את הלקוח', 'She reads the customer', 'เธออ่านอารมณ์ลูกค้าได้')}>
             <p>{pick(
-              'זיהוי סנטימנט: לקוח מחייך — היא מתחממת. לחוץ — מרגיעה ומקצרת. כועס — איפוס מנומס אחד, ואז העברה לאנושי.',
-              'Sentiment awareness: a smiling customer — she warms up. Stressed — she calms and shortens. Angry — one polite reset, then a handover to a human.', 'วิเคราะห์อารมณ์: ลูกค้ายิ้ม เธอก็เป็นกันเองมากขึ้น ลูกค้าเครียด เธอช่วยให้ใจเย็นลงและพูดให้กระชับ ลูกค้าโกรธ เธอขอเริ่มใหม่อย่างสุภาพหนึ่งครั้ง แล้วส่งต่อให้พนักงาน'
+              'זיהוי סנטימנט: לקוח מחייך, היא מתחממת. לחוץ, מרגיעה ומקצרת. כועס, איפוס מנומס אחד, ואז העברה לאנושי.',
+              'Sentiment awareness: a smiling customer, she warms up. Stressed, she calms and shortens. Angry, one polite reset, then a handover to a human.', 'วิเคราะห์อารมณ์: ลูกค้ายิ้ม เธอก็เป็นกันเองมากขึ้น ลูกค้าเครียด เธอช่วยให้ใจเย็นลงและพูดให้กระชับ ลูกค้าโกรธ เธอขอเริ่มใหม่อย่างสุภาพหนึ่งครั้ง แล้วส่งต่อให้พนักงาน'
             )}</p>
-            <p className="text-[0.85rem] text-muted-foreground">{pick('פרימיום: מצב מראה — הבעות פנים שמגיבות להבעות שלכם.', 'Premium: mirror mode — facial expressions that react to yours.', 'ระดับพรีเมียม: โหมดกระจก สีหน้าของเธอตอบสนองตามสีหน้าของคุณ')}</p>
+            <p className="text-[0.85rem] text-muted-foreground">{pick('פרימיום: מצב מראה, הבעות פנים שמגיבות להבעות שלכם.', 'Premium: mirror mode, facial expressions that react to yours.', 'ระดับพรีเมียม: โหมดกระจก สีหน้าของเธอตอบสนองตามสีหน้าของคุณ')}</p>
           </Card>
 
           <Card icon={<ShieldCheck className="w-5 h-5" />} title={pick('גבולות ברזל', 'Iron limits', 'ขอบเขตที่เข้มงวด')}>
             <p>{pick(
-              'אפס ייעוץ רפואי/משפטי · מחירים = טווחים בלבד · מקרה דחוף ⇐ טלפון + התראה לאנושי · זמינות אך ורק מהיומן — היא לא ממציאה שעה, לעולם.',
-              'Zero medical/legal advice · prices = ranges only · emergency ⇒ phone + human alert · availability strictly from the calendar — she never invents a slot.', 'ไม่ให้คำปรึกษาทางการแพทย์หรือกฎหมาย · ราคาบอกเป็นช่วงเท่านั้น · กรณีฉุกเฉิน ⇒ โทรศัพท์ + แจ้งเตือนพนักงาน · เวลาว่างอ้างอิงจากปฏิทินเท่านั้น เธอไม่มีวันกุเวลานัดขึ้นมาเอง'
+              'אפס ייעוץ רפואי/משפטי · מחירים = טווחים בלבד · מקרה דחוף ⇐ טלפון + התראה לאנושי · זמינות אך ורק מהיומן, היא לא ממציאה שעה, לעולם.',
+              'Zero medical/legal advice · prices = ranges only · emergency ⇒ phone + human alert · availability strictly from the calendar, she never invents a slot.', 'ไม่ให้คำปรึกษาทางการแพทย์หรือกฎหมาย · ราคาบอกเป็นช่วงเท่านั้น · กรณีฉุกเฉิน ⇒ โทรศัพท์ + แจ้งเตือนพนักงาน · เวลาว่างอ้างอิงจากปฏิทินเท่านั้น เธอไม่มีวันกุเวลานัดขึ้นมาเอง'
             )}</p>
             <p className="text-[0.85rem] text-muted-foreground">{pick('כל שיחה מתועדת.', 'Every conversation is logged.', 'ทุกบทสนทนาถูกบันทึกไว้')}</p>
           </Card>
 
           <Card icon={<BarChart3 className="w-5 h-5" />} title={pick('דשבורד למנהל', 'A dashboard for the manager', 'แดชบอร์ดสำหรับผู้จัดการ')}>
             <p>{pick(
-              'כמה שיחות היום, כמה תורים נקבעו, מה שאלו הכי הרבה, איפה לקוחות נטשו, ואילו שאלות אין עליהן תשובה בידע — כלומר מה להוסיף.',
-              'How many conversations today, how many bookings, what got asked most, where customers dropped off, and which questions have no answer yet — i.e. what to add.', 'วันนี้มีกี่บทสนทนา นัดหมายได้กี่คิว คำถามไหนถูกถามบ่อยที่สุด ลูกค้าหลุดออกไปตรงจุดไหน และคำถามไหนที่ยังไม่มีคำตอบในคลังความรู้ ซึ่งก็คือสิ่งที่ควรเพิ่มเข้าไป'
+              'כמה שיחות היום, כמה תורים נקבעו, מה שאלו הכי הרבה, איפה לקוחות נטשו, ואילו שאלות אין עליהן תשובה בידע, כלומר מה להוסיף.',
+              'How many conversations today, how many bookings, what got asked most, where customers dropped off, and which questions have no answer yet, i.e. what to add.', 'วันนี้มีกี่บทสนทนา นัดหมายได้กี่คิว คำถามไหนถูกถามบ่อยที่สุด ลูกค้าหลุดออกไปตรงจุดไหน และคำถามไหนที่ยังไม่มีคำตอบในคลังความรู้ ซึ่งก็คือสิ่งที่ควรเพิ่มเข้าไป'
             )}</p>
             <p className="text-[0.85rem] text-muted-foreground">{pick('הפקידה הראשונה שמגישה לך דוח.', 'The first receptionist that hands you a report.', 'พนักงานต้อนรับคนแรกที่ส่งรายงานให้คุณได้')}</p>
           </Card>

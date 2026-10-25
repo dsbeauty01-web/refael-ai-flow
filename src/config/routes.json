@@ -1,6 +1,10 @@
 {
   "siteUrl": "https://refael-ai-flow.lovable.app",
-  "languages": ["he", "en", "th"],
+  "languages": [
+    "he",
+    "en",
+    "th"
+  ],
   "defaultLanguage": "he",
   "routes": [
     {
@@ -16,6 +20,21 @@
         "he": "דמויות AI שמדברות בקול, עונות ללקוחות בשם, מוכרות בלייב ומקבלות אורחים בלובי. בעברית, באנגלית ובתאית.",
         "en": "AI characters that talk out loud, answer customers by name, sell on live streams and greet visitors in your lobby. In Hebrew, English and Thai.",
         "th": "ตัวละคร AI ที่พูดด้วยเสียง ตอบลูกค้าด้วยชื่อ ขายของบนไลฟ์ และต้อนรับแขกในล็อบบี้ รองรับภาษาฮีบรู อังกฤษ และไทย"
+      }
+    },
+    {
+      "path": "/customer-service",
+      "priority": 0.95,
+      "changefreq": "weekly",
+      "title": {
+        "he": "נציג שירות AI לעסק: אווטאר, קול או צ׳אט, 24/7 | Refael.ai",
+        "en": "AI customer service agent: avatar, voice or chat, 24/7 | Refael.ai",
+        "th": "พนักงานบริการลูกค้า AI: อวตาร เสียง หรือแชท ตลอด 24 ชม. | Refael.ai"
+      },
+      "description": {
+        "he": "נציג שירות AI שמכיר את העסק שלכם (RAG), עונה בעברית, באנגלית ובתאית, קובע תורים ביומן, מעדכן CRM ומעביר לאדם כשצריך. באתר, בוואטסאפ, בטלפון או כאווטאר על מסך.",
+        "en": "An AI customer service agent that knows your business (RAG), answers in Hebrew, English and Thai, books appointments, updates your CRM and hands off to a human when needed. On your site, WhatsApp, the phone or as an avatar on screen.",
+        "th": "พนักงานบริการลูกค้า AI ที่รู้จักธุรกิจของคุณ (RAG) ตอบได้ทั้งไทย อังกฤษ และฮีบรู นัดคิวลงปฏิทิน อัปเดต CRM และส่งต่อให้คนจริงเมื่อจำเป็น ใช้ได้บนเว็บ WhatsApp โทรศัพท์ หรือเป็นอวตารบนจอ"
       }
     },
     {
@@ -93,8 +112,20 @@
         "th": "คุยกับเอเจนต์เสียงของเราได้ทันที ทั้งพนักงานต้อนรับคลินิก นักเล่าเรื่อง และพิธีกรไลฟ์ แต่ละตัวมีเสียงและบุคลิกของตัวเอง"
       }
     },
-    { "path": "/legal/privacy", "priority": 0.3, "changefreq": "yearly" },
-    { "path": "/legal/terms", "priority": 0.3, "changefreq": "yearly" },
-    { "path": "/legal/accessibility", "priority": 0.3, "changefreq": "yearly" }
+    {
+      "path": "/legal/privacy",
+      "priority": 0.3,
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/legal/terms",
+      "priority": 0.3,
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/legal/accessibility",
+      "priority": 0.3,
+      "changefreq": "yearly"
+    }
   ]
 }

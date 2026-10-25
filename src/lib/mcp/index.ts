@@ -8,6 +8,6 @@ export default defineMcp({
   title: "Refael.ai",
   version: "0.1.0",
   instructions:
-    "Public MCP for Refael.ai — a Hebrew/English AI agency landing page. Use `get_services` to describe offerings and pricing, `get_contact` for contact channels, and `submit_lead` only when the user explicitly asks to be contacted.",
+    "Public MCP for Refael.ai, a Hebrew/English AI agency landing page. Use `get_services` to describe offerings and pricing, `get_contact` for contact channels, and `submit_lead` only when the user explicitly asks to be contacted.",
   tools: [getContactTool, getServicesTool, submitLeadTool],
 });

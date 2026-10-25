@@ -206,7 +206,7 @@ export default function LiveSelling() {
         </div>
       </section>
 
-      {/* STEPS — a real sequence, so it is numbered */}
+      {/* STEPS, a real sequence, so it is numbered */}
       <section id="start" className="px-5 py-24 bg-mist scroll-mt-16">
         <div className="max-w-[1200px] mx-auto">
           <h2 className={`${fontDisplay} text-[clamp(2rem,4.6vw,3.2rem)] leading-[1.12] text-ink`}>{tr(STEPS_HEAD)}</h2>

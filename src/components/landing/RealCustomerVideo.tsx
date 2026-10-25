@@ -365,7 +365,7 @@ export function RealCustomerVideo() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 items-stretch">
-          {/* LEFT — video when idle, instruction card when Mia is active */}
+          {/* LEFT, video when idle, instruction card when Mia is active */}
           <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black min-h-[400px] md:min-h-[520px]">
             {!callStarted ? (
               <>
@@ -464,7 +464,7 @@ export function RealCustomerVideo() {
             )}
           </div>
 
-          {/* RIGHT — salon image with Mia at bottom */}
+          {/* RIGHT, salon image with Mia at bottom */}
           <div className="relative rounded-2xl overflow-hidden shadow-2xl min-h-[400px] md:min-h-[520px] bg-[#1a1a2a]">
             <img
               src={SALON_IMAGE}

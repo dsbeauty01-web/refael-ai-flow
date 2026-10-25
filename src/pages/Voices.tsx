@@ -40,8 +40,8 @@ const CHARACTERS: Character[] = [
     name: ['הסבא המספר', 'The Storyteller', 'คุณตานักเล่าเรื่อง'],
     role: ['בן שבעים וחמש, זיכרון של שכונה שלמה', '75 years old, a whole neighborhood in his memory', 'อายุเจ็ดสิบห้า ความทรงจำของทั้งชุมชน'],
     desc: [
-      'מדבר לאט, עוצר בדיוק במקום הנכון, ותמיד יש לו עוד סיפור אחד מהשוק, מהצבא, מהחתונה של הדודה. שאלו אותו איך קוראים לכם — ותנו לו לקחת אתכם.',
-      'Speaks slowly, pauses in exactly the right place, and always has one more story — the market, the army, the aunt’s wedding. Tell him your name and let him take you along.',
+      'מדבר לאט, עוצר בדיוק במקום הנכון, ותמיד יש לו עוד סיפור אחד מהשוק, מהצבא, מהחתונה של הדודה. שאלו אותו איך קוראים לכם, ותנו לו לקחת אתכם.',
+      'Speaks slowly, pauses in exactly the right place, and always has one more story, the market, the army, the aunt’s wedding. Tell him your name and let him take you along.',
       'พูดช้าๆ หยุดตรงจังหวะพอดี และมีเรื่องเล่าอีกเรื่องเสมอ ทั้งเรื่องตลาด ทหาร และงานแต่งงานของป้า บอกชื่อคุณแล้วให้เขาพาคุณไป',
     ],
     quote: '״בוא, שב לידי רגע. בגילי כבר לא ממהרים לשום מקום…״',
@@ -55,8 +55,8 @@ const CHARACTERS: Character[] = [
     name: ['מיכל', 'Michal', 'มิคาล'],
     role: ['קבלה במרפאה: חדה, יעילה, חמה', 'Clinic reception: sharp, efficient, warm', 'พนักงานต้อนรับคลินิก ฉับไว มีประสิทธิภาพ และอบอุ่น'],
     desc: [
-      'עונה מהשנייה הראשונה, קובעת תור, אומרת בדיוק מה להביא — וכל המספרים והשעות במילים, כמו בן אדם. נסו לבקש תור ליום שלישי.',
-      'Answers from the first second, books the appointment, tells you exactly what to bring — every number and hour spoken in words, like a person. Try booking a Tuesday slot.',
+      'עונה מהשנייה הראשונה, קובעת תור, אומרת בדיוק מה להביא, וכל המספרים והשעות במילים, כמו בן אדם. נסו לבקש תור ליום שלישי.',
+      'Answers from the first second, books the appointment, tells you exactly what to bring, every number and hour spoken in words, like a person. Try booking a Tuesday slot.',
       'รับสายตั้งแต่วินาทีแรก นัดหมายให้ บอกชัดเจนว่าต้องเตรียมอะไรมา และพูดตัวเลขกับเวลาเป็นคำเหมือนคนจริง ลองขอนัดวันอังคารดูสิ',
     ],
     quote: '״שלום, הגעתם למרפאת כהן, מדברת מיכל. איך אפשר לעזור?״',
@@ -70,8 +70,8 @@ const CHARACTERS: Character[] = [
     name: ['המארחת', 'The Host', 'พิธีกรหญิง'],
     role: ['שידור חי, אנרגיה של מכירה', 'Live broadcast, sales energy', 'ไลฟ์สด พลังงานของการขาย'],
     desc: [
-      'קול משוכפל מהקלטה אמיתית. חמה, מהירה, יודעת להחזיק שיחה — הבסיס לכל סוכנת מכירה חיה שנבנה ללקוח.',
-      'A voice cloned from a real recording. Warm, quick, holds a conversation — the base for every live sales agent we build for a client.',
+      'קול משוכפל מהקלטה אמיתית. חמה, מהירה, יודעת להחזיק שיחה, הבסיס לכל סוכנת מכירה חיה שנבנה ללקוח.',
+      'A voice cloned from a real recording. Warm, quick, holds a conversation, the base for every live sales agent we build for a client.',
       'เสียงที่โคลนจากการบันทึกจริง อบอุ่น ฉับไว คุยต่อเนื่องได้ เป็นพื้นฐานของเอเจนต์ขายสดทุกตัวที่เราสร้างให้ลูกค้า',
     ],
     quote: '״שלום! איזה כיף שהתקשרת. ספרי לי רגע מה את מחפשת…״',
@@ -85,8 +85,8 @@ const CHARACTERS: Character[] = [
     name: ['המארח', 'The Host (male)', 'พิธีกรชาย'],
     role: ['שידור חי, נוכחות רגועה', 'Live broadcast, calm presence', 'ไลฟ์สด สุขุม มั่นคง'],
     desc: [
-      'הגרסה הגברית — אותה טכנולוגיה, טמפרמנט אחר. יציב, סבלני, מתאים לשירות, ייעוץ והנחיה.',
-      'The male counterpart — same technology, different temperament. Steady, patient; fits service, consulting and guidance.',
+      'הגרסה הגברית, אותה טכנולוגיה, טמפרמנט אחר. יציב, סבלני, מתאים לשירות, ייעוץ והנחיה.',
+      'The male counterpart, same technology, different temperament. Steady, patient; fits service, consulting and guidance.',
       'เวอร์ชันเสียงผู้ชาย เทคโนโลยีเดียวกัน บุคลิกต่างกัน มั่นคง อดทน เหมาะกับงานบริการ ให้คำปรึกษา และการนำเสนอ',
     ],
     quote: '״שלום! כיף שהצטרפת. מה תרצו לשאול אותי?״',
@@ -166,8 +166,8 @@ const Voices = () => {
           </h1>
           <p className="mt-4 max-w-[52ch] mx-auto text-ink/65 leading-relaxed">
             {pick(
-              'כל דמות כאן חיה — לוחצים, מדברים, והיא עונה בעברית בקול שלה ובאופי שלה. אלה הקולות שאנחנו בונים ללקוחות.',
-              'Every character here is live — click, speak, and it answers in Hebrew with its own voice and temperament. These are the voices we build for clients.',
+              'כל דמות כאן חיה, לוחצים, מדברים, והיא עונה בעברית בקול שלה ובאופי שלה. אלה הקולות שאנחנו בונים ללקוחות.',
+              'Every character here is live, click, speak, and it answers in Hebrew with its own voice and temperament. These are the voices we build for clients.',
               'ตัวละครทุกตัวในหน้านี้คุยได้จริง กดแล้วพูด แล้วมันจะตอบเป็นภาษาฮีบรูด้วยเสียงและบุคลิกของตัวเอง นี่คือเสียงที่เราสร้างให้ลูกค้า'
             )}
           </p>
@@ -231,8 +231,8 @@ const Voices = () => {
           <>
             <p className="mt-10 text-center text-[0.85rem] text-ink/50">
               {pick(
-                'החיבור נפתח בפינת המסך — אשרו גישה למיקרופון ודברו.',
-                'The call opens at the corner of the screen — allow the microphone and speak.',
+                'החיבור נפתח בפינת המסך, אשרו גישה למיקרופון ודברו.',
+                'The call opens at the corner of the screen, allow the microphone and speak.',
                 'หน้าต่างสนทนาจะเปิดที่มุมจอ อนุญาตไมโครโฟนแล้วพูดได้เลย'
               )}
             </p>

@@ -11,10 +11,10 @@ export const translations = {
       contact: 'צור קשר',
     },
     hero: {
-      badge: 'רפאל סלע — אוטומציה עסקית מבוססת AI',
+      badge: 'רפאל סלע, אוטומציה עסקית מבוססת AI',
       headline: 'העסק שלך יכול לעבוד חכם יותר.',
       subheadline: 'הרבה יותר חכם.',
-      description: 'אני בונה מערכות אוטומציה מבוססות בינה מלאכותית שעונות ללקוחות, מסננות לידים, קובעות פגישות ומנהלות תהליכי מכירה — בלי שתצטרך לגעת בדבר.',
+      description: 'אני בונה מערכות אוטומציה מבוססות בינה מלאכותית שעונות ללקוחות, מסננות לידים, קובעות פגישות ומנהלות תהליכי מכירה, בלי שתצטרך לגעת בדבר.',
       stats: [
         { value: '80%', label: 'חיסכון בזמן מענה' },
         { value: '3x', label: 'יותר לידים מטופלים' },
@@ -25,7 +25,7 @@ export const translations = {
     },
     services: {
       title: 'מה אני בונה בשבילך',
-      subtitle: 'כל מערכת נבנית בהתאמה מלאה לעסק שלך — לא פתרון גנרי, אלא כלי שעובד בדיוק כמו שאתה צריך.',
+      subtitle: 'כל מערכת נבנית בהתאמה מלאה לעסק שלך, לא פתרון גנרי, אלא כלי שעובד בדיוק כמו שאתה צריך.',
       items: [
         {
           title: 'בוט תמיכה בלקוחות',
@@ -35,25 +35,25 @@ export const translations = {
         },
         {
           title: 'בוט סינון וניהול לידים',
-          description: 'במקום לבזבז זמן על כל פנייה — הבוט שואל שאלות מקדימות, מדרג את הליד לפי רלוונטיות, ומעביר אליך רק את מי שבאמת מוכן לקנות.',
+          description: 'במקום לבזבז זמן על כל פנייה, הבוט שואל שאלות מקדימות, מדרג את הליד לפי רלוונטיות, ומעביר אליך רק את מי שבאמת מוכן לקנות.',
           features: ['שאלות מקדימות מותאמות לעסק שלך', 'דירוג אוטומטי של לידים לפי פוטנציאל', 'התראות בזמן אמת על לידים חמים', 'אינטגרציה עם CRM וכלי מכירות'],
           cta: 'ראה דמו',
         },
         {
           title: 'סוכן קביעת פגישות',
-          description: 'הבוט מתאם פגישות עם לקוחות, בודק זמינות ביומן שלך, שולח אישורים ותזכורות — ומפחית ביטולים בצורה דרמטית.',
+          description: 'הבוט מתאם פגישות עם לקוחות, בודק זמינות ביומן שלך, שולח אישורים ותזכורות, ומפחית ביטולים בצורה דרמטית.',
           features: ['סנכרון אוטומטי עם Google Calendar', 'תזכורות SMS ו-WhatsApp ללקוח', 'ניהול שינויים וביטולים בלי התערבות', 'דף נחיתה מותאם לקביעת תורים'],
           cta: 'ראה דמו',
         },
         {
           title: 'הצעות מחיר ותשלומים אוטומטיים',
-          description: 'הלקוח מתאר מה הוא צריך, הבוט מפיק הצעת מחיר מיידית, שולח חשבונית ועוקב אחרי תשלומים — הכל בלי שתצטרך לפתוח אקסל.',
+          description: 'הלקוח מתאר מה הוא צריך, הבוט מפיק הצעת מחיר מיידית, שולח חשבונית ועוקב אחרי תשלומים, הכל בלי שתצטרך לפתוח אקסל.',
           features: ['הפקת הצעות מחיר תוך שניות', 'שליחת חשבוניות אוטומטית ללקוח', 'מעקב ותזכורות על תשלומים פתוחים', 'דוחות הכנסה שבועיים וחודשיים'],
           cta: 'ראה דמו',
         },
         {
           title: 'אוטומציית שיווק ותוכן',
-          description: 'מערכת שיוצרת תוכן שיווקי, מפרסמת ברשתות חברתיות, ומנהלת קמפיינים — כך שאתה יכול להתמקד בניהול העסק ולא בכתיבת פוסטים.',
+          description: 'מערכת שיוצרת תוכן שיווקי, מפרסמת ברשתות חברתיות, ומנהלת קמפיינים, כך שאתה יכול להתמקד בניהול העסק ולא בכתיבת פוסטים.',
           features: ['יצירת תוכן מותאם למותג שלך', 'פרסום אוטומטי בפייסבוק, אינסטגרם ולינקדאין', 'תזמון פוסטים וניהול לוח תוכן', 'דוחות ביצועים ואנליטיקס'],
           cta: 'ראה דמו',
         },
@@ -61,28 +61,28 @@ export const translations = {
     },
     demos: {
       title: 'ראה את הבוטים בפעולה',
-      subtitle: 'אלה לא סתם דמואים — הם דוגמאות לשיחות אמיתיות שהמערכות שלי מנהלות כל יום, עם לקוחות אמיתיים, בעסקים אמיתיים.',
+      subtitle: 'אלה לא סתם דמואים, הם דוגמאות לשיחות אמיתיות שהמערכות שלי מנהלות כל יום, עם לקוחות אמיתיים, בעסקים אמיתיים.',
       items: [
         {
-          name: 'בוט תמיכה — חנות אונליין',
-          description: 'לקוחה שואלת על מדיניות החזרה ומקבלת מענה מיידי, מדויק ואנושי — בלי לחכות לנציג.',
+          name: 'בוט תמיכה, חנות אונליין',
+          description: 'לקוחה שואלת על מדיניות החזרה ומקבלת מענה מיידי, מדויק ואנושי, בלי לחכות לנציג.',
           useCase: '💬 תרחיש: לקוחה רוצה להחזיר מוצר שקנתה לפני 5 ימים',
           buttonText: 'פתח שיחת דמו',
         },
         {
-          name: 'בוט סינון לידים — סוכנות ביטוח',
+          name: 'בוט סינון לידים, סוכנות ביטוח',
           description: 'ליד חדש פונה, הבוט מזהה את הצורך, שואל שאלות ממוקדות ומעביר ליד מוכן לסוכן.',
           useCase: '💬 תרחיש: בעל סוכנות ביטוח רוצה לסנן פניות אוטומטית',
           buttonText: 'פתח שיחת דמו',
         },
         {
-          name: 'סוכן קביעת פגישות — מרפאה',
-          description: 'מטופל רוצה לקבוע תור. הבוט מציע שעות פנויות, מאשר ושולח תזכורת — בלי מזכירה.',
+          name: 'סוכן קביעת פגישות, מרפאה',
+          description: 'מטופל רוצה לקבוע תור. הבוט מציע שעות פנויות, מאשר ושולח תזכורת, בלי מזכירה.',
           useCase: '💬 תרחיש: מטופל רוצה לקבוע תור לבדיקה כללית',
           buttonText: 'פתח שיחת דמו',
         },
         {
-          name: 'בוט הצעות מחיר — שירותי שיפוץ',
+          name: 'בוט הצעות מחיר, שירותי שיפוץ',
           description: 'לקוח מתאר את הפרויקט, הבוט אוסף פרטים ומפיק הצעת מחיר מפורטת תוך שניות.',
           useCase: '💬 תרחיש: לקוח מבקש הצעת מחיר לשיפוץ מטבח',
           buttonText: 'פתח שיחת דמו',
@@ -95,9 +95,9 @@ export const translations = {
         { role: 'user', text: 'היי, קניתי מוצר לפני שבוע ואני רוצה להחזיר אותו' },
         { role: 'bot', text: 'בטח! מדיניות ההחזרה שלנו מאפשרת החזרה עד 14 יום מהרכישה. האם יש לך את מספר ההזמנה?' },
         { role: 'user', text: 'כן, ההזמנה מספר 4521' },
-        { role: 'bot', text: 'מצאתי את ההזמנה שלך. אני רואה שהמוצר נרכש לפני 5 ימים — את בתוך חלון ההחזרה. אני שולח לך קישור להחזרה למייל עכשיו. 📧' },
+        { role: 'bot', text: 'מצאתי את ההזמנה שלך. אני רואה שהמוצר נרכש לפני 5 ימים, את בתוך חלון ההחזרה. אני שולח לך קישור להחזרה למייל עכשיו. 📧' },
         { role: 'user', text: 'תודה רבה!' },
-        { role: 'bot', text: 'בשמחה! אם יש עוד משהו — אני כאן. יום מעולה! 😊' },
+        { role: 'bot', text: 'בשמחה! אם יש עוד משהו, אני כאן. יום מעולה! 😊' },
       ],
       [
         { role: 'bot', text: 'שלום! 👋 תודה שפנית אלינו. אשמח לעזור לך למצוא את הפתרון הנכון. מה סוג העסק שלך?' },
@@ -106,7 +106,7 @@ export const translations = {
         { role: 'user', text: 'שלושה סוכנים ומזכירה' },
         { role: 'bot', text: 'מובן. ומה האתגר העיקרי שלכם כרגע? למשל: מענה ללקוחות, ניהול לידים, תיאום פגישות?' },
         { role: 'user', text: 'בעיקר ניהול לידים, אנחנו מפספסים הרבה פניות' },
-        { role: 'bot', text: 'הבנתי. נראה שמערכת אוטומציה לסינון וניהול לידים יכולה לחסוך לך הרבה זמן ולקוחות. אני מעביר את הפרטים שלך לרפאל — הוא יחזור אליך תוך 24 שעות עם הצעה מותאמת! 📋' },
+        { role: 'bot', text: 'הבנתי. נראה שמערכת אוטומציה לסינון וניהול לידים יכולה לחסוך לך הרבה זמן ולקוחות. אני מעביר את הפרטים שלך לרפאל, הוא יחזור אליך תוך 24 שעות עם הצעה מותאמת! 📋' },
       ],
       [
         { role: 'bot', text: 'שלום! 👋 ברוכים הבאים למרפאת ד"ר כהן. איך אפשר לעזור?' },
@@ -123,38 +123,38 @@ export const translations = {
         { role: 'bot', text: 'מעולה! כמה גדול המטבח בערך? (קטן עד 8 מ"ר / בינוני 8-15 מ"ר / גדול מעל 15 מ"ר)' },
         { role: 'user', text: 'בינוני, בערך 12 מ"ר' },
         { role: 'bot', text: 'מובן. האם אתה מעוניין בשיפוץ מלא (ארונות + ריצוף + צביעה) או חלקי?' },
-        { role: 'user', text: 'שיפוץ מלא — הכל' },
-        { role: 'bot', text: 'הנה הצעת מחיר ראשונית:\n\n🔧 שיפוץ מטבח מלא (12 מ"ר)\n\n• ארונות מטבח חדשים: ₪15,000\n• ריצוף (פורצלן): ₪4,500\n• צביעה ושפכטל: ₪2,500\n• עבודות אינסטלציה: ₪3,000\n• חשמל: ₪2,000\n• עבודה כללית: ₪3,000\n\n💰 סה"כ משוער: ₪30,000\n\n⏱ זמן ביצוע משוער: 2-3 שבועות\n\nלתיאום סיור הערכה חינם — השאר פרטים ונחזור אליך תוך שעות!' },
+        { role: 'user', text: 'שיפוץ מלא, הכל' },
+        { role: 'bot', text: 'הנה הצעת מחיר ראשונית:\n\n🔧 שיפוץ מטבח מלא (12 מ"ר)\n\n• ארונות מטבח חדשים: ₪15,000\n• ריצוף (פורצלן): ₪4,500\n• צביעה ושפכטל: ₪2,500\n• עבודות אינסטלציה: ₪3,000\n• חשמל: ₪2,000\n• עבודה כללית: ₪3,000\n\n💰 סה"כ משוער: ₪30,000\n\n⏱ זמן ביצוע משוער: 2-3 שבועות\n\nלתיאום סיור הערכה חינם, השאר פרטים ונחזור אליך תוך שעות!' },
       ],
     ],
     howItWorks: {
       title: 'איך התהליך עובד?',
-      subtitle: 'מהשיחה הראשונה ועד מערכת עובדת — תהליך ברור, מהיר, ובלי הפתעות.',
+      subtitle: 'מהשיחה הראשונה ועד מערכת עובדת, תהליך ברור, מהיר, ובלי הפתעות.',
       description: 'אני לא מוכר לך "פתרון AI". אני יושב איתך, מבין מה מאט את העסק שלך, ובונה מערכת שפותרת את הבעיה. בדרך כלל תוך ימים ספורים.',
       steps: [
         {
           number: '01',
           title: 'שיחת אפיון',
-          description: 'בשיחה קצרה אני מבין את העסק שלך, את התהליכים שלך ואת האתגרים — כדי לזהות איפה אוטומציה תיתן את ההשפעה הכי גדולה.',
+          description: 'בשיחה קצרה אני מבין את העסק שלך, את התהליכים שלך ואת האתגרים, כדי לזהות איפה אוטומציה תיתן את ההשפעה הכי גדולה.',
           detail: 'בדרך כלל 30 דקות בזום או בוואטסאפ',
         },
         {
           number: '02',
           title: 'בנייה והתאמה',
-          description: 'אני בונה את המערכת בהתאמה מלאה — כולל כתיבת התסריטים, חיבור למערכות הקיימות שלך, ובדיקות מקיפות.',
+          description: 'אני בונה את המערכת בהתאמה מלאה, כולל כתיבת התסריטים, חיבור למערכות הקיימות שלך, ובדיקות מקיפות.',
           detail: 'בדרך כלל 3-7 ימי עבודה',
         },
         {
           number: '03',
           title: 'השקה ושיפור מתמיד',
-          description: 'המערכת עולה לאוויר, אני עוקב אחרי הביצועים ומשפר בהתמדה — כי אוטומציה טובה היא כזו שמשתפרת עם הזמן.',
+          description: 'המערכת עולה לאוויר, אני עוקב אחרי הביצועים ומשפר בהתמדה, כי אוטומציה טובה היא כזו שמשתפרת עם הזמן.',
           detail: 'תמיכה ועדכונים שוטפים',
         },
       ],
     },
     whyMe: {
       title: 'למה לעבוד דווקא איתי?',
-      subtitle: 'אני לא חברת תוכנה ולא סוכנות דיגיטל. אני מומחה אוטומציה שמבין עסקים קטנים — ובונה פתרונות שעובדים מהיום הראשון.',
+      subtitle: 'אני לא חברת תוכנה ולא סוכנות דיגיטל. אני מומחה אוטומציה שמבין עסקים קטנים, ובונה פתרונות שעובדים מהיום הראשון.',
       points: [
         {
           title: 'מתמקד בתוצאות, לא בטכנולוגיה',
@@ -166,7 +166,7 @@ export const translations = {
         },
         {
           title: 'מהיר ופרקטי',
-          description: 'רוב הפרויקטים שלי עולים לאוויר תוך שבוע. בלי ישיבות מיותרות, בלי מצגות, בלי סיבוכים — ישר לעבודה.',
+          description: 'רוב הפרויקטים שלי עולים לאוויר תוך שבוע. בלי ישיבות מיותרות, בלי מצגות, בלי סיבוכים, ישר לעבודה.',
         },
         {
           title: 'מבין את העסק הקטן',
@@ -180,7 +180,7 @@ export const translations = {
     },
     industries: {
       title: 'תחומים שאני עובד בהם',
-      subtitle: 'לכל תחום יש אתגרים ייחודיים — ולכל אתגר יש פתרון אוטומציה שמתאים בדיוק.',
+      subtitle: 'לכל תחום יש אתגרים ייחודיים, ולכל אתגר יש פתרון אוטומציה שמתאים בדיוק.',
       items: [
         {
           name: 'מסחר אלקטרוני',
@@ -189,7 +189,7 @@ export const translations = {
         },
         {
           name: 'מרפאות וקליניקות',
-          description: 'קביעת תורים אוטומטית, תזכורות SMS, ומענה על שאלות נפוצות של מטופלים — בלי לטרוח מזכירה.',
+          description: 'קביעת תורים אוטומטית, תזכורות SMS, ומענה על שאלות נפוצות של מטופלים, בלי לטרוח מזכירה.',
           stat: 'עד 40% פחות ביטולי תורים',
         },
         {
@@ -204,7 +204,7 @@ export const translations = {
         },
         {
           name: 'סוכנויות ומשרדים',
-          description: 'ניהול פניות, אוטומציית דוחות, ותקשורת שוטפת עם לקוחות — בלי לבזבז שעות על עבודה ידנית.',
+          description: 'ניהול פניות, אוטומציית דוחות, ותקשורת שוטפת עם לקוחות, בלי לבזבז שעות על עבודה ידנית.',
           stat: 'עד 15 שעות חיסכון בשבוע',
         },
       ],
@@ -235,12 +235,12 @@ export const translations = {
     },
     portfolio: {
       title: 'פרויקטים שביצעתי',
-      subtitle: 'כל פרויקט התחיל מאתגר עסקי ספציפי — וסיים עם מערכת אוטומציה שעובדת 24/7 ונותנת תוצאות מדידות.',
+      subtitle: 'כל פרויקט התחיל מאתגר עסקי ספציפי, וסיים עם מערכת אוטומציה שעובדת 24/7 ונותנת תוצאות מדידות.',
       items: [
         {
           title: 'בוט תמיכה לרשת אופנה',
           industry: 'מסחר אלקטרוני',
-          description: 'בוט שעונה על שאלות לגבי מידות, זמני משלוח, מדיניות החזרה ומצב הזמנות — 24 שעות ביממה, 7 ימים בשבוע.',
+          description: 'בוט שעונה על שאלות לגבי מידות, זמני משלוח, מדיניות החזרה ומצב הזמנות, 24 שעות ביממה, 7 ימים בשבוע.',
           result: 'ירידה של 65% בפניות לשירות לקוחות',
           details: 'חיבור ל-Shopify, מענה ב-3 שפות, זמן הקמה: 5 ימים',
         },
@@ -270,7 +270,7 @@ export const translations = {
     contact: {
       title: 'מוכנים להתחיל?',
       subtitle: 'בואו נדבר על העסק שלכם ונראה איך אוטומציה יכולה לחסוך לכם זמן, כסף ועצבים.',
-      description: 'אני מגיב תוך שעות ספורות. ספרו לי מה העסק שלכם עושה, מה מאט אתכם, ואני אחזור עם רעיונות מעשיים — בלי התחייבות.',
+      description: 'אני מגיב תוך שעות ספורות. ספרו לי מה העסק שלכם עושה, מה מאט אתכם, ואני אחזור עם רעיונות מעשיים, בלי התחייבות.',
       form: {
         name: 'שם מלא',
         email: 'אימייל',
@@ -294,41 +294,41 @@ export const translations = {
     products: {
       badge: 'מוצרי AI',
       title: 'חמשת הכלים שישנו את העסק שלך',
-      subtitle: 'כל כלי נבנה בהתאמה מלאה לצרכים שלך — טכנולוגיה מתקדמת, תוצאות מיידיות.',
+      subtitle: 'כל כלי נבנה בהתאמה מלאה לצרכים שלך, טכנולוגיה מתקדמת, תוצאות מיידיות.',
       modalCta: 'דבר איתי על הפתרון הזה',
       items: [
         {
           title: 'בוט WhatsApp AI',
-          shortDesc: 'בוט חכם שפועל ישירות בוואטסאפ — עונה ללקוחות, מטפל בפניות ומוכר בשבילך, 24/7.',
-          fullDesc: 'בוט AI שרץ ישירות בוואטסאפ של העסק שלך. הלקוחות שולחים הודעה ומקבלים מענה מיידי, אנושי ומדויק — בלי לחכות, בלי להתפשר. מסינון לידים ועד סגירת עסקאות.',
-          highlights: ['פועל ישירות בוואטסאפ — בלי אפליקציות נוספות', 'מענה אנושי תוך שניות, 24/7', 'מסנן לידים ומעביר רק את הרלוונטיים', 'דוחות שבועיים על שיחות ומגמות'],
+          shortDesc: 'בוט חכם שפועל ישירות בוואטסאפ, עונה ללקוחות, מטפל בפניות ומוכר בשבילך, 24/7.',
+          fullDesc: 'בוט AI שרץ ישירות בוואטסאפ של העסק שלך. הלקוחות שולחים הודעה ומקבלים מענה מיידי, אנושי ומדויק, בלי לחכות, בלי להתפשר. מסינון לידים ועד סגירת עסקאות.',
+          highlights: ['פועל ישירות בוואטסאפ, בלי אפליקציות נוספות', 'מענה אנושי תוך שניות, 24/7', 'מסנן לידים ומעביר רק את הרלוונטיים', 'דוחות שבועיים על שיחות ומגמות'],
           cta: 'למד עוד',
         },
         {
           title: 'סינון לידים אוטומטי',
           shortDesc: 'שאלות מקדימות חכמות שמסננות לידים ומעבירות אליך רק את הרלוונטיים.',
-          fullDesc: 'מערכת שמזהה לידים חמים תוך שניות, שואלת שאלות ממוקדות, מדרגת לפי פוטנציאל ומתריעה בזמן אמת — כדי שתדבר רק עם מי שמוכן לקנות.',
+          fullDesc: 'מערכת שמזהה לידים חמים תוך שניות, שואלת שאלות ממוקדות, מדרגת לפי פוטנציאל ומתריעה בזמן אמת, כדי שתדבר רק עם מי שמוכן לקנות.',
           highlights: ['שאלות מקדימות מותאמות לתחום שלך', 'דירוג אוטומטי לפי פוטנציאל מכירה', 'התראות מיידיות על לידים חמים', 'חיבור ל-CRM וכלי מכירות'],
           cta: 'למד עוד',
         },
         {
           title: 'סוכן קביעת פגישות',
           shortDesc: 'תיאום תורים ופגישות אוטומטי עם סנכרון יומן ותזכורות.',
-          fullDesc: 'הבוט מתאם פגישות, בודק זמינות ביומן, שולח אישורים ותזכורות אוטומטיות ומפחית ביטולים — בלי שתצטרך לענות לטלפון.',
+          fullDesc: 'הבוט מתאם פגישות, בודק זמינות ביומן, שולח אישורים ותזכורות אוטומטיות ומפחית ביטולים, בלי שתצטרך לענות לטלפון.',
           highlights: ['סנכרון אוטומטי עם Google Calendar', 'תזכורות WhatsApp ו-SMS', 'ניהול שינויים וביטולים חכם', 'דף נחיתה מותאם לתורים'],
           cta: 'למד עוד',
         },
         {
           title: 'הצעות מחיר אוטומטיות',
-          shortDesc: 'הלקוח מתאר מה הוא צריך — הבוט מפיק הצעת מחיר תוך שניות.',
-          fullDesc: 'מערכת שמפיקה הצעות מחיר מפורטות, שולחת חשבוניות ומנהלת מעקב תשלומים — הכל אוטומטית, בלי אקסל ובלי בירוקרטיה.',
+          shortDesc: 'הלקוח מתאר מה הוא צריך, הבוט מפיק הצעת מחיר תוך שניות.',
+          fullDesc: 'מערכת שמפיקה הצעות מחיר מפורטות, שולחת חשבוניות ומנהלת מעקב תשלומים, הכל אוטומטית, בלי אקסל ובלי בירוקרטיה.',
           highlights: ['הצעות מחיר מיידיות ומפורטות', 'שליחת חשבוניות אוטומטית', 'תזכורות על תשלומים פתוחים', 'דוחות הכנסה שבועיים'],
           cta: 'למד עוד',
         },
         {
           title: 'אווטאר AI מדבר',
-          shortDesc: 'דמות דיגיטלית שמציגה את העסק שלך בווידאו — מקצועית, אישית ובלתי נשכחת.',
-          fullDesc: 'אווטאר AI ריאליסטי שמדבר בשמך — מציג מוצרים, מסביר שירותים ויוצר תוכן וידאו מרשים. בלי צילומים, בלי סטודיו, בלי עלויות מוגזמות.',
+          shortDesc: 'דמות דיגיטלית שמציגה את העסק שלך בווידאו, מקצועית, אישית ובלתי נשכחת.',
+          fullDesc: 'אווטאר AI ריאליסטי שמדבר בשמך, מציג מוצרים, מסביר שירותים ויוצר תוכן וידאו מרשים. בלי צילומים, בלי סטודיו, בלי עלויות מוגזמות.',
           highlights: ['דמות דיגיטלית ריאליסטית בהתאמה אישית', 'יצירת וידאו מקצועי תוך דקות', 'תמיכה בעברית ואנגלית', 'מושלם לפרסום, הדרכות ודפי נחיתה'],
           cta: 'למד עוד',
         },
@@ -336,7 +336,7 @@ export const translations = {
     },
     footer: {
       rights: '© 2025 רפאל סלע. כל הזכויות שמורות.',
-      tagline: 'אוטומציה חכמה לעסקים קטנים — מבוססת בינה מלאכותית',
+      tagline: 'אוטומציה חכמה לעסקים קטנים, מבוססת בינה מלאכותית',
       cta: 'מוכנים להתחיל? דברו איתי היום.',
     },
   },
@@ -352,10 +352,10 @@ export const translations = {
       contact: 'Contact',
     },
     hero: {
-      badge: 'Refael Sela — AI-Powered Business Automation',
+      badge: 'Refael Sela, AI-Powered Business Automation',
       headline: 'Your business can work smarter.',
       subheadline: 'Much smarter.',
-      description: 'I build AI-powered automation systems that respond to customers, qualify leads, schedule appointments, and manage sales workflows — so you don\'t have to.',
+      description: 'I build AI-powered automation systems that respond to customers, qualify leads, schedule appointments, and manage sales workflows, so you don\'t have to.',
       stats: [
         { value: '80%', label: 'Faster response time' },
         { value: '3x', label: 'More leads handled' },
@@ -366,7 +366,7 @@ export const translations = {
     },
     services: {
       title: 'What I Build For You',
-      subtitle: 'Every system is custom-built for your business — not a template, not a one-size-fits-all. A tool that works exactly the way you need it to.',
+      subtitle: 'Every system is custom-built for your business, not a template, not a one-size-fits-all. A tool that works exactly the way you need it to.',
       items: [
         {
           title: 'AI Customer Support Bot',
@@ -376,25 +376,25 @@ export const translations = {
         },
         {
           title: 'AI Lead Qualification Bot',
-          description: 'Instead of wasting time on every inquiry — the bot asks pre-qualifying questions, scores leads by relevance, and passes only the ones ready to buy.',
+          description: 'Instead of wasting time on every inquiry, the bot asks pre-qualifying questions, scores leads by relevance, and passes only the ones ready to buy.',
           features: ['Custom qualifying questions for your business', 'Automatic lead scoring by potential', 'Real-time alerts for hot leads', 'Integration with CRM and sales tools'],
           cta: 'View Demo',
         },
         {
           title: 'AI Booking Agent',
-          description: 'The bot schedules meetings with clients, checks your calendar availability, sends confirmations and reminders — and dramatically reduces no-shows.',
+          description: 'The bot schedules meetings with clients, checks your calendar availability, sends confirmations and reminders, and dramatically reduces no-shows.',
           features: ['Automatic sync with Google Calendar', 'SMS and WhatsApp reminders to clients', 'Change and cancellation management hands-free', 'Custom landing page for booking'],
           cta: 'View Demo',
         },
         {
           title: 'AI Quote & Payment Automation',
-          description: 'The client describes what they need, the bot generates an instant quote, sends an invoice, and tracks payments — all without touching a spreadsheet.',
+          description: 'The client describes what they need, the bot generates an instant quote, sends an invoice, and tracks payments, all without touching a spreadsheet.',
           features: ['Quote generation in seconds', 'Automatic invoice delivery to clients', 'Follow-up reminders for open payments', 'Weekly and monthly revenue reports'],
           cta: 'View Demo',
         },
         {
           title: 'AI Marketing & Content Automation',
-          description: 'A system that creates marketing content, publishes on social media, and manages campaigns — so you can focus on running your business, not writing posts.',
+          description: 'A system that creates marketing content, publishes on social media, and manages campaigns, so you can focus on running your business, not writing posts.',
           features: ['Content creation matched to your brand', 'Auto-publishing to Facebook, Instagram, LinkedIn', 'Post scheduling and content calendar management', 'Performance reports and analytics'],
           cta: 'View Demo',
         },
@@ -402,28 +402,28 @@ export const translations = {
     },
     demos: {
       title: 'See the Bots in Action',
-      subtitle: 'These aren\'t just demos — they\'re examples of real conversations my systems handle every day, with real customers, in real businesses.',
+      subtitle: 'These aren\'t just demos, they\'re examples of real conversations my systems handle every day, with real customers, in real businesses.',
       items: [
         {
-          name: 'Support Bot — Online Store',
-          description: 'A customer asks about the return policy and gets an instant, accurate, human-like response — no agent needed.',
+          name: 'Support Bot: Online Store',
+          description: 'A customer asks about the return policy and gets an instant, accurate, human-like response, no agent needed.',
           useCase: '💬 Scenario: Customer wants to return a product purchased 5 days ago',
           buttonText: 'Open Demo Chat',
         },
         {
-          name: 'Lead Qualification — Insurance Agency',
+          name: 'Lead Qualification: Insurance Agency',
           description: 'A new lead reaches out, the bot identifies the need, asks targeted questions, and passes a qualified lead to the agent.',
           useCase: '💬 Scenario: Insurance agency owner wants to auto-filter inquiries',
           buttonText: 'Open Demo Chat',
         },
         {
-          name: 'Booking Agent — Medical Clinic',
-          description: 'A patient wants to book an appointment. The bot offers available slots, confirms, and sends a reminder — no receptionist needed.',
+          name: 'Booking Agent: Medical Clinic',
+          description: 'A patient wants to book an appointment. The bot offers available slots, confirms, and sends a reminder, no receptionist needed.',
           useCase: '💬 Scenario: Patient wants to book a general checkup',
           buttonText: 'Open Demo Chat',
         },
         {
-          name: 'Quote Generator — Renovation Services',
+          name: 'Quote Generator: Renovation Services',
           description: 'A client describes the project, the bot collects details and generates a detailed quote in seconds.',
           useCase: '💬 Scenario: Client requests a quote for a kitchen renovation',
           buttonText: 'Open Demo Chat',
@@ -436,9 +436,9 @@ export const translations = {
         { role: 'user', text: 'Hey, I bought a product last week and want to return it' },
         { role: 'bot', text: 'Of course! Our return policy allows returns within 14 days of purchase. Do you have your order number?' },
         { role: 'user', text: 'Yes, order #4521' },
-        { role: 'bot', text: 'Found your order. I see it was purchased 5 days ago — you\'re within the return window. I\'m sending you a return link via email now. 📧' },
+        { role: 'bot', text: 'Found your order. I see it was purchased 5 days ago, you\'re within the return window. I\'m sending you a return link via email now. 📧' },
         { role: 'user', text: 'Thanks a lot!' },
-        { role: 'bot', text: 'You\'re welcome! If there\'s anything else — I\'m here. Have a great day! 😊' },
+        { role: 'bot', text: 'You\'re welcome! If there\'s anything else, I\'m here. Have a great day! 😊' },
       ],
       [
         { role: 'bot', text: 'Hi! 👋 Thanks for reaching out. I\'d love to help you find the right solution. What type of business do you have?' },
@@ -447,7 +447,7 @@ export const translations = {
         { role: 'user', text: 'Three agents and a secretary' },
         { role: 'bot', text: 'Got it. What\'s your main challenge right now? For example: customer responses, lead management, scheduling?' },
         { role: 'user', text: 'Mainly lead management, we\'re missing a lot of inquiries' },
-        { role: 'bot', text: 'I understand. It sounds like a lead filtering and management automation system could save you a lot of time and clients. I\'m forwarding your details to Refael — he\'ll get back to you within 24 hours with a tailored proposal! 📋' },
+        { role: 'bot', text: 'I understand. It sounds like a lead filtering and management automation system could save you a lot of time and clients. I\'m forwarding your details to Refael, he\'ll get back to you within 24 hours with a tailored proposal! 📋' },
       ],
       [
         { role: 'bot', text: 'Hi! 👋 Welcome to Dr. Cohen\'s clinic. How can I help?' },
@@ -464,38 +464,38 @@ export const translations = {
         { role: 'bot', text: 'Great! How large is the kitchen approximately? (Small up to 8 sqm / Medium 8-15 sqm / Large 15+ sqm)' },
         { role: 'user', text: 'Medium, about 12 sqm' },
         { role: 'bot', text: 'Got it. Are you looking for a full renovation (cabinets + tiling + painting) or partial?' },
-        { role: 'user', text: 'Full renovation — everything' },
-        { role: 'bot', text: 'Here\'s an initial quote:\n\n🔧 Full Kitchen Renovation (12 sqm)\n\n• New kitchen cabinets: $5,000\n• Tiling (porcelain): $1,500\n• Painting & plastering: $800\n• Plumbing work: $1,000\n• Electrical work: $700\n• General labor: $1,000\n\n💰 Estimated total: $10,000\n\n⏱ Estimated timeline: 2-3 weeks\n\nTo schedule a free on-site assessment — leave your details and we\'ll get back to you within hours!' },
+        { role: 'user', text: 'Full renovation, everything' },
+        { role: 'bot', text: 'Here\'s an initial quote:\n\n🔧 Full Kitchen Renovation (12 sqm)\n\n• New kitchen cabinets: $5,000\n• Tiling (porcelain): $1,500\n• Painting & plastering: $800\n• Plumbing work: $1,000\n• Electrical work: $700\n• General labor: $1,000\n\n💰 Estimated total: $10,000\n\n⏱ Estimated timeline: 2-3 weeks\n\nTo schedule a free on-site assessment, leave your details and we\'ll get back to you within hours!' },
       ],
     ],
     howItWorks: {
       title: 'How the Process Works',
-      subtitle: 'From our first conversation to a live automation system — a clear, fast process with no surprises.',
+      subtitle: 'From our first conversation to a live automation system, a clear, fast process with no surprises.',
       description: 'I don\'t sell you an "AI solution." I sit down with you, understand what\'s slowing your business down, and build a system that solves the problem. Usually within days.',
       steps: [
         {
           number: '01',
           title: 'Discovery Call',
-          description: 'In a short call, I learn about your business, your processes, and your challenges — to identify where automation will have the biggest impact.',
+          description: 'In a short call, I learn about your business, your processes, and your challenges, to identify where automation will have the biggest impact.',
           detail: 'Usually 30 minutes on Zoom or WhatsApp',
         },
         {
           number: '02',
           title: 'Build & Customize',
-          description: 'I build the system from scratch to match your exact needs — including writing conversation scripts, connecting to your existing tools, and thorough testing.',
+          description: 'I build the system from scratch to match your exact needs, including writing conversation scripts, connecting to your existing tools, and thorough testing.',
           detail: 'Usually 3-7 working days',
         },
         {
           number: '03',
           title: 'Launch & Improve',
-          description: 'The system goes live, I monitor performance and continuously improve — because good automation is automation that gets better over time.',
+          description: 'The system goes live, I monitor performance and continuously improve, because good automation is automation that gets better over time.',
           detail: 'Ongoing support and updates',
         },
       ],
     },
     whyMe: {
       title: 'Why Work With Me?',
-      subtitle: 'I\'m not a software company or a digital agency. I\'m an automation specialist who understands small businesses — and builds solutions that work from day one.',
+      subtitle: 'I\'m not a software company or a digital agency. I\'m an automation specialist who understands small businesses, and builds solutions that work from day one.',
       points: [
         {
           title: 'Focused on Results, Not Tech',
@@ -507,7 +507,7 @@ export const translations = {
         },
         {
           title: 'Fast & Practical',
-          description: 'Most of my projects go live within a week. No unnecessary meetings, no presentations, no complications — straight to work.',
+          description: 'Most of my projects go live within a week. No unnecessary meetings, no presentations, no complications, straight to work.',
         },
         {
           title: 'Built for Small Business',
@@ -521,7 +521,7 @@ export const translations = {
     },
     industries: {
       title: 'Industries I Work With',
-      subtitle: 'Every industry has unique challenges — and every challenge has an automation solution that fits perfectly.',
+      subtitle: 'Every industry has unique challenges, and every challenge has an automation solution that fits perfectly.',
       items: [
         {
           name: 'E-commerce',
@@ -530,7 +530,7 @@ export const translations = {
         },
         {
           name: 'Clinics & Healthcare',
-          description: 'Automated appointment scheduling, SMS reminders, and answering common patient questions — without burdening your receptionist.',
+          description: 'Automated appointment scheduling, SMS reminders, and answering common patient questions, without burdening your receptionist.',
           stat: 'Up to 40% fewer cancellations',
         },
         {
@@ -545,7 +545,7 @@ export const translations = {
         },
         {
           name: 'Agencies & Offices',
-          description: 'Manage inquiries, automate reports, and maintain ongoing client communication — without wasting hours on manual work.',
+          description: 'Manage inquiries, automate reports, and maintain ongoing client communication, without wasting hours on manual work.',
           stat: 'Up to 15 hours saved per week',
         },
       ],
@@ -576,12 +576,12 @@ export const translations = {
     },
     portfolio: {
       title: 'Projects I\'ve Delivered',
-      subtitle: 'Every project started with a specific business challenge — and ended with an automation system that works 24/7 and delivers measurable results.',
+      subtitle: 'Every project started with a specific business challenge, and ended with an automation system that works 24/7 and delivers measurable results.',
       items: [
         {
           title: 'Support Bot for Fashion Retail Chain',
           industry: 'E-commerce',
-          description: 'A bot answering questions about sizes, shipping times, return policy, and order status — 24 hours a day, 7 days a week.',
+          description: 'A bot answering questions about sizes, shipping times, return policy, and order status, 24 hours a day, 7 days a week.',
           result: '65% reduction in customer service inquiries',
           details: 'Shopify integration, 3-language support, setup time: 5 days',
         },
@@ -611,7 +611,7 @@ export const translations = {
     contact: {
       title: 'Ready to Get Started?',
       subtitle: 'Let\'s talk about your business and see how automation can save you time, money, and headaches.',
-      description: 'I respond within hours. Tell me what your business does, what\'s slowing you down, and I\'ll get back with practical ideas — no commitment required.',
+      description: 'I respond within hours. Tell me what your business does, what\'s slowing you down, and I\'ll get back with practical ideas, no commitment required.',
       form: {
         name: 'Full Name',
         email: 'Email',
@@ -635,41 +635,41 @@ export const translations = {
     products: {
       badge: 'AI Products',
       title: 'Five Tools That Will Transform Your Business',
-      subtitle: 'Each tool is custom-built for your needs — advanced technology, immediate results.',
+      subtitle: 'Each tool is custom-built for your needs, advanced technology, immediate results.',
       modalCta: 'Talk to me about this solution',
       items: [
         {
           title: 'WhatsApp AI Bot',
-          shortDesc: 'A smart bot that runs directly on WhatsApp — answers customers, handles inquiries, and sells for you 24/7.',
-          fullDesc: 'An AI bot running directly on your business WhatsApp. Customers send a message and get instant, human-like, accurate responses — no waiting, no compromise. From lead filtering to closing deals.',
-          highlights: ['Runs directly on WhatsApp — no extra apps needed', 'Human-like responses in seconds, 24/7', 'Filters leads and forwards only relevant ones', 'Weekly reports on conversations and trends'],
+          shortDesc: 'A smart bot that runs directly on WhatsApp, answers customers, handles inquiries, and sells for you 24/7.',
+          fullDesc: 'An AI bot running directly on your business WhatsApp. Customers send a message and get instant, human-like, accurate responses, no waiting, no compromise. From lead filtering to closing deals.',
+          highlights: ['Runs directly on WhatsApp, no extra apps needed', 'Human-like responses in seconds, 24/7', 'Filters leads and forwards only relevant ones', 'Weekly reports on conversations and trends'],
           cta: 'Learn More',
         },
         {
           title: 'Automatic Lead Filtering',
           shortDesc: 'Smart qualifying questions that filter leads and send you only the relevant ones.',
-          fullDesc: 'A system that identifies hot leads in seconds, asks targeted questions, scores by potential, and alerts in real-time — so you only talk to buyers.',
+          fullDesc: 'A system that identifies hot leads in seconds, asks targeted questions, scores by potential, and alerts in real-time, so you only talk to buyers.',
           highlights: ['Custom qualifying questions for your industry', 'Automatic scoring by sales potential', 'Instant alerts for hot leads', 'CRM and sales tool integration'],
           cta: 'Learn More',
         },
         {
           title: 'Booking Agent',
           shortDesc: 'Automated appointment scheduling with calendar sync and reminders.',
-          fullDesc: 'The bot coordinates meetings, checks calendar availability, sends confirmations and automatic reminders, and reduces no-shows — without picking up the phone.',
+          fullDesc: 'The bot coordinates meetings, checks calendar availability, sends confirmations and automatic reminders, and reduces no-shows, without picking up the phone.',
           highlights: ['Auto-sync with Google Calendar', 'WhatsApp and SMS reminders', 'Smart change and cancellation handling', 'Custom booking landing page'],
           cta: 'Learn More',
         },
         {
           title: 'Auto Quote Generator',
-          shortDesc: 'Customer describes what they need — the bot generates a quote in seconds.',
-          fullDesc: 'A system that produces detailed quotes, sends invoices, and manages payment tracking — all automatically, no spreadsheets, no bureaucracy.',
+          shortDesc: 'Customer describes what they need, the bot generates a quote in seconds.',
+          fullDesc: 'A system that produces detailed quotes, sends invoices, and manages payment tracking, all automatically, no spreadsheets, no bureaucracy.',
           highlights: ['Instant detailed quotes', 'Automatic invoice delivery', 'Payment follow-up reminders', 'Weekly revenue reports'],
           cta: 'Learn More',
         },
         {
           title: 'AI Talking Avatar',
-          shortDesc: 'A digital character that presents your business in video — professional, personal, and unforgettable.',
-          fullDesc: 'A realistic AI avatar that speaks on your behalf — presents products, explains services, and creates stunning video content. No filming, no studio, no excessive costs.',
+          shortDesc: 'A digital character that presents your business in video, professional, personal, and unforgettable.',
+          fullDesc: 'A realistic AI avatar that speaks on your behalf, presents products, explains services, and creates stunning video content. No filming, no studio, no excessive costs.',
           highlights: ['Custom realistic digital character', 'Professional video creation in minutes', 'Hebrew and English support', 'Perfect for ads, tutorials, and landing pages'],
           cta: 'Learn More',
         },

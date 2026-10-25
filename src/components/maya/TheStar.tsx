@@ -23,8 +23,8 @@ const SPECIAL: { icon: JSX.Element; he: string; en: string; th: string; bodyHe: 
   {
     icon: <Heart className="w-5 h-5" />,
     he: 'זוכרת את הקבועים', en: 'She remembers the regulars', th: 'จำลูกค้าประจำได้',
-    bodyHe: '"דנה! חזרת! איך היה הטיפול?" — הרגע ששווה את כל התקציב.',
-    bodyEn: '"Dana! You\'re back! How was the treatment?" — the moment worth the whole budget.',
+    bodyHe: '"דנה! חזרת! איך היה הטיפול?", הרגע ששווה את כל התקציב.',
+    bodyEn: '"Dana! You\'re back! How was the treatment?", the moment worth the whole budget.',
     bodyTh: '"คุณดาน่า! กลับมาแล้ว! ทรีตเมนต์ครั้งก่อนเป็นยังไงบ้างคะ?" ช่วงเวลาที่คุ้มค่ากับงบทั้งหมด',
   },
   {
@@ -51,8 +51,8 @@ const SPECIAL: { icon: JSX.Element; he: string; en: string; th: string; bodyHe: 
   {
     icon: <Users className="w-5 h-5" />,
     he: 'דו-שיח (אופציה)', en: 'A duet (optional)', th: 'บทสนทนาคู่ (ตัวเลือกเสริม)',
-    bodyHe: 'דמות שנייה שהיא מדברת איתה — קבלה + מומחית. תיאטרון, לא מסך.',
-    bodyEn: 'A second character she talks with — reception + expert. Theatre, not a screen.',
+    bodyHe: 'דמות שנייה שהיא מדברת איתה, קבלה + מומחית. תיאטרון, לא מסך.',
+    bodyEn: 'A second character she talks with, reception + expert. Theatre, not a screen.',
     bodyTh: 'ตัวละครที่สองที่เธอพูดคุยด้วย ฝ่ายต้อนรับ + ผู้เชี่ยวชาญ เหมือนดูละครเวที ไม่ใช่แค่หน้าจอ',
   },
   {
@@ -97,7 +97,7 @@ export default function TheStar() {
             </span>
           </h2>
           <p className="mt-5 text-[1.15rem] text-ink/85 max-w-[680px] leading-[1.6]">
-            {pick('לא פקידה — שחקנית דיגיטלית. עובדת אחת, צוות שלם.', 'Not a receptionist — a digital actress. One employee, a whole team.', 'ไม่ใช่แค่พนักงานต้อนรับ แต่เป็นนักแสดงดิจิทัล พนักงานคนเดียว ทำงานได้เท่าทั้งทีม')}
+            {pick('לא פקידה, שחקנית דיגיטלית. עובדת אחת, צוות שלם.', 'Not a receptionist, a digital actress. One employee, a whole team.', 'ไม่ใช่แค่พนักงานต้อนรับ แต่เป็นนักแสดงดิจิทัล พนักงานคนเดียว ทำงานได้เท่าทั้งทีม')}
           </p>
         </FadeUp>
 
@@ -107,8 +107,8 @@ export default function TheStar() {
             <p className="text-[0.75rem] font-semibold tracking-[0.16em] uppercase text-muted-foreground mb-3">{pick('מי היא', 'Who she is', 'เธอคือใคร')}</p>
             <p className="text-[1.05rem] text-ink/80 leading-[1.8]">
               {pick(
-                'דמות בגודל מלא שצולמה באולפן עם שחקנית מקצועית — 80–120 קליפים מדויקים: נכנסת לפריים כשאתם מתקרבים, יושבת, נשענת, מחזיקה מוצרים, מושיטה, צוחקת, חושבת, חוגגת, רוקדת. לא "מחוות" — רפרטואר.',
-                'A full-size figure shot in a studio with a professional actress — 80–120 precise clips: she enters the frame as you approach, sits, leans, holds products, reaches out, laughs, thinks, celebrates, dances. Not "gestures" — a repertoire.', 'ตัวละครขนาดเท่าคนจริงที่ถ่ายทำในสตูดิโอกับนักแสดงมืออาชีพ 80–120 คลิปที่แม่นยำ: เดินเข้าเฟรมเมื่อคุณเข้าใกล้ นั่ง เอนตัว ถือสินค้า ยื่นมือ หัวเราะ ครุ่นคิด ฉลอง และเต้น ไม่ใช่แค่ "ท่าทาง" แต่เป็นคลังการแสดงทั้งชุด'
+                'דמות בגודל מלא שצולמה באולפן עם שחקנית מקצועית, 80–120 קליפים מדויקים: נכנסת לפריים כשאתם מתקרבים, יושבת, נשענת, מחזיקה מוצרים, מושיטה, צוחקת, חושבת, חוגגת, רוקדת. לא "מחוות", רפרטואר.',
+                'A full-size figure shot in a studio with a professional actress, 80–120 precise clips: she enters the frame as you approach, sits, leans, holds products, reaches out, laughs, thinks, celebrates, dances. Not "gestures", a repertoire.', 'ตัวละครขนาดเท่าคนจริงที่ถ่ายทำในสตูดิโอกับนักแสดงมืออาชีพ 80–120 คลิปที่แม่นยำ: เดินเข้าเฟรมเมื่อคุณเข้าใกล้ นั่ง เอนตัว ถือสินค้า ยื่นมือ หัวเราะ ครุ่นคิด ฉลอง และเต้น ไม่ใช่แค่ "ท่าทาง" แต่เป็นคลังการแสดงทั้งชุด'
               )}
             </p>
           </div>

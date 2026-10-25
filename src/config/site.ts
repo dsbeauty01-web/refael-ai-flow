@@ -49,10 +49,21 @@ export type Product = {
 };
 
 /**
- * The five things Refael sells, in the order a visitor should meet them.
+ * The six things Refael sells, in the order a visitor should meet them.
  * Used by the header menu, the homepage product grid and the footer site map.
  */
 export const PRODUCTS: Product[] = [
+  {
+    path: '/customer-service',
+    name: { he: 'נציג שירות AI', en: 'AI customer service', th: 'บริการลูกค้า AI' },
+    blurb: {
+      he: 'מכיר את העסק, עונה 24/7, קובע תורים ומעביר לאדם כשצריך. כאווטאר, בקול או בצ׳אט.',
+      en: 'Knows your business, answers 24/7, books appointments and hands off to a human. As an avatar, by voice or in chat.',
+      th: 'รู้จักธุรกิจของคุณ ตอบได้ตลอด 24 ชม. นัดคิว และส่งต่อให้คนจริง ทั้งแบบอวตาร เสียง หรือแชท',
+    },
+    image: { he: '/media/maya_speaking_poster.jpg', en: '/media/maya_speaking_poster.jpg', th: '/media/maya_speaking_poster.jpg' },
+    alt: { he: 'מיה, נציגת שירות AI', en: 'Maya, an AI customer service agent', th: 'มายา พนักงานบริการลูกค้า AI' },
+  },
   {
     path: '/live-selling',
     name: { he: 'מנחה AI ללייב מכירות', en: 'AI host for live selling', th: 'พิธีกร AI สำหรับไลฟ์ขายของ' },

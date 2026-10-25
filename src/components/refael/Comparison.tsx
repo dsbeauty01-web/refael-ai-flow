@@ -49,7 +49,7 @@ const ROWS: Row[] = [
   },
   {
     feature: { he: 'זמן הקמה', en: 'Time to launch', th: 'ระยะเวลาติดตั้ง' },
-    api: { v: 'part', label: { he: '—', en: '—', th: '—' } },
+    api: { v: 'part', label: { he: ', ', en: ', ', th: ', ' } },
     enterprise: { v: 'no', label: { he: 'חודשים', en: 'Months', th: 'หลายเดือน' } },
     us: { v: 'yes', label: { he: 'ימים', en: 'Days', th: 'ไม่กี่วัน' } },
   },
@@ -101,8 +101,8 @@ export default function Comparison() {
           </h2>
           <p className="mt-4 text-[1.05rem] text-muted-foreground max-w-[700px] leading-[1.7]">
             {pick(
-              'החברות הגדולות מוכרות אווטארים בתשלום לפי דקה, חצי גוף, בלי עברית אמיתית. בנינו את אותה ארכיטקטורה — על תשתית משלנו, בקוד פתוח, בעברית. אתם משלמים על מוצר, לא על כל דקת שיחה.',
-              'The big vendors sell avatars billed per minute, chest-up, without real Hebrew. We built the same architecture — on our own infrastructure, open source, in Hebrew. You pay for a product, not for every minute of conversation.',
+              'החברות הגדולות מוכרות אווטארים בתשלום לפי דקה, חצי גוף, בלי עברית אמיתית. בנינו את אותה ארכיטקטורה, על תשתית משלנו, בקוד פתוח, בעברית. אתם משלמים על מוצר, לא על כל דקת שיחה.',
+              'The big vendors sell avatars billed per minute, chest-up, without real Hebrew. We built the same architecture, on our own infrastructure, open source, in Hebrew. You pay for a product, not for every minute of conversation.',
               'ผู้ให้บริการรายใหญ่ขายอวตารแบบคิดเงินตามนาที เห็นแค่ครึ่งตัว และไม่มีภาษาฮีบรูที่แท้จริง เราสร้างสถาปัตยกรรมเดียวกัน บนโครงสร้างพื้นฐานของเราเอง ด้วยโอเพนซอร์ส และเป็นภาษาฮีบรู คุณจ่ายค่าผลิตภัณฑ์ ไม่ใช่ค่าทุกนาทีที่สนทนา'
             )}
           </p>
@@ -171,8 +171,8 @@ export default function Comparison() {
         <FadeUp className="mt-8">
           <p className="text-[0.82rem] text-muted-foreground max-w-[760px] leading-[1.7]">
             {pick(
-              'ההשוואה מתייחסת למוצרי המדף הפומביים של אותם ספקים נכון ליולי 2026. ספקים משנים מוצר ומחיר — בדקו גם בעצמכם.',
-              "The comparison refers to those vendors' public off-the-shelf products as of July 2026. Vendors change products and prices — check for yourself too.",
+              'ההשוואה מתייחסת למוצרי המדף הפומביים של אותם ספקים נכון ליולי 2026. ספקים משנים מוצר ומחיר, בדקו גם בעצמכם.',
+              "The comparison refers to those vendors' public off-the-shelf products as of July 2026. Vendors change products and prices, check for yourself too.",
               'การเปรียบเทียบนี้อ้างอิงผลิตภัณฑ์สำเร็จรูปที่เปิดเผยต่อสาธารณะของผู้ให้บริการเหล่านั้น ณ เดือนกรกฎาคม 2026 ผู้ให้บริการมีการเปลี่ยนแปลงผลิตภัณฑ์และราคา ควรตรวจสอบด้วยตนเองด้วย'
             )}
           </p>

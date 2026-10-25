@@ -13,13 +13,13 @@ const SERVICES = [
     he: {
       t: 'אווטאר חי',
       hook: 'מישהו נכנס ללובי ב-19:00. אין אף אחד בדלפק.',
-      b: 'דמות בגודל מלא מקבלת אותו בשמו, עונה על שאלות, ומזמנת פגישה — בזמן שאתם בבית.',
+      b: 'דמות בגודל מלא מקבלת אותו בשמו, עונה על שאלות, ומזמנת פגישה, בזמן שאתם בבית.',
       cta: 'המחירים למעלה',
     },
     en: {
       t: 'Live avatar',
       hook: 'Someone walks into the lobby at 7pm. Nobody is at the desk.',
-      b: 'A full-size figure greets them, answers questions and books the meeting — while you are at home.',
+      b: 'A full-size figure greets them, answers questions and books the meeting, while you are at home.',
       cta: 'Prices above',
     },
     th: {
@@ -35,13 +35,13 @@ const SERVICES = [
     he: {
       t: 'בוט וואטסאפ ומסנג׳ר',
       hook: 'לקוח שולח הודעה ב-2 לפנות בוקר.',
-      b: 'הוא מקבל תשובה אמיתית מיד — ואתם מקבלים ליד מסודר בבוקר, עם כל מה שהוא סיפר.',
+      b: 'הוא מקבל תשובה אמיתית מיד, ואתם מקבלים ליד מסודר בבוקר, עם כל מה שהוא סיפר.',
       cta: 'לשמוע איך',
     },
     en: {
       t: 'WhatsApp & Messenger bots',
       hook: 'A customer messages you at 2am.',
-      b: 'They get a real answer immediately — and you get a tidy lead in the morning with everything they said.',
+      b: 'They get a real answer immediately, and you get a tidy lead in the morning with everything they said.',
       cta: 'Hear how',
     },
     th: {
@@ -57,7 +57,7 @@ const SERVICES = [
     he: {
       t: 'אוטומציות ואינטגרציות',
       hook: 'יש משהו שאתם עושים ידנית כל יום.',
-      b: 'n8n, חיבורי CRM, RAG על המסמכים שלכם, עמדות קיוסק. אם זה חוזר על עצמו — אפשר להפוך אותו לאוטומטי.',
+      b: 'n8n, חיבורי CRM, RAG על המסמכים שלכם, עמדות קיוסק. אם זה חוזר על עצמו, אפשר להפוך אותו לאוטומטי.',
       cta: 'לספר לי מה חוזר',
     },
     en: {
@@ -88,8 +88,8 @@ export default function Services() {
           </h2>
           <p className="mt-4 text-[1.05rem] text-muted-foreground max-w-[680px] leading-[1.7]">
             {pick(
-              'רוב מה שאני בונה לעסקים אף אחד לא רואה — זה פשוט קורה, בשקט, בזמן שהם עסוקים במשהו אחר.',
-              'Most of what I build for businesses is never seen — it just happens, quietly, while they are busy with something else.',
+              'רוב מה שאני בונה לעסקים אף אחד לא רואה, זה פשוט קורה, בשקט, בזמן שהם עסוקים במשהו אחר.',
+              'Most of what I build for businesses is never seen, it just happens, quietly, while they are busy with something else.',
               'สิ่งที่ผมสร้างให้ธุรกิจส่วนใหญ่ไม่มีใครมองเห็น มันเพียงทำงานอย่างเงียบ ๆ ในขณะที่พวกเขายุ่งอยู่กับเรื่องอื่น'
             )}
           </p>
@@ -123,8 +123,8 @@ export default function Services() {
           <div className="surface p-7 sm:p-8 flex flex-wrap items-center justify-between gap-5">
             <p className="text-[1.05rem] text-ink max-w-[620px] leading-[1.6]">
               {pick(
-                'לא בטוחים מה מתאים לכם? חצי שעה איתי, בלי תשלום ובלי התחייבות — ותדעו בדיוק מה שווה לבנות ומה לא.',
-                "Not sure what fits you? Half an hour with me, free and with no commitment — and you'll know exactly what is worth building and what isn't.",
+                'לא בטוחים מה מתאים לכם? חצי שעה איתי, בלי תשלום ובלי התחייבות, ותדעו בדיוק מה שווה לבנות ומה לא.',
+                "Not sure what fits you? Half an hour with me, free and with no commitment, and you'll know exactly what is worth building and what isn't.",
                 'ไม่แน่ใจว่าแบบไหนเหมาะกับคุณ ครึ่งชั่วโมงกับผม ฟรีและไม่มีข้อผูกมัด แล้วคุณจะรู้ว่าอะไรควรสร้างและอะไรไม่ควร'
               )}
             </p>

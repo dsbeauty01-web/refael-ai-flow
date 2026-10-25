@@ -21,8 +21,8 @@ const problems = [
     icon: DollarSign,
     he: 'עובדים עולים כסף',
     en: 'Staff costs keep rising',
-    heDesc: 'פקידת קבלה, איש מכירות — כל אחד עולה אלפים בחודש.',
-    enDesc: 'A receptionist, a salesperson — each costs thousands per month.',
+    heDesc: 'פקידת קבלה, איש מכירות, כל אחד עולה אלפים בחודש.',
+    enDesc: 'A receptionist, a salesperson, each costs thousands per month.',
   },
 ];
 

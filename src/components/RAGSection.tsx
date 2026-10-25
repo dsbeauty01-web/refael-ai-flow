@@ -8,14 +8,14 @@ const RAGSection = () => {
 
   const steps = isHebrew
     ? [
-        { Icon: Upload, title: 'אנחנו מלמדים אותו', desc: 'מעלים את כל המידע — מוצרים, מחירים, מדיניות, שאלות נפוצות. הבוט מכיר את העסק שלך לעומק.' },
-        { Icon: Brain, title: 'הוא מבין ומחפש', desc: 'כשלקוח שואל שאלה, הבוט מוצא את המידע הכי רלוונטי מתוך המאגר שלך — ועונה בדיוק.' },
+        { Icon: Upload, title: 'אנחנו מלמדים אותו', desc: 'מעלים את כל המידע, מוצרים, מחירים, מדיניות, שאלות נפוצות. הבוט מכיר את העסק שלך לעומק.' },
+        { Icon: Brain, title: 'הוא מבין ומחפש', desc: 'כשלקוח שואל שאלה, הבוט מוצא את המידע הכי רלוונטי מתוך המאגר שלך, ועונה בדיוק.' },
         { Icon: MessageCircle, title: 'הלקוח מקבל תשובה חכמה', desc: 'תשובות מותאמות אישית בשפה טבעית, עם המלצות מוצרים, קישורים ומידע מדויק.' },
       ]
     : [
-        { Icon: Upload, title: 'We Train It', desc: 'Upload all your data — products, prices, policies, FAQs. The bot learns your entire business inside out.' },
+        { Icon: Upload, title: 'We Train It', desc: 'Upload all your data, products, prices, policies, FAQs. The bot learns your entire business inside out.' },
         { Icon: Brain, title: 'It Retrieves & Reasons', desc: 'When a customer asks a question, the AI searches your knowledge base and generates an accurate, contextual answer.' },
-        { Icon: MessageCircle, title: 'Customer Gets a Smart Reply', desc: 'Personalized responses in natural language — with product recommendations, links, and precise information.' },
+        { Icon: MessageCircle, title: 'Customer Gets a Smart Reply', desc: 'Personalized responses in natural language, with product recommendations, links, and precise information.' },
       ];
 
   return (
@@ -50,8 +50,8 @@ const RAGSection = () => {
         </div>
         <p className="text-center text-primary-foreground/55 text-lg md:text-xl max-w-3xl mx-auto mb-16 leading-relaxed font-medium">
           {isHebrew
-            ? 'הבוט שלנו משתמש בטכנולוגיית RAG — הוא לא ממציא תשובות, אלא מושך מידע אמיתי מהמאגר שלך ועונה בצורה מדויקת ואמינה.'
-            : 'Our AI uses RAG technology — it doesn\'t make up answers. It retrieves real data from your business knowledge base and responds with precision and confidence.'}
+            ? 'הבוט שלנו משתמש בטכנולוגיית RAG, הוא לא ממציא תשובות, אלא מושך מידע אמיתי מהמאגר שלך ועונה בצורה מדויקת ואמינה.'
+            : 'Our AI uses RAG technology, it doesn\'t make up answers. It retrieves real data from your business knowledge base and responds with precision and confidence.'}
         </p>
 
         {/* Steps */}

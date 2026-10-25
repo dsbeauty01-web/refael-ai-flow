@@ -26,7 +26,7 @@ const HeroSection = () => (
         AI Automation for Small Businesses
       </p>
       <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-        I build AI assistants that talk, think, and take action for your business — 24/7
+        I build AI assistants that talk, think, and take action for your business, 24/7
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <Button

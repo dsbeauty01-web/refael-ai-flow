@@ -13,7 +13,7 @@ export default defineTool({
         messenger: "https://www.facebook.com/refael.silanikove",
         email: "dsbeauty01@gmail.com",
         phone: "+972-53-332-7125",
-        offer: "Free 15-minute consultation — reply within 1 hour",
+        offer: "Free 15-minute consultation, reply within 1 hour",
       }, null, 2),
     }],
   }),

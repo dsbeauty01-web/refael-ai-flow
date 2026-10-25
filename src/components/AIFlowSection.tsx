@@ -75,8 +75,8 @@ const AIFlowSection = () => {
           </h2>
           <p className="text-primary-foreground/60 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
             {isHebrew
-              ? 'עוזר חכם שעובד 24/7, מאומן על כל המוצרים, המדיניות והמידע העסקי שלך — כדי שתוכל להתמקד בצמיחה'
-              : 'A 24/7 intelligent assistant trained on all your products, policies, and store data — so you can focus on growth'}
+              ? 'עוזר חכם שעובד 24/7, מאומן על כל המוצרים, המדיניות והמידע העסקי שלך, כדי שתוכל להתמקד בצמיחה'
+              : 'A 24/7 intelligent assistant trained on all your products, policies, and store data, so you can focus on growth'}
           </p>
           <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-3 max-w-3xl mx-auto ${isHebrew ? 'direction-rtl' : ''}`}>
             {(isHebrew

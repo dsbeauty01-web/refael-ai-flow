@@ -34,7 +34,7 @@ export const LEGAL: Record<LegalSlug, Record<Language, LegalDoc>> = {
         { h: 'מי אחראי למידע', p: [`בעל האתר והאחראי על המידע: ${C.he}. לכל פנייה בנושא פרטיות ניתן לכתוב לכתובת הדוא"ל הזו.`] },
         { h: 'איזה מידע נאסף', p: [
           'מידע שאתם מוסרים מרצונכם בטופס יצירת הקשר: שם, טלפון, שם העסק ומיקום ההצבה המבוקש.',
-          'מידע טכני שנאסף אוטומטית בעת הגלישה: כתובת IP, סוג הדפדפן והמכשיר, ודפים שנצפו — לצורך תפעול ואבטחת האתר.',
+          'מידע טכני שנאסף אוטומטית בעת הגלישה: כתובת IP, סוג הדפדפן והמכשיר, ודפים שנצפו, לצורך תפעול ואבטחת האתר.',
           'העדפת השפה שלכם נשמרת בדפדפן שלכם בלבד (localStorage), כדי שהאתר ייפתח בשפה שבחרתם. מידע זה אינו נשלח אלינו.',
         ]},
         { h: 'שיחות קוליות עם אווטאר', p: [
@@ -67,7 +67,7 @@ export const LEGAL: Record<LegalSlug, Record<Language, LegalDoc>> = {
         { h: 'Who controls your data', p: [`Site owner and data controller: ${C.en}. For any privacy request, write to that address.`] },
         { h: 'What we collect', p: [
           'Information you submit voluntarily through the contact form: name, phone number, business name, and intended deployment location.',
-          'Technical information collected automatically while browsing: IP address, browser and device type, and pages viewed — used to operate and secure the site.',
+          'Technical information collected automatically while browsing: IP address, browser and device type, and pages viewed, used to operate and secure the site.',
           'Your language preference is stored in your own browser (localStorage) so the site opens in the language you chose. It is not transmitted to us.',
         ]},
         { h: 'Voice conversations with an avatar', p: [
@@ -147,7 +147,7 @@ export const LEGAL: Record<LegalSlug, Record<Language, LegalDoc>> = {
           `${BUSINESS.nameHe} רשום כ${BUSINESS.entityHe}; חשבוניות מונפקות בהתאם למעמד זה. מחיר מחייב יימסר בהצעת מחיר בכתב.`,
         ]},
         { h: 'קניין רוחני', p: [
-          'כל התכנים באתר — לרבות טקסטים, עיצוב, סרטונים ודמויות האווטאר — הם קניינו של בעל האתר. אין להעתיק, לשכפל או לעשות בהם שימוש מסחרי ללא אישור בכתב.',
+          'כל התכנים באתר, לרבות טקסטים, עיצוב, סרטונים ודמויות האווטאר, הם קניינו של בעל האתר. אין להעתיק, לשכפל או לעשות בהם שימוש מסחרי ללא אישור בכתב.',
         ]},
         { h: 'אחריות', p: [
           'האתר ותכניו מסופקים כפי שהם. לא תחול אחריות לנזק ישיר או עקיף שייגרם משימוש באתר או מהסתמכות על תוכנו.',
@@ -176,7 +176,7 @@ export const LEGAL: Record<LegalSlug, Record<Language, LegalDoc>> = {
           `${BUSINESS.name} is registered as an Israeli Osek Patur; invoices are issued accordingly. Binding pricing is provided in a written quote.`,
         ]},
         { h: 'Intellectual property', p: [
-          'All content on this site — including text, design, video, and the avatar characters — belongs to the site owner. It may not be copied, reproduced, or used commercially without written permission.',
+          'All content on this site, including text, design, video, and the avatar characters, belongs to the site owner. It may not be copied, reproduced, or used commercially without written permission.',
         ]},
         { h: 'Liability', p: [
           'The site and its content are provided as is. No liability is accepted for direct or indirect damages arising from use of the site or reliance on its content.',
@@ -233,7 +233,7 @@ export const LEGAL: Record<LegalSlug, Record<Language, LegalDoc>> = {
           'שמירה על ניגודיות צבעים בין הטקסט לרקע.',
           'תמיכה בהעדפת המערכת להפחתת תנועה (prefers-reduced-motion): כאשר ההעדפה פעילה, אנימציות, הבהובים ואפקט ההקלדה מבוטלים ותוכן מוצג באופן מיידי.',
           'מבנה כותרות היררכי, טקסט חלופי לתמונות, ותוויות לשדות בטופס יצירת הקשר.',
-          'האתר נתמך בשלוש שפות — עברית, אנגלית ותאית — עם כיווניות טקסט מותאמת.',
+          'האתר נתמך בשלוש שפות, עברית, אנגלית ותאית, עם כיווניות טקסט מותאמת.',
           'רוב סרטוני האווטאר באתר הם קטעי תנועה ללא פס קול. הסרטון שבו מאיה מדברת כולל דיבור, ולצידו מופיע תמלול מלא בעמוד הבית ("מה היא אומרת"), כך שאין צורך לשמוע כדי להבין את התוכן.',
         ]},
         { h: 'מגבלות ידועות', p: [
@@ -259,7 +259,7 @@ export const LEGAL: Record<LegalSlug, Record<Language, LegalDoc>> = {
           'Colour contrast maintained between text and background.',
           'Support for the reduced-motion system preference: when enabled, animations, pulsing, and the typing effect are disabled and content is shown immediately.',
           'Hierarchical heading structure, alternative text for images, and labels on all contact-form fields.',
-          'The site is available in three languages — Hebrew, English, and Thai — with correct text direction for each.',
+          'The site is available in three languages, Hebrew, English, and Thai, with correct text direction for each.',
           'Most avatar videos on this site are silent motion clips. The one clip in which Maya speaks carries speech, and a full transcript sits beside it on the home page ("What she says"), so hearing it is never required to understand the content.',
         ]},
         { h: 'Known limitations', p: [

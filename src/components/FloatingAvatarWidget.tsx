@@ -110,7 +110,7 @@ function TextChatPanel({ sessionId }: { sessionId: string }) {
     {
       id: 'greet',
       role: 'bot',
-      text: 'היי, אני מיקה. אפשר לכתוב לי או פשוט לדבר איתי — אני מקשיבה.',
+      text: 'היי, אני מיקה. אפשר לכתוב לי או פשוט לדבר איתי, אני מקשיבה.',
       ts: Date.now(),
     },
   ]);
@@ -542,7 +542,7 @@ export function FloatingAvatarWidget() {
 
   return (
     <>
-      {/* Floating button — visible when modal closed */}
+      {/* Floating button, visible when modal closed */}
       {!open && (
         <button
           type="button"
@@ -551,7 +551,7 @@ export function FloatingAvatarWidget() {
           dir="rtl"
           aria-label="דבר עם מיקה"
         >
-          {/* Tease speech bubble — only for new visitors after 10s */}
+          {/* Tease speech bubble, only for new visitors after 10s */}
           {showTease && (
             <span
               className="hidden sm:inline-block bg-white text-[#2a1f10] text-sm font-semibold px-3 py-2 rounded-2xl shadow-xl relative"
@@ -565,7 +565,7 @@ export function FloatingAvatarWidget() {
             </span>
           )}
 
-          {/* Default static tag — shows when not teasing */}
+          {/* Default static tag, shows when not teasing */}
           {!showTease && (
             <span className="hidden sm:inline-block bg-[#0a0a1a]/90 text-white text-sm font-medium px-3 py-2 rounded-full shadow-lg backdrop-blur-sm whitespace-nowrap">
               דבר איתי עכשיו
@@ -577,7 +577,7 @@ export function FloatingAvatarWidget() {
             className="relative w-[130px] h-[130px] rounded-full shadow-xl"
             style={{ border: '3px solid #00e5ff' }}
           >
-            {/* Pulse rings — only when teasing */}
+            {/* Pulse rings, only when teasing */}
             {showTease && (
               <>
                 <span className="absolute inset-0 rounded-full bg-cyan-400/40 animate-ping" />
@@ -597,7 +597,7 @@ export function FloatingAvatarWidget() {
         </button>
       )}
 
-      {/* Modal — bigger on desktop. Stable: no backdrop-click close, only X or ESC */}
+      {/* Modal, bigger on desktop. Stable: no backdrop-click close, only X or ESC */}
       {open && (
         <div
           className="fixed inset-0 z-[9999] bg-black/40 backdrop-blur-sm flex items-end justify-end sm:p-5 pointer-events-none"
@@ -635,7 +635,7 @@ export function FloatingAvatarWidget() {
               </button>
             </div>
 
-            {/* VOICE PANE — top, with AvatarCall wrapper */}
+            {/* VOICE PANE, top, with AvatarCall wrapper */}
             {voiceActive && (
               <AvatarCall
                 key={reconnectKey}
@@ -655,10 +655,10 @@ export function FloatingAvatarWidget() {
               </div>
             )}
 
-            {/* TEXT CHAT — main scrollable area */}
+            {/* TEXT CHAT, main scrollable area */}
             <TextChatPanel sessionId={sessionId} />
 
-            {/* LEAD FORM — compact at bottom */}
+            {/* LEAD FORM, compact at bottom */}
             <LeadForm sessionId={sessionId} />
           </div>
         </div>

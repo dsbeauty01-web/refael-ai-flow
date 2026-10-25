@@ -110,7 +110,7 @@ const LiveDemos = () => {
             {isHebrew ? 'דמואים חיים' : 'Live Demos'}
           </span>
           <h2 className={`text-[3rem] sm:text-[4rem] font-black mt-3 mb-1 text-white tracking-tight ${isHebrew ? 'font-hebrew' : ''}`} dir={isHebrew ? 'rtl' : 'ltr'}>
-            {isHebrew ? 'אל תאמין לי — תנסה בעצמך' : "Don't Take My Word For It — Try Them Now"}
+            {isHebrew ? 'אל תאמין לי, תנסה בעצמך' : "Don't Take My Word For It: Try Them Now"}
           </h2>
         </div>
 

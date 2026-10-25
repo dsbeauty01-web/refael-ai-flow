@@ -17,22 +17,22 @@ type Card = {
 const CARDS: Card[] = [
   {
     key: 'nova_v2',
-    name: { he: 'מיה — מארחת הלובי', en: 'Maya — The Lobby Host', th: 'มายา พนักงานต้อนรับประจำล็อบบี้' },
+    name: { he: 'מיה, מארחת הלובי', en: 'Maya: The Lobby Host', th: 'มายา พนักงานต้อนรับประจำล็อบบี้' },
     role: { he: 'פוטוריאליסטית · עברית · גוף מלא', en: 'Photoreal · Hebrew · Full body', th: 'สมจริงระดับภาพถ่าย · ฮีบรู · เต็มตัว' },
     body: {
-      he: 'מקבלת אורחים בעברית, עונה על שאלות, מנופפת, מהנהנת ומצביעה לכיוון הנכון — כל תנועה נורית על ידי ה-AI בעצמו תוך כדי שיחה.',
-      en: 'Greets guests in Hebrew, answers questions, waves, nods, and points the right way — every gesture fired by the AI itself, mid-conversation.',
+      he: 'מקבלת אורחים בעברית, עונה על שאלות, מנופפת, מהנהנת ומצביעה לכיוון הנכון, כל תנועה נורית על ידי ה-AI בעצמו תוך כדי שיחה.',
+      en: 'Greets guests in Hebrew, answers questions, waves, nods, and points the right way, every gesture fired by the AI itself, mid-conversation.',
       th: 'ต้อนรับผู้มาเยือนเป็นภาษาฮีบรู ตอบคำถาม โบกมือ พยักหน้า และชี้บอกทางได้ถูกต้อง ทุกท่าทางสั่งงานโดย AI เองระหว่างการสนทนา',
     },
     focus: 'object-top',
   },
   {
     key: 'nova_dance',
-    name: { he: 'נובה — מורת הריקוד', en: 'Nova — The Dance Teacher', th: 'โนวา ครูสอนเต้น' },
+    name: { he: 'נובה, מורת הריקוד', en: 'Nova: The Dance Teacher', th: 'โนวา ครูสอนเต้น' },
     role: { he: 'אנימציה בסגנון פיקסאר · אנגלית · לאפליקציות ילדים', en: 'Pixar-style animation · English · For kids\' apps', th: 'แอนิเมชันสไตล์พิกซาร์ · อังกฤษ · สำหรับแอปเด็ก' },
     body: {
-      he: 'דמות מונפשת שמלמדת ילדים לרקוד באנגלית: ידיים למעלה, מחיאות כפיים, פריז — והיא גם מדגימה בעצמה.',
-      en: 'An animated character that teaches kids to dance in English: hands up, clap-clap, freeze — and she demonstrates the moves herself.',
+      he: 'דמות מונפשת שמלמדת ילדים לרקוד באנגלית: ידיים למעלה, מחיאות כפיים, פריז, והיא גם מדגימה בעצמה.',
+      en: 'An animated character that teaches kids to dance in English: hands up, clap-clap, freeze, and she demonstrates the moves herself.',
       th: 'ตัวละครแอนิเมชันที่สอนเด็ก ๆ เต้นเป็นภาษาอังกฤษ ยกมือขึ้น ปรบมือ หยุดนิ่ง และเธอทำให้ดูเป็นตัวอย่างด้วยตัวเอง',
     },
   },
@@ -41,8 +41,8 @@ const CARDS: Card[] = [
     name: { he: 'נובה מקרוב', en: 'Nova, up close', th: 'โนวา ระยะใกล้' },
     role: { he: 'קלוז-אפ · איכות שפתיים מקסימלית', en: 'Close-up · Maximum lip quality', th: 'ระยะใกล้ · ริมฝีปากคมชัดที่สุด' },
     body: {
-      he: 'אותה נובה, מצולמת חזה-ומעלה: הפנים גדולות פי שלושה, והשפתיים מסונכרנות ברמה של אפליקציות שיחה מהשורה הראשונה. לשיחות ארוכות — ולמעבר בין קלוז-אפ להדגמה בגוף מלא.',
-      en: 'The same Nova, framed chest-up: the face is three times bigger, and the lip-sync reaches top conversation-app quality. Built for longer talks — and for cutting between close-up and full-body demonstration.',
+      he: 'אותה נובה, מצולמת חזה-ומעלה: הפנים גדולות פי שלושה, והשפתיים מסונכרנות ברמה של אפליקציות שיחה מהשורה הראשונה. לשיחות ארוכות, ולמעבר בין קלוז-אפ להדגמה בגוף מלא.',
+      en: 'The same Nova, framed chest-up: the face is three times bigger, and the lip-sync reaches top conversation-app quality. Built for longer talks, and for cutting between close-up and full-body demonstration.',
       th: 'โนวาคนเดิม ถ่ายในระยะครึ่งตัว ใบหน้าใหญ่ขึ้นสามเท่า และการขยับริมฝีปากคมชัดระดับแอปสนทนาชั้นนำ เหมาะกับการพูดคุยที่ยาวขึ้น และการสลับระหว่างภาพระยะใกล้กับการสาธิตแบบเต็มตัว',
     },
   },
@@ -152,7 +152,7 @@ export default function AvatarsSection() {
           </h2>
           <p className="mt-4 text-[1.1rem] text-muted-foreground max-w-[600px]">
             {pick(
-              'אלה לא סרטוני תדמית. כשהם באוויר — אפשר לדבר איתם.',
+              'אלה לא סרטוני תדמית. כשהם באוויר, אפשר לדבר איתם.',
               "These aren't showreels. When they're live, you can talk to them.",
               'นี่ไม่ใช่วิดีโอโปรโมต เมื่อพวกเขาออนไลน์ คุณคุยกับพวกเขาได้จริง'
             )}

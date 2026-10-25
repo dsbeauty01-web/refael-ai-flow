@@ -4,8 +4,9 @@ import { useT } from '@/components/refael/i18n';
 import { PRODUCTS } from '@/config/site';
 
 /**
- * Homepage hub: one tile per product page. The live-selling host is the main
- * funnel, so it gets the big tile; the rest share the column beside it.
+ * Homepage hub: one tile per product page. Customer service is what most clients
+ * ask for, so it gets the big tile; four share the column beside it and any
+ * fifth runs as a wide strip underneath.
  */
 export default function ProductsGrid() {
   const { pick, tr, fontDisplay, isHebrew } = useT();
@@ -17,9 +18,9 @@ export default function ProductsGrid() {
       <div className="max-w-[1200px] mx-auto">
         <h2 className={`${fontDisplay} text-[clamp(2rem,4.6vw,3.25rem)] leading-[1.12] max-w-[22ch] text-ink`}>
           {pick(
-            'חמש דרכים לשים דמות חיה מול הלקוחות שלכם',
-            'Five ways to put a live character in front of your customers',
-            'ห้าวิธีให้ตัวละคร AI ได้คุยกับลูกค้าของคุณ'
+            'שש דרכים לשים דמות חיה מול הלקוחות שלכם',
+            'Six ways to put a live character in front of your customers',
+            'หกวิธีให้ตัวละคร AI ได้คุยกับลูกค้าของคุณ'
           )}
         </h2>
         <p className="mt-4 text-[1.05rem] text-muted-foreground max-w-[60ch] leading-[1.7]">
@@ -30,7 +31,7 @@ export default function ProductsGrid() {
           )}
         </p>
 
-        <div className="mt-12 grid gap-4 lg:grid-cols-4 lg:grid-rows-2">
+        <div className="mt-12 grid gap-4 lg:grid-cols-4">
           <Link
             to={lead.path}
             className="group lg:col-span-2 lg:row-span-2 relative overflow-hidden rounded-[22px] border border-ink/10 bg-mist flex flex-col sm:flex-row lg:flex-col min-h-[420px]"
@@ -57,13 +58,15 @@ export default function ProductsGrid() {
             </div>
           </Link>
 
-          {rest.map(p => (
+          {rest.map((p, i) => {
+            const wide = i === 4;
+            return (
             <Link
               key={p.path}
               to={p.path}
-              className="group relative overflow-hidden rounded-[22px] border border-ink/10 bg-mist flex flex-col"
+              className={`group relative overflow-hidden rounded-[22px] border border-ink/10 bg-mist flex ${wide ? 'flex-col sm:flex-row lg:col-span-4' : 'flex-col'}`}
             >
-              <div className="relative h-[170px] overflow-hidden bg-white">
+              <div className={`relative overflow-hidden bg-white ${wide ? 'h-[170px] sm:h-auto sm:w-[38%] lg:w-[24%] shrink-0' : 'h-[170px]'}`}>
                 <img
                   src={tr(p.image)}
                   alt={tr(p.alt)}
@@ -71,12 +74,13 @@ export default function ProductsGrid() {
                   className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
                 />
               </div>
-              <div className="p-5 flex flex-col flex-1">
+              <div className={`p-5 flex flex-col flex-1 ${wide ? 'sm:justify-center sm:p-7' : ''}`}>
                 <h3 className="text-[1.08rem] font-bold text-ink leading-snug">{tr(p.name)}</h3>
                 <p className="mt-1.5 text-[0.88rem] text-ink/65 leading-[1.55]">{tr(p.blurb)}</p>
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

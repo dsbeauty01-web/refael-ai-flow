@@ -8,8 +8,8 @@ const ITEMS = [
     th: { t: 'บทสนทนาด้วยเสียงจริง', b: 'อวตารได้ยินคุณและตอบด้วยเสียง เหมือนคุยโทรศัพท์ ไม่ต้องพิมพ์ ไม่ใช่เสียงอ่านข้อความสำเร็จรูป' },
   },
   {
-    he: { t: 'גוף מלא, תנועות אמיתיות', b: 'מנופף לשלום, מהנהן, מצביע לכיוון. ה-AI מחליט לבד מתי — באמצע השיחה, לפי מה שנאמר.' },
-    en: { t: 'Full body, real gestures', b: 'It waves, nods, points the way. The AI decides when — mid-conversation, based on what\'s being said.' },
+    he: { t: 'גוף מלא, תנועות אמיתיות', b: 'מנופף לשלום, מהנהן, מצביע לכיוון. ה-AI מחליט לבד מתי, באמצע השיחה, לפי מה שנאמר.' },
+    en: { t: 'Full body, real gestures', b: 'It waves, nods, points the way. The AI decides when, mid-conversation, based on what\'s being said.' },
     th: { t: 'เต็มตัว ท่าทางสมจริง', b: 'โบกมือ พยักหน้า ชี้บอกทาง โดย AI เลือกจังหวะเองระหว่างสนทนา ตามสิ่งที่กำลังพูดคุยกัน' },
   },
   {
@@ -18,8 +18,8 @@ const ITEMS = [
     th: { t: 'ภาษาที่เป็นธรรมชาติ', b: 'พูดฮีบรูได้คล่องและเข้าใจสำเนียงอิสราเอล รวมถึงภาษาอังกฤษในบทสนทนาเดียวกัน' },
   },
   {
-    he: { t: 'המחיר לא זז', b: 'המערכת רצה על שרת ייעודי שלכם. מחיר חודשי קבוע — לא לפי דקות, לא לפי משתמשים.' },
-    en: { t: "The price doesn't move", b: "It runs on your own dedicated server. Flat monthly cost — not per minute, not per user." },
+    he: { t: 'המחיר לא זז', b: 'המערכת רצה על שרת ייעודי שלכם. מחיר חודשי קבוע, לא לפי דקות, לא לפי משתמשים.' },
+    en: { t: "The price doesn't move", b: "It runs on your own dedicated server. Flat monthly cost, not per minute, not per user." },
     th: { t: 'ราคาคงที่ ไม่ผันผวน', b: 'ระบบทำงานบนเซิร์ฟเวอร์เฉพาะของคุณ คิดค่าบริการรายเดือนแบบคงที่ ไม่คิดตามนาที ไม่คิดตามจำนวนผู้ใช้' },
   },
 ];

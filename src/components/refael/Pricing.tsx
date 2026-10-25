@@ -32,14 +32,14 @@ const TIERS: Tier[] = [
     },
     bullets: {
       he: [
-        'דמות מותאמת — מתמונה אחת',
+        'דמות מותאמת, מתמונה אחת',
         'שיחה קולית בעברית באתר שלכם',
         'ידע העסק (עד 20 עמודים)',
         'עד 300 דקות שיחה בחודש',
         'עדכוני ידע רבעוניים',
       ],
       en: [
-        'Custom character — from a single photo',
+        'Custom character, from a single photo',
         'Hebrew voice conversation on your site',
         'Your business knowledge (up to 20 pages)',
         'Up to 300 conversation minutes / month',
@@ -61,14 +61,14 @@ const TIERS: Tier[] = [
     setup: '₪6,900',
     monthly: '₪690',
     pitch: {
-      he: 'לא רק עונה — מבצעת. מזמנת פגישות ביומן האמיתי שלכם.',
-      en: "Not just answering — acting. She books real meetings in your real calendar.",
+      he: 'לא רק עונה, מבצעת. מזמנת פגישות ביומן האמיתי שלכם.',
+      en: "Not just answering, acting. She books real meetings in your real calendar.",
       th: 'ไม่ใช่แค่ตอบ แต่ลงมือทำ เธอนัดหมายลงในปฏิทินจริงของคุณ',
     },
     bullets: {
       he: [
         'כל מה שיש באווטאר לאתר, ובנוסף:',
-        'ידיים — זימון פגישות אמיתי (יומן + מייל + רישום)',
+        'ידיים, זימון פגישות אמיתי (יומן + מייל + רישום)',
         'חיבורי n8n: CRM, וואטסאפ, גיליונות',
         'בנק מחוות מותאם לעסק',
         'אנליטיקס שיחות חודשי',
@@ -76,7 +76,7 @@ const TIERS: Tier[] = [
       ],
       en: [
         'Everything in the website avatar, plus:',
-        'Hands — real booking (calendar + email + records)',
+        'Hands, real booking (calendar + email + records)',
         'n8n connections: CRM, WhatsApp, Sheets',
         'A gesture bank tailored to your business',
         'Monthly conversation analytics',
@@ -106,14 +106,14 @@ const TIERS: Tier[] = [
     bullets: {
       he: [
         'מסך או הולוגרמה בגודל מלא',
-        'דמות בהתאמה מלאה — כולל דמויות היסטוריות',
+        'דמות בהתאמה מלאה, כולל דמויות היסטוריות',
         'כיול מחוות למרחב (מצביעה על הדלת האמיתית)',
         'אינטגרציה עם חומרת התצוגה',
         'SLA ותמיכה',
       ],
       en: [
         'Full-size screen or hologram',
-        'Fully bespoke character — historical figures included',
+        'Fully bespoke character, historical figures included',
         'Gestures calibrated to the room (she points at the real door)',
         'Integration with your display hardware',
         'SLA and support',
@@ -206,8 +206,8 @@ export default function Pricing() {
                   <div className="mt-7 rounded-2xl bg-live-a/10 border border-live-a/25 p-4">
                     <p className="text-[0.9rem] text-ink leading-[1.65]">
                       {SHOW_PRICES ? pick(
-                        'פקידת קבלה עולה ₪7,000–9,000 בחודש. מאיה עולה ₪690 — והיא לא חולה, לא מתעייפת, ועונה גם ב-23:00.',
-                        'A receptionist costs ₪7,000–9,000 a month. Maya costs ₪690 — and she never calls in sick, never tires, and still answers at 11pm.',
+                        'פקידת קבלה עולה ₪7,000–9,000 בחודש. מאיה עולה ₪690, והיא לא חולה, לא מתעייפת, ועונה גם ב-23:00.',
+                        'A receptionist costs ₪7,000–9,000 a month. Maya costs ₪690, and she never calls in sick, never tires, and still answers at 11pm.',
                         'พนักงานต้อนรับมีค่าใช้จ่าย 7,000–9,000 ₪ ต่อเดือน ส่วนมายาอยู่ที่ 690 ₪ และเธอไม่ลาป่วย ไม่เหนื่อย และยังตอบตอนห้าทุ่ม'
                       ) : pick(
                         'פקידת קבלה עובדת משמרת אחת. מאיה עונה גם ב-23:00, לא חולה ולא מתעייפת.',
@@ -239,8 +239,8 @@ export default function Pricing() {
         <FadeUp className="mt-8">
           <p className="text-[0.88rem] text-muted-foreground max-w-[760px] leading-[1.7]">
             {pick(
-              'המכסות החודשיות מגנות על שני הצדדים — עמדה שנעשית ויראלית לא אמורה להפיל אתכם בחשבון. חריגה: ₪0.5 לדקה. התקנה פיזית מתומחרת לפי פרויקט, החל מהמחיר שלמעלה.',
-              'The monthly caps protect both sides — a kiosk that goes viral should not blow up your bill. Overage: ₪0.5/minute. Physical installations are quoted per project, starting from the price above.',
+              'המכסות החודשיות מגנות על שני הצדדים, עמדה שנעשית ויראלית לא אמורה להפיל אתכם בחשבון. חריגה: ₪0.5 לדקה. התקנה פיזית מתומחרת לפי פרויקט, החל מהמחיר שלמעלה.',
+              'The monthly caps protect both sides, a kiosk that goes viral should not blow up your bill. Overage: ₪0.5/minute. Physical installations are quoted per project, starting from the price above.',
               'โควตารายเดือนคุ้มครองทั้งสองฝ่าย จุดบริการที่คนแห่มาใช้ไม่ควรทำให้บิลของคุณพุ่ง ส่วนเกิน: 0.5 ₪ ต่อนาที การติดตั้งหน้างานจริงคิดราคาตามโปรเจกต์ โดยเริ่มต้นจากราคาข้างต้น'
             )}
           </p>

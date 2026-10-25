@@ -26,7 +26,7 @@ export default function Hero() {
   return (
     <section className="relative hero-bg overflow-hidden pt-28 pb-16 lg:pt-32 lg:pb-20">
       <div className="absolute inset-0 grid-veil pointer-events-none" aria-hidden />
-      {/* On phones she must come straight after the pitch — the avatar IS the
+      {/* On phones she must come straight after the pitch, the avatar IS the
           argument, and burying her under three paragraphs loses the visitor.
           On desktop the explicit row/col placement rebuilds the two columns. */}
       <div className="relative max-w-[1160px] mx-auto px-5 grid gap-10 lg:gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
@@ -41,16 +41,16 @@ export default function Hero() {
 
           <p className="mt-6 text-[1.15rem] sm:text-[1.3rem] text-ink/85 max-w-[640px] leading-[1.55]">
             {pick(
-              'פקידת קבלה, מדריכת מוזיאון, מורה לילדים — דמות בגודל מלא שרואה, שומעת, עונה ומזמנת פגישות. באמת.',
-              'A receptionist, a museum guide, a teacher for kids — a full-size figure that sees, hears, answers and books meetings. For real.',
+              'פקידת קבלה, מדריכת מוזיאון, מורה לילדים, דמות בגודל מלא שרואה, שומעת, עונה ומזמנת פגישות. באמת.',
+              'A receptionist, a museum guide, a teacher for kids, a full-size figure that sees, hears, answers and books meetings. For real.',
               'พนักงานต้อนรับ ไกด์พิพิธภัณฑ์ ครูสอนเด็ก ตัวละครขนาดเท่าคนจริงที่มองเห็น ได้ยิน ตอบคำถาม และนัดหมายให้ได้จริง'
             )}
           </p>
 
           <p className="mt-4 text-[1rem] text-muted-foreground max-w-[620px] leading-[1.7]">
             {pick(
-              'גוף מלא, קול-לקול אמיתי, על תשתית משלנו — בלי תשלום לפי דקה.',
-              'Full body, true voice-to-voice, on our own infrastructure — with no per-minute meter.',
+              'גוף מלא, קול-לקול אמיתי, על תשתית משלנו, בלי תשלום לפי דקה.',
+              'Full body, true voice-to-voice, on our own infrastructure, with no per-minute meter.',
               'เต็มตัว สนทนาด้วยเสียงจริง บนโครงสร้างพื้นฐานของเราเอง โดยไม่คิดค่าบริการรายนาที'
             )}
           </p>
@@ -75,15 +75,15 @@ export default function Hero() {
           </div>
           <p className="mt-3 text-[0.82rem] text-muted-foreground">
             {pick(
-              'הפעילו את הרמקולים — זו ההקלטה שלה, לא קריינות.',
-              "Turn your sound on — that's her, not a voice-over.",
+              'הפעילו את הרמקולים, זו ההקלטה שלה, לא קריינות.',
+              "Turn your sound on, that's her, not a voice-over.",
               'เปิดเสียงด้วย นี่คือเสียงของเธอจริง ๆ ไม่ใช่เสียงพากย์'
             )}
           </p>
 
           {/* The accessibility remedy for the only clip here that carries
               meaning in audio. A disclosure, not always-on text, so it does not
-              spoil the reveal — collapsed content is hidden from assistive tech
+              spoil the reveal, collapsed content is hidden from assistive tech
               too, but <details> announces itself as expandable and is keyboard
               reachable, which is what the accessibility statement promises. */}
           <details className="mt-3 max-w-[620px] group">
@@ -104,7 +104,7 @@ export default function Hero() {
         <div className="lg:col-start-1 lg:row-start-2">
           <div>
             <p className="text-[0.78rem] font-semibold tracking-[0.14em] uppercase text-muted-foreground">
-              {pick('נסו אותה — לחצו על תנועה והיא תבצע אותה', 'Try her — click a gesture and she performs it', 'ลองดูสิ คลิกเลือกท่าทาง แล้วเธอจะทำให้ดู')}
+              {pick('נסו אותה, לחצו על תנועה והיא תבצע אותה', 'Try her, click a gesture and she performs it', 'ลองดูสิ คลิกเลือกท่าทาง แล้วเธอจะทำให้ดู')}
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {MAYA_GESTURES.map(g => (
@@ -123,8 +123,8 @@ export default function Hero() {
             </div>
             <p className="mt-3 text-[0.82rem] text-muted-foreground/80">
               {pick(
-                'אלה קטעים אמיתיים מתוך המערכת — בשיחה חיה ה-AI בוחר את התנועות בעצמו.',
-                'These are real clips from the system — in a live conversation the AI picks the gestures itself.',
+                'אלה קטעים אמיתיים מתוך המערכת, בשיחה חיה ה-AI בוחר את התנועות בעצמו.',
+                'These are real clips from the system, in a live conversation the AI picks the gestures itself.',
                 'คลิปเหล่านี้มาจากระบบจริง ในการสนทนาสด AI จะเลือกท่าทางเองโดยอัตโนมัติ'
               )}
             </p>
@@ -264,7 +264,7 @@ function GestureStage() {
         {showPoster ? (
           <img
             src={MAYA_POSTER}
-            alt={pick('מיה — אווטארית חיה בגוף מלא', 'Maya — a full-body live avatar', 'มายา อวตารเสมือนจริงแบบเต็มตัว')}
+            alt={pick('מיה, אווטארית חיה בגוף מלא', 'Maya, a full-body live avatar', 'มายา อวตารเสมือนจริงแบบเต็มตัว')}
             className="relative w-full h-auto blend-white"
           />
         ) : (
@@ -278,7 +278,7 @@ function GestureStage() {
             loop={!speaking && clip === null}
             onEnded={() => { setClip(null); setSpeaking(false); }}
             className="relative w-full h-auto blend-white"
-            aria-label={pick('מיה — אווטארית חיה בגוף מלא', 'Maya — a full-body live avatar', 'มายา อวตารเสมือนจริงแบบเต็มตัว')}
+            aria-label={pick('מיה, אווטארית חיה בגוף מלא', 'Maya, a full-body live avatar', 'มายา อวตารเสมือนจริงแบบเต็มตัว')}
           />
         )}
 
@@ -286,7 +286,7 @@ function GestureStage() {
           <div className="absolute top-3 inset-x-0 flex justify-center pointer-events-none">
             <span className="inline-flex items-center gap-2 bg-live-gradient text-white text-[0.78rem] font-semibold px-3.5 py-1.5 rounded-full shadow-[0_8px_20px_-8px_rgba(0,184,217,0.6)]">
               <VoiceBars />
-              {pick('הקול שלה — חי', 'Her real voice', 'เสียงจริงของเธอ')}
+              {pick('הקול שלה, חי', 'Her real voice', 'เสียงจริงของเธอ')}
             </span>
           </div>
         )}
@@ -298,7 +298,7 @@ function GestureStage() {
               className="inline-flex items-center gap-2 bg-paper text-ink text-[0.78rem] font-semibold px-3.5 py-1.5 rounded-full shadow-lg"
             >
               <SpeakerIcon />
-              {pick('הדפדפן חסם את הקול — הקישו להפעלה', 'Your browser blocked the sound — tap to play', 'เบราว์เซอร์บล็อกเสียง แตะเพื่อเล่น')}
+              {pick('הדפדפן חסם את הקול, הקישו להפעלה', 'Your browser blocked the sound, tap to play', 'เบราว์เซอร์บล็อกเสียง แตะเพื่อเล่น')}
             </button>
           </div>
         )}

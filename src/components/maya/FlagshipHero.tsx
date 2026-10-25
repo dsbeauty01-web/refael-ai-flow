@@ -28,8 +28,8 @@ export default function FlagshipHero() {
 
           <p className="mt-6 text-[1.15rem] sm:text-[1.28rem] text-ink/85 max-w-[640px] leading-[1.55]">
             {pick(
-              'מאיה — עובדת קבלה דיגיטלית בגודל מלא. רואה את הלקוח נכנס, מברכת אותו לפני שהוא מדבר, קובעת לו תור אמיתי ביומן, שולחת אישור למייל — ומצביעה לו איפה לחכות.',
-              'Maya — a full-size digital receptionist. She sees the customer walk in, greets them before they speak, books a real appointment in the calendar, emails the confirmation — and points them to where to wait.', 'มายา พนักงานต้อนรับดิจิทัลขนาดเท่าคนจริง เห็นลูกค้าเดินเข้ามา ทักทายก่อนที่ลูกค้าจะเอ่ยปาก นัดหมายลงปฏิทินจริง ส่งอีเมลยืนยัน แล้วชี้บอกว่าให้นั่งรอตรงไหน'
+              'מאיה, עובדת קבלה דיגיטלית בגודל מלא. רואה את הלקוח נכנס, מברכת אותו לפני שהוא מדבר, קובעת לו תור אמיתי ביומן, שולחת אישור למייל, ומצביעה לו איפה לחכות.',
+              'Maya, a full-size digital receptionist. She sees the customer walk in, greets them before they speak, books a real appointment in the calendar, emails the confirmation, and points them to where to wait.', 'มายา พนักงานต้อนรับดิจิทัลขนาดเท่าคนจริง เห็นลูกค้าเดินเข้ามา ทักทายก่อนที่ลูกค้าจะเอ่ยปาก นัดหมายลงปฏิทินจริง ส่งอีเมลยืนยัน แล้วชี้บอกว่าให้นั่งรอตรงไหน'
             )}
           </p>
 
@@ -57,8 +57,8 @@ export default function FlagshipHero() {
 
           <p className="mt-6 text-[0.82rem] text-muted-foreground">
             {pick(
-              'הפעילו את הרמקולים ולחצו "דברו איתה עכשיו" — זו ההקלטה שלה, לא קריינות.',
-              'Turn your sound on and press "Talk to her now" — that\'s her, not a voice-over.', 'เปิดเสียงแล้วกด "คุยกับมายาตอนนี้" นี่คือเสียงของเธอเอง ไม่ใช่เสียงพากย์'
+              'הפעילו את הרמקולים ולחצו "דברו איתה עכשיו", זו ההקלטה שלה, לא קריינות.',
+              'Turn your sound on and press "Talk to her now", that\'s her, not a voice-over.', 'เปิดเสียงแล้วกด "คุยกับมายาตอนนี้" นี่คือเสียงของเธอเอง ไม่ใช่เสียงพากย์'
             )}
           </p>
         </div>

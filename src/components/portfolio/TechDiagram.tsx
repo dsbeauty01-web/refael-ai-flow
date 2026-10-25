@@ -58,7 +58,7 @@ const TechDiagram = () => {
         </div>
 
         <p className="text-center text-muted-foreground text-sm max-w-2xl mx-auto leading-relaxed">
-          Every bot is custom-built with n8n workflows. The AI brain connects to your real business tools — calendar, inventory, CRM, email. No templates. No limitations.
+          Every bot is custom-built with n8n workflows. The AI brain connects to your real business tools, calendar, inventory, CRM, email. No templates. No limitations.
         </p>
       </div>
     </section>

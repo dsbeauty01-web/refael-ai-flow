@@ -76,7 +76,7 @@ export const PRODUCTS: Product[] = [
     alt: {
       he: 'מיה בשידור חי עונה לצופה בשם',
       en: 'Maya presenting to a live audience',
-      th: 'พิธีกร AI กำลังไลฟ์ขายผ้าทอ',
+      th: 'พลอย พิธีกร AI กำลังไลฟ์ขายผ้าทอ',
     },
   },
   {

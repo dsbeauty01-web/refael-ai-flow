@@ -20,7 +20,7 @@ var get_contact_default = defineTool({
         messenger: "https://www.facebook.com/refael.silanikove",
         email: "dsbeauty01@gmail.com",
         phone: "+972-53-332-7125",
-        offer: "Free 15-minute consultation \u2014 reply within 1 hour"
+        offer: "Free 15-minute consultation, reply within 1 hour"
       }, null, 2)
     }]
   })
@@ -89,7 +89,7 @@ var mcp_default = defineMcp({
   name: "refael-ai-mcp",
   title: "Refael.ai",
   version: "0.1.0",
-  instructions: "Public MCP for Refael.ai \u2014 a Hebrew/English AI agency landing page. Use `get_services` to describe offerings and pricing, `get_contact` for contact channels, and `submit_lead` only when the user explicitly asks to be contacted.",
+  instructions: "Public MCP for Refael.ai, a Hebrew/English AI agency landing page. Use `get_services` to describe offerings and pricing, `get_contact` for contact channels, and `submit_lead` only when the user explicitly asks to be contacted.",
   tools: [get_contact_default, get_services_default, submit_lead_default]
 });
 

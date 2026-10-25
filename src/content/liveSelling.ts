@@ -16,7 +16,7 @@ export const MEDIA: Record<'he' | 'en' | 'th', { src: string; poster: string; ra
 
 export const HERO = {
   kicker: { he: 'הבוט שלך ישן.', en: 'Your bot is asleep.', th: 'บอทของคุณกำลังหลับ' } as L10n,
-  h1a: { he: 'מיה', en: 'Maya', th: 'พิธีกร AI' } as L10n,
+  h1a: { he: 'מיה', en: 'Maya', th: 'พลอย' } as L10n,
   h1b: { he: 'מוכרת בשידור חי.', en: 'sells on live.', th: 'ขายของบนไลฟ์ให้คุณ' } as L10n,
   lead: {
     he: 'דמות AI שעולה לשידור, מציגה את המוצרים שלכם וקוראת את הצ׳אט. כל מי שכותב מקבל תשובה בקול, בשם שלו, תוך כמה שניות.',
@@ -41,7 +41,7 @@ export const PROOF: { n: string; label: L10n }[] = [
 export type Chat = { who: L10n; text: L10n; host?: boolean }[];
 export type Feature = { icon: string; title: L10n; body: L10n; chat?: Chat; product?: boolean };
 
-const HOST_LABEL: L10n = { he: 'מיה, בקול', en: 'Maya, out loud', th: 'พิธีกร AI, ด้วยเสียง' };
+const HOST_LABEL: L10n = { he: 'מיה, בקול', en: 'Maya, out loud', th: 'พลอย, ด้วยเสียง' };
 
 export const FEATURES_HEAD = {
   title: { he: 'מה היא עושה בשידור', en: 'What she does on live', th: 'เธอทำอะไรบนไลฟ์' } as L10n,

@@ -1,5 +1,6 @@
 import Hero from '@/components/refael/Hero';
 import AvatarsSection from '@/components/refael/AvatarsSection';
+import LiveProof from '@/components/refael/LiveProof';
 import WhatItIs from '@/components/refael/WhatItIs';
 import HowItWorks from '@/components/refael/HowItWorks';
 import UseCases from '@/components/refael/UseCases';
@@ -18,6 +19,7 @@ import { SHOW_PRICES } from '@/config/site';
 
 const SECTIONS = [
   { href: '#products', he: 'המוצרים', en: 'Products', th: 'ผลิตภัณฑ์' },
+  { href: '#proof', he: 'הוכחה חיה', en: 'Live proof', th: 'พิสูจน์สด' },
   { href: '#how', he: 'איך זה עובד', en: 'How it works', th: 'ทำงานอย่างไร' },
   { href: '#uses', he: 'איפה זה עובד', en: 'Where it works', th: 'ใช้งานที่ไหน' },
   { href: '#faq', he: 'שאלות', en: 'FAQ', th: 'คำถาม' },
@@ -30,6 +32,7 @@ const Index = () => {
       <Hero />
       <ProductsGrid />
       <AvatarsSection />
+      <LiveProof />
       <WhatItIs />
       <HowItWorks />
       <UseCases />

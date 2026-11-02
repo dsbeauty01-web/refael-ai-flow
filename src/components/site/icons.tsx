@@ -6,6 +6,14 @@ export function WhatsAppGlyph({ className = 'w-5 h-5' }: { className?: string })
   );
 }
 
+export function LineGlyph({ className = 'w-5 h-5' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
+      <path d="M12 2C6.48 2 2 5.93 2 10.74c0 4.33 3.84 7.95 9.03 8.64.35.08.83.24.95.54.11.28.07.71.04 1l-.15.91c-.05.28-.22 1.1.97.6 1.18-.5 6.38-3.76 8.71-6.44C23.23 14.04 22 12.52 22 10.74 22 5.93 17.52 2 12 2zm-3.39 11.26h-2.2a.53.53 0 0 1-.53-.53V8.78a.53.53 0 1 1 1.06 0v3.42h1.67a.53.53 0 0 1 0 1.06zm1.55-.53a.53.53 0 1 1-1.06 0V8.78a.53.53 0 1 1 1.06 0v3.95zm3.59 0a.53.53 0 0 1-.38.51.53.53 0 0 1-.56-.17l-2-2.72v2.38a.53.53 0 1 1-1.06 0V8.78a.53.53 0 0 1 .94-.34l2 2.72V8.78a.53.53 0 1 1 1.06 0v3.95zm3.07-2.89a.53.53 0 0 1 0 1.06h-1.67v.77h1.67a.53.53 0 0 1 0 1.06h-2.2a.53.53 0 0 1-.53-.53V8.78a.53.53 0 0 1 .53-.53h2.2a.53.53 0 0 1 0 1.06h-1.67v.53h1.67z" />
+    </svg>
+  );
+}
+
 export function SpeakerGlyph({ className = 'w-5 h-5' }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden className={className}>

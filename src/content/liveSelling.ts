@@ -28,7 +28,7 @@ export const HERO = {
   ctaNote: {
     he: 'בוואטסאפ, ישירות לרפאל. בלי טפסים.',
     en: 'On WhatsApp, straight to Refael. No forms.',
-    th: 'ทาง WhatsApp ถึงราฟาเอลโดยตรง ไม่ต้องกรอกฟอร์ม',
+    th: 'ทาง LINE ถึงราฟาเอลโดยตรง ไม่ต้องกรอกฟอร์ม',
   } as L10n,
 };
 
@@ -154,7 +154,7 @@ export const STEPS_HEAD = { he: 'איך מתחילים', en: 'How to start', th:
 export const STEPS: { t: L10n; b: L10n }[] = [
   {
     t: { he: 'שולחים תמונה של מוצר', en: 'Send a product photo', th: 'ส่งรูปสินค้า' },
-    b: { he: 'צילום מהטלפון, שם ומחיר. בוואטסאפ, דקה של עבודה.', en: 'A phone snap, a name and a price. On WhatsApp, a minute of work.', th: 'ถ่ายจากมือถือ ชื่อและราคา ทาง WhatsApp ใช้เวลาแค่นาทีเดียว' },
+    b: { he: 'צילום מהטלפון, שם ומחיר. בוואטסאפ, דקה של עבודה.', en: 'A phone snap, a name and a price. On WhatsApp, a minute of work.', th: 'ถ่ายจากมือถือ ชื่อและราคา ทาง LINE ใช้เวลาแค่นาทีเดียว' },
   },
   {
     t: { he: 'רואים 10 שניות של לייב עם המוצר שלכם', en: 'See 10 seconds of a live with your product', th: 'ดูไลฟ์ 10 วินาทีกับสินค้าของคุณ' },
@@ -175,11 +175,11 @@ export const OFFER = {
   body: {
     he: 'צלמו מוצר אחד שאתם מוכרים ושלחו לי בוואטסאפ. תקבלו בחזרה 10 שניות שלה מציגה אותו בלייב, עם מחיר על המסך ותשובה לצופה בשם.',
     en: "Snap one product you sell and send it to me on WhatsApp. You'll get back 10 seconds of her presenting it live, with the price on screen and an answer to a viewer by name.",
-    th: 'ถ่ายรูปสินค้าหนึ่งชิ้นที่คุณขาย แล้วส่งมาทาง WhatsApp คุณจะได้คลิป 10 วินาทีที่เธอนำเสนอสินค้านั้นบนไลฟ์ พร้อมราคาบนจอและคำตอบให้ผู้ชมด้วยชื่อ',
+    th: 'ถ่ายรูปสินค้าหนึ่งชิ้นที่คุณขาย แล้วส่งมาทาง LINE คุณจะได้คลิป 10 วินาทีที่เธอนำเสนอสินค้านั้นบนไลฟ์ พร้อมราคาบนจอและคำตอบให้ผู้ชมด้วยชื่อ',
   } as L10n,
   promise: { he: 'בלי התחייבות, בלי טפסים.', en: 'No commitment, no forms.', th: 'ไม่มีข้อผูกมัด ไม่มีแบบฟอร์ม' } as L10n,
-  button: { he: 'שלחו תמונה בוואטסאפ', en: 'Send a photo on WhatsApp', th: 'ส่งรูปทาง WhatsApp' } as L10n,
-  sub: { he: 'וואטסאפ ישיר לרפאל סלע.', en: 'Direct WhatsApp to Refael Sela.', th: 'WhatsApp ตรงถึงราฟาเอล เซลา' } as L10n,
+  button: { he: 'שלחו תמונה בוואטסאפ', en: 'Send a photo on WhatsApp', th: 'ส่งรูปทาง LINE' } as L10n,
+  sub: { he: 'וואטסאפ ישיר לרפאל סלע.', en: 'Direct WhatsApp to Refael Sela.', th: 'LINE ตรงถึงราฟาเอล เซลา' } as L10n,
   message: {
     he: 'היי רפאל, ראיתי את מיה. אשלח תמונה של מוצר, אשמח לראות 10 שניות שלה מציגה אותו בלייב. אני מוכר/ת: ',
     en: "Hi Refael, I saw Maya. I'll send a product photo, I'd love to see 10 seconds of her presenting it live. I sell: ",
@@ -234,7 +234,7 @@ export const FAQ: { q: L10n; a: L10n }[] = [
     a: {
       he: 'תלוי במספר המוצרים והשידורים. שלחו לי תמונה של מוצר בוואטסאפ, תראו אותה בלייב, ואגיד לכם בדיוק.',
       en: "It depends on the number of products and lives. Send me a product photo on WhatsApp, see her live with it, and I'll tell you exactly.",
-      th: 'ขึ้นอยู่กับจำนวนสินค้าและไลฟ์ ส่งรูปสินค้ามาทาง WhatsApp ดูเธอบนไลฟ์ แล้วเราจะแจ้งราคาที่แน่นอน',
+      th: 'ขึ้นอยู่กับจำนวนสินค้าและไลฟ์ ส่งรูปสินค้ามาทาง LINE ดูเธอบนไลฟ์ แล้วเราจะแจ้งราคาที่แน่นอน',
     },
   },
 ];

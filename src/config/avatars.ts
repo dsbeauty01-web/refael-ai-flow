@@ -58,6 +58,7 @@ export const MAYA_GESTURES = [
 ] as const;
 
 export const WHATSAPP_URL = "https://wa.me/972533217125";
+export const LINE_URL = "https://line.me/ti/p/~refael.ai";
 
 /** Single source of truth for the business details shown in legal pages + footer. */
 export const BUSINESS = {

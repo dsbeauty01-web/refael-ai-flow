@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useT } from '@/components/refael/i18n';
 import SiteLayout from '@/components/site/SiteLayout';
 import { SpeakingVideo, FaqList, RelatedProducts, playWithSound } from '@/components/site/blocks';
-import { WhatsAppGlyph, SpeakerGlyph } from '@/components/site/icons';
+import { WhatsAppGlyph, LineGlyph, SpeakerGlyph } from '@/components/site/icons';
 import { useSeo, serviceLd, faqLd, breadcrumbLd } from '@/components/site/Seo';
-import { WHATSAPP_URL } from '@/config/avatars';
+import { WHATSAPP_URL, LINE_URL } from '@/config/avatars';
 import { routeMeta, urlFor, SITE_URL } from '@/config/site';
 import {
   MEDIA, HERO, PROOF, FEATURES_HEAD, FEATURES, PRODUCT_CARD, WHERE_HEAD, WHERE,
@@ -21,7 +21,11 @@ const SECTIONS = [
 export default function LiveSelling() {
   const { language, pick, tr, fontDisplay } = useT();
   const media = MEDIA[language];
-  const wa = `${WHATSAPP_URL}?text=${encodeURIComponent(tr(OFFER.message))}`;
+  const isThai = language === 'th';
+  const ctaUrl = isThai ? LINE_URL : `${WHATSAPP_URL}?text=${encodeURIComponent(tr(OFFER.message))}`;
+  const CtaIcon = isThai ? LineGlyph : WhatsAppGlyph;
+  const ctaColor = isThai ? 'bg-[#06C755]' : 'bg-[#25D366]';
+  const ctaShadow = isThai ? 'shadow-[0_14px_34px_-12px_rgba(6,199,85,0.75)]' : 'shadow-[0_14px_34px_-12px_rgba(37,211,102,0.75)]';
   const [novaLang, setNovaLang] = useState<'he' | 'en'>(language === 'he' ? 'he' : 'en');
 
   const meta = routeMeta(PATH)!;
@@ -56,12 +60,12 @@ export default function LiveSelling() {
 
             <div className="mt-9 flex flex-wrap gap-3">
               <a
-                href={wa}
+                href={ctaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 rounded-full bg-[#25D366] text-[#06210f] font-bold px-7 py-3.5 text-[1rem] shadow-[0_14px_34px_-12px_rgba(37,211,102,0.75)] hover:brightness-105 transition"
+                className={`inline-flex items-center gap-2.5 rounded-full ${ctaColor} text-[#06210f] font-bold px-7 py-3.5 text-[1rem] ${ctaShadow} hover:brightness-105 transition`}
               >
-                <WhatsAppGlyph className="w-5 h-5" />
+                <CtaIcon className="w-5 h-5" />
                 {tr(HERO.cta)}
               </a>
               <button
@@ -229,12 +233,12 @@ export default function LiveSelling() {
           <p className="mt-5 text-[1.12rem] leading-[1.7] text-ink/80">{tr(OFFER.body)}</p>
           <p className="mt-2 text-[1.05rem] font-semibold text-live-a">{tr(OFFER.promise)}</p>
           <a
-            href={wa}
+            href={ctaUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-9 inline-flex items-center gap-3 rounded-full bg-[#25D366] text-[#06210f] font-bold px-9 py-4 text-[1.1rem] shadow-[0_18px_44px_-14px_rgba(37,211,102,0.8)] hover:brightness-105 transition"
+            className={`mt-9 inline-flex items-center gap-3 rounded-full ${ctaColor} text-[#06210f] font-bold px-9 py-4 text-[1.1rem] ${isThai ? 'shadow-[0_18px_44px_-14px_rgba(6,199,85,0.8)]' : 'shadow-[0_18px_44px_-14px_rgba(37,211,102,0.8)]'} hover:brightness-105 transition`}
           >
-            <WhatsAppGlyph className="w-6 h-6" />
+            <CtaIcon className="w-6 h-6" />
             {tr(OFFER.button)}
           </a>
           <p className="mt-3 text-[0.9rem] text-muted-foreground">{tr(OFFER.sub)}</p>

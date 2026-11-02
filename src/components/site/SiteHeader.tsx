@@ -4,6 +4,7 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 import { useT, LANGUAGES, LANGUAGE_LABELS } from '@/components/refael/i18n';
 import { PRODUCTS, LANGUAGE_NAMES, type L10n } from '@/config/site';
 import { WHATSAPP_URL } from '@/config/avatars';
+import { trackWhatsAppClick } from '@/lib/analytics';
 import { WhatsAppGlyph } from './icons';
 
 export type SectionLink = { href: string } & L10n;
@@ -135,6 +136,7 @@ export default function SiteHeader({ sections = [] }: { sections?: SectionLink[]
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsAppClick('header')}
             className="hidden sm:inline-flex items-center gap-2 bg-live-gradient text-white text-[0.85rem] font-semibold px-4 py-2 rounded-full hover:brightness-110 transition"
           >
             <WhatsAppGlyph className="w-4 h-4" />
@@ -208,6 +210,7 @@ export default function SiteHeader({ sections = [] }: { sections?: SectionLink[]
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsAppClick('mobile_menu')}
             className="mt-7 flex items-center justify-center gap-2 bg-live-gradient text-white text-[1rem] font-semibold py-3.5 rounded-full"
           >
             <WhatsAppGlyph className="w-5 h-5" />

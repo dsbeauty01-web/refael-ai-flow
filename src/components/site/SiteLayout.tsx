@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { useT } from '@/components/refael/i18n';
 import { WHATSAPP_URL, LINE_URL } from '@/config/avatars';
+import { trackWhatsAppClick, trackLineClick } from '@/lib/analytics';
 import SiteHeader, { type SectionLink } from './SiteHeader';
 import SiteFooter from './SiteFooter';
 import { WhatsAppGlyph, LineGlyph } from './icons';
@@ -28,6 +29,7 @@ function FloatingCTA({ message }: { message?: string }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => isThai ? trackLineClick('floating_cta') : trackWhatsAppClick('floating_cta')}
       aria-label={pick('דברו איתנו בוואטסאפ', 'Talk to us on WhatsApp', 'คุยกับเราทาง LINE')}
       className={`fixed bottom-5 end-5 z-40 inline-flex items-center gap-2 rounded-full ${bg} text-[#06210f] font-bold ${shadow} px-4 py-3 sm:px-5 transition-all duration-300 ${
         show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'

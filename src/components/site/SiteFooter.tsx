@@ -3,6 +3,7 @@ import { useT, LANGUAGES } from '@/components/refael/i18n';
 import { PRODUCTS, LANGUAGE_NAMES } from '@/config/site';
 import { WHATSAPP_URL, BUSINESS } from '@/config/avatars';
 import { LEGAL, type LegalSlug } from '@/content/legal';
+import { trackWhatsAppClick } from '@/lib/analytics';
 import { WhatsAppGlyph } from './icons';
 
 const LEGAL_SLUGS: LegalSlug[] = ['privacy', 'terms', 'accessibility'];
@@ -42,6 +43,7 @@ export default function SiteFooter() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick('footer')}
               className="mt-6 inline-flex items-center gap-2 rounded-full border border-ink/20 px-4 py-2 text-[0.88rem] font-semibold text-ink hover:bg-ink/5 transition-colors"
             >
               <WhatsAppGlyph className="w-4 h-4 text-[#25D366]" />

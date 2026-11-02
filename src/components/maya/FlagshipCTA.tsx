@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useT } from '@/components/refael/i18n';
 import FadeUp from '@/components/refael/FadeUp';
 import { N8N_LEAD_WEBHOOK, WHATSAPP_URL } from '@/config/avatars';
+import { trackLeadSubmit, trackLeadError, trackWhatsAppClick, getStoredUtm } from '@/lib/analytics';
 
 type State = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -39,15 +40,18 @@ export default function FlagshipCTA() {
       const res = await fetch(N8N_LEAD_WEBHOOK, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, place: form.field, source: 'maya flagship', language }),
+        body: JSON.stringify({ ...form, place: form.field, source: 'maya flagship', language, utm: getStoredUtm() }),
       });
       if (!res.ok) throw new Error(String(res.status));
       setState('success');
+      trackLeadSubmit('maya_flagship', language);
       setForm({ name: '', company: '', field: '', phone: '', use: '' });
     } catch {
       // A dead webhook must never swallow a lead — hand them to WhatsApp with
       // everything already written out.
       setState('error');
+      trackLeadError('maya_flagship');
+      trackWhatsAppClick('maya_flagship_fallback');
       window.open(whatsappFallback(), '_blank', 'noopener,noreferrer');
     }
   }

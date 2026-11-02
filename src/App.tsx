@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import RouteEffects from "@/components/site/RouteEffects";
+import MayaChatWidget from "@/components/MayaChatWidget";
+import { captureUtm } from "@/lib/analytics";
 import Index from "./pages/Index";
 
 // Home loads with the bundle; every other page is its own chunk.
@@ -29,7 +31,11 @@ function Moved({ to, lang }: { to: string; lang?: string }) {
 
 const Blank = () => <div className="min-h-screen bg-paper" aria-busy="true" />;
 
-const App = () => (
+const App = () => {
+  // Capture UTM params from the landing URL on first load
+  useEffect(() => { captureUtm(); }, []);
+
+  return (
   <QueryClientProvider client={queryClient}>
     <LanguageProvider>
       <TooltipProvider>
@@ -60,10 +66,14 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
+          <MayaChatWidget />
         </BrowserRouter>
       </TooltipProvider>
     </LanguageProvider>
   </QueryClientProvider>
 );
+
+  );
+};
 
 export default App;

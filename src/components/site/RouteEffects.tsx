@@ -9,6 +9,7 @@ import { DEFAULT_LANGUAGE } from '@/config/site';
  *    waiting for lazy-loaded pages to render it.
  * 2. Keep ?lang= and the chosen language in step, so every page has one URL
  *    per language (shareable, and what hreflang/canonical point at).
+ * 3. Fire GA4 page_view + Facebook Pixel PageView on every route change (SPA).
  */
 export default function RouteEffects() {
   const { pathname, search, hash } = useLocation();
@@ -31,6 +32,19 @@ export default function RouteEffects() {
     }, 50);
     return () => window.clearInterval(id);
   }, [pathname, hash]);
+
+  // Analytics: fire page_view on every SPA navigation
+  useEffect(() => {
+    const url = pathname + search + hash;
+    // GA4
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'page_view', { page_path: url, page_title: document.title });
+    }
+    // Facebook Pixel
+    if (typeof window.fbq === 'function') {
+      window.fbq('track', 'PageView');
+    }
+  }, [pathname, search, hash]);
 
   // URL -> language (links such as /live-selling?lang=th)
   useEffect(() => {

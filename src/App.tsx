@@ -12,6 +12,7 @@ import Index from "./pages/Index";
 
 // Home loads with the bundle; every other page is its own chunk.
 const LiveSelling = lazy(() => import("./pages/LiveSelling"));
+const CoHost = lazy(() => import("./pages/CoHost"));
 const Landing = lazy(() => import("./pages/Landing"));
 const Maya = lazy(() => import("./pages/Maya"));
 const Voices = lazy(() => import("./pages/Voices"));
@@ -47,6 +48,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/live-selling" element={<LiveSelling />} />
+              <Route path="/co-host" element={<CoHost />} />
               <Route path="/live-avatar" element={<Maya />} />
               <Route path="/customer-service" element={<Landing />} />
               <Route path="/ai-avatar" element={<Landing />} />

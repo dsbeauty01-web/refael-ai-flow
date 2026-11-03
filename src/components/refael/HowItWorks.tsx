@@ -56,6 +56,31 @@ export default function HowItWorks() {
             </li>
           ))}
         </ol>
+
+        <FadeUp>
+          <div className="mt-16 max-w-[800px] mx-auto">
+            <p className="text-center text-[0.85rem] font-semibold tracking-[0.12em] uppercase text-live-a mb-4">
+              {pick('מאחורי הקלעים', 'Behind the scenes', 'เบื้องหลัง')}
+            </p>
+            <div className="rounded-2xl overflow-hidden shadow-2xl bg-black">
+              <video
+                src="/site/tools-explainer.mp4"
+                poster="/site/tools-explainer.jpg"
+                controls
+                playsInline
+                preload="none"
+                className="w-full"
+              />
+            </div>
+            <p className="mt-4 text-center text-[0.92rem] text-muted-foreground leading-relaxed">
+              {pick(
+                'הצופה כותב תגובה. ה-AI מגיב בזמן אמת. מאחור, n8n מנהל הכל: לינק קנייה, ליד ל-Google Sheets, הזמנה ליומן.',
+                'A viewer comments. The AI responds in real time. Behind the scenes, n8n handles everything: checkout link, lead to Google Sheets, calendar invite.',
+                'ผู้ชมคอมเมนต์ AI ตอบแบบเรียลไทม์ เบื้องหลัง n8n จัดการทุกอย่าง: ลิงก์ชำระเงิน ลีดไปยัง Google Sheets นัดหมายในปฏิทิน'
+              )}
+            </p>
+          </div>
+        </FadeUp>
       </div>
     </section>
   );

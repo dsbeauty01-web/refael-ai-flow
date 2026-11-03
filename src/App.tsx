@@ -6,7 +6,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import RouteEffects from "@/components/site/RouteEffects";
-import MayaChatWidget from "@/components/MayaChatWidget";
 import { captureUtm } from "@/lib/analytics";
 import Index from "./pages/Index";
 
@@ -66,7 +65,6 @@ const App = () => {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
-          <MayaChatWidget />
         </BrowserRouter>
       </TooltipProvider>
     </LanguageProvider>

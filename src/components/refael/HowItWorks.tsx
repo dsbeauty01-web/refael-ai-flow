@@ -64,8 +64,8 @@ export default function HowItWorks() {
             </p>
             <div className="rounded-2xl overflow-hidden shadow-2xl bg-black">
               <video
-                src="/site/tools-explainer.mp4"
-                poster="/site/tools-explainer.jpg"
+                src="/site/tools-showcase.mp4"
+                poster="/site/tools-showcase.jpg"
                 controls
                 playsInline
                 preload="none"

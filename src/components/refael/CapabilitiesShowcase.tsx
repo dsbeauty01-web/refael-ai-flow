@@ -10,6 +10,51 @@ type Demo = {
   ratio: '9/16' | '4/5' | '16/9';
 };
 
+/** Big landscape proof videos shown as wide cards */
+type ProofVideo = {
+  video: string;
+  poster: string;
+  title: { he: string; en: string; th: string };
+  subtitle: { he: string; en: string; th: string };
+  badge: { he: string; en: string; th: string };
+};
+
+const PROOF_VIDEOS: ProofVideo[] = [
+  {
+    video: '/site/agent-ad.mp4',
+    poster: '/site/agent-ad.jpg',
+    title: { he: 'לא רק מנחה. סוכנת AI לעסק שלך.', en: "Not just a host. An AI agent for your business.", th: 'ไม่ใช่แค่พิธีกร แต่เป็น AI เอเจนต์สำหรับธุรกิจคุณ' },
+    subtitle: {
+      he: 'לינק קנייה, תגובה לתגובה, קביעת תור ביומן, לידים, תשלום. הכל אמיתי.',
+      en: 'Buy link, comment reply, calendar booking, leads, payment. All real.',
+      th: 'ลิงก์ซื้อ ตอบคอมเมนต์ จองปฏิทิน ลีด ชำระเงิน ทั้งหมดเป็นของจริง',
+    },
+    badge: { he: 'הוכחה חיה', en: 'Live proof', th: 'พิสูจน์สด' },
+  },
+  {
+    video: '/site/cohost-product.mp4',
+    poster: '/site/cohost-product.jpg',
+    title: { he: 'שיתוף מסך: אדם + AI ביחד', en: 'Co-host: human + AI together', th: 'โค-โฮสต์: คนจริง + AI ด้วยกัน' },
+    subtitle: {
+      he: 'שני אנשים על מסך אחד. אחד מהם AI. שפתיים מסונכרנות, תגובה תוך 2.7 שניות.',
+      en: 'Two people on one screen. One is AI. Lips in sync, 2.7s response time.',
+      th: 'สองคนบนจอเดียว คนหนึ่งเป็น AI ริมฝีปากซิงค์ ตอบใน 2.7 วินาที',
+    },
+    badge: { he: 'חדש', en: 'New', th: 'ใหม่' },
+  },
+  {
+    video: '/site/tools-showcase.mp4',
+    poster: '/site/tools-showcase.jpg',
+    title: { he: '5 כלים יורים בו-זמנית', en: '5 tools firing at once', th: '5 เครื่องมือทำงานพร้อมกัน' },
+    subtitle: {
+      he: 'לינק קנייה, ליד ל-Sheets, תור ליומן, התראה לבעל העסק, תשלום. הכל מלייב אחד.',
+      en: 'Buy link, lead to Sheets, booking to Calendar, owner notified, payment. All from one live.',
+      th: 'ลิงก์ซื้อ ลีดไป Sheets จองปฏิทิน แจ้งเจ้าของร้าน ชำระเงิน ทั้งหมดจากไลฟ์เดียว',
+    },
+    badge: { he: 'כלים אמיתיים', en: 'Real tools', th: 'เครื่องมือจริง' },
+  },
+];
+
 const DEMOS: Demo[] = [
   {
     video: '/site/zara-skinread.mp4',
@@ -24,27 +69,27 @@ const DEMOS: Demo[] = [
     ratio: '9/16',
   },
   {
-    video: '/site/maya-gallery.mp4',
-    poster: '/site/maya-gallery.jpg',
-    name: { he: 'גלריה ומכירות אמנות', en: 'Gallery and art sales', th: 'แกลเลอรีและขายงานศิลปะ' },
+    video: '/site/zara-vote.mp4',
+    poster: '/site/zara-vote.jpg',
+    name: { he: 'הצבעה אינטראקטיבית', en: 'Interactive voting', th: 'โหวตแบบอินเทอร์แอคทีฟ' },
     desc: {
-      he: 'מיה מציגה יצירות אמנות בשידור חי, עונה לצופים ומוכרת. הגלריה שלא נסגרת.',
-      en: 'Maya presents artwork on a live stream, answers viewers and sells. A gallery that never closes.',
-      th: 'มายานำเสนองานศิลปะบนไลฟ์ ตอบผู้ชมและขาย แกลเลอรีที่ไม่มีวันปิด',
+      he: 'הצופים בוחרים ז\'קט בתגובות, הדמות מגיבה לכל הצבעה בזמן אמת.',
+      en: 'Viewers vote on a jacket in comments, the host reacts to every vote in real time.',
+      th: 'ผู้ชมโหวตเลือกแจ็คเก็ตในคอมเมนต์ โฮสต์ตอบทุกโหวตแบบเรียลไทม์',
     },
-    badge: { he: 'אמנות חיה', en: 'Live art', th: 'ศิลปะสด' },
+    badge: { he: 'הצבעה חיה', en: 'Live voting', th: 'โหวตสด' },
     ratio: '9/16',
   },
   {
-    video: '/site/professor-live.mp4',
-    poster: '/site/professor-live.jpg',
-    name: { he: 'מדריך AI למעבדה', en: 'AI lab guide', th: 'ไกด์ AI ห้องแล็บ' },
+    video: '/site/cohost-human.mp4',
+    poster: '/site/cohost-human.jpg',
+    name: { he: 'רפאל + מיה ביחד', en: 'Refael + Maya together', th: 'ราฟาเอล + มายา ด้วยกัน' },
     desc: {
-      he: 'דמות תלת-ממד שמדגימה ניסויים, עונה לשאלות ומלמדת. לכל גיל.',
-      en: 'A 3D character that demonstrates experiments, answers questions and teaches. For any age.',
-      th: 'ตัวละคร 3D ที่สาธิตการทดลอง ตอบคำถามและสอน สำหรับทุกวัย',
+      he: 'אדם אמיתי ודמות AI מדברים יחד על מסך אחד. שיחה טבעית, לא מוכנה מראש.',
+      en: 'A real person and an AI character talk together on one screen. Natural, unscripted.',
+      th: 'คนจริงกับตัวละคร AI คุยกันบนจอเดียว สนทนาธรรมชาติ ไม่ได้เตรียมล่วงหน้า',
     },
-    badge: { he: 'חינוך', en: 'Education', th: 'การศึกษา' },
+    badge: { he: 'שיתוף מסך', en: 'Co-host', th: 'โค-โฮสต์' },
     ratio: '9/16',
   },
   {
@@ -163,11 +208,61 @@ export default function CapabilitiesShowcase() {
           </div>
         </FadeUp>
 
+        {/* Proof videos: big landscape cards */}
+        <FadeUp>
+          <div className="text-center mb-14">
+            <span className="text-[0.78rem] font-semibold tracking-[0.14em] uppercase text-live-a">
+              {pick('הוכחות', 'Proof', 'พิสูจน์ให้เห็น')}
+            </span>
+            <h2 className={`mt-3 ${fontDisplay} text-[clamp(2rem,4.5vw,3rem)] leading-[1.1] text-ink`}>
+              {pick(
+                'לא מצגת. הדבר האמיתי.',
+                'Not a pitch. The real thing.',
+                'ไม่ใช่พรีเซนต์ นี่คือของจริง'
+              )}
+            </h2>
+          </div>
+        </FadeUp>
+
+        <FadeUp>
+          <div className="grid gap-6 mb-24">
+            {PROOF_VIDEOS.map((pv) => (
+              <div key={pv.video} className="surface overflow-hidden hover:-translate-y-1 transition-all duration-300">
+                <div className="grid lg:grid-cols-5 gap-0">
+                  <div className="lg:col-span-3 relative bg-black" style={{ aspectRatio: '16/9' }}>
+                    <video
+                      src={pv.video}
+                      poster={pv.poster}
+                      muted
+                      loop
+                      playsInline
+                      autoPlay
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <span className="absolute top-3 start-3 z-10 inline-flex items-center gap-1.5 bg-red-500/90 text-white text-[0.72rem] font-bold px-2.5 py-1 rounded-full pointer-events-none">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                      {pick(pv.badge.he, pv.badge.en, pv.badge.th)}
+                    </span>
+                  </div>
+                  <div className="lg:col-span-2 p-6 sm:p-8 flex flex-col justify-center">
+                    <h3 className={`${fontDisplay} text-[clamp(1.2rem,2.5vw,1.6rem)] leading-[1.2] text-ink`}>
+                      {pick(pv.title.he, pv.title.en, pv.title.th)}
+                    </h3>
+                    <p className="mt-3 text-[0.95rem] text-muted-foreground leading-[1.65]">
+                      {pick(pv.subtitle.he, pv.subtitle.en, pv.subtitle.th)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </FadeUp>
+
         {/* Demo videos */}
         <FadeUp>
           <div className="text-center mb-14">
             <span className="text-[0.78rem] font-semibold tracking-[0.14em] uppercase text-live-a">
-              {pick('לא רק לייב', 'Beyond live selling', 'มากกว่าไลฟ์ขายของ')}
+              {pick('עוד דוגמאות', 'More demos', 'ตัวอย่างเพิ่มเติม')}
             </span>
             <h2 className={`mt-3 ${fontDisplay} text-[clamp(1.8rem,4vw,2.5rem)] leading-[1.1] text-ink`}>
               {pick(
@@ -178,9 +273,9 @@ export default function CapabilitiesShowcase() {
             </h2>
             <p className="mt-4 text-[1.05rem] text-muted-foreground max-w-[600px] mx-auto leading-relaxed">
               {pick(
-                'ייעוץ עור, גלריית אמנות, מדריך מעבדה, מוצרי ילדים. אותה טכנולוגיה, דמות שמתאימה לעסק שלכם.',
-                'Skin consultation, art gallery, lab guide, kids products. Same tech, a character that fits your business.',
-                'ที่ปรึกษาผิว แกลเลอรี ไกด์ห้องแล็บ สินค้าเด็ก เทคโนโลยีเดียวกัน ตัวละครที่เหมาะกับธุรกิจคุณ'
+                'ייעוץ עור, הצבעה חיה, שיתוף מסך, מוצרי ילדים. אותה טכנולוגיה, דמות שמתאימה לעסק שלכם.',
+                'Skin consult, live voting, co-host, kids products. Same tech, a character that fits your business.',
+                'ที่ปรึกษาผิว โหวตสด โค-โฮสต์ สินค้าเด็ก เทคโนโลยีเดียวกัน ตัวละครที่เหมาะกับธุรกิจคุณ'
               )}
             </p>
           </div>

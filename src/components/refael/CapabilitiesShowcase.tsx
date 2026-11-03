@@ -69,6 +69,30 @@ const DEMOS: Demo[] = [
     ratio: '9/16',
   },
   {
+    video: '/site/maya-gallery.mp4',
+    poster: '/site/maya-gallery.jpg',
+    name: { he: 'גלריה ומכירות אמנות', en: 'Gallery and art sales', th: 'แกลเลอรีและขายงานศิลปะ' },
+    desc: {
+      he: 'מיה מציגה יצירות אמנות בשידור חי, עונה לצופים ומוכרת. הגלריה שלא נסגרת.',
+      en: 'Maya presents artwork on a live stream, answers viewers and sells. A gallery that never closes.',
+      th: 'มายานำเสนองานศิลปะบนไลฟ์ ตอบผู้ชมและขาย แกลเลอรีที่ไม่มีวันปิด',
+    },
+    badge: { he: 'אמנות חיה', en: 'Live art', th: 'ศิลปะสด' },
+    ratio: '9/16',
+  },
+  {
+    video: '/site/professor-live.mp4',
+    poster: '/site/professor-live.jpg',
+    name: { he: 'מדריך AI למעבדה', en: 'AI lab guide', th: 'ไกด์ AI ห้องแล็บ' },
+    desc: {
+      he: 'דמות תלת-ממד שמדגימה ניסויים, עונה לשאלות ומלמדת. לכל גיל.',
+      en: 'A 3D character that demonstrates experiments, answers questions and teaches. For any age.',
+      th: 'ตัวละคร 3D ที่สาธิตการทดลอง ตอบคำถามและสอน สำหรับทุกวัย',
+    },
+    badge: { he: 'חינוך', en: 'Education', th: 'การศึกษา' },
+    ratio: '9/16',
+  },
+  {
     video: '/site/zara-vote.mp4',
     poster: '/site/zara-vote.jpg',
     name: { he: 'הצבעה אינטראקטיבית', en: 'Interactive voting', th: 'โหวตแบบอินเทอร์แอคทีฟ' },

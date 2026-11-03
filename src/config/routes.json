@@ -38,21 +38,6 @@
       }
     },
     {
-      "path": "/co-host",
-      "priority": 0.9,
-      "changefreq": "weekly",
-      "title": {
-        "he": "קו-הוסט AI לשידור חי: אדם ומיה זה לצד זה | Refael.ai",
-        "en": "AI co-host for your live: you and Maya side by side | Refael.ai",
-        "th": "โค-โฮสต์ AI สำหรับไลฟ์: คุณกับมายาเคียงข้างกัน | Refael.ai"
-      },
-      "description": {
-        "he": "אדם ודמות AI זה לצד זה על מסך אחד. שפתיים מסונכרנות, תגובה תוך כ-2.75 שניות, שותקת כשאתם מדברים. שלושה לייאוטים לבחירה, שידור ניסיון פרטי על הנייד.",
-        "en": "A human and an AI character side by side on one screen. Lips in sync, about 2.75s response, goes quiet the moment you speak. Three layouts to pick from, one private test live on your phone.",
-        "th": "คนจริงกับตัวละคร AI เคียงข้างกันบนจอเดียว ริมฝีปากซิงค์ ตอบในประมาณ 2.75 วินาที เงียบทันทีที่คุณพูด มี 3 เลย์เอาต์ให้เลือก ทดสอบไลฟ์ส่วนตัวบนมือถือ"
-      }
-    },
-    {
       "path": "/live-selling",
       "priority": 0.9,
       "changefreq": "weekly",

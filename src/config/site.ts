@@ -65,17 +65,6 @@ export const PRODUCTS: Product[] = [
     alt: { he: 'מיה, נציגת שירות AI', en: 'Maya, an AI customer service agent', th: 'มายา พนักงานบริการลูกค้า AI' },
   },
   {
-    path: '/co-host',
-    name: { he: 'שיתוף מסך עם AI', en: 'AI co-host', th: 'โค-โฮสต์ AI' },
-    blurb: {
-      he: 'אדם ודמות AI זה לצד זה על מסך אחד. שפתיים מסונכרנות, תגובה תוך 2.7 שניות, שיחה אמיתית.',
-      en: 'A human and an AI character side by side on one screen. Lips in sync, 2.7s response, real conversation.',
-      th: 'คนจริงกับตัวละคร AI เคียงข้างกันบนจอเดียว ริมฝีปากซิงค์ ตอบใน 2.7 วินาที สนทนาธรรมชาติ',
-    },
-    image: { he: '/site/cohost-product.jpg', en: '/site/cohost-product.jpg', th: '/site/cohost-product.jpg' },
-    alt: { he: 'אדם ודמות AI יחד על מסך אחד', en: 'Human and AI character on one screen', th: 'คนจริงกับ AI บนจอเดียวกัน' },
-  },
-  {
     path: '/live-selling',
     name: { he: 'מנחה AI ללייב מכירות', en: 'AI host for live selling', th: 'พิธีกร AI สำหรับไลฟ์ขายของ' },
     blurb: {

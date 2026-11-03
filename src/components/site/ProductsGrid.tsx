@@ -18,9 +18,9 @@ export default function ProductsGrid() {
       <div className="max-w-[1200px] mx-auto">
         <h2 className={`${fontDisplay} text-[clamp(2rem,4.6vw,3.25rem)] leading-[1.12] max-w-[22ch] text-ink`}>
           {pick(
-            'שבע דרכים לשים דמות חיה מול הלקוחות שלכם',
-            'Seven ways to put a live character in front of your customers',
-            'เจ็ดวิธีให้ตัวละคร AI ได้คุยกับลูกค้าของคุณ'
+            'שש דרכים לשים דמות חיה מול הלקוחות שלכם',
+            'Six ways to put a live character in front of your customers',
+            'หกวิธีให้ตัวละคร AI ได้คุยกับลูกค้าของคุณ'
           )}
         </h2>
         <p className="mt-4 text-[1.05rem] text-muted-foreground max-w-[60ch] leading-[1.7]">

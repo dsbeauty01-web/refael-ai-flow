@@ -93,17 +93,83 @@ function DemoCard({ demo }: { demo: Demo }) {
   );
 }
 
+const ACTIONS = [
+  {
+    icon: '💬',
+    title: { he: 'WhatsApp ומסנג\'ר', en: 'WhatsApp and Messenger', th: 'WhatsApp และ Messenger' },
+    body: { he: 'שולחת הודעות, לינקים ומעקב אוטומטי. הלקוח מקבל תשובה גם ב-3 בלילה.', en: 'Sends messages, links and automatic follow-ups. The customer gets an answer even at 3 AM.', th: 'ส่งข้อความ ลิงก์ และติดตามอัตโนมัติ ลูกค้าได้คำตอบแม้ตี 3' },
+  },
+  {
+    icon: '🛒',
+    title: { he: 'מכירה ותשלום', en: 'Selling and checkout', th: 'ขายและชำระเงิน' },
+    body: { he: 'מציגה מוצר, מראה מחיר, ושולחת לינק קנייה ישיר. מהתגובה להזמנה תוך שניות.', en: 'Shows a product, displays the price, and sends a direct buy link. From comment to order in seconds.', th: 'แสดงสินค้า แสดงราคา และส่งลิงก์ซื้อตรง จากคอมเมนต์ถึงออเดอร์ในไม่กี่วินาที' },
+  },
+  {
+    icon: '📅',
+    title: { he: 'קביעת תורים', en: 'Appointment booking', th: 'จองนัดหมาย' },
+    body: { he: 'בודקת זמינות ביומן ומזמינה תור מהצ\'אט. בלי טפסים, בלי המתנה.', en: 'Checks calendar availability and books from the chat. No forms, no waiting.', th: 'เช็คปฏิทินว่างและจองจากแชท ไม่ต้องกรอกฟอร์ม ไม่ต้องรอ' },
+  },
+  {
+    icon: '🧠',
+    title: { he: 'ידע ו-RAG', en: 'Knowledge and RAG', th: 'ฐานความรู้และ RAG' },
+    body: { he: 'מחוברת לכל המידע של העסק. מוצרים, מחירים, משלוחים, החזרות, שעות פעילות. תמיד מעודכנת.', en: 'Connected to all your business info. Products, prices, shipping, returns, hours. Always current.', th: 'เชื่อมกับข้อมูลธุรกิจทั้งหมด สินค้า ราคา การจัดส่ง การคืน เวลาทำการ อัปเดตเสมอ' },
+  },
+  {
+    icon: '📊',
+    title: { he: 'לידים ל-Google Sheets', en: 'Leads to Google Sheets', th: 'ลีดไปยัง Google Sheets' },
+    body: { he: 'כל פנייה נשמרת אוטומטית. שם, טלפון, מה רצו, מתי פנו. בלי שתקלידו שורה.', en: 'Every inquiry saved automatically. Name, phone, what they wanted, when they reached out. Without you typing a line.', th: 'ทุกคำถามบันทึกอัตโนมัติ ชื่อ เบอร์ สิ่งที่ต้องการ เวลาติดต่อ ไม่ต้องพิมพ์เอง' },
+  },
+  {
+    icon: '⚡',
+    title: { he: 'פעולות מותאמות', en: 'Custom actions', th: 'การกระทำแบบกำหนดเอง' },
+    body: { he: 'n8n מחבר את הדמות לכל כלי. שליחת SMS, עדכון CRM, הפקת חשבונית, כל דבר.', en: 'n8n connects the character to any tool. Send an SMS, update a CRM, generate an invoice, anything.', th: 'n8n เชื่อมตัวละครกับทุกเครื่องมือ ส่ง SMS อัปเดต CRM ออกใบแจ้งหนี้ ทุกอย่าง' },
+  },
+];
+
 export default function CapabilitiesShowcase() {
   const { pick, fontDisplay } = useT();
   return (
     <section id="capabilities" className="py-24 sm:py-32 px-5 bg-gradient-to-b from-white to-paper dark:from-midnight/80 dark:to-midnight">
       <div className="max-w-[1160px] mx-auto">
+        {/* Actions grid */}
         <FadeUp>
-          <div className="text-center mb-16">
+          <div className="text-center mb-14">
+            <span className="text-[0.78rem] font-semibold tracking-[0.14em] uppercase text-live-a">
+              {pick('מה היא יכולה לעשות', 'What she can do', 'เธอทำอะไรได้บ้าง')}
+            </span>
+            <h2 className={`mt-3 ${fontDisplay} text-[clamp(2rem,4.5vw,3rem)] leading-[1.1] text-ink`}>
+              {pick(
+                'לא רק מדברת. מבצעת.',
+                "She doesn't just talk. She acts.",
+                'ไม่ได้แค่พูด ลงมือทำจริง'
+              )}
+            </h2>
+          </div>
+        </FadeUp>
+
+        <FadeUp>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-24">
+            {ACTIONS.map((a, i) => (
+              <div key={i} className="surface p-6 hover:-translate-y-1 hover:border-live-a/40 transition-all duration-300">
+                <span className="text-[1.5rem] leading-none" aria-hidden>{a.icon}</span>
+                <h3 className="mt-3 text-[1.05rem] font-bold text-ink">
+                  {pick(a.title.he, a.title.en, a.title.th)}
+                </h3>
+                <p className="mt-2 text-[0.9rem] text-muted-foreground leading-[1.65]">
+                  {pick(a.body.he, a.body.en, a.body.th)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </FadeUp>
+
+        {/* Demo videos */}
+        <FadeUp>
+          <div className="text-center mb-14">
             <span className="text-[0.78rem] font-semibold tracking-[0.14em] uppercase text-live-a">
               {pick('לא רק לייב', 'Beyond live selling', 'มากกว่าไลฟ์ขายของ')}
             </span>
-            <h2 className={`mt-3 ${fontDisplay} text-[clamp(2rem,4.5vw,3rem)] leading-[1.1] text-ink`}>
+            <h2 className={`mt-3 ${fontDisplay} text-[clamp(1.8rem,4vw,2.5rem)] leading-[1.1] text-ink`}>
               {pick(
                 'אותה דמות. כל תפקיד.',
                 'Same character. Every role.',

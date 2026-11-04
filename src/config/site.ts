@@ -123,6 +123,21 @@ export const PRODUCTS: Product[] = [
     image: { he: '/voices/host-female.webp', en: '/voices/host-female.webp', th: '/voices/host-female.webp' },
     alt: { he: 'המארחת, סוכנת קול', en: 'The Host, a voice agent', th: 'พิธีกร เอเจนต์เสียง' },
   },
+  {
+    path: '/avatar-videos',
+    name: { he: 'סרטוני אווטאר', en: 'Avatar videos', th: 'วิดีโออวตาร' },
+    blurb: {
+      he: 'סרטון הסבר, הדרכה לעובדים או פרסומת עם דמות שמדברת. בלי צילומים, בלי שחקן, בכל שפה.',
+      en: 'An explainer, staff training or an ad with a talking character. No filming, no actor, in any language.',
+      th: 'คลิปอธิบาย ฝึกอบรมพนักงาน หรือโฆษณา พร้อมตัวละครที่พูดได้ ไม่ต้องถ่ายทำ ไม่ต้องใช้นักแสดง ทุกภาษา',
+    },
+    image: { he: '/site/maya-textiles.jpg', en: '/site/maya-textiles.jpg', th: '/site/maya-textiles.jpg' },
+    alt: {
+      he: 'דמות AI מציגה מוצר בסרטון',
+      en: 'An AI character presenting a product on video',
+      th: 'ตัวละคร AI นำเสนอสินค้าในวิดีโอ',
+    },
+  },
 ];
 
 export const LANGUAGE_NAMES: L10n = { he: 'עברית', en: 'English', th: 'ไทย' };

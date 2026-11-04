@@ -50,6 +50,7 @@ const App = () => {
               <Route path="/customer-service" element={<Landing />} />
               <Route path="/ai-avatar" element={<Landing />} />
               <Route path="/brand-character" element={<Landing />} />
+              <Route path="/avatar-videos" element={<Landing />} />
               <Route path="/voices" element={<Voices />} />
               <Route path="/legal/:slug" element={<Legal />} />
 

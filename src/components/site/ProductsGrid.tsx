@@ -18,16 +18,16 @@ export default function ProductsGrid() {
       <div className="max-w-[1200px] mx-auto">
         <h2 className={`${fontDisplay} text-[clamp(2rem,4.6vw,3.25rem)] leading-[1.12] max-w-[22ch] text-ink`}>
           {pick(
-            'שש דרכים לשים דמות חיה מול הלקוחות שלכם',
-            'Six ways to put a live character in front of your customers',
-            'หกวิธีให้ตัวละคร AI ได้คุยกับลูกค้าของคุณ'
+            'שבע דרכים לשים דמות מול הלקוחות שלכם',
+            'Seven ways to put a character in front of your customers',
+            'เจ็ดวิธีนำตัวละคร AI ไปอยู่หน้าลูกค้าของคุณ'
           )}
         </h2>
         <p className="mt-4 text-[1.05rem] text-muted-foreground max-w-[60ch] leading-[1.7]">
           {pick(
-            'אותה טכנולוגיה בכל אחד מהם: פנים, קול ואופי, שעונים בזמן אמת. בעברית, באנגלית ובתאית.',
-            'The same technology in each: a face, a voice and a personality that answer in real time. In Hebrew, English and Thai.',
-            'เทคโนโลยีเดียวกันในทุกแบบ มีใบหน้า เสียง และบุคลิก ตอบโต้แบบเรียลไทม์ รองรับภาษาฮีบรู อังกฤษ และไทย'
+            'אותה טכנולוגיה בכל אחד מהם: פנים, קול ואופי. בלייב, בשיחה או בסרטון. בעברית, באנגלית ובתאית.',
+            'The same technology in each: a face, a voice and a personality. Live, in conversation or on video. In Hebrew, English and Thai.',
+            'เทคโนโลยีเดียวกันในทุกแบบ มีใบหน้า เสียง และบุคลิก ทั้งแบบไลฟ์ แบบสนทนา และแบบวิดีโอ รองรับภาษาไทย อังกฤษ และฮีบรู'
           )}
         </p>
 
@@ -59,19 +59,20 @@ export default function ProductsGrid() {
           </Link>
 
           {rest.map((p, i) => {
-            const wide = i === 4;
+            // The last two run as wider half-row strips so the bottom row stays balanced.
+            const wide = i >= rest.length - 2;
             return (
             <Link
               key={p.path}
               to={p.path}
-              className={`group relative overflow-hidden rounded-[22px] border border-ink/10 bg-mist flex ${wide ? 'flex-col sm:flex-row lg:col-span-4' : 'flex-col'}`}
+              className={`group relative overflow-hidden rounded-[22px] border border-ink/10 bg-mist flex ${wide ? 'flex-col sm:flex-row lg:col-span-2' : 'flex-col'}`}
             >
-              <div className={`relative overflow-hidden bg-white ${wide ? 'h-[170px] sm:h-auto sm:w-[38%] lg:w-[24%] shrink-0' : 'h-[170px]'}`}>
+              <div className={`relative overflow-hidden bg-white ${wide ? 'h-[170px] sm:h-auto sm:w-[38%] shrink-0' : 'h-[170px]'}`}>
                 <img
                   src={tr(p.image)}
                   alt={tr(p.alt)}
                   loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                  className={`absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04] ${wide ? 'object-center' : 'object-top'}`}
                 />
               </div>
               <div className={`p-5 flex flex-col flex-1 ${wide ? 'sm:justify-center sm:p-7' : ''}`}>

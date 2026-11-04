@@ -279,6 +279,166 @@ export const LANDINGS: Record<string, Landing> = {
     ],
   },
 
+  '/avatar-videos': {
+    path: '/avatar-videos',
+    crumb: { he: 'סרטוני אווטאר', en: 'Avatar videos', th: 'วิดีโออวตาร' },
+    h1: {
+      he: 'סרטון עם דמות שמדברת. בלי צילומים, בלי שחקן.',
+      en: 'A video with a talking character. No filming, no actor.',
+      th: 'วิดีโอพร้อมตัวละครที่พูดได้ ไม่ต้องถ่ายทำ ไม่ต้องใช้นักแสดง',
+    },
+    lead: {
+      he: 'סרטון הסבר, הדרכה לעובדים, שיעור בקורס או פרסומת. שולחים לי את הטקסט, מקבלים סרטון של דמות שמדברת אותו. אותה דמות בעברית, באנגלית ובתאית.',
+      en: 'An explainer, staff training, a course lesson or an ad. Send me the text, get back a video of a character saying it. The same character in Hebrew, English and Thai.',
+      th: 'คลิปอธิบาย ฝึกอบรมพนักงาน บทเรียนในคอร์ส หรือโฆษณา ส่งข้อความมาให้ผม แล้วรับวิดีโอที่ตัวละครพูดข้อความนั้น ตัวละครเดียวกัน ทั้งภาษาไทย อังกฤษ และฮีบรู',
+    },
+    media: {
+      he: { src: '/media/maya_speaking_he.mp4', poster: '/media/maya_speaking_poster.jpg', ratio: '9/16' },
+      en: { src: '/media/maya_speaking_en.mp4', poster: '/media/maya_speaking_poster.jpg', ratio: '9/16' },
+      th: { src: '/media/maya_speaking_th.mp4', poster: '/media/maya_speaking_poster.jpg', ratio: '9/16' },
+    },
+    live: false,
+    proof: [
+      { n: '48h', label: { he: 'סרטון ראשון ביד', en: 'first video in your hands', th: 'ได้วิดีโอแรกในมือ' } },
+      { n: '3', label: { he: 'שפות, אותה דמות', en: 'languages, one character', th: 'ภาษา ตัวละครเดียว' } },
+      { n: '0', label: { he: 'ימי צילום, סטודיו ושחקנים', en: 'shoot days, studios and actors', th: 'วันถ่ายทำ สตูดิโอ และนักแสดง' } },
+    ],
+    blocks: [
+      {
+        h: { he: 'מה אפשר להזמין', en: 'What you can order', th: 'สั่งทำอะไรได้บ้าง' },
+        bullets: [
+          {
+            he: 'סרטון הסבר על המוצר או השירות, 60 עד 90 שניות, לאתר ולרשתות.',
+            en: 'A product or service explainer, 60 to 90 seconds, for your site and social.',
+            th: 'คลิปอธิบายสินค้าหรือบริการ 60 ถึง 90 วินาที สำหรับเว็บและโซเชียล',
+          },
+          {
+            he: 'הדרכה לעובדים חדשים: נהלים, בטיחות, שימוש במערכות.',
+            en: 'Onboarding for new staff: procedures, safety, how to use your systems.',
+            th: 'ฝึกอบรมพนักงานใหม่ ขั้นตอนการทำงาน ความปลอดภัย วิธีใช้ระบบ',
+          },
+          {
+            he: 'שיעורים לקורס דיגיטלי, עם אותה דמות בכל הפרקים.',
+            en: 'Lessons for an online course, with the same character in every episode.',
+            th: 'บทเรียนสำหรับคอร์สออนไลน์ ใช้ตัวละครเดียวกันทุกตอน',
+          },
+          {
+            he: 'פרסומת קצרה לרילס, לטיקטוק ולשורטס, אנכית ומוכנה להעלאה.',
+            en: 'A short ad for Reels, TikTok and Shorts, vertical and ready to upload.',
+            th: 'โฆษณาสั้นสำหรับ Reels, TikTok และ Shorts แนวตั้ง พร้อมอัปโหลด',
+          },
+          {
+            he: 'אותו סרטון בכמה שפות, בלי לצלם מחדש.',
+            en: 'The same video in several languages, without reshooting anything.',
+            th: 'วิดีโอเดียวกันหลายภาษา โดยไม่ต้องถ่ายใหม่',
+          },
+        ],
+      },
+      {
+        h: { he: 'למה זה עדיף על צילום', en: 'Why this beats a shoot', th: 'ทำไมดีกว่าการถ่ายทำ' },
+        p: [
+          {
+            he: 'צילום אמיתי דורש שחקן, סטודיו, תאורה ועריכה, וכשמשתנה משפט אחד במחירון צריך להתחיל מהתחלה. כאן משנים את הטקסט ומקבלים גרסה חדשה באותו יום, עם אותה דמות ואותו קול.',
+            en: 'A real shoot needs an actor, a studio, lighting and editing, and when one sentence in your price list changes you start over. Here you change the text and get a new version the same day, same character, same voice.',
+            th: 'การถ่ายทำจริงต้องมีนักแสดง สตูดิโอ ไฟ และการตัดต่อ และเมื่อข้อความเพียงประโยคเดียวเปลี่ยน ก็ต้องเริ่มใหม่ ที่นี่แก้ข้อความแล้วได้เวอร์ชันใหม่ในวันเดียวกัน ตัวละครเดิม เสียงเดิม',
+          },
+          {
+            he: 'הדמות גם לא מתפטרת. אם בשנה הבאה צריך עוד עשרה סרטונים, זה אותו פנים ואותו קול כמו בראשון.',
+            en: 'The character also never quits. If you need ten more videos next year, it is the same face and the same voice as the first one.',
+            th: 'ตัวละครก็ไม่ลาออก ถ้าปีหน้าต้องการอีกสิบคลิป ก็ยังเป็นใบหน้าและเสียงเดิมเหมือนคลิปแรก',
+          },
+        ],
+      },
+      {
+        h: { he: 'איך זה עובד', en: 'How it works', th: 'ขั้นตอนเป็นอย่างไร' },
+        bullets: [
+          {
+            he: 'אתם שולחים את הטקסט, או רק נקודות ואני כותב את התסריט.',
+            en: 'You send the text, or just the points and I write the script.',
+            th: 'คุณส่งข้อความมา หรือส่งแค่หัวข้อแล้วผมเขียนสคริปต์ให้',
+          },
+          {
+            he: 'בוחרים דמות וקול. אפשר דמות מוכנה, דמות חדשה למותג, או הקול שלכם באישורכם.',
+            en: 'You pick a character and a voice. An existing one, a new one built for your brand, or your own voice with your permission.',
+            th: 'เลือกตัวละครและเสียง จะใช้ตัวที่มีอยู่ ตัวใหม่ที่สร้างให้แบรนด์คุณ หรือเสียงของคุณเองเมื่อคุณอนุญาต',
+          },
+          {
+            he: 'מקבלים גרסה ראשונה לאישור, עם כתוביות אם צריך.',
+            en: 'You get a first version to approve, with subtitles if you want them.',
+            th: 'รับเวอร์ชันแรกมาตรวจ พร้อมคำบรรยายถ้าต้องการ',
+          },
+          {
+            he: 'מתקנים מה שצריך ומקבלים את הקבצים הסופיים, אנכי ורחב.',
+            en: 'We fix whatever needs fixing and you get the final files, vertical and wide.',
+            th: 'แก้ตามที่ต้องการ แล้วรับไฟล์สุดท้าย ทั้งแนวตั้งและแนวนอน',
+          },
+        ],
+      },
+    ],
+    offer: {
+      cta: { he: 'שלחו לי טקסט', en: 'Send me a script', th: 'ส่งสคริปต์มาให้ผม' },
+      title: {
+        he: 'שלחו פסקה אחת. תקבלו אותה כסרטון.',
+        en: 'Send one paragraph. Get it back as a video.',
+        th: 'ส่งมาหนึ่งย่อหน้า รับกลับเป็นวิดีโอ',
+      },
+      body: {
+        he: 'שלחו לי בוואטסאפ פסקה מהאתר שלכם, מהמחירון או מנוהל הדרכה. אחזיר לכם אותה כסרטון קצר עם דמות שמדברת, כדי שתראו איך זה נראה לפני שמזמינים.',
+        en: 'Send me on WhatsApp a paragraph from your site, your price list or a training document. I will send it back as a short video with a talking character, so you see how it looks before you order anything.',
+        th: 'ส่ง WhatsApp มาพร้อมหนึ่งย่อหน้าจากเว็บของคุณ รายการราคา หรือเอกสารฝึกอบรม ผมจะส่งกลับเป็นวิดีโอสั้นที่ตัวละครพูดให้ เพื่อให้คุณเห็นผลก่อนสั่งทำ',
+      },
+      promise: { he: 'בלי התחייבות, בלי טפסים.', en: 'No commitment, no forms.', th: 'ไม่มีข้อผูกมัด ไม่มีแบบฟอร์ม' },
+      button: { he: 'דברו איתי בוואטסאפ', en: 'Talk to me on WhatsApp', th: 'คุยกับผมทาง WhatsApp' },
+      message: {
+        he: 'היי רפאל, ראיתי את סרטוני האווטאר. הטקסט שלי: ',
+        en: 'Hi Refael, I saw the avatar videos. My text: ',
+        th: 'สวัสดีครับ/ค่ะ ราฟาเอล เห็นวิดีโออวตารแล้ว ข้อความของฉันคือ: ',
+      },
+    },
+    faq: [
+      {
+        q: { he: 'כמה זמן לוקח לסרטון אחד?', en: 'How long does one video take?', th: 'หนึ่งคลิปใช้เวลานานแค่ไหน?' },
+        a: {
+          he: 'סרטון של 60 עד 90 שניות מתסריט מוכן חוזר תוך יום או שניים. אם צריך לכתוב תסריט, תוסיפו עוד יום.',
+          en: 'A 60 to 90 second video from a ready script comes back within a day or two. If the script needs writing, add another day.',
+          th: 'คลิป 60 ถึง 90 วินาทีจากสคริปต์ที่พร้อมแล้ว ได้กลับภายในหนึ่งถึงสองวัน ถ้าต้องเขียนสคริปต์ด้วย เพิ่มอีกหนึ่งวัน',
+        },
+      },
+      {
+        q: { he: 'הדמות מדברת עברית טבעית?', en: 'Does the character speak naturally?', th: 'ตัวละครพูดเป็นธรรมชาติไหม?' },
+        a: {
+          he: 'כן, בקול טבעי ועם שפתיים מסונכרנות. בעברית, באנגלית ובתאית. אפשר לשמוע דוגמה לפני שמזמינים.',
+          en: 'Yes, in a natural voice with synced lips, in Hebrew, English and Thai. You can hear a sample before ordering.',
+          th: 'ใช่ ด้วยเสียงธรรมชาติและปากขยับตรงกับคำพูด ทั้งภาษาไทย อังกฤษ และฮีบรู ฟังตัวอย่างก่อนสั่งได้',
+        },
+      },
+      {
+        q: { he: 'אפשר להשתמש בפנים שלי?', en: 'Can you use my own face?', th: 'ใช้หน้าของฉันเองได้ไหม?' },
+        a: {
+          he: 'כן, מתוך קליפ קצר שאתם מצלמים בטלפון, ובאישור בכתב שזה אתם. אחר כך אפשר להפיק סרטונים בלי לצלם שוב.',
+          en: 'Yes, from a short clip you film on your phone, with written permission that it is you. After that we make videos without filming again.',
+          th: 'ได้ จากคลิปสั้นที่คุณถ่ายด้วยมือถือ พร้อมหนังสืออนุญาตว่าเป็นคุณจริง หลังจากนั้นทำวิดีโอได้โดยไม่ต้องถ่ายอีก',
+        },
+      },
+      {
+        q: { he: 'מה אם אני צריך לשנות משפט אחרי שהסרטון מוכן?', en: 'What if I need to change a sentence after it is done?', th: 'ถ้าต้องแก้ประโยคหลังคลิปเสร็จแล้วล่ะ?' },
+        a: {
+          he: 'שולחים את המשפט החדש ואני מרנדר מחדש. אין צילום מחדש ואין צורך בשחקן, אז זה זול ומהיר.',
+          en: 'Send the new sentence and I re-render. No reshoot and no actor needed, so it is cheap and fast.',
+          th: 'ส่งประโยคใหม่มา แล้วผมเรนเดอร์ใหม่ ไม่ต้องถ่ายซ้ำและไม่ต้องใช้นักแสดง จึงถูกและเร็ว',
+        },
+      },
+      {
+        q: { he: 'מה אני מקבל בסוף?', en: 'What do I get at the end?', th: 'สุดท้ายได้อะไร?' },
+        a: {
+          he: 'קובץ mp4 בניצב ובאופק, עם כתוביות בקובץ נפרד אם ביקשתם. הקבצים שלכם לשימוש חופשי.',
+          en: 'An mp4 in vertical and wide, with subtitles in a separate file if you asked for them. The files are yours to use freely.',
+          th: 'ไฟล์ mp4 ทั้งแนวตั้งและแนวนอน พร้อมไฟล์คำบรรยายแยกถ้าขอไว้ ไฟล์เป็นของคุณ ใช้ได้อย่างอิสระ',
+        },
+      },
+    ],
+  },
+
   '/brand-character': {
     path: '/brand-character',
     crumb: { he: 'דמות AI למותג', en: 'AI brand character', th: 'ตัวละคร AI สำหรับแบรนด์' },

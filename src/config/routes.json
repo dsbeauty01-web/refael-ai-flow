@@ -113,6 +113,21 @@
       }
     },
     {
+      "path": "/avatar-videos",
+      "priority": 0.7,
+      "changefreq": "monthly",
+      "title": {
+        "he": "סרטוני אווטאר לעסקים | סרטון הסבר והדרכה בלי צילומים | Refael.ai",
+        "en": "Avatar videos for business | Explainer and training video with no filming | Refael.ai",
+        "th": "วิดีโออวตารสำหรับธุรกิจ | คลิปอธิบายและฝึกอบรมโดยไม่ต้องถ่ายทำ | Refael.ai"
+      },
+      "description": {
+        "he": "סרטון הסבר, הדרכה לעובדים, שיעור בקורס או פרסומת עם דמות AI שמדברת. שולחים טקסט, מקבלים סרטון. בעברית, באנגלית ובתאית, בלי סטודיו ובלי שחקן.",
+        "en": "An explainer, staff training, a course lesson or an ad with a talking AI character. Send the text, get the video back. In Hebrew, English and Thai, with no studio and no actor.",
+        "th": "คลิปอธิบาย ฝึกอบรมพนักงาน บทเรียนในคอร์ส หรือโฆษณา พร้อมตัวละคร AI ที่พูดได้ ส่งข้อความมา รับวิดีโอกลับ ทั้งภาษาไทย อังกฤษ และฮีบรู ไม่ต้องมีสตูดิโอและนักแสดง"
+      }
+    },
+    {
       "path": "/legal/privacy",
       "priority": 0.3,
       "changefreq": "yearly"

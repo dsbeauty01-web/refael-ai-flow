@@ -32,17 +32,6 @@ const PROOF_VIDEOS: ProofVideo[] = [
     badge: { he: 'הוכחה חיה', en: 'Live proof', th: 'พิสูจน์สด' },
   },
   {
-    video: '/site/cohost-product.mp4',
-    poster: '/site/cohost-product.jpg',
-    title: { he: 'שיתוף מסך: אדם + AI ביחד', en: 'Co-host: human + AI together', th: 'โค-โฮสต์: คนจริง + AI ด้วยกัน' },
-    subtitle: {
-      he: 'שני אנשים על מסך אחד. אחד מהם AI. שפתיים מסונכרנות, תגובה תוך 2.7 שניות.',
-      en: 'Two people on one screen. One is AI. Lips in sync, 2.7s response time.',
-      th: 'สองคนบนจอเดียว คนหนึ่งเป็น AI ริมฝีปากซิงค์ ตอบใน 2.7 วินาที',
-    },
-    badge: { he: 'חדש', en: 'New', th: 'ใหม่' },
-  },
-  {
     video: '/site/tools-showcase.mp4',
     poster: '/site/tools-showcase.jpg',
     title: { he: '5 כלים יורים בו-זמנית', en: '5 tools firing at once', th: '5 เครื่องมือทำงานพร้อมกัน' },
@@ -102,18 +91,6 @@ const DEMOS: Demo[] = [
       th: 'มีการโหวตเลือกแจ็คเก็ตในคอมเมนต์ โฮสต์ตอบทุกโหวตแบบเรียลไทม์',
     },
     badge: { he: 'הצבעה חיה', en: 'Live voting', th: 'โหวตสด' },
-    ratio: '9/16',
-  },
-  {
-    video: '/site/cohost-human.mp4',
-    poster: '/site/cohost-human.jpg',
-    name: { he: 'רפאל + מיה ביחד', en: 'Refael + Maya together', th: 'ราฟาเอล + มายา ด้วยกัน' },
-    desc: {
-      he: 'אדם אמיתי ודמות AI מדברים יחד על מסך אחד. שיחה טבעית, לא מוכנה מראש.',
-      en: 'A real person and an AI character talk together on one screen. Natural, unscripted.',
-      th: 'คนจริงกับตัวละคร AI คุยกันบนจอเดียว สนทนาธรรมชาติ ไม่ได้เตรียมล่วงหน้า',
-    },
-    badge: { he: 'שיתוף מסך', en: 'Co-host', th: 'โค-โฮสต์' },
     ratio: '9/16',
   },
   {

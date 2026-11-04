@@ -66,3 +66,6 @@ JavaScript, so these stubs are what give the right card per language.
 - Search Console: verify the site and submit `https://refael-ai-flow.lovable.app/sitemap.xml` (needs Refael's Google login).
 - Old generalist components under `src/components/landing/`, `portfolio/` and the root `components/*.tsx` are not routed
   (dead code, safe to delete later).
+
+## Analytics
+GA4 measurement ID: G-9RW8J7CTBE (property created 2026-11-04, account dsbeauty01@gmail.com). Meta Pixel: 2243359692576106. Both set in index.html.

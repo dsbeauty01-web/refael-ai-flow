@@ -10,13 +10,13 @@ import type { L10n } from '@/config/site';
 // badge: draw our LIVE marker only where the footage doesn't already carry one
 export const MEDIA: Record<'he' | 'en' | 'th', { src: string; poster: string; ratio: '4/5' | '9/16'; badge: boolean }> = {
   he: { src: '/maya/maya-live.mp4', poster: '/maya/maya-live-poster.jpg', ratio: '4/5', badge: false },
-  en: { src: '/media/maya_speaking_en.mp4', poster: '/media/maya_speaking_poster.jpg', ratio: '9/16', badge: true },
-  th: { src: '/site/thai-host-live.mp4', poster: '/site/thai-host-live.jpg', ratio: '9/16', badge: false },
+  en: { src: '/site/live-proof-en.mp4', poster: '/site/live-proof-en.jpg', ratio: '9/16', badge: false },
+  th: { src: '/site/live-proof-th.mp4', poster: '/site/live-proof-th.jpg', ratio: '9/16', badge: false },
 };
 
 export const HERO = {
   kicker: { he: 'הבוט שלך ישן.', en: 'Your bot is asleep.', th: 'บอทของคุณกำลังหลับ' } as L10n,
-  h1a: { he: 'מיה', en: 'Maya', th: 'พลอย' } as L10n,
+  h1a: { he: 'מיה', en: 'Your AI host', th: 'พิธีกร AI' } as L10n,
   h1b: { he: 'מוכרת בשידור חי.', en: 'sells on live.', th: 'ขายของบนไลฟ์ให้คุณ' } as L10n,
   lead: {
     he: 'דמות AI שעולה לשידור, מציגה את המוצרים שלכם וקוראת את הצ׳אט. כל מי שכותב מקבל תשובה בקול, בשם שלו, תוך כמה שניות.',
@@ -24,7 +24,7 @@ export const HERO = {
     th: 'ตัวละคร AI ที่ขึ้นไลฟ์ นำเสนอสินค้าของคุณ และอ่านแชท ทุกคนที่คอมเมนต์จะได้คำตอบด้วยเสียง เรียกชื่อ ภายในไม่กี่วินาที',
   } as L10n,
   cta: { he: 'שלחו תמונה של מוצר', en: 'Send a product photo', th: 'ส่งรูปสินค้ามาเลย' } as L10n,
-  hear: { he: 'לשמוע אותה', en: 'Hear her', th: 'ฟังเสียงเธอ' } as L10n,
+  hear: { he: 'לשמוע אותה', en: 'Watch the real live', th: 'ดูไลฟ์จริง' } as L10n,
   ctaNote: {
     he: 'בוואטסאפ, ישירות לרפאל. בלי טפסים.',
     en: 'On WhatsApp, straight to Refael. No forms.',
@@ -41,11 +41,11 @@ export const PROOF: { n: string; label: L10n }[] = [
 export type Chat = { who: L10n; text: L10n; host?: boolean }[];
 export type Feature = { icon: string; title: L10n; body: L10n; chat?: Chat; product?: boolean };
 
-const HOST_LABEL: L10n = { he: 'מיה, בקול', en: 'Maya, out loud', th: 'พลอย, ด้วยเสียง' };
+const HOST_LABEL: L10n = { he: 'מיה, בקול', en: 'AI host, out loud', th: 'พิธีกร AI, ด้วยเสียง' };
 
 export const FEATURES_HEAD = {
-  title: { he: 'מה היא עושה בשידור', en: 'What she does on live', th: 'เธอทำอะไรบนไลฟ์' } as L10n,
-  sub: { he: 'אתם מתעסקים במוצר. היא מתעסקת בקהל.', en: 'You handle the product. She handles the crowd.', th: 'คุณดูแลสินค้า เธอดูแลผู้ชม' } as L10n,
+  title: { he: 'מה היא עושה בשידור', en: 'What it does on live', th: 'ทำอะไรได้บนไลฟ์' } as L10n,
+  sub: { he: 'אתם מתעסקים במוצר. היא מתעסקת בקהל.', en: 'You handle the product. The host handles the chat.', th: 'คุณดูแลสินค้า พิธีกรดูแลแชท' } as L10n,
 };
 
 export const FEATURES: Feature[] = [

@@ -203,8 +203,8 @@ export const LANDINGS: Record<string, Landing> = {
     },
     media: {
       he: { src: '/maya/maya-live.mp4', poster: '/maya/maya-live-poster.jpg', ratio: '4/5' },
-      en: { src: '/media/maya_speaking_en.mp4', poster: '/media/maya_speaking_poster.jpg', ratio: '9/16' },
-      th: { src: '/site/thai-host-live.mp4', poster: '/site/thai-host-live.jpg', ratio: '9/16' },
+      en: { src: '/site/live-proof-en.mp4', poster: '/site/live-proof-en.jpg', ratio: '9/16' },
+      th: { src: '/site/live-proof-th.mp4', poster: '/site/live-proof-th.jpg', ratio: '9/16' },
     },
     live: true,
     blocks: [

@@ -72,11 +72,11 @@ export const PRODUCTS: Product[] = [
       en: 'Goes live, presents your products and answers every viewer by name, out loud, in seconds.',
       th: 'ขึ้นไลฟ์ นำเสนอสินค้า และตอบผู้ชมทุกคนด้วยชื่อ ด้วยเสียง ในไม่กี่วินาที',
     },
-    image: { he: '/maya/maya-live-poster.jpg', en: '/media/maya_speaking_poster.jpg', th: '/site/thai-host-live.jpg' },
+    image: { he: '/maya/maya-live-poster.jpg', en: '/site/live-proof-en.jpg', th: '/site/live-proof-th.jpg' },
     alt: {
       he: 'מיה בשידור חי עונה לצופה בשם',
-      en: 'Maya presenting to a live audience',
-      th: 'พลอย พิธีกร AI กำลังไลฟ์ขายผ้าทอ',
+      en: 'An AI host on a real YouTube live',
+      th: 'พิธีกร AI ในไลฟ์จริงบน YouTube',
     },
   },
   {

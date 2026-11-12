@@ -10,7 +10,7 @@ import { routeMeta, urlFor, SITE_URL, type L10n } from '@/config/site';
 import { trackWhatsAppClick, trackLineClick } from '@/lib/analytics';
 import {
   FACE_VIDEO, FACE_POSTER, TALK_VIDEO, TALK_POSTER, WORK_VIDEO, WORK_POSTER, STYLES,
-  HERO, MOCK, TALK, WORK, HOW, PRICING, COMPARE, FAQ_HEAD, FAQ, FINAL, SECTIONS, type Plan,
+  HERO, MOCK, TALK, BIZ, WORK, HOW, PRICING, COMPARE, FAQ_HEAD, FAQ, FINAL, SECTIONS, type Plan,
 } from '@/content/agentPage';
 
 const PATH = '/customer-service';
@@ -379,6 +379,87 @@ function StyleRow() {
   );
 }
 
+/** One illustration clip of the business strip. Plays only while it is the active one. */
+function BizClip({ i, active, onEnded, onPick, liRef }: {
+  i: number; active: boolean; onEnded: () => void; onPick: () => void; liRef: (el: HTMLLIElement | null) => void;
+}) {
+  const { tr } = useT();
+  const ref = useRef<HTMLVideoElement>(null);
+  const c = BIZ.clips[i];
+  useAutoplay(ref, { enabled: active, threshold: 0.5 });
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    v.addEventListener('ended', onEnded);
+    return () => v.removeEventListener('ended', onEnded);
+  }, [onEnded]);
+  return (
+    <li ref={liRef} data-i={i} className="snap-start shrink-0 w-[42vw] max-w-[190px] md:w-auto md:max-w-none min-w-0">
+      <button
+        type="button"
+        onClick={onPick}
+        aria-label={tr(c.label)}
+        className={`relative block w-full overflow-hidden rounded-2xl aspect-[9/16] bg-black border transition-colors ${active ? 'border-live-a/70' : 'border-ink/10'}`}
+      >
+        <video
+          ref={ref}
+          src={c.src}
+          poster={c.poster}
+          muted
+          playsInline
+          preload="none"
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </button>
+      <p className="mt-2 text-[0.88rem] font-semibold text-ink/80">{tr(c.label)}</p>
+    </li>
+  );
+}
+
+/**
+ * "Works on any business site": one clip plays at a time and hands over to the next
+ * clip that is on screen (on phones the row scrolls sideways). Tap a clip to play it.
+ */
+function BizStrip() {
+  const n = BIZ.clips.length;
+  const [active, setActive] = useState(0);
+  const activeRef = useRef(0);
+  const seen = useRef<number[]>(Array(n).fill(0));
+  const items = useRef<(HTMLLIElement | null)[]>([]);
+  const pick = (i: number) => { activeRef.current = i; setActive(i); };
+
+  const next = useRef(() => {
+    const from = activeRef.current;
+    for (let k = 1; k <= n; k++) {
+      const j = (from + k) % n;
+      if (seen.current[j] >= 0.5) { pick(j); return; }
+    }
+  }).current;
+
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { seen.current[Number((e.target as HTMLElement).dataset.i)] = e.isIntersecting ? e.intersectionRatio : 0; });
+      // the playing clip scrolled out of view: hand over to the first visible one
+      if (seen.current[activeRef.current] < 0.5) {
+        const j = seen.current.findIndex(r => r >= 0.5);
+        if (j >= 0) pick(j);
+      }
+    }, { threshold: [0, 0.5, 0.9] });
+    items.current.forEach(el => el && io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <ul className="mt-7 -mx-4 px-4 sm:mx-0 sm:px-0 flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-5 md:gap-4 md:overflow-visible">
+      {BIZ.clips.map((c, i) => (
+        <BizClip key={c.id} i={i} active={i === active} onEnded={next} onPick={() => pick(i)} liRef={el => { items.current[i] = el; }} />
+      ))}
+    </ul>
+  );
+}
+
 /** The 16:9 tools recording, with sound. */
 function WorkVideo() {
   const { tr } = useT();
@@ -688,6 +769,16 @@ export default function AgentPage() {
           <div className="order-2 md:order-first w-full max-w-[300px] md:max-w-[380px] mx-auto md:mx-0">
             <TalkVideo />
           </div>
+        </div>
+      </section>
+
+      {/* ANY BUSINESS SITE */}
+      <section id="sites" className="px-4 sm:px-5 pt-16 pb-4 lg:pt-20 lg:pb-6 bg-paper overflow-hidden">
+        <div className="max-w-[1100px] mx-auto">
+          <h2 className={h2}>{tr(BIZ.title)}</h2>
+          <p className="mt-3 text-[1.05rem] leading-[1.6] text-ink/70">{tr(BIZ.line)}</p>
+          <BizStrip />
+          <p className="mt-4 text-[0.8rem] text-muted-foreground">{tr(BIZ.caption)}</p>
         </div>
       </section>
 

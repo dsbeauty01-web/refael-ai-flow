@@ -158,6 +158,35 @@ export const TALK = {
   } as L10n,
 };
 
+/* ------------------------------------------------------------------ any business site */
+
+/**
+ * Illustration loops: AI-animated (fal.ai Kling 2.1) from still mockups, 540x960, ~4.7 s, silent.
+ * Not real client sites. The caption says so.
+ */
+export const BIZ = {
+  title: { he: 'עובד על כל אתר עסקי', en: 'Works on any business site', th: 'ใช้ได้กับทุกเว็บไซต์ธุรกิจ' } as L10n,
+  line: {
+    he: 'קליניקה, מספרה, חדר כושר או מסעדה. הנציג יושב בפינה ומדבר עם המבקרים.',
+    en: 'Clinic, salon, gym or restaurant. The agent sits in the corner and talks to visitors.',
+    th: 'คลินิก ร้านทำผม ฟิตเนส หรือร้านอาหาร เจ้าหน้าที่อยู่มุมจอและคุยกับผู้เข้าชม',
+  } as L10n,
+  caption: {
+    he: 'איור. השיחה האמיתית מוקלטת למטה.',
+    en: 'Illustration. The real recorded conversation is below.',
+    th: 'ภาพประกอบ บทสนทนาจริงที่บันทึกไว้อยู่ด้านล่าง',
+  } as L10n,
+  clips: [
+    { id: 'dental', label: { he: 'מרפאת שיניים', en: 'Dental clinic', th: 'คลินิกทันตกรรม' } },
+    { id: 'beauty', label: { he: 'קליניקת יופי', en: 'Beauty clinic', th: 'คลินิกความงาม' } },
+    { id: 'salon', label: { he: 'מספרה', en: 'Hair salon', th: 'ร้านทำผม' } },
+    { id: 'gym', label: { he: 'חדר כושר', en: 'Gym', th: 'ฟิตเนส' } },
+    { id: 'restaurant', label: { he: 'מסעדה', en: 'Restaurant', th: 'ร้านอาหาร' } },
+  ].map(c => ({ ...c, src: `/agent/biz-${c.id}.mp4`, poster: `/agent/biz-${c.id}.jpg` })) as {
+    id: string; label: L10n; src: string; poster: string;
+  }[],
+};
+
 /* ------------------------------------------------------------------ see it work */
 
 export const WORK = {

@@ -372,9 +372,9 @@ type Cost = { t: L10n; note?: L10n };
  */
 export const COMPARE = {
   hook: {
-    he: 'בערך חצי מחיר. הכל כלול. בעברית. בלי מתכנת.',
-    en: 'About half the price. Everything included. In Hebrew. No developer.',
-    th: 'ราวครึ่งราคา รวมทุกอย่าง เป็นภาษาฮีบรู ไม่ต้องจ้างโปรแกรมเมอร์',
+    he: 'עד חצי מחיר. הכל כלול. בעברית. בלי מתכנת.',
+    en: 'Up to half the price. Everything included. In Hebrew. No developer.',
+    th: 'ถูกกว่าได้ถึงครึ่งหนึ่ง รวมทุกอย่าง เป็นภาษาฮีบรู ไม่ต้องจ้างโปรแกรมเมอร์',
   } as L10n,
   sub: {
     he: 'פלטפורמות האווטאר המובילות מוכרות לכם פנים מדברות. עדיין תשלמו על המוח, על העברית ועל מתכנת. אנחנו מקימים בשבילכם את כל הנציג.',
@@ -424,7 +424,7 @@ export const COMPARE = {
   oursTotal: '₪10,980',
   oursTotalNote: { he: '₪790 × 12 + ₪1,500 הקמה', en: '₪790 × 12 + ₪1,500 setup', th: '₪790 × 12 + ค่าติดตั้ง ₪1,500' } as L10n,
   oursPerConv: { he: 'בערך ₪7 לשיחה', en: 'about ₪7 a conversation', th: 'ราว ₪7 ต่อบทสนทนา' } as L10n,
-  otherTotals: ['≈₪23,500+', '≈₪12,100+', '≈₪26,800+'],
+  otherTotals: ['≈₪23,500+', '≈₪12,100+', '≈₪27,600+'],
   perHour: {
     he: 'לפי שעת שיחה, בשימוש הזה: אצלנו ≈₪158 (≈$51). בחבילת פרו זה יוצא ≈₪112 לשעה.',
     en: 'Per hour of conversation at this usage: ours ≈₪158 (≈$51). Our Pro package works out to ≈₪112 an hour.',

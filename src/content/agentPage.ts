@@ -1,59 +1,81 @@
 import type { L10n } from '@/config/site';
 
 /**
- * /customer-service: the live talking-face website agent (the service, not a character).
+ * /customer-service (v2): the live talking-face website agent.
  * Rendered by pages/AgentPage.tsx. Every string has he, en, th.
- * Rules: no em dashes or double dashes, no character names, never "replaces your
- * sales team", never promise a sales lift. Prices are shown on THIS page only
- * (rendered directly, not through <Price>, which stays off site-wide).
+ * Rules: no em dashes or double dashes, no character names, no invented numbers,
+ * never "replaces your sales team", never promise a sales lift.
+ * Prices are shown on THIS page only (osek patur: final prices, no VAT line).
  * Internal cost basis is secret: never put it here.
  */
 
-// swap to /site/live-widget-session.mp4 when the real widget session recording is added
-export const SESSION_VIDEO = '/site/tools-explainer.mp4';
-export const SESSION_POSTER = '/site/tools-explainer.jpg';
+/* ------------------------------------------------------------------ media */
 
 export const FACE_VIDEO = '/agent/face.mp4';
 export const FACE_POSTER = '/agent/face.jpg';
 
+/** Cropped, compressed web cuts of /media/maya_speaking_{he,en,th}.mp4 (head to waist, 480x600). */
+export const TALK_VIDEO: L10n = { he: '/agent/talk-he.mp4', en: '/agent/talk-en.mp4', th: '/agent/talk-th.mp4' };
+export const TALK_POSTER = '/agent/talk.jpg';
+
+/** Tools screen recording from private test sessions. Swap when the real widget session is recorded. */
+export const WORK_VIDEO = '/site/tools-explainer.mp4';
+export const WORK_POSTER = '/site/tools-explainer.jpg';
+
+/** 6 s silent loops cut from existing clips, 288x360. */
+export const STYLES: { src: string; poster: string; label: L10n }[] = [
+  {
+    src: '/agent/style-3d.mp4',
+    poster: '/agent/style-3d.jpg',
+    label: { he: 'דמות תלת־ממד, בלייב אמיתי ביוטיוב', en: '3D character, on a real YouTube live', th: 'ตัวละคร 3D ในไลฟ์จริงบน YouTube' },
+  },
+  {
+    src: '/agent/style-real.mp4',
+    poster: '/agent/style-real.jpg',
+    label: { he: 'מגיש מציאותי, בבדיקה חיה', en: 'Realistic presenter, live test', th: 'พิธีกรสมจริง ทดสอบสด' },
+  },
+  {
+    src: '/agent/style-clinic.mp4',
+    poster: '/agent/style-clinic.jpg',
+    label: { he: 'סגנון קליניקה, סשן בדיקה', en: 'Clinic look, test session', th: 'สไตล์คลินิก เซสชันทดสอบ' },
+  },
+];
+
+/* ------------------------------------------------------------------ hero */
+
 export const HERO = {
   h1: {
-    he: 'נציג חי באתר שלכם. מקבל כל מבקר, עונה בעברית ושולח לכם את הליד.',
-    en: 'A live agent on your website. It greets every visitor, answers in Hebrew and sends you the lead.',
-    th: 'เจ้าหน้าที่ AI แบบสดบนเว็บไซต์ของคุณ ทักทายผู้เข้าชมทุกคน ตอบด้วยเสียง และส่งลีดถึงคุณ',
+    he: 'נציג חי באתר שלכם. עונה בעברית ושולח לכם את הליד.',
+    en: 'A live agent on your website. It answers in Hebrew and sends you the lead.',
+    th: 'เจ้าหน้าที่ AI แบบสดบนเว็บไซต์ของคุณ ตอบลูกค้าด้วยเสียง แล้วส่งลีดถึงคุณ',
   } as L10n,
   lead: {
-    he: 'פנים מדברות בפינת האתר. כמה שניות אחרי שהדף נפתח הנציג פונה למבקר בעצמו, עונה על מחירים ושאלות מתוך המידע של העסק, ושומר שם וטלפון אצלכם. שורת קוד אחת, על כל אתר.',
-    en: 'A talking face in the corner of your site. A few seconds after the page opens it greets the visitor by itself, answers prices and questions from your own business info, and saves their name and phone for you. One line of code, on any site.',
-    th: 'ใบหน้าที่พูดได้ที่มุมเว็บไซต์ของคุณ ไม่กี่วินาทีหลังเปิดหน้า เจ้าหน้าที่จะทักผู้เข้าชมเอง ตอบเรื่องราคาและคำถามจากข้อมูลธุรกิจของคุณ และเก็บชื่อกับเบอร์โทรไว้ให้คุณ โค้ดบรรทัดเดียว ใช้ได้กับทุกเว็บ',
+    he: 'פנים מדברות בפינת האתר, 24/7. שורת קוד אחת.',
+    en: 'A talking face in the corner of your site, 24/7. One line of code.',
+    th: 'ใบหน้าที่พูดได้ที่มุมเว็บไซต์ ตลอด 24 ชั่วโมง โค้ดบรรทัดเดียว',
   } as L10n,
+  priceChip: { he: 'מ־₪99 לחודש', en: 'From ₪99 a month', th: 'เริ่ม ₪99 ต่อเดือน' } as L10n,
+  priceChipNote: { he: 'הקמה ₪0. מבטלים בכל חודש.', en: 'Setup ₪0. Cancel any month.', th: 'ค่าติดตั้ง ₪0 ยกเลิกได้ทุกเดือน' } as L10n,
   cta: {
-    he: 'הדגמה חיה של 3 דקות, על האתר שלכם, בחינם',
-    en: 'Free 3-minute live demo, on YOUR site',
-    th: 'เดโมสด 3 นาทีบนเว็บของคุณ ฟรี',
+    he: 'הדגמה חיה על האתר שלכם, בחינם',
+    en: 'Free live demo on your own site',
+    th: 'ขอเดโมสดบนเว็บของคุณ ฟรี',
   } as L10n,
-  seePrices: { he: 'לראות מחירים', en: 'See prices', th: 'ดูราคา' } as L10n,
-  priceChip: { he: 'מ־₪13 ביום', en: 'From ₪13 a day', th: 'เริ่ม ₪13 ต่อวัน' } as L10n,
-  priceChipNote: { he: 'חבילה בסיסית, ₪390 לחודש', en: 'Basic package, ₪390 a month', th: 'แพ็กเกจ Basic ₪390 ต่อเดือน' } as L10n,
   ctaNote: {
-    he: 'בוואטסאפ, ישירות לרפאל. שלחו כתובת אתר ונראה לכם אותו עם נציג.',
-    en: 'On WhatsApp, straight to Refael. Send your site address and we show it to you with an agent.',
-    th: 'ทาง LINE ถึงราฟาเอลโดยตรง ส่งที่อยู่เว็บไซต์มา แล้วเราจะโชว์เว็บของคุณพร้อมเจ้าหน้าที่ AI',
+    he: '3 דקות בוואטסאפ, ישירות מול רפאל.',
+    en: '3 minutes on WhatsApp, straight with Refael.',
+    th: '3 นาทีทาง LINE คุยกับราฟาเอลโดยตรง',
   } as L10n,
-  facts: [
-    { he: 'עונה תוך כ־3.5 שניות', en: 'Answers in about 3.5 s', th: 'ตอบภายในราว 3.5 วินาที' },
-    { he: 'קול עברי ואוזן עברית', en: 'Hebrew voice and Hebrew ears', th: 'พูดและฟังภาษาฮีบรู' },
-    { he: 'לידים ישר לוואטסאפ', en: 'Leads straight to your WhatsApp', th: 'ลีดส่งตรงถึง WhatsApp ของคุณ' },
-  ] as L10n[],
+  seePrices: { he: 'למחירים', en: 'See prices', th: 'ดูราคา' } as L10n,
   caption: {
-    he: 'המחשה. הקלטה אמיתית למטה.',
-    en: 'Illustration. Real recorded session below.',
-    th: 'ภาพประกอบ ดูการบันทึกจริงด้านล่าง',
+    he: 'המחשה של האתר. הפנים בפינה הן הקלטה אמיתית של הנציג.',
+    en: 'Illustrated site. The face in the corner is a real recording of the agent.',
+    th: 'เว็บไซต์เป็นภาพประกอบ ใบหน้าที่มุมเป็นการบันทึกจริงของเจ้าหน้าที่',
   } as L10n,
   mockLabel: {
-    he: 'המחשה: אתר של קליניקה עם נציג AI בפינה. הנציג מברך את המבקרת, עונה על מחיר הסרת שיער בלייזר, שומר את השם והטלפון שלה, וליד חדש מגיע לבעלת העסק בוואטסאפ.',
-    en: 'Illustration: a clinic website with an AI agent in the corner. The agent greets the visitor, answers the price of laser hair removal, saves her name and phone, and a new lead reaches the owner on WhatsApp.',
-    th: 'ภาพประกอบ: เว็บไซต์คลินิกที่มีเจ้าหน้าที่ AI อยู่มุมจอ เจ้าหน้าที่ทักทายผู้เข้าชม ตอบราคาเลเซอร์กำจัดขน เก็บชื่อและเบอร์โทร แล้วลีดใหม่ก็ส่งถึงเจ้าของธุรกิจทาง WhatsApp',
+    he: 'המחשה: אתר של קליניקה עם נציג AI בפינה. הנציג מברך את המבקרת, עונה על מחיר, שומר את השם והטלפון שלה, וליד חדש מגיע לבעלת העסק בוואטסאפ.',
+    en: 'Illustration: a clinic website with an AI agent in the corner. The agent greets the visitor, answers a price question, saves her name and phone, and a new lead reaches the owner on WhatsApp.',
+    th: 'ภาพประกอบ: เว็บไซต์คลินิกที่มีเจ้าหน้าที่ AI อยู่มุมจอ ทักทายผู้เข้าชม ตอบคำถามเรื่องราคา เก็บชื่อและเบอร์โทร แล้วลีดใหม่ก็ส่งถึงเจ้าของธุรกิจทาง WhatsApp',
   } as L10n,
 };
 
@@ -67,11 +89,7 @@ export const MOCK = {
     { he: 'צור קשר', en: 'Contact', th: 'ติดต่อ' },
   ] as L10n[],
   headline: { he: 'עור חלק, בלי לחץ.', en: 'Smooth skin, no pressure.', th: 'ผิวเนียน สบายใจ' } as L10n,
-  sub: {
-    he: 'קליניקה לטיפולי לייזר ואסתטיקה',
-    en: 'Laser and aesthetics clinic',
-    th: 'คลินิกเลเซอร์และความงาม',
-  } as L10n,
+  sub: { he: 'קליניקה לטיפולי לייזר ואסתטיקה', en: 'Laser and aesthetics clinic', th: 'คลินิกเลเซอร์และความงาม' } as L10n,
   book: { he: 'קביעת תור', en: 'Book a visit', th: 'จองคิว' } as L10n,
   agentName: { he: 'העוזרת של הקליניקה', en: 'Clinic assistant', th: 'ผู้ช่วยของคลินิก' } as L10n,
   online: { he: 'מחוברת', en: 'Online', th: 'ออนไลน์' } as L10n,
@@ -80,37 +98,30 @@ export const MOCK = {
     {
       agent: true,
       text: {
-        he: 'היי, אני העוזרת הדיגיטלית של הקליניקה. אפשר לשאול אותי כל דבר, בקול או בכתב.',
-        en: "Hi, I'm the clinic's AI assistant. Ask me anything, by voice or by text.",
-        th: 'สวัสดีค่ะ ฉันเป็นผู้ช่วย AI ของคลินิก ถามได้ทุกเรื่อง จะพูดหรือพิมพ์ก็ได้ค่ะ',
+        he: 'היי, אני העוזרת הדיגיטלית של הקליניקה. אפשר לשאול אותי כל דבר.',
+        en: "Hi, I'm the clinic's AI assistant. Ask me anything.",
+        th: 'สวัสดีค่ะ ฉันเป็นผู้ช่วย AI ของคลินิก ถามได้ทุกเรื่องค่ะ',
       },
     },
     {
       agent: false,
-      text: {
-        he: 'כמה עולה הסרת שיער בלייזר לרגליים?',
-        en: 'How much is laser hair removal for the legs?',
-        th: 'เลเซอร์กำจัดขนที่ขาราคาเท่าไหร่คะ?',
-      },
+      text: { he: 'כמה עולה לייזר לרגליים?', en: 'How much is laser for the legs?', th: 'เลเซอร์ที่ขาราคาเท่าไหร่คะ?' },
     },
     {
       agent: true,
       text: {
-        he: '₪450 לטיפול, או ₪2,200 לסדרה של 6. לשמור לך שיחת ייעוץ?',
-        en: '₪450 a session, or ₪2,200 for a series of 6. Shall I save you a consultation?',
-        th: 'ครั้งละ ₪450 หรือ ₪2,200 สำหรับ 6 ครั้ง ให้จองคิวปรึกษาไว้ให้ไหมคะ?',
+        he: '₪450 לטיפול. לשמור לך שיחת ייעוץ?',
+        en: '₪450 a session. Shall I save you a consultation?',
+        th: 'ครั้งละ ₪450 ค่ะ ให้จองคิวปรึกษาไว้ให้ไหมคะ?',
       },
     },
-    {
-      agent: false,
-      text: { he: 'דנה, 052-555-0147', en: 'Dana, 052-555-0147', th: 'Dana, 052-555-0147' },
-    },
+    { agent: false, text: { he: 'דנה, 052-555-0147', en: 'Dana, 052-555-0147', th: 'Dana, 052-555-0147' } },
     {
       agent: true,
       text: {
-        he: 'תודה דנה, שמרתי. הקליניקה תחזור אלייך היום.',
-        en: 'Thanks Dana, saved. The clinic will get back to you today.',
-        th: 'ขอบคุณค่ะคุณ Dana บันทึกแล้ว คลินิกจะติดต่อกลับวันนี้ค่ะ',
+        he: 'שמרתי, דנה. הקליניקה תחזור אלייך היום.',
+        en: 'Saved, Dana. The clinic will call you today.',
+        th: 'บันทึกแล้วค่ะคุณ Dana คลินิกจะติดต่อกลับวันนี้ค่ะ',
       },
     },
   ] as { agent: boolean; text: L10n }[],
@@ -121,398 +132,318 @@ export const MOCK = {
       { k: { he: 'שם', en: 'Name', th: 'ชื่อ' }, v: { he: 'דנה', en: 'Dana', th: 'Dana' } },
       { k: { he: 'טלפון', en: 'Phone', th: 'โทร' }, v: { he: '052-555-0147', en: '052-555-0147', th: '052-555-0147' } },
       { k: { he: 'מתעניינת ב', en: 'Interested in', th: 'สนใจ' }, v: { he: 'לייזר, רגליים', en: 'Laser, legs', th: 'เลเซอร์ ขา' } },
-      { k: { he: 'שעה', en: 'Time', th: 'เวลา' }, v: { he: '21:47', en: '21:47', th: '21:47' } },
     ] as { k: L10n; v: L10n }[],
   },
 };
 
-export const PROOF = {
-  title: { he: 'הקלטה של סשן אמיתי', en: 'A recorded session', th: 'บันทึกการใช้งานจริง' } as L10n,
-  body: {
-    he: 'מוקלט בבדיקות פרטיות: אותו מוח n8n מפעיל כלים אמיתיים: קישור תשלום, ליד לגוגל שיטס, תור ביומן, הודעה לבעל העסק.',
-    en: 'Recorded in private tests: the same n8n brain runs real tools: a payment link, a lead into Google Sheets, a calendar booking, a message to the owner.',
-    th: 'บันทึกจากการทดสอบส่วนตัว: สมอง n8n ตัวเดียวกันสั่งงานเครื่องมือจริง ได้แก่ ลิงก์ชำระเงิน ลีดลง Google Sheets นัดหมายในปฏิทิน และข้อความถึงเจ้าของธุรกิจ',
+/* ------------------------------------------------------------------ see it talk */
+
+export const TALK = {
+  title: { he: 'ככה הוא נשמע', en: 'Hear it talk', th: 'ฟังเสียงจริง' } as L10n,
+  line: {
+    he: 'קול טבעי, בעברית, באנגלית או בתאית. לחצו על הקול.',
+    en: 'A natural voice, in Hebrew, English or Thai. Tap for sound.',
+    th: 'เสียงธรรมชาติ ภาษาฮีบรู อังกฤษ หรือไทย แตะเพื่อเปิดเสียง',
   } as L10n,
   videoLabel: {
-    he: 'הקלטת מסך: הנציג מפעיל כלים אמיתיים דרך n8n',
-    en: 'Screen recording: the agent running real tools through n8n',
-    th: 'บันทึกหน้าจอ: เจ้าหน้าที่ AI ใช้เครื่องมือจริงผ่าน n8n',
+    he: 'קליפ מוקלט: דמות מדברת עברית',
+    en: 'Recorded clip: a character speaking English',
+    th: 'คลิปที่บันทึกไว้: ตัวละครพูดภาษาไทย',
+  } as L10n,
+  stylesTitle: { he: 'הדמות שלכם, בסגנון שלכם', en: 'Your character, your style', th: 'ตัวละครของคุณ ในสไตล์ของคุณ' } as L10n,
+  stylesNote: {
+    he: 'דמויות שבנינו. אתם בוחרים מראה, קול ושם.',
+    en: 'Characters we built. You choose the look, voice and name.',
+    th: 'ตัวละครที่เราสร้างไว้ คุณเลือกหน้าตา เสียง และชื่อได้',
   } as L10n,
 };
+
+/* ------------------------------------------------------------------ see it work */
+
+export const WORK = {
+  title: { he: 'ככה הוא עובד', en: 'See it work', th: 'ดูการทำงานจริง' } as L10n,
+  line: {
+    he: 'הקלטת מסך מבדיקות פרטיות. הכלים אמיתיים, דרך n8n.',
+    en: 'Screen recording from private tests. The tools are real, run through n8n.',
+    th: 'บันทึกหน้าจอจากการทดสอบส่วนตัว เครื่องมือเป็นของจริง ทำงานผ่าน n8n',
+  } as L10n,
+  videoLabel: {
+    he: 'הקלטת מסך: הנציג שולח קישור קנייה, שומר ליד בגוגל שיטס, קובע תור ומעדכן את בעל העסק',
+    en: 'Screen recording: the agent sends a buy link, saves a lead to Google Sheets, books a slot and notifies the owner',
+    th: 'บันทึกหน้าจอ: เจ้าหน้าที่ส่งลิงก์ซื้อ บันทึกลีดลง Google Sheets จองคิว และแจ้งเจ้าของธุรกิจ',
+  } as L10n,
+  points: [
+    { he: 'עונה מתוך המידע שלכם', en: 'Answers from your info', th: 'ตอบจากข้อมูลของคุณ' },
+    { he: 'תופס את הליד', en: 'Catches the lead', th: 'เก็บลีดไว้ให้' },
+    { he: 'קובע תור ביומן', en: 'Books the slot', th: 'จองคิวในปฏิทิน' },
+  ] as L10n[],
+};
+
+/* ------------------------------------------------------------------ how it starts */
 
 export const HOW = {
-  title: { he: 'איך זה עובד', en: 'How it works', th: 'ทำงานอย่างไร' } as L10n,
+  title: { he: 'איך מתחילים', en: 'How it starts', th: 'เริ่มต้นอย่างไร' } as L10n,
   steps: [
     {
-      t: { he: 'אנחנו בונים את הנציג שלכם', en: 'We build your agent', th: 'เราสร้างเจ้าหน้าที่ของคุณ' },
-      b: {
-        he: 'דמות, קול ושם לבחירתכם, וידע מתוך המחירון, השאלות הנפוצות והשירותים של העסק. מאחורי הקלעים: מוח n8n שבנוי רק בשבילכם.',
-        en: 'A character, voice and name of your choice, plus knowledge from your price list, FAQ and services. Behind it: an n8n brain built only for you.',
-        th: 'ตัวละคร เสียง และชื่อที่คุณเลือก พร้อมความรู้จากรายการราคา คำถามที่พบบ่อย และบริการของคุณ เบื้องหลังคือสมอง n8n ที่สร้างเฉพาะสำหรับคุณ',
-      },
+      he: 'שולחים לנו כתובת אתר ומקבלים הדגמה חיה של 3 דקות, בחינם.',
+      en: 'Send your site address and get a free 3-minute live demo.',
+      th: 'ส่งที่อยู่เว็บไซต์มา รับเดโมสด 3 นาทีฟรี',
     },
     {
-      t: { he: 'אתם מדביקים שורה אחת באתר', en: 'You paste one line on your site', th: 'คุณวางโค้ดบรรทัดเดียวบนเว็บ' },
-      b: {
-        he: 'עובד על וורדפרס, Wix, Shopify וכל אתר HTML. אם אין לכם גישה, אנחנו נעזור.',
-        en: 'Works on WordPress, Wix, Shopify and any HTML site. No access? We will help.',
-        th: 'ใช้ได้กับ WordPress, Wix, Shopify และทุกเว็บ HTML ถ้าเข้าระบบเองไม่ได้ เราช่วยได้',
-      },
-      code: '<script src=".../widget.js"></script>',
+      he: 'בוחרים חבילה ודמות. אנחנו מכינים את הידע מהמחירון והשאלות שלכם.',
+      en: 'Pick a plan and a character. We load your prices and FAQ.',
+      th: 'เลือกแพ็กเกจและตัวละคร เราใส่ราคาและคำถามที่พบบ่อยของคุณให้',
     },
     {
-      t: { he: 'הלידים מגיעים אליכם', en: 'Leads arrive on your phone', th: 'ลีดส่งถึงคุณ' },
-      b: {
-        he: 'שם, טלפון ומה עניין אותם, ישר לוואטסאפ, למייל, לגיליון גוגל או ל־CRM.',
-        en: 'Name, phone and what they asked about, straight to WhatsApp, email, a Google Sheet or your CRM.',
-        th: 'ชื่อ เบอร์โทร และสิ่งที่ลูกค้าสนใจ ส่งตรงไปที่ WhatsApp อีเมล Google Sheet หรือ CRM ของคุณ',
-      },
-    },
-  ] as { t: L10n; b: L10n; code?: string }[],
-};
-
-export const BENEFITS = {
-  title: { he: 'למה זה שווה לכם', en: 'Why it pays off', th: 'ทำไมถึงคุ้ม' } as L10n,
-  items: [
-    {
-      t: { he: '24/7, גם בלילה ובשבת', en: '24/7, nights and weekends too', th: 'ตลอด 24 ชม. รวมกลางคืนและวันหยุด' },
-      b: {
-        he: 'רוב המבקרים מגיעים כשאין מי שיענה. הנציג עונה גם בעשר בלילה.',
-        en: 'Most visitors come when nobody is there to answer. Your agent answers at 10 pm too.',
-        th: 'ผู้เข้าชมส่วนใหญ่มาตอนที่ไม่มีใครตอบ เจ้าหน้าที่ของคุณตอบได้แม้ตอนสี่ทุ่ม',
-      },
-    },
-    {
-      t: { he: 'מדבר עברית טבעית', en: 'Speaks natural Hebrew', th: 'พูดภาษาฮีบรูอย่างเป็นธรรมชาติ' },
-      b: {
-        he: 'שומע עברית, עונה בקול עברי טבעי, עם פנים חיות ולא סרטון מוקלט.',
-        en: 'Hears Hebrew and answers in a natural Hebrew voice, with a live face, not a pre-recorded video.',
-        th: 'ฟังภาษาฮีบรู ตอบด้วยเสียงฮีบรูที่เป็นธรรมชาติ ด้วยใบหน้าสด ไม่ใช่วิดีโอที่อัดไว้',
-      },
-    },
-    {
-      t: { he: 'תופס מבקרים שהיו עוזבים', en: 'Catches visitors who would leave', th: 'รั้งผู้เข้าชมที่กำลังจะออกไป' },
-      b: {
-        he: 'במקום טופס שאף אחד לא ממלא, מישהו פונה אליהם ושואל במה אפשר לעזור.',
-        en: 'Instead of a form nobody fills in, someone talks to them and asks how to help.',
-        th: 'แทนฟอร์มที่ไม่มีใครกรอก มีคนทักและถามว่าช่วยอะไรได้บ้าง',
-      },
-    },
-    {
-      t: { he: 'הליד ישר לטלפון שלכם', en: 'The lead goes straight to your phone', th: 'ลีดส่งตรงถึงโทรศัพท์ของคุณ' },
-      b: {
-        he: 'שם, טלפון ונושא הפנייה, תוך שניות מסיום השיחה.',
-        en: 'Name, phone and topic, seconds after the conversation ends.',
-        th: 'ชื่อ เบอร์โทร และเรื่องที่สนใจ ภายในไม่กี่วินาทีหลังจบบทสนทนา',
-      },
-    },
-    {
-      t: { he: 'עולה פחות מנציג צ׳אט במשרה חלקית', en: 'Costs less than a part-time chat rep', th: 'ถูกกว่าพนักงานแชทพาร์ตไทม์' },
-      b: {
-        he: 'נציג אנושי בחצי משרה עולה ₪3,000 ומעלה בחודש, ועובד רק במשמרת שלו.',
-        en: 'A part-time human rep costs ₪3,000+ a month and only works their shift.',
-        th: 'พนักงานพาร์ตไทม์มีค่าใช้จ่าย ₪3,000 ขึ้นไปต่อเดือน และทำงานแค่ในกะของตัวเอง',
-      },
-    },
-  ] as { t: L10n; b: L10n }[],
-  fitTitle: { he: 'מתאים במיוחד ל', en: 'Best fit for', th: 'เหมาะที่สุดสำหรับ' } as L10n,
-  fitNote: {
-    he: 'עסקים שבהם לקוח אחד שווה ₪500 ומעלה.',
-    en: 'Businesses where one customer is worth ₪500 or more.',
-    th: 'ธุรกิจที่ลูกค้าหนึ่งคนมีมูลค่า ₪500 ขึ้นไป',
-  } as L10n,
-  fit: [
-    { he: 'קליניקות', en: 'Clinics', th: 'คลินิก' },
-    { he: 'אסתטיקה וקוסמטיקה', en: 'Aesthetics', th: 'ความงาม' },
-    { he: 'עורכי דין ורואי חשבון', en: 'Lawyers and accountants', th: 'ทนายความและนักบัญชี' },
-    { he: 'קורסים והדרכות', en: 'Courses', th: 'คอร์สเรียน' },
-    { he: 'שיפוצים', en: 'Renovation', th: 'รีโนเวต' },
-    { he: 'נדל״ן', en: 'Real estate', th: 'อสังหาริมทรัพย์' },
-    { he: 'שירותי רכב', en: 'Car services', th: 'บริการรถยนต์' },
-    { he: 'שירותים לעסקים', en: 'B2B services', th: 'บริการสำหรับธุรกิจ' },
-  ] as L10n[],
-  study: {
-    he: 'מחקר מקרה של ספק (Anam) מצא שהוספת אווטאר מדבר העלתה את שיעור המבקרים שפותחים שיחה מ־7.75% ל־26.58%. זו הייתה בדיקת לפני ואחרי, לא ניסוי אקראי.',
-    en: 'A vendor case study (Anam) found that adding a talking avatar raised the share of visitors who start a conversation from 7.75% to 26.58%. It was a before/after test, not a randomized one.',
-    th: 'กรณีศึกษาจากผู้ให้บริการ (Anam) พบว่าการเพิ่มอวตารที่พูดได้ทำให้สัดส่วนผู้เข้าชมที่เริ่มบทสนทนาเพิ่มจาก 7.75% เป็น 26.58% เป็นการทดสอบก่อนและหลัง ไม่ใช่การทดลองแบบสุ่ม',
-  } as L10n,
-  limitsTitle: { he: 'מה הוא עוד לא יודע לעשות', en: "What it can't do yet", th: 'สิ่งที่ยังทำไม่ได้' } as L10n,
-  limits: [
-    {
-      he: 'מבקר אחד בכל רגע לכל ערוץ שרת. הרחבה לכמה מבקרים במקביל בתכנון.',
-      en: 'One visitor at a time per server slot today. Scaling to more at once is planned.',
-      th: 'ตอนนี้รองรับผู้เข้าชมครั้งละหนึ่งคนต่อหนึ่งช่องเซิร์ฟเวอร์ กำลังวางแผนขยาย',
-    },
-    {
-      he: 'אי אפשר עדיין לקטוע אותו בקול באמצע משפט. בכתב זה עובד.',
-      en: "Visitors can't interrupt it by voice mid-sentence yet. Typing works.",
-      th: 'ผู้เข้าชมยังพูดแทรกกลางประโยคไม่ได้ แต่พิมพ์แทรกได้',
-    },
-    {
-      he: 'צריך חיבור לאינטרנט.',
-      en: 'It needs an internet connection.',
-      th: 'ต้องใช้อินเทอร์เน็ต',
+      he: 'מדביקים שורת קוד אחת באתר. הלידים מגיעים לוואטסאפ.',
+      en: 'Paste one line of code on your site. Leads arrive on WhatsApp.',
+      th: 'วางโค้ดบรรทัดเดียวบนเว็บ ลีดส่งถึง WhatsApp',
     },
   ] as L10n[],
+  platforms: 'Wix · WordPress · Shopify · HTML',
 };
 
-export type Plan = { id: string; name: L10n; price: number; minutes: number; fit: L10n; perMin: string; perDay: string; perConv: string; recommended?: boolean };
+/* ------------------------------------------------------------------ pricing */
+
+export type Plan = {
+  id: 'start' | 'business' | 'pro';
+  name: L10n;
+  tagline: L10n;
+  price: number;
+  minutes: number;
+  convs: number;
+  perMin: string;
+  perConv: string;
+  perDay: string;
+  includes: L10n[];
+  recommended?: boolean;
+};
+
+const SETUP_FREE: L10n = { he: 'הקמה ₪0', en: 'Setup ₪0', th: 'ค่าติดตั้ง ₪0' };
 
 export const PRICING = {
   title: { he: 'מחירים', en: 'Pricing', th: 'ราคา' } as L10n,
-  sub: {
-    he: 'מחיר חודשי קבוע, לפי דקות שיחה. בלי התחייבות.',
-    en: 'A fixed monthly price, by conversation minutes. No commitment.',
-    th: 'ราคารายเดือนคงที่ ตามนาทีสนทนา ไม่มีสัญญาผูกมัด',
+  statement: {
+    he: 'שיחה עם לקוח: מ־₪5 בערך',
+    en: 'A conversation with a customer: from about ₪5',
+    th: 'คุยกับลูกค้าหนึ่งครั้ง: เริ่มราว ₪5',
+  } as L10n,
+  statementNote: {
+    he: 'שיחה טיפוסית של 2.5 דקות בחבילת Pro. מחירים סופיים, הקמה ₪0, מבטלים בכל חודש.',
+    en: 'A typical 2.5-minute conversation on Pro. Final prices, setup ₪0, cancel any month.',
+    th: 'บทสนทนาทั่วไป 2.5 นาทีในแพ็กเกจ Pro ราคาสุทธิ ค่าติดตั้ง ₪0 ยกเลิกได้ทุกเดือน',
   } as L10n,
   perMonth: { he: 'לחודש', en: '/ month', th: '/ เดือน' } as L10n,
-  minutesLabel: { he: 'דקות שיחה בחודש', en: 'conversation minutes a month', th: 'นาทีสนทนาต่อเดือน' } as L10n,
-  perMinLabel: { he: 'לדקה בפועל', en: 'effective per minute', th: 'ต่อนาทีโดยเฉลี่ย' } as L10n,
-  recommended: { he: 'מומלץ', en: 'Recommended', th: 'แนะนำ' } as L10n,
-  statement: { he: 'שיחה עם לקוח: בערך ₪5 עד ₪10', en: 'A customer conversation: about ₪5 to ₪10', th: 'คุยกับลูกค้าหนึ่งครั้ง: ราว ₪5 ถึง ₪10' } as L10n,
-  statementNote: {
-    he: 'לפי שיחה טיפוסית של 2.5 דקות: ₪5 בחבילת פרו, ₪10 בחבילה הבסיסית.',
-    en: 'Based on a typical 2.5-minute conversation: ₪5 on Pro, ₪10 on Basic.',
-    th: 'คิดจากบทสนทนาทั่วไป 2.5 นาที: ₪5 ในแพ็กเกจ Pro, ₪10 ในแพ็กเกจ Basic',
-  } as L10n,
-  perDayLabel: { he: 'ביום', en: 'a day', th: 'ต่อวัน' } as L10n,
+  minutesLabel: { he: 'דקות שיחה', en: 'minutes of conversation', th: 'นาทีสนทนา' } as L10n,
+  convsLabel: (n: number): L10n => ({ he: `כ־${n} שיחות`, en: `about ${n} conversations`, th: `ราว ${n} บทสนทนา` }),
   perConvLabel: { he: 'לשיחה', en: 'a conversation', th: 'ต่อบทสนทนา' } as L10n,
+  perMinLabel: { he: 'לדקה', en: 'a minute', th: 'ต่อนาที' } as L10n,
+  perDayLabel: { he: 'ביום', en: 'a day', th: 'ต่อวัน' } as L10n,
+  recommended: { he: 'הכי משתלם לרוב העסקים', en: 'Best fit for most businesses', th: 'เหมาะกับธุรกิจส่วนใหญ่' } as L10n,
   free: {
-    name: { he: 'התחלה בחינם', en: 'Start free', th: 'เริ่มต้นฟรี' } as L10n,
+    name: { he: 'הדגמה', en: 'Demo', th: 'เดโม' } as L10n,
+    tagline: { he: 'לראות לפני שמחליטים', en: 'See it before you decide', th: 'ดูก่อนตัดสินใจ' } as L10n,
     includes: [
+      { he: 'הדגמה חיה של 3 דקות על האתר שלכם, עם המידע האמיתי שלכם', en: 'A 3-minute live demo on your own site, with your real info', th: 'เดโมสด 3 นาทีบนเว็บของคุณ ด้วยข้อมูลจริงของคุณ' },
       { he: 'שיחת ייעוץ', en: 'A consultation call', th: 'คุยปรึกษา' },
-      { he: 'הדגמה חיה של 3 דקות של הנציג על האתר שלכם, עם המידע האמיתי שלכם', en: 'A 3-minute live demo of the agent on YOUR own site, with your real info', th: 'เดโมสด 3 นาทีของเจ้าหน้าที่บนเว็บของคุณเอง ด้วยข้อมูลจริงของคุณ' },
     ] as L10n[],
-    note: { he: 'זו נקודת ההתחלה, לא חבילה קבועה.', en: 'This is the free start, not a permanent plan.', th: 'นี่คือจุดเริ่มต้นฟรี ไม่ใช่แพ็กเกจถาวร' } as L10n,
-    cta: { he: 'להדגמה החינמית', en: 'Get the free demo', th: 'ขอเดโมฟรี' } as L10n,
+    cta: { he: 'להדגמה בחינם', en: 'Get the free demo', th: 'ขอเดโมฟรี' } as L10n,
   },
   plans: [
     {
-      id: 'basic',
-      name: { he: 'בסיסי', en: 'Basic', th: 'Basic' },
-      price: 390,
-      minutes: 100,
-      fit: { he: 'לאתר קטן, כ־30 מבקרים ביום', en: 'A small site, about 30 visitors a day', th: 'เว็บเล็ก ราว 30 คนต่อวัน' },
-      perMin: '₪3.90',
-      perDay: '₪13',
-      perConv: '≈₪10',
+      id: 'start',
+      name: { he: 'Start', en: 'Start', th: 'Start' },
+      tagline: { he: 'להתחיל בקטן', en: 'To start small', th: 'เริ่มเล็กๆ ก่อน' },
+      price: 99,
+      minutes: 30,
+      convs: 12,
+      perMin: '≈₪3.30',
+      perConv: '≈₪8',
+      perDay: '≈₪3.30',
+      includes: [
+        { he: 'דמות מוכנה מהספרייה', en: 'A ready-made character', th: 'ตัวละครสำเร็จรูป' },
+        SETUP_FREE,
+      ],
     },
     {
       id: 'business',
-      name: { he: 'עסקי', en: 'Business', th: 'Business' },
-      price: 790,
-      minutes: 300,
-      fit: { he: 'כ־100 מבקרים ביום', en: 'About 100 visitors a day', th: 'ราว 100 คนต่อวัน' },
-      perMin: '₪2.63',
-      perDay: '≈₪26',
-      perConv: '≈₪7',
+      name: { he: 'Business', en: 'Business', th: 'Business' },
+      tagline: { he: 'דמות משלכם, מספיק לעסק פעיל', en: 'Your own character, enough for an active business', th: 'ตัวละครของคุณเอง พอสำหรับธุรกิจที่มีลูกค้าเข้าเรื่อยๆ' },
+      price: 390,
+      minutes: 150,
+      convs: 60,
+      perMin: '₪2.60',
+      perConv: '₪6.50',
+      perDay: '₪13',
+      includes: [
+        { he: 'דמות מותאמת אישית, כלולה', en: 'Your own custom character, included', th: 'ตัวละครเฉพาะของคุณ รวมแล้ว' },
+        SETUP_FREE,
+      ],
       recommended: true,
     },
     {
       id: 'pro',
-      name: { he: 'פרו', en: 'Pro', th: 'Pro' },
-      price: 1490,
-      minutes: 800,
-      fit: { he: 'אתר עמוס או קמפיינים', en: 'A busy site or campaigns', th: 'เว็บที่มีคนเข้าเยอะหรือช่วงแคมเปญ' },
-      perMin: '₪1.86',
-      perDay: '≈₪50',
+      name: { he: 'Pro', en: 'Pro', th: 'Pro' },
+      tagline: { he: 'נציג שגם מבצע פעולות', en: 'An agent that also takes actions', th: 'เจ้าหน้าที่ที่ลงมือทำงานให้ด้วย' },
+      price: 790,
+      minutes: 400,
+      convs: 160,
+      perMin: '≈₪1.98',
       perConv: '≈₪5',
+      perDay: '≈₪26',
+      includes: [
+        { he: 'דמות מותאמת אישית', en: 'Custom character', th: 'ตัวละครเฉพาะของคุณ' },
+        { he: 'פעולות n8n: תורים, CRM, מעקב בוואטסאפ', en: 'n8n actions: booking, CRM, WhatsApp follow-up', th: 'แอ็กชัน n8n: จองคิว CRM ติดตามทาง WhatsApp' },
+        SETUP_FREE,
+      ],
     },
   ] as Plan[],
+  planCta: (name: string): L10n => ({ he: `להתחיל עם ${name}`, en: `Start with ${name}`, th: `เริ่มกับ ${name}` }),
+  planMessage: (name: string): L10n => ({
+    he: `היי רפאל, מעניינת אותי חבילת ${name} לנציג באתר. האתר שלי: `,
+    en: `Hi Refael, I'm interested in the ${name} plan for the website agent. My site: `,
+    th: `สวัสดีครับ/ค่ะ สนใจแพ็กเกจ ${name} สำหรับเจ้าหน้าที่บนเว็บ เว็บของฉัน: `,
+  }),
   extras: [
-    { k: { he: 'דקה נוספת', en: 'Extra minute', th: 'นาทีเพิ่มเติม' }, v: { he: '₪2', en: '₪2', th: '₪2' } },
-    {
-      k: { he: 'הקמה חד־פעמית', en: 'One-time setup', th: 'ค่าติดตั้งครั้งเดียว' },
-      v: {
-        he: '₪1,500 עד ₪3,000: דמות, קול, ידע, מוח n8n וזרימת לידים',
-        en: '₪1,500 to ₪3,000: character, voice, knowledge, n8n brain and lead flow',
-        th: '₪1,500 ถึง ₪3,000: ตัวละคร เสียง ความรู้ สมอง n8n และระบบส่งลีด',
-      },
-    },
-    { k: { he: 'תשלום שנתי', en: 'Annual billing', th: 'จ่ายรายปี' }, v: { he: '15% הנחה', en: '15% off', th: 'ลด 15%' } },
-    {
-      k: { he: 'תוספת: פעולות n8n', en: 'Add-on: n8n actions', th: 'ส่วนเสริม: แอ็กชัน n8n' },
-      v: {
-        he: 'קביעת תורים, CRM, מעקב בוואטסאפ. בהצעת מחיר לפי פרויקט',
-        en: 'Booking, CRM, WhatsApp follow-up. Quoted per project',
-        th: 'จองคิว CRM ติดตามทาง WhatsApp เสนอราคาตามโปรเจกต์',
-      },
-    },
-    { k: { he: 'ביטול', en: 'Cancel', th: 'ยกเลิก' }, v: { he: 'בכל חודש, בלי קנס', en: 'Any month, no penalty', th: 'ได้ทุกเดือน ไม่มีค่าปรับ' } },
+    { k: { he: 'דקה נוספת', en: 'Extra minute', th: 'นาทีเพิ่มเติม' }, v: { he: '₪2.50', en: '₪2.50', th: '₪2.50' } },
+    { k: { he: 'דמות משלכם ב־Start', en: 'Own character on Start', th: 'ตัวละครเฉพาะใน Start' }, v: { he: '₪490 חד־פעמי, לא חובה', en: '₪490 once, optional', th: '₪490 ครั้งเดียว ไม่บังคับ' } },
+    { k: { he: 'תשלום שנתי', en: 'Annual billing', th: 'จ่ายรายปี' }, v: { he: 'חודשיים מתנה', en: '2 months free', th: 'ฟรี 2 เดือน' } },
+    { k: { he: 'ביטול', en: 'Cancel', th: 'ยกเลิก' }, v: { he: 'בכל חודש', en: 'Any month', th: 'ได้ทุกเดือน' } },
   ] as { k: L10n; v: L10n }[],
-  trialTitle: { he: '30 יום לשפוט לפי המספרים שלכם', en: '30 days to judge it by your own numbers', th: '30 วันให้คุณตัดสินจากตัวเลขของคุณเอง' } as L10n,
-  trialBody: {
-    he: 'בחודש הראשון יש לכם מונה של שיחות ולידים, כך שאתם רואים בדיוק כמה אנשים דיברו עם הנציג וכמה השאירו פרטים. לא מתאים? מבטלים.',
-    en: 'In the first month you get a counter of conversations and leads, so you see exactly how many people talked to your agent and how many left their details. Not a fit? Cancel.',
-    th: 'เดือนแรกคุณจะมีตัวนับบทสนทนาและลีด เห็นชัดว่ามีกี่คนคุยกับเจ้าหน้าที่ และกี่คนทิ้งข้อมูลไว้ ไม่เหมาะก็ยกเลิกได้',
-  } as L10n,
-  payback: {
-    he: 'אם זה מביא לכם 2 לקוחות בחודש, זה כבר החזיר את עצמו.',
-    en: 'If it brings you 2 customers a month, it has paid for itself.',
-    th: 'ถ้าได้ลูกค้าเพิ่ม 2 คนต่อเดือน ก็คุ้มทุนแล้ว',
-  } as L10n,
   foreign: {
     he: '',
     en: 'Prices in Israeli shekels. Outside Israel, ask for a USD or THB quote.',
     th: 'ราคาเป็นเงินเชเกลอิสราเอล หากอยู่นอกอิสราเอล ขอใบเสนอราคาเป็น USD หรือ THB ได้',
   } as L10n,
-  cta: {
-    he: 'קודם הדגמה חיה, בחינם',
-    en: 'Start with a free live demo',
-    th: 'เริ่มจากเดโมสดฟรี',
-  } as L10n,
 };
 
-type Cost = { t: L10n; note?: L10n };
+/* ------------------------------------------------------------------ comparison */
 
 /**
- * Layered first-year cost, scenario: 300 conversation minutes a month with a custom character
- * (= our Business plan). $1 = ₪3.08, €1 ≈ ₪3.55 (Wise, Nov 12 2026). Figures computed by Refael;
- * competitor totals are lower bounds (cheapest n8n tier, cheapest developer estimate).
+ * Scenario = our Business plan: 150 conversation minutes a month, custom character.
+ * $1 = ₪3.08 (Wise, Nov 12 2026), €1 ≈ ₪3.55. Competitor list prices from HeyGen's blog
+ * (updated Oct 29 2026), n8n Starter €24 (toolradar 2026), developer from ≈₪5,000 (AI Buddy, dev.to 2026).
+ * First year = (face + n8n) × 12 + developer.
  */
 export const COMPARE = {
   hook: {
-    he: 'עד חצי מחיר. הכל כלול. בעברית. בלי מתכנת.',
-    en: 'Up to half the price. Everything included. In Hebrew. No developer.',
-    th: 'ถูกกว่าได้ถึงครึ่งหนึ่ง รวมทุกอย่าง เป็นภาษาฮีบรู ไม่ต้องจ้างโปรแกรมเมอร์',
-  } as L10n,
-  sub: {
-    he: 'פלטפורמות האווטאר המובילות מוכרות לכם פנים מדברות. עדיין תשלמו על המוח, על העברית ועל מתכנת. אנחנו מקימים בשבילכם את כל הנציג.',
-    en: "Leading avatar platforms sell you a talking face. You'd still pay for the brain, the Hebrew and a developer. We set up the whole agent for you.",
-    th: 'แพลตฟอร์มอวตารชั้นนำขายใบหน้าที่พูดได้ให้คุณ คุณยังต้องจ่ายค่าสมอง ค่าภาษาฮีบรู และค่านักพัฒนาอีก เราตั้งค่าเจ้าหน้าที่ทั้งระบบให้คุณ',
-  } as L10n,
-  cta: {
-    he: 'נסו בחינם 3 דקות על האתר שלכם',
-    en: 'Try it free for 3 minutes on your own site',
-    th: 'ลองฟรี 3 นาทีบนเว็บของคุณเอง',
+    he: 'פי 2 עד פי 5 זול יותר. הכל כלול. בעברית.',
+    en: '2 to 5 times cheaper. Everything included. In Hebrew.',
+    th: 'ถูกกว่า 2 ถึง 5 เท่า รวมทุกอย่าง พูดภาษาฮีบรูได้',
   } as L10n,
   scenario: {
-    he: 'התרחיש: 300 דקות שיחה בחודש, דמות מותאמת אישית.',
-    en: 'Scenario: 300 minutes of conversation a month, custom character.',
-    th: 'สถานการณ์: สนทนา 300 นาทีต่อเดือน พร้อมตัวละครเฉพาะของคุณ',
+    he: 'שנה ראשונה, הכל כלול. 150 דקות שיחה בחודש עם דמות מותאמת אישית.',
+    en: 'First year, all-in. 150 minutes of conversation a month with a custom character.',
+    th: 'ปีแรก รวมทุกอย่าง สนทนา 150 นาทีต่อเดือน พร้อมตัวละครเฉพาะของคุณ',
   } as L10n,
-  competitors: ['HeyGen LiveAvatar', 'Tavus', 'D-ID'],
   oursName: 'Refael.ai',
+  oursNote: { he: '₪390 × 12, הקמה ₪0', en: '₪390 × 12, setup ₪0', th: '₪390 × 12 ค่าติดตั้ง ₪0' } as L10n,
   faceAlt: { he: 'הפנים המדברות של הנציג', en: "The agent's talking face", th: 'ใบหน้าที่พูดได้ของเจ้าหน้าที่' } as L10n,
+  bars: [
+    { name: 'HeyGen', total: 23600 },
+    { name: 'D-ID', total: 16900 },
+    { name: 'Tavus', total: 10100 },
+  ],
+  oursTotal: 4680,
+  breakdownTitle: { he: 'איך חישבנו', en: 'How we counted', th: 'เราคำนวณอย่างไร' } as L10n,
+  competitors: ['HeyGen', 'Tavus', 'D-ID'],
   layers: [
     {
-      label: { he: 'פנים מדברות + קול (דמות מותאמת)', en: 'Talking face + voice (custom character)', th: 'ใบหน้าพูดได้ + เสียง (ตัวละครเฉพาะ)' },
-      ours: { t: { he: 'כלול', en: 'Included', th: 'รวมแล้ว' } },
+      label: { he: 'פנים + קול, דמות מותאמת, לחודש', en: 'Face + voice, custom character, a month', th: 'ใบหน้า + เสียง ตัวละครเฉพาะ ต่อเดือน' },
+      ours: { he: 'כלול', en: 'Included', th: 'รวมแล้ว' },
       others: [
-        { t: { he: '≈₪1,463 לחודש', en: '≈₪1,463 / mo', th: '≈₪1,463 / เดือน' }, note: { he: 'Business ‏$475, נדרש לפנים מותאמות ב־1080p', en: 'Business $475, needed for a custom 1080p face', th: 'Business $475 จำเป็นสำหรับใบหน้าเฉพาะ 1080p' } },
-        { t: { he: '≈₪505 לחודש', en: '≈₪505 / mo', th: '≈₪505 / เดือน' }, note: { he: 'Builder ‏$59 + ‏300 דקות × $0.35', en: '$59 Builder + 300 min × $0.35', th: 'Builder $59 + 300 นาที × $0.35' } },
-        { t: { he: '≈₪1,800 לחודש', en: '≈₪1,800 / mo', th: '≈₪1,800 / เดือน' }, note: { he: 'Advanced ‏$196 ל־100 דקות, 300 דקות באותו תעריף. מעל 100 דקות: הצעת מחיר ארגונית', en: 'Advanced $196 per 100 min, 300 min at that rate. Above 100 min it is an enterprise quote', th: 'Advanced $196 ต่อ 100 นาที คิด 300 นาทีที่อัตรานี้ เกิน 100 นาทีต้องขอราคาองค์กร' } },
-      ] as Cost[],
+        { t: '≈₪1,463', note: { he: 'Business ‏$475, נדרש לדמות מותאמת ב־1080p', en: 'Business $475, needed for custom 1080p', th: 'Business $475 จำเป็นสำหรับตัวละครเฉพาะ 1080p' } },
+        { t: '≈₪343', note: { he: '$59 + ‏150 דקות × $0.35', en: '$59 + 150 min × $0.35', th: '$59 + 150 นาที × $0.35' } },
+        { t: '≈₪906', note: { he: '$1.96 לדקה (Advanced). מעל 100 דקות: הצעת מחיר ארגונית', en: '$1.96/min (Advanced). Above 100 min: enterprise quote', th: '$1.96/นาที (Advanced) เกิน 100 นาทีต้องขอราคาองค์กร' } },
+      ],
     },
     {
-      label: { he: 'סוכן AI שמוכר, קובע ומבצע פעולות (אחסון n8n)', en: 'AI agent that sells, books and takes actions (n8n hosting)', th: 'AI agent ที่ขาย จองคิว และลงมือทำ (โฮสต์ n8n)' },
-      ours: { t: { he: 'כלול', en: 'Included', th: 'รวมแล้ว' } },
-      others: Array(3).fill({ t: { he: '+≈₪85 עד ₪215 לחודש', en: '+≈₪85 to ₪215 / mo', th: '+≈₪85 ถึง ₪215 / เดือน' }, note: { he: 'n8n cloud ‏€24 עד €60', en: 'n8n cloud €24 to €60', th: 'n8n cloud €24 ถึง €60' } }) as Cost[],
+      label: { he: '+ סוכן AI (אחסון n8n), לחודש', en: '+ AI agent (n8n hosting), a month', th: '+ AI agent (โฮสต์ n8n) ต่อเดือน' },
+      ours: { he: 'כלול', en: 'Included', th: 'รวมแล้ว' },
+      others: Array(3).fill({ t: '≈₪85', note: { he: 'n8n Starter ‏€24', en: 'n8n Starter €24', th: 'n8n Starter €24' } }),
     },
     {
-      label: { he: 'מתכנת שמחבר לידים, תורים, וואטסאפ ועברית', en: 'Developer to connect leads, booking, WhatsApp, Hebrew', th: 'นักพัฒนาเพื่อเชื่อมลีด การจอง WhatsApp และภาษาฮีบรู' },
-      ours: { t: { he: 'הקמה ₪1,500 עד ₪3,000 חד־פעמי, אנחנו עושים הכול', en: 'Setup ₪1,500 to ₪3,000 once, done for you', th: 'ค่าติดตั้ง ₪1,500 ถึง ₪3,000 ครั้งเดียว เราทำให้ทั้งหมด' } },
-      others: Array(3).fill({ t: { he: '+₪5,000 עד ₪20,000 חד־פעמי', en: '+₪5,000 to ₪20,000 once', th: '+₪5,000 ถึง ₪20,000 ครั้งเดียว' }, note: { he: 'הערכת סטודיו ישראלי', en: 'Israeli studio estimate', th: 'ประมาณการจากสตูดิโออิสราเอล' } }) as Cost[],
+      label: { he: '+ מתכנת: לידים, תורים, וואטסאפ, עברית', en: '+ Developer: leads, booking, WhatsApp, Hebrew', th: '+ นักพัฒนา: ลีด การจอง WhatsApp ภาษาฮีบรู' },
+      ours: { he: '₪0', en: '₪0', th: '₪0' },
+      others: Array(3).fill({ t: '≈₪5,000+', note: { he: 'חד־פעמי, לפחות', en: 'once, at least', th: 'ครั้งเดียว ขั้นต่ำ' } }),
     },
-    {
-      label: { he: 'קול עברי וזיהוי דיבור בעברית, מכוונים', en: 'Hebrew voice and Hebrew speech recognition tuned', th: 'เสียงฮีบรูและการรู้จำเสียงฮีบรูที่ปรับแล้ว' },
-      ours: { t: { he: 'כלול ומכוון', en: 'Included and tuned', th: 'รวมและปรับแล้ว' }, ok: true },
-      others: Array(3).fill({ t: { he: 'אתם מגדירים', en: 'You configure it', th: 'คุณตั้งค่าเอง' } }) as Cost[],
-    },
-  ] as { label: L10n; ours: Cost & { ok?: boolean }; others: Cost[] }[],
-  totalLabel: { he: 'שנה ראשונה, הכול כלול', en: 'First year, all-in', th: 'ปีแรก รวมทุกอย่าง' } as L10n,
-  oursTotal: '₪10,980',
-  oursTotalNote: { he: '₪790 × 12 + ₪1,500 הקמה', en: '₪790 × 12 + ₪1,500 setup', th: '₪790 × 12 + ค่าติดตั้ง ₪1,500' } as L10n,
-  oursPerConv: { he: 'בערך ₪7 לשיחה', en: 'about ₪7 a conversation', th: 'ราว ₪7 ต่อบทสนทนา' } as L10n,
-  otherTotals: ['≈₪23,500+', '≈₪12,100+', '≈₪27,600+'],
-  perHour: {
-    he: 'לפי שעת שיחה, בשימוש הזה: אצלנו ≈₪158 (≈$51). בחבילת פרו זה יוצא ≈₪112 לשעה.',
-    en: 'Per hour of conversation at this usage: ours ≈₪158 (≈$51). Our Pro package works out to ≈₪112 an hour.',
-    th: 'ต่อชั่วโมงสนทนาที่การใช้งานนี้: ของเรา ≈₪158 (≈$51) แพ็กเกจ Pro ตกราว ≈₪112 ต่อชั่วโมง',
-  } as L10n,
+  ] as { label: L10n; ours: L10n; others: { t: string; note: L10n }[] }[],
+  totalLabel: { he: 'שנה ראשונה', en: 'First year', th: 'ปีแรก' } as L10n,
+  otherTotals: ['≈₪23,600', '≈₪10,100', '≈₪16,900'],
   honest: {
-    he: 'לפי דקה גולמית, מנועי פנים בלבד (וגם HeyGen עם פנים מוכנות) יכולים לצאת זולים יותר. הם מוכרים פנים. אנחנו מספקים נציג עובד.',
-    en: 'Per raw minute, face-only engines (and HeyGen with a stock face) can be cheaper. They sell a face. We deliver a working agent.',
-    th: 'ถ้าคิดเป็นนาทีล้วนๆ เอนจินที่ขายแค่ใบหน้า (และ HeyGen แบบใบหน้าสำเร็จรูป) อาจถูกกว่า เขาขายใบหน้า เราส่งมอบเจ้าหน้าที่ที่ทำงานได้จริง',
+    he: 'לפי דקה גולמית, מנועים שמוכרים רק פנים יכולים לצאת זולים יותר. הם מוכרים פנים. אנחנו מספקים נציג עובד.',
+    en: 'Per raw minute, face-only engines can be cheaper. They sell a face. We deliver a working agent.',
+    th: 'ถ้าคิดเป็นนาทีล้วนๆ เอนจินที่ขายแค่ใบหน้าอาจถูกกว่า เขาขายใบหน้า เราส่งมอบเจ้าหน้าที่ที่ทำงานได้จริง',
   } as L10n,
-  sourcesTitle: { he: 'מקורות', en: 'Sources', th: 'แหล่งที่มา' } as L10n,
   sourcesNote: {
-    he: 'מחירי מחירון כפי שפורסמו, נבדקו באוקטובר 2026. הומר לפי $1 = ₪3.08 ו־€1 ≈ ₪3.55 (Wise, 12 בנובמבר 2026), מעוגל ומסומן ≈. סכומי המתחרים הם רף תחתון.',
-    en: 'List prices as published, verified Oct 2026. Converted at $1 = ₪3.08 and €1 ≈ ₪3.55 (Wise, Nov 12 2026), rounded and marked ≈. Competitor totals are lower bounds.',
-    th: 'ราคาตามที่เผยแพร่ ตรวจสอบเมื่อ ต.ค. 2026 แปลงที่ $1 = ₪3.08 และ €1 ≈ ₪3.55 (Wise, 12 พ.ย. 2026) ปัดเศษและทำเครื่องหมาย ≈ ยอดรวมของผู้ให้บริการอื่นเป็นค่าขั้นต่ำ',
+    he: 'מחירי מחירון כפי שפורסמו. ‏$1 = ₪3.08 (Wise, 12 בנובמבר 2026), €1 ≈ ₪3.55. מעוגל ומסומן ≈. הסכומים של המתחרים הם רף תחתון.',
+    en: 'Published list prices. $1 = ₪3.08 (Wise, Nov 12 2026), €1 ≈ ₪3.55. Rounded and marked ≈. Competitor totals are lower bounds.',
+    th: 'ราคาตามที่เผยแพร่ $1 = ₪3.08 (Wise, 12 พ.ย. 2026) €1 ≈ ₪3.55 ปัดเศษและทำเครื่องหมาย ≈ ยอดของผู้ให้บริการอื่นเป็นค่าขั้นต่ำ',
   } as L10n,
   sources: [
     {
-      label: {
-        he: 'HeyGen, "Best real-time AI avatar platforms" (עודכן 29.10.2026, מחירים נבדקו אוקטובר 2026)',
-        en: 'HeyGen, "Best real-time AI avatar platforms" (updated Oct 29 2026, prices verified Oct 2026)',
-        th: 'HeyGen, "Best real-time AI avatar platforms" (อัปเดต 29 ต.ค. 2026 ตรวจสอบราคา ต.ค. 2026)',
-      },
+      label: { he: 'HeyGen, Best real-time AI avatar platforms (עודכן 29.10.2026)', en: 'HeyGen, Best real-time AI avatar platforms (updated Oct 29 2026)', th: 'HeyGen, Best real-time AI avatar platforms (อัปเดต 29 ต.ค. 2026)' },
       href: 'https://www.heygen.com/blog/best-real-time-ai-avatar-platforms',
     },
+    { label: { he: 'toolradar, תמחור n8n 2026', en: 'toolradar, n8n pricing 2026', th: 'toolradar, ราคา n8n 2026' }, href: 'https://toolradar.com/blog/n8n-pricing-2026' },
     {
-      label: { he: 'toolradar.com, תמחור n8n 2026', en: 'toolradar.com, n8n pricing 2026', th: 'toolradar.com, ราคา n8n 2026' },
-      href: 'https://toolradar.com/blog/n8n-pricing-2026',
-    },
-    {
-      label: {
-        he: 'AI Buddy ב־dev.to, עלות סוכן AI לעסק ישראלי 2026 (הערכת ספק)',
-        en: 'AI Buddy on dev.to, AI agent cost for an Israeli business 2026 (vendor estimate)',
-        th: 'AI Buddy บน dev.to, ค่าสร้าง AI agent สำหรับธุรกิจอิสราเอล 2026 (ประมาณการของผู้ให้บริการ)',
-      },
+      label: { he: 'AI Buddy ב־dev.to, עלות סוכן AI לעסק ישראלי 2026', en: 'AI Buddy on dev.to, AI agent cost for an Israeli business 2026', th: 'AI Buddy บน dev.to, ค่า AI agent สำหรับธุรกิจอิสราเอล 2026' },
       href: 'https://dev.to/aibuddy_il/how-much-does-an-ai-agent-cost-for-an-israeli-business-real-prices-in-2026-36om',
     },
-    {
-      label: { he: 'Wise, שער דולר לשקל, 12 בנובמבר 2026', en: 'Wise, USD to ILS rate, Nov 12 2026', th: 'Wise, อัตรา USD เป็น ILS, 12 พ.ย. 2026' },
-      href: 'https://wise.com/gb/currency-converter/usd-to-ils-rate',
-    },
+    { label: { he: 'Wise, דולר לשקל, 12.11.2026', en: 'Wise, USD to ILS, Nov 12 2026', th: 'Wise, USD เป็น ILS, 12 พ.ย. 2026' }, href: 'https://wise.com/us/currency-converter/usd-to-ils-rate' },
   ] as { label: L10n; href: string }[],
+  cta: { he: 'לנסות בחינם על האתר שלכם', en: 'Try it free on your own site', th: 'ลองฟรีบนเว็บของคุณ' } as L10n,
 };
 
-export const CUSTOM = {
-  title: { he: 'הכול מותאם לעסק שלכם', en: 'Built around your business', th: 'ปรับให้เข้ากับธุรกิจของคุณ' } as L10n,
-  items: [
-    { t: { he: 'דמות', en: 'Character', th: 'ตัวละคร' }, b: { he: 'סגנון ומראה שמתאימים למותג: מציאותי, מאויר או קמע.', en: 'A look that fits your brand: realistic, illustrated or a mascot.', th: 'หน้าตาที่เข้ากับแบรนด์ สมจริง การ์ตูน หรือมาสคอต' } },
-    { t: { he: 'קול', en: 'Voice', th: 'เสียง' }, b: { he: 'קול עברי טבעי, נשי או גברי, בטון של העסק.', en: 'A natural Hebrew voice, female or male, in your tone.', th: 'เสียงฮีบรูธรรมชาติ หญิงหรือชาย ในโทนของธุรกิจคุณ' } },
-    { t: { he: 'שם', en: 'Name', th: 'ชื่อ' }, b: { he: 'אתם בוחרים איך הנציג מציג את עצמו.', en: 'You choose how your agent introduces itself.', th: 'คุณเลือกได้ว่าเจ้าหน้าที่จะแนะนำตัวว่าอะไร' } },
-    { t: { he: 'ידע', en: 'Knowledge', th: 'ความรู้' }, b: { he: 'מחירון, שירותים, שעות פעילות ושאלות נפוצות. מתעדכן כשמשהו משתנה.', en: 'Prices, services, hours and FAQ. Updated when something changes.', th: 'ราคา บริการ เวลาทำการ และคำถามที่พบบ่อย อัปเดตเมื่อมีการเปลี่ยนแปลง' } },
-    { t: { he: 'פעולות דרך n8n', en: 'Actions through n8n', th: 'แอ็กชันผ่าน n8n' }, b: { he: 'קביעת פגישה, שליחת הצעת מחיר, פתיחת פנייה. מוסיפים כשצריך.', en: 'Book a meeting, send a quote, open a ticket. Add them when you need them.', th: 'นัดประชุม ส่งใบเสนอราคา เปิดทิกเก็ต เพิ่มได้เมื่อต้องการ' } },
-  ] as { t: L10n; b: L10n }[],
-};
+/* ------------------------------------------------------------------ FAQ */
 
-export const FAQ_HEAD: L10n = { he: 'שאלות ותנאים', en: 'Questions and terms', th: 'คำถามและเงื่อนไข' };
+export const FAQ_HEAD: L10n = { he: 'שאלות', en: 'Questions', th: 'คำถาม' };
+
+export const LIMITS: L10n[] = [
+  {
+    he: 'עד 3 מבקרים מדברים איתו בו זמנית היום (מגדילים בהמשך).',
+    en: 'Up to 3 visitors can talk to it at the same time today (scaling planned).',
+    th: 'ตอนนี้คุยกับผู้เข้าชมได้พร้อมกันสูงสุด 3 คน (กำลังวางแผนขยาย)',
+  },
+  {
+    he: 'אי אפשר עדיין לקטוע אותו בקול באמצע משפט. בכתב זה עובד.',
+    en: "Visitors can't interrupt it by voice mid-sentence yet. Typing works.",
+    th: 'ยังพูดแทรกกลางประโยคไม่ได้ แต่พิมพ์แทรกได้',
+  },
+  { he: 'צריך חיבור לאינטרנט.', en: 'It needs an internet connection.', th: 'ต้องใช้อินเทอร์เน็ต' },
+];
 
 export const FAQ: { q: L10n; a: L10n }[] = [
   {
-    q: { he: 'איך עובדים 30 הימים הראשונים?', en: 'How do the first 30 days work?', th: '30 วันแรกเป็นอย่างไร?' },
+    q: { he: 'אפשר לנסות לפני שמשלמים?', en: 'Can I try it before I pay?', th: 'ลองก่อนจ่ายได้ไหม?' },
     a: {
-      he: 'הנציג עולה לאתר שלכם ויש לכם מונה של שיחות ולידים. אחרי 30 יום אתם מחליטים לפי המספרים שלכם אם להמשיך.',
-      en: 'Your agent goes live on your site and you get a counter of conversations and leads. After 30 days you decide by your own numbers whether to continue.',
-      th: 'เจ้าหน้าที่ขึ้นบนเว็บของคุณ และคุณมีตัวนับบทสนทนาและลีด หลัง 30 วันคุณตัดสินใจจากตัวเลขของคุณเองว่าจะใช้ต่อหรือไม่',
+      he: 'כן. שלחו כתובת אתר ונראה לכם את הנציג על האתר שלכם, עם המידע האמיתי שלכם, בהדגמה חיה של 3 דקות. בחינם.',
+      en: 'Yes. Send your site address and we show you the agent on your own site, with your real info, in a free 3-minute live demo.',
+      th: 'ได้ ส่งที่อยู่เว็บไซต์มา แล้วเราจะโชว์เจ้าหน้าที่บนเว็บของคุณ ด้วยข้อมูลจริงของคุณ ในเดโมสด 3 นาที ฟรี',
     },
   },
   {
     q: { he: 'אפשר לבטל?', en: 'Can I cancel?', th: 'ยกเลิกได้ไหม?' },
     a: {
-      he: 'כן, בכל חודש, בלי קנס. התשלום חודשי. בתשלום שנתי מקבלים 15% הנחה.',
-      en: 'Yes, any month, no penalty. Billing is monthly. Annual billing gets 15% off.',
-      th: 'ได้ ทุกเดือน ไม่มีค่าปรับ เรียกเก็บรายเดือน ถ้าจ่ายรายปีลด 15%',
+      he: 'כן, בכל חודש. התשלום חודשי, ההקמה ₪0. בתשלום שנתי מקבלים חודשיים מתנה.',
+      en: 'Yes, any month. Billing is monthly and setup is ₪0. Pay yearly and get 2 months free.',
+      th: 'ได้ทุกเดือน เรียกเก็บรายเดือน ค่าติดตั้ง ₪0 จ่ายรายปีฟรี 2 เดือน',
     },
   },
   {
-    q: { he: 'מה נחשב דקה, ומה קורה אם עוברים את החבילה?', en: 'What counts as a minute, and what if I go over?', th: 'นับนาทีอย่างไร และถ้าใช้เกินแพ็กเกจล่ะ?' },
+    q: { he: 'מה נחשב דקה, ומה אם עוברים את החבילה?', en: 'What counts as a minute, and what if I go over?', th: 'นับนาทีอย่างไร และถ้าใช้เกินล่ะ?' },
     a: {
-      he: 'נספרות דקות שיחה פעילה עם מבקר. מעבר לחבילה כל דקה עולה ₪2, ותמיד אפשר לעבור לחבילה גדולה יותר.',
-      en: 'We count active conversation minutes with a visitor. Beyond your plan each minute is ₪2, and you can always move up a plan.',
-      th: 'นับเฉพาะนาทีที่สนทนากับผู้เข้าชมจริง ถ้าเกินแพ็กเกจ นาทีละ ₪2 และเปลี่ยนเป็นแพ็กเกจใหญ่ขึ้นได้เสมอ',
+      he: 'נספרות רק דקות של שיחה פעילה עם מבקר. שיחה טיפוסית לוקחת בערך 2.5 דקות. מעבר לחבילה כל דקה עולה ₪2.50, ואפשר לעבור לחבילה גדולה יותר בכל רגע.',
+      en: 'Only active conversation minutes with a visitor count. A typical conversation is about 2.5 minutes. Beyond your plan each minute is ₪2.50, and you can move up a plan any time.',
+      th: 'นับเฉพาะนาทีที่สนทนากับผู้เข้าชมจริง บทสนทนาทั่วไปราว 2.5 นาที ถ้าเกินแพ็กเกจ นาทีละ ₪2.50 และเปลี่ยนเป็นแพ็กเกจใหญ่ขึ้นได้ทุกเมื่อ',
     },
   },
   {
     q: { he: 'מה עם פרטיות?', en: 'What about privacy?', th: 'เรื่องความเป็นส่วนตัวล่ะ?' },
     a: {
-      he: 'נתוני השיחות והלידים שייכים לכם ונשמרים אצלכם (בגיליון, ב־CRM או במייל שלכם). אנחנו עובדים לפי חוק הגנת הפרטיות הישראלי ולפי נהלים ברוח ה־GDPR: איסוף רק של מה שצריך ומחיקה לפי בקשה.',
-      en: 'Conversation and lead data belong to you and are kept on your side (your Sheet, CRM or email). We work in line with the Israeli Privacy Protection Law and GDPR-style practices: collect only what is needed and delete on request.',
-      th: 'ข้อมูลบทสนทนาและลีดเป็นของคุณ และเก็บไว้ฝั่งคุณ (Sheet, CRM หรืออีเมลของคุณ) เราทำงานตามกฎหมายคุ้มครองความเป็นส่วนตัวของอิสราเอลและแนวปฏิบัติแบบ GDPR เก็บเท่าที่จำเป็นและลบเมื่อมีการร้องขอ',
+      he: 'נתוני השיחות והלידים שייכים לכם ונשמרים אצלכם (בגיליון, ב־CRM או במייל). אנחנו עובדים לפי חוק הגנת הפרטיות הישראלי ונהלים ברוח ה־GDPR: אוספים רק מה שצריך ומוחקים לפי בקשה.',
+      en: 'Conversation and lead data belong to you and stay on your side (your Sheet, CRM or email). We follow the Israeli Privacy Protection Law and GDPR-style practices: collect only what is needed and delete on request.',
+      th: 'ข้อมูลบทสนทนาและลีดเป็นของคุณ และเก็บไว้ฝั่งคุณ (Sheet, CRM หรืออีเมล) เราทำตามกฎหมายคุ้มครองความเป็นส่วนตัวของอิสราเอลและแนวปฏิบัติแบบ GDPR เก็บเท่าที่จำเป็นและลบเมื่อร้องขอ',
     },
   },
   {
@@ -526,51 +457,21 @@ export const FAQ: { q: L10n; a: L10n }[] = [
   {
     q: { he: 'מה הוא עוד לא יודע לעשות?', en: "What can't it do yet?", th: 'ยังทำอะไรไม่ได้บ้าง?' },
     a: {
-      he: 'היום הוא מדבר עם מבקר אחד בכל רגע לכל ערוץ שרת (הרחבה בתכנון). אי אפשר עדיין לקטוע אותו בקול באמצע משפט, אבל בכתב זה עובד. והוא צריך חיבור לאינטרנט.',
-      en: "Today it talks with one visitor at a time per server slot (scaling is planned). Visitors can't interrupt it by voice mid-sentence yet, but typing works. And it needs an internet connection.",
-      th: 'ตอนนี้คุยกับผู้เข้าชมได้ครั้งละหนึ่งคนต่อหนึ่งช่องเซิร์ฟเวอร์ (กำลังวางแผนขยาย) ยังพูดแทรกกลางประโยคไม่ได้ แต่พิมพ์แทรกได้ และต้องใช้อินเทอร์เน็ต',
-    },
-  },
-  {
-    q: { he: 'זה עובד על Wix, וורדפרס או Shopify?', en: 'Does it work on Wix, WordPress or Shopify?', th: 'ใช้กับ Wix, WordPress หรือ Shopify ได้ไหม?' },
-    a: {
-      he: 'כן. זו שורת קוד אחת שמדביקים באתר, והיא עובדת על Wix, וורדפרס, Shopify וכל אתר HTML.',
-      en: 'Yes. It is one line of code you paste into your site, and it works on Wix, WordPress, Shopify and any HTML site.',
-      th: 'ได้ เป็นโค้ดบรรทัดเดียวที่วางในเว็บ ใช้ได้กับ Wix, WordPress, Shopify และทุกเว็บ HTML',
-    },
-  },
-  {
-    q: { he: 'כמה זמן לוקחת ההקמה?', en: 'How long does setup take?', th: 'ติดตั้งนานแค่ไหน?' },
-    a: {
-      he: 'כמה ימי עסקים מרגע שקיבלנו מכם את המידע: מחירון, שירותים ושאלות נפוצות.',
-      en: 'A few business days after we get your info: prices, services and common questions.',
-      th: 'ไม่กี่วันทำการหลังจากเราได้รับข้อมูลของคุณ: ราคา บริการ และคำถามที่พบบ่อย',
-    },
-  },
-  {
-    q: { he: 'ומה אם שואלים אותו משהו שהוא לא יודע?', en: "What if a visitor asks something it doesn't know?", th: 'ถ้าผู้เข้าชมถามสิ่งที่ไม่รู้ล่ะ?' },
-    a: {
-      he: 'הוא לא ממציא. הוא אומר שהוא לא בטוח, לוקח שם וטלפון, ואתם חוזרים ללקוח.',
-      en: "It doesn't make things up. It says it isn't sure, takes their name and phone, and you get back to them.",
-      th: 'ไม่แต่งเรื่อง จะบอกว่าไม่แน่ใจ เก็บชื่อและเบอร์โทร แล้วคุณติดต่อกลับเอง',
-    },
-  },
-  {
-    q: { he: 'הוא מבטיח לי יותר מכירות?', en: 'Will it increase my sales?', th: 'จะช่วยเพิ่มยอดขายไหม?' },
-    a: {
-      he: 'אנחנו לא מבטיחים מכירות. מה שהוא עושה: מדבר עם יותר מבקרים ואוסף יותר לידים, ובחודש הראשון אתם רואים את המספרים בעצמכם. את הסגירה עושים אתם.',
-      en: 'We do not promise sales. What it does: talk with more visitors and collect more leads, and in the first month you see the numbers yourself. Closing stays with you.',
-      th: 'เราไม่สัญญาเรื่องยอดขาย สิ่งที่ทำคือคุยกับผู้เข้าชมมากขึ้นและเก็บลีดมากขึ้น และเดือนแรกคุณเห็นตัวเลขเอง การปิดการขายยังเป็นของคุณ',
+      he: LIMITS.map(l => l.he).join(' '),
+      en: LIMITS.map(l => l.en).join(' '),
+      th: LIMITS.map(l => l.th).join(' '),
     },
   },
 ];
 
+/* ------------------------------------------------------------------ final */
+
 export const FINAL = {
   title: { he: 'רוצים לראות אותו על האתר שלכם?', en: 'Want to see it on your own site?', th: 'อยากเห็นบนเว็บของคุณเองไหม?' } as L10n,
   body: {
-    he: 'שלחו כתובת אתר. נראה לכם בשיחה של 3 דקות איך הנציג שלכם מקבל מבקרים, בלי עלות ובלי התחייבות.',
-    en: 'Send your site address. In a 3-minute call we show you how your agent greets visitors, free and with no commitment.',
-    th: 'ส่งที่อยู่เว็บไซต์มา แล้วเราจะโชว์ใน 3 นาทีว่าเจ้าหน้าที่ของคุณต้อนรับผู้เข้าชมอย่างไร ฟรี ไม่มีข้อผูกมัด',
+    he: 'שלחו כתובת אתר. תוך 3 דקות תראו את הנציג שלכם מקבל מבקרים.',
+    en: 'Send your site address. In 3 minutes you see your agent greeting visitors.',
+    th: 'ส่งที่อยู่เว็บไซต์มา ใน 3 นาทีคุณจะเห็นเจ้าหน้าที่ของคุณต้อนรับผู้เข้าชม',
   } as L10n,
   message: {
     he: 'היי רפאל, אשמח להדגמה חיה של 3 דקות על האתר שלי: ',
@@ -581,7 +482,7 @@ export const FINAL = {
 
 /** In-page header links. Pricing is not here: the global header always links to #pricing. */
 export const SECTIONS = [
-  { href: '#how', he: 'איך זה עובד', en: 'How it works', th: 'ทำงานอย่างไร' },
+  { href: '#talk', he: 'לראות אותו', en: 'See it', th: 'ดูตัวอย่าง' },
   { href: '#compare', he: 'השוואה', en: 'Compare', th: 'เปรียบเทียบ' },
   { href: '#faq', he: 'שאלות', en: 'FAQ', th: 'คำถาม' },
 ];

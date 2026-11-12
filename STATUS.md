@@ -1,6 +1,6 @@
 # Refael.ai website: how it is built
 
-_Last update: 2026-11-12 (/customer-service rebuilt as the live website agent page, with prices)._
+_Last update: 2026-11-12 (/customer-service v2: video-first, new ₪99 to ₪790 price ladder)._
 Live: https://refael-ai-flow.lovable.app · Repo is the source of truth; Lovable builds `main` when you hit Publish.
 
 ## Pages (site map)
@@ -8,7 +8,7 @@ Live: https://refael-ai-flow.lovable.app · Repo is the source of truth; Lovable
 | URL | What | File |
 |---|---|---|
 | `/` | Homepage: hero (live Maya demo), product hub, how it works, use cases, packages, FAQ, contact | `src/pages/Index.tsx` |
-| `/customer-service` | Live AI website agent (talking face in the corner of any site, Hebrew voice, leads to WhatsApp/Sheet). Animated hero mock, recorded session, how it works, **prices** (free start + 3 plans, per day / per conversation), first-year cost comparison vs HeyGen/Tavus/D-ID, FAQ with honest limits. `/noa` and `/live-agent` redirect here. Swap `SESSION_VIDEO` in the content file when the real widget session is recorded. | `src/pages/AgentPage.tsx` + `src/content/agentPage.ts` |
+| `/customer-service` | Live AI website agent (talking face in the corner of any site). v2 (Nov 12 2026): video-first. Hero clinic mock with the face loop, "hear it talk" (speaking clip per language + 3 character-style loops), "see it work" (tools recording with sound), 3 steps, **prices** (Demo ₪0, Start ₪99, Business ₪390 recommended, Pro ₪790; setup ₪0), first-year bars vs HeyGen/Tavus/D-ID with breakdown + sources, short FAQ with honest limits. Autoplay budget: max 2 clips play at once, only on screen, none for reduced motion. Web cuts of clips live in `public/agent/`. `/noa` and `/live-agent` redirect here. | `src/pages/AgentPage.tsx` + `src/content/agentPage.ts` |
 | `/live-selling` | Maya, AI host for live selling. The funnel page every post/DM points to. Thai shows the Thai host. | `src/pages/LiveSelling.tsx` + `src/content/liveSelling.ts` |
 | `/live-avatar` | Flagship: Maya as a full-body lobby/museum/showroom avatar | `src/pages/Maya.tsx` + `src/components/maya/*` |
 | `/ai-avatar` | Keyword page: talking AI avatar for business | `src/pages/Landing.tsx` + `src/content/landings.ts` |

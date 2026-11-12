@@ -1,6 +1,6 @@
 # Refael.ai website: how it is built
 
-_Last update: 2026-10-24 (site v2: one shell, all landing pages in the app, SEO)._
+_Last update: 2026-11-12 (/customer-service rebuilt as the live website agent page, with prices)._
 Live: https://refael-ai-flow.lovable.app · Repo is the source of truth; Lovable builds `main` when you hit Publish.
 
 ## Pages (site map)
@@ -8,6 +8,7 @@ Live: https://refael-ai-flow.lovable.app · Repo is the source of truth; Lovable
 | URL | What | File |
 |---|---|---|
 | `/` | Homepage: hero (live Maya demo), product hub, how it works, use cases, packages, FAQ, contact | `src/pages/Index.tsx` |
+| `/customer-service` | Live AI website agent (talking face in the corner of any site, Hebrew voice, leads to WhatsApp/Sheet). Animated hero mock, recorded session, how it works, **prices** (free start + 3 plans, per day / per conversation), first-year cost comparison vs HeyGen/Tavus/D-ID, FAQ with honest limits. `/noa` and `/live-agent` redirect here. Swap `SESSION_VIDEO` in the content file when the real widget session is recorded. | `src/pages/AgentPage.tsx` + `src/content/agentPage.ts` |
 | `/live-selling` | Maya, AI host for live selling. The funnel page every post/DM points to. Thai shows the Thai host. | `src/pages/LiveSelling.tsx` + `src/content/liveSelling.ts` |
 | `/live-avatar` | Flagship: Maya as a full-body lobby/museum/showroom avatar | `src/pages/Maya.tsx` + `src/components/maya/*` |
 | `/ai-avatar` | Keyword page: talking AI avatar for business | `src/pages/Landing.tsx` + `src/content/landings.ts` |
@@ -37,8 +38,9 @@ JavaScript, so these stubs are what give the right card per language.
 - **Products** (header menu, homepage hub, footer): `PRODUCTS` in `src/config/site.ts`.
 - **SEO titles/descriptions**: `src/config/routes.json`. Then run `npm run seo` to regenerate `public/sitemap.xml`
   and the redirect stubs.
-- **Prices**: hidden site-wide (`SHOW_PRICES = false` in `src/config/site.ts`, Refael's rule: no public or monthly
-  prices). Set it to `true` and every price comes back.
+- **Prices**: hidden site-wide (`SHOW_PRICES = false` in `src/config/site.ts`), EXCEPT on `/customer-service`, which
+  shows its own prices directly (approved by Refael, Nov 2026). The header has a "Pricing" link to `/customer-service#pricing`.
+  Set `SHOW_PRICES` to `true` and every other price comes back.
 - **A new page**: add the route in `src/App.tsx`, its entry in `routes.json`, call `useSeo({ path })` in the page,
   wrap it in `<SiteLayout sections={...}>`, add it to `PRODUCTS` if it is a product, then `npm run seo`.
 - **Social preview cards** (`public/og/*.jpg`, 1200x630): `scripts/og-cards.mjs` (instructions at the top).

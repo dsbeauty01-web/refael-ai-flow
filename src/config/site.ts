@@ -55,14 +55,14 @@ export type Product = {
 export const PRODUCTS: Product[] = [
   {
     path: '/customer-service',
-    name: { he: 'נציג שירות AI', en: 'AI customer service', th: 'บริการลูกค้า AI' },
+    name: { he: 'נציג AI חי לאתר', en: 'Live AI agent for your website', th: 'เจ้าหน้าที่ AI แบบสดบนเว็บไซต์' },
     blurb: {
-      he: 'מכיר את העסק, עונה 24/7, קובע תורים ומעביר לאדם כשצריך. כאווטאר, בקול או בצ׳אט.',
-      en: 'Knows your business, answers 24/7, books appointments and hands off to a human. As an avatar, by voice or in chat.',
-      th: 'รู้จักธุรกิจของคุณ ตอบได้ตลอด 24 ชม. นัดคิว และส่งต่อให้คนจริง ทั้งแบบอวตาร เสียง หรือแชท',
+      he: 'פנים מדברות בפינת האתר: מברך כל מבקר, עונה בעברית ושולח לכם את הליד. שורת קוד אחת.',
+      en: 'A talking face in the corner of your site: greets every visitor, answers in Hebrew and sends you the lead. One line of code.',
+      th: 'ใบหน้าที่พูดได้ที่มุมเว็บไซต์ ทักทายผู้เข้าชมทุกคน ตอบด้วยเสียง และส่งลีดถึงคุณ โค้ดบรรทัดเดียว',
     },
-    image: { he: '/media/maya_speaking_poster.jpg', en: '/media/maya_speaking_poster.jpg', th: '/media/maya_speaking_poster.jpg' },
-    alt: { he: 'מיה, נציגת שירות AI', en: 'Maya, an AI customer service agent', th: 'มายา พนักงานบริการลูกค้า AI' },
+    image: { he: '/agent/face.jpg', en: '/agent/face.jpg', th: '/agent/face.jpg' },
+    alt: { he: 'נציג AI חי בפינת אתר', en: 'A live AI agent in the corner of a website', th: 'เจ้าหน้าที่ AI แบบสดที่มุมเว็บไซต์' },
   },
   {
     path: '/live-selling',

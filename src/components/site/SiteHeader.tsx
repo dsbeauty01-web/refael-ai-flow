@@ -52,6 +52,15 @@ export default function SiteHeader({ sections = [] }: { sections?: SectionLink[]
     document.getElementById(href.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  // Prices are shown on the website-agent page only; this link is in the header on every page.
+  const PRICING_PATH = '/customer-service';
+  const pricingLabel = pick('מחירים', 'Pricing', 'ราคา');
+  const onPricing = () => {
+    setMenu(false);
+    setProducts(false);
+    if (pathname === PRICING_PATH) document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   const solid = scrolled || menu;
 
   return (
@@ -112,6 +121,13 @@ export default function SiteHeader({ sections = [] }: { sections?: SectionLink[]
               {tr(s)}
             </button>
           ))}
+          <Link
+            to={`${PRICING_PATH}#pricing`}
+            onClick={onPricing}
+            className="text-[0.9rem] font-semibold text-ink/80 hover:text-ink transition-colors"
+          >
+            {pricingLabel}
+          </Link>
         </nav>
 
         <div className="flex items-center gap-2 ms-auto">
@@ -168,6 +184,14 @@ export default function SiteHeader({ sections = [] }: { sections?: SectionLink[]
               </li>
             ))}
           </ul>
+
+          <Link
+            to={`${PRICING_PATH}#pricing`}
+            onClick={onPricing}
+            className="mt-5 flex items-center rounded-xl px-2.5 py-2.5 text-[1rem] font-semibold text-ink hover:bg-ink/[0.05]"
+          >
+            {pricingLabel}
+          </Link>
 
           {sections.length > 0 && (
             <>

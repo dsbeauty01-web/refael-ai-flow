@@ -12,6 +12,7 @@ import Index from "./pages/Index";
 // Home loads with the bundle; every other page is its own chunk.
 const LiveSelling = lazy(() => import("./pages/LiveSelling"));
 const Landing = lazy(() => import("./pages/Landing"));
+const AgentPage = lazy(() => import("./pages/AgentPage"));
 const Maya = lazy(() => import("./pages/Maya"));
 const Voices = lazy(() => import("./pages/Voices"));
 const Legal = lazy(() => import("./pages/Legal"));
@@ -47,7 +48,7 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/live-selling" element={<LiveSelling />} />
               <Route path="/live-avatar" element={<Maya />} />
-              <Route path="/customer-service" element={<Landing />} />
+              <Route path="/customer-service" element={<AgentPage />} />
               <Route path="/ai-avatar" element={<Landing />} />
               <Route path="/brand-character" element={<Landing />} />
               <Route path="/avatar-videos" element={<Landing />} />
@@ -62,6 +63,8 @@ const App = () => {
               <Route path="/ai-avatar-business" element={<Moved to="/ai-avatar" />} />
               <Route path="/ai-brand-character" element={<Moved to="/brand-character" />} />
               <Route path="/privacy" element={<Moved to="/legal/privacy" />} />
+              <Route path="/noa" element={<Moved to="/customer-service" />} />
+              <Route path="/live-agent" element={<Moved to="/customer-service" />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>

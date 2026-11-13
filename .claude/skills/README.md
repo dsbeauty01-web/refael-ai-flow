@@ -16,3 +16,6 @@ Third-party skills, MIT licensed (commercial use allowed; keep each LICENSE file
 | solo-pricing, solo-finances, first-customers, retention, validate | Solo bootstrapped SaaS: one price before 10 customers, runway and quit number, first customers | whawkinsiv/solo-founder-skills (MIT; pricing/finances renamed to avoid clashes) |
 
 House rules still win over these skills: no em dashes, no invented numbers, no character names in product copy, Hebrew first.
+
+- ads, conversion-tracking: coreyhaines31/marketingskills (MIT)
+- meta-boost: written for Refael.ai (Boost-post settings and kill rules)

@@ -1,240 +1,355 @@
 import type { L10n } from '@/config/site';
 
 /**
- * /live-selling — the funnel page every Facebook post, DM and comment points at.
- * Ported from the old static maya.html / maya-en.html / maya-th.html.
- * Thai uses the Thai host (not Maya), so Thai copy says "พิธีกร AI" where the
- * others say Maya. No em dashes in copy (Refael's rule).
+ * /live-selling (v2, Nov 2026): video-first page for the AI live host.
+ * Rendered by pages/LiveSelling.tsx. Every string has he, en, th. Hebrew first.
+ * Rules: no em dashes or double dashes, no invented numbers or testimonials,
+ * no character names in headlines.
+ *
+ * HONESTY RULE: every clip carries a true tag (see TAGS).
+ *   real  = recorded as it aired on a real YouTube / Facebook live
+ *   test  = a private live we recorded, with comments we typed in ourselves
+ *   prerec = rendered ahead of time, never ran live, or origin not proven (weaker label wins)
+ * Never move a clip to a stronger tag without proof in the maya-lt asset library.
+ *
+ * Prices are shown on this page (manager's assumption, Nov 12 2026): full-body live needs
+ * its own GPU pod per live, so the price is per live hour. Internal cost basis is NOT on the page.
  */
 
-// badge: draw our LIVE marker only where the footage doesn't already carry one
-export const MEDIA: Record<'he' | 'en' | 'th', { src: string; poster: string; ratio: '4/5' | '9/16'; badge: boolean }> = {
-  he: { src: '/maya/maya-live.mp4', poster: '/maya/maya-live-poster.jpg', ratio: '4/5', badge: false },
-  en: { src: '/site/live-proof-en.mp4', poster: '/site/live-proof-en.jpg', ratio: '9/16', badge: false },
-  th: { src: '/site/live-proof-th.mp4', poster: '/site/live-proof-th.jpg', ratio: '9/16', badge: false },
+export type Tag = 'real' | 'test' | 'prerec';
+
+export const TAGS: Record<Tag, L10n> = {
+  real: { he: 'שידור חי אמיתי', en: 'Real live', th: 'ไลฟ์จริง' },
+  test: { he: 'בדיקה מוקלטת', en: 'Recorded test', th: 'การทดสอบที่บันทึกไว้' },
+  prerec: { he: 'קליפ מוכן מראש', en: 'Pre-recorded clip', th: 'คลิปที่ทำไว้ล่วงหน้า' },
 };
+
+export const SECTIONS = [
+  { href: '#clips', he: 'קליפים', en: 'Clips', th: 'คลิป' },
+  { href: '#cohost', he: 'מנחה שותף', en: 'Co-host', th: 'พิธีกรร่วม' },
+  { href: '#pricing', he: 'מחירים', en: 'Pricing', th: 'ราคา' },
+  { href: '#faq', he: 'שאלות', en: 'FAQ', th: 'คำถาม' },
+];
+
+/* ------------------------------------------------------------------ hero */
+
+/** Real YouTube LIVE + Facebook LIVE, 30.10.2026, cut to 31 s with captions per language. */
+export const HERO_VIDEO: L10n = { he: '/site/live-proof-he.mp4', en: '/site/live-proof-en.mp4', th: '/site/live-proof-th.mp4' };
+export const HERO_POSTER: L10n = { he: '/site/live-proof-he.jpg', en: '/site/live-proof-en.jpg', th: '/site/live-proof-th.jpg' };
 
 export const HERO = {
-  kicker: { he: 'הבוט שלך ישן.', en: 'Your bot is asleep.', th: 'บอทของคุณกำลังหลับ' } as L10n,
-  h1a: { he: 'מיה', en: 'Your AI host', th: 'พิธีกร AI' } as L10n,
-  h1b: { he: 'מוכרת בשידור חי.', en: 'sells on live.', th: 'ขายของบนไลฟ์ให้คุณ' } as L10n,
+  h1: {
+    he: 'מנחה AI שמריץ לכם את הלייב ומגיב לצ׳אט בזמן אמת.',
+    en: 'An AI host that runs your live and reacts to the chat in real time.',
+    th: 'พิธีกร AI ที่ดำเนินไลฟ์ให้คุณ และตอบสนองแชทแบบเรียลไทม์',
+  } as L10n,
   lead: {
-    he: 'דמות AI שעולה לשידור, מציגה את המוצרים שלכם וקוראת את הצ׳אט. כל מי שכותב מקבל תשובה בקול, בשם שלו, תוך כמה שניות.',
-    en: 'An AI character that goes live, presents your products and reads the chat. Everyone who comments gets an answer out loud, by their name, within seconds.',
-    th: 'ตัวละคร AI ที่ขึ้นไลฟ์ นำเสนอสินค้าของคุณ และอ่านแชท ทุกคนที่คอมเมนต์จะได้คำตอบด้วยเสียง เรียกชื่อ ภายในไม่กี่วินาที',
+    he: 'הצופים כותבים בצ׳אט. המנחה עונה בקול, בשם, ומציג את המוצר שלכם.',
+    en: 'Viewers type in the chat. The host answers out loud, by name, and shows your product.',
+    th: 'ผู้ชมพิมพ์ในแชท พิธีกรตอบด้วยเสียง เรียกชื่อ และนำเสนอสินค้าของคุณ',
   } as L10n,
-  cta: { he: 'שלחו תמונה של מוצר', en: 'Send a product photo', th: 'ส่งรูปสินค้ามาเลย' } as L10n,
-  hear: { he: 'לשמוע אותה', en: 'Watch the real live', th: 'ดูไลฟ์จริง' } as L10n,
+  steps: [
+    { he: 'צופה כותב ״red״', en: 'Viewer types “red”', th: 'ผู้ชมพิมพ์ “red”' },
+    { he: 'המנחה קורא את הצ׳אט', en: 'Host reads the chat', th: 'พิธีกรอ่านแชท' },
+    { he: 'ועושה את זה בלייב', en: 'Does it live', th: 'ทำให้ดูสดๆ' },
+  ] as L10n[],
+  videoCaption: {
+    he: 'YouTube LIVE ו־Facebook LIVE, 30.10.2026. אותה דמות, הצ׳אט בחר סוף אחר.',
+    en: 'YouTube LIVE and Facebook LIVE, 30.10.2026. Same character, the chat picked a different ending.',
+    th: 'YouTube LIVE และ Facebook LIVE 30.10.2026 ตัวละครเดียวกัน แชทเลือกตอนจบต่างกัน',
+  } as L10n,
+  videoLabel: {
+    he: 'הקלטה של לייב אמיתי: הצופה כותב red בצ׳אט והמנחה מוזג את הנוזל האדום',
+    en: 'Recording of a real live: a viewer types red in the chat and the host pours the red liquid',
+    th: 'บันทึกจากไลฟ์จริง: ผู้ชมพิมพ์ red ในแชท แล้วพิธีกรเทของเหลวสีแดง',
+  } as L10n,
+  cta: { he: 'לייב בדיקה חינם, 10 דקות', en: 'Free 10-minute test live', th: 'ไลฟ์ทดลองฟรี 10 นาที' } as L10n,
   ctaNote: {
-    he: 'בוואטסאפ, ישירות לרפאל. בלי טפסים.',
-    en: 'On WhatsApp, straight to Refael. No forms.',
-    th: 'ทาง LINE ถึงราฟาเอลโดยตรง ไม่ต้องกรอกฟอร์ม',
+    he: 'עם המוצר שלכם. בוואטסאפ, ישירות לרפאל.',
+    en: 'With your product. On WhatsApp, straight to Refael.',
+    th: 'กับสินค้าของคุณ ทาง LINE ถึงราฟาเอลโดยตรง',
   } as L10n,
+  seePrices: { he: 'למחירים', en: 'See prices', th: 'ดูราคา' } as L10n,
 };
 
-export const PROOF: { n: string; label: L10n }[] = [
-  { n: '15', label: { he: 'שידורים חיים אמיתיים בפייסבוק', en: 'real Facebook lives', th: 'ไลฟ์จริงบน Facebook' } },
-  { n: '10/10', label: { he: 'תגובות נענו, כל אחת בשם', en: 'comments answered, each by name', th: 'คอมเมนต์ที่ตอบ เรียกชื่อทุกคน' } },
-  { n: '~5', label: { he: 'שניות מהתגובה לתשובה', en: 'seconds from comment to answer', th: 'วินาทีจากคอมเมนต์ถึงคำตอบ' } },
-];
+/* ------------------------------------------------------------------ channels */
 
-export type Chat = { who: L10n; text: L10n; host?: boolean }[];
-export type Feature = { icon: string; title: L10n; body: L10n; chat?: Chat; product?: boolean };
-
-const HOST_LABEL: L10n = { he: 'מיה, בקול', en: 'AI host, out loud', th: 'พิธีกร AI, ด้วยเสียง' };
-
-export const FEATURES_HEAD = {
-  title: { he: 'מה היא עושה בשידור', en: 'What it does on live', th: 'ทำอะไรได้บนไลฟ์' } as L10n,
-  sub: { he: 'אתם מתעסקים במוצר. היא מתעסקת בקהל.', en: 'You handle the product. The host handles the chat.', th: 'คุณดูแลสินค้า พิธีกรดูแลแชท' } as L10n,
+export const CHANNELS = {
+  title: {
+    he: 'שדרו ב־YouTube, Facebook ו־TikTok',
+    en: 'Go live on YouTube, Facebook and TikTok',
+    th: 'ไลฟ์บน YouTube, Facebook และ TikTok',
+  } as L10n,
+  note: {
+    he: 'מתחבר עם מפתח השידור של הערוץ שלכם.',
+    en: "Connects with your channel's stream key.",
+    th: 'เชื่อมต่อด้วย stream key ของช่องคุณ',
+  } as L10n,
+  /** Text badges only. Official brand-kit logo files can be dropped in later (do not draw the marks). */
+  names: ['YouTube', 'Facebook', 'TikTok'],
 };
 
-export const FEATURES: Feature[] = [
-  {
-    icon: '💬',
-    title: { he: 'קוראת את הצ׳אט בזמן אמת', en: 'Reads the chat in real time', th: 'อ่านแชทแบบเรียลไทม์' },
-    body: {
-      he: 'כל תגובה שנכתבת בשידור מגיעה אליה תוך שניות. שאלות על מחיר, מידות, משלוח, צבעים. אף שאלה לא נבלעת בגלילה.',
-      en: 'Every comment in the live reaches her within seconds. Questions on price, sizes, shipping, colors. No question gets lost in the scroll.',
-      th: 'ทุกคอมเมนต์ในไลฟ์ไปถึงเธอภายในไม่กี่วินาที คำถามเรื่องราคา ไซซ์ การจัดส่ง สี ไม่มีคำถามไหนหายไปในแชท',
-    },
-    chat: [
-      { who: { he: 'דנה', en: 'Dana', th: 'ดาว' }, text: { he: 'כמה עולה התיק החום?', en: 'How much is the brown bag?', th: 'กระเป๋าสีน้ำตาลราคาเท่าไหร่คะ?' } },
-      {
-        who: HOST_LABEL,
-        host: true,
-        text: {
-          he: 'דנה, הוא 490 במקום 690, רק בשידור הזה. הקישור בצ׳אט.',
-          en: "Dana, it's $129 instead of $179, this live only. Link's in the chat.",
-          th: 'คุณดาว ราคา 1,290 บาท จากปกติ 1,790 เฉพาะไลฟ์นี้เท่านั้น ลิงก์อยู่ในแชทค่ะ',
-        },
+/* ------------------------------------------------------------------ gallery */
+
+export type Clip = { id: string; src: string; poster: string; tag: Tag; label: L10n; line: L10n };
+
+export const GALLERY = {
+  title: { he: 'עוד מנחים, עוד מוצרים', en: 'More hosts, more products', th: 'พิธีกรอื่นๆ สินค้าอื่นๆ' } as L10n,
+  sub: {
+    he: 'כל קליפ מסומן: שידור חי אמיתי, בדיקה מוקלטת או קליפ מוכן מראש. לחצו על קליפ כדי לשמוע.',
+    en: 'Every clip is labeled: real live, recorded test or pre-recorded clip. Tap a clip to hear it.',
+    th: 'ทุกคลิปมีป้ายบอก: ไลฟ์จริง การทดสอบที่บันทึกไว้ หรือคลิปที่ทำไว้ล่วงหน้า แตะคลิปเพื่อฟังเสียง',
+  } as L10n,
+  clips: [
+    {
+      id: 'prof-red',
+      src: '/site/prof-red-live.mp4',
+      poster: '/site/prof-red-live.jpg',
+      tag: 'test',
+      label: { he: 'הצ׳אט בוחר את הסוף', en: 'Chat picks the ending', th: 'แชทเลือกตอนจบ' },
+      line: {
+        he: 'אדום ניצח, הוא מוזג, וכרטיס הערכה עולה עם המחיר.',
+        en: 'Red wins, he pours, and the kit card comes up with the price.',
+        th: 'สีแดงชนะ เขาเทให้ดู แล้วการ์ดชุดทดลองขึ้นพร้อมราคา',
       },
-    ],
-  },
-  {
-    icon: '🗣️',
-    title: { he: 'עונה בקול, ובשם', en: 'Answers out loud, by name', th: 'ตอบด้วยเสียง และเรียกชื่อ' },
-    body: {
-      he: 'לא טקסט אוטומטי. היא פונה לצופה בשם שלו, בשפה טבעית, והשפתיים זזות עם המילים. אנשים נשארים בשידור כשמדברים אליהם.',
-      en: 'Not canned text. She calls each viewer by their name, in natural speech, and her lips move with the words. People stay in a live when you talk to them.',
-      th: 'ไม่ใช่ข้อความอัตโนมัติ เธอเรียกผู้ชมด้วยชื่อ พูดภาษาไทยเป็นธรรมชาติ และริมฝีปากขยับตามคำพูด คนอยู่ในไลฟ์นานขึ้นเมื่อมีคนพูดกับเขา',
     },
-  },
-  {
-    icon: '🛍️',
-    title: { he: 'מציגה מוצר ומחיר על המסך', en: 'Shows product and price on screen', th: 'แสดงสินค้าและราคาบนจอ' },
-    body: {
-      he: 'כרטיס מוצר עם תמונה, מחיר ומחיר לפני הנחה. היא עוברת בין המוצרים לפי הסדר שלכם, או לפי מה שהקהל שואל.',
-      en: 'A product card with image, price and pre-discount price. She moves between products in your order, or by what the crowd is asking.',
-      th: 'การ์ดสินค้าพร้อมรูป ราคา และราคาก่อนลด เธอเลื่อนระหว่างสินค้าตามลำดับของคุณ หรือตามที่ผู้ชมถาม',
-    },
-    product: true,
-  },
-  {
-    icon: '⚡',
-    title: { he: '"אני!" הופך להזמנה', en: '"Me!" turns into an order', th: '"CF!" กลายเป็นออเดอร์' },
-    body: {
-      he: 'מי שכותב "אני" או "רוצה" מקבל ממנה קישור לקנייה מיד, בזמן שהוא עוד בהתלהבות.',
-      en: 'Anyone who types "me" or "want" gets a buy link from her right away, while they are still excited.',
-      th: 'ใครที่พิมพ์ "CF" หรือ "เอา" จะได้ลิงก์สั่งซื้อจากเธอทันที ตอนที่ยังอยากได้อยู่',
-    },
-    chat: [
-      { who: { he: 'מורן', en: 'Moran', th: 'มล' }, text: { he: 'אני!!', en: 'me!!', th: 'CF ค่ะ!!' } },
-      {
-        who: HOST_LABEL,
-        host: true,
-        text: {
-          he: 'מורן, מעולה! שלחתי לך קישור, מחכה לך בצ׳אט.',
-          en: 'Moran, perfect! Sent you a link, it is waiting in the chat.',
-          th: 'คุณมล เยี่ยมเลย! ส่งลิงก์ให้แล้ว รออยู่ในแชทนะคะ',
-        },
+    {
+      id: 'skin',
+      src: '/site/zara-skinread.mp4',
+      poster: '/site/zara-skinread.jpg',
+      tag: 'prerec',
+      label: { he: 'קוראת את העור', en: 'Reads your skin', th: 'อ่านสภาพผิว' },
+      line: {
+        he: 'צופה שולחת תמונה, והמנחה מסמנת לה אזור T שמנוני ולחיים יבשות.',
+        en: 'A viewer sends a photo and the host marks an oily T-zone and dry cheeks.',
+        th: 'ผู้ชมส่งรูปมา พิธีกรชี้ให้เห็น T-zone มันและแก้มแห้ง',
       },
-    ],
-  },
-  {
-    icon: '🙋',
-    title: { he: 'יודעת מתי להעביר אליכם', en: 'Knows when to hand off to you', th: 'รู้ว่าเมื่อไหร่ควรส่งต่อให้คุณ' },
-    body: {
-      he: 'שאלה רגישה, הזמנה מיוחדת או תלונה? היא לא ממציאה. היא אומרת שתחזרו אליו, ומסמנת לכם את התגובה.',
-      en: "A sensitive question, a special order or a complaint? She doesn't make things up. She says you will get back to them, and flags the comment for you.",
-      th: 'คำถามละเอียดอ่อน ออเดอร์พิเศษ หรือข้อร้องเรียน? เธอไม่แต่งเรื่อง เธอบอกว่าคุณจะติดต่อกลับ และทำเครื่องหมายคอมเมนต์ไว้ให้คุณ',
     },
-  },
-  {
-    icon: '📊',
-    title: { he: 'דוח אחרי כל שידור', en: 'A report after every live', th: 'รายงานหลังจบทุกไลฟ์' },
-    body: {
-      he: 'מה שאלו, מי רצה לקנות, אילו מוצרים עניינו, ומה כדאי לשנות בשידור הבא.',
-      en: 'What they asked, who wanted to buy, which products drew interest, and what to change for the next one.',
-      th: 'ลูกค้าถามอะไร ใครอยากซื้อ สินค้าไหนน่าสนใจ และควรปรับอะไรในไลฟ์ครั้งต่อไป',
+    {
+      id: 'earbuds',
+      src: '/site/daniel-live-test.mp4',
+      poster: '/site/daniel-live-test.jpg',
+      tag: 'test',
+      label: { he: 'אוזניות ב־₪199', en: 'Earbuds, ₪199', th: 'หูฟัง ₪199' },
+      line: {
+        he: 'צופה כותב ״תשים אחת באוזן״, והוא עונה בשם ומראה.',
+        en: 'A viewer types “put one in your ear”, he answers by name and shows it.',
+        th: 'ผู้ชมพิมพ์ “ใส่หูให้ดูหน่อย” เขาตอบด้วยชื่อและโชว์ให้ดู',
+      },
     },
-  },
-];
-
-export const PRODUCT_CARD = {
-  name: { he: 'תיק עור קוניאק', en: 'Cognac leather bag', th: 'กระเป๋าหนังสีคอนญัก' } as L10n,
-  price: { he: '₪490', en: '$129', th: '฿1,290' } as L10n,
-  was: { he: '₪690', en: '$179', th: '฿1,790' } as L10n,
+    {
+      id: 'kids-kit',
+      src: '/site/nova-live-test.mp4',
+      poster: '/site/nova-live-test.jpg',
+      tag: 'test',
+      label: { he: 'ערכת מדע לילדים', en: 'Kids science kit', th: 'ชุดวิทยาศาสตร์เด็ก' },
+      line: {
+        he: 'דמות מצוירת מציגה ערכה ב־₪129 ומראה אותה מקרוב כשמבקשים.',
+        en: 'A cartoon host presents a ₪129 kit and holds it up close when asked.',
+        th: 'ตัวละครการ์ตูนนำเสนอชุด ₪129 และยกให้ดูใกล้ๆ เมื่อมีคนขอ',
+      },
+    },
+    {
+      id: 'thai',
+      src: '/site/thai-host-live.mp4',
+      poster: '/site/thai-host-live.jpg',
+      tag: 'prerec',
+      label: { he: 'לייב בתאית', en: 'Thai live', th: 'ไลฟ์ภาษาไทย' },
+      line: {
+        he: 'מנחה תאית מציגה בדים על מסך של אפליקציית לייב.',
+        en: 'A Thai host shows fabrics on a live-app screen.',
+        th: 'พิธีกรไทยนำเสนอผ้าบนหน้าจอแอปไลฟ์',
+      },
+    },
+    {
+      id: 'gallery',
+      src: '/site/maya-gallery.mp4',
+      poster: '/site/maya-gallery.jpg',
+      tag: 'prerec',
+      label: { he: 'סיור בגלריה', en: 'Gallery tour', th: 'ทัวร์แกลเลอรี' },
+      line: {
+        he: 'מנחה מציגה ציור ועונה לצופים שמברכים אותה.',
+        en: 'A host presents a painting and answers viewers who greet her.',
+        th: 'พิธีกรนำเสนอภาพวาด และตอบผู้ชมที่ทักทายเธอ',
+      },
+    },
+  ] as Clip[],
 };
 
-export const WHERE_HEAD = {
-  title: { he: 'איפה היא עובדת', en: 'Where she works', th: 'เธอทำงานที่ไหน' } as L10n,
-  sub: { he: 'אותה דמות, בכל מקום שיש בו מצלמה וקהל.', en: "Same character, anywhere there's a camera and an audience.", th: 'ตัวละครเดียวกัน ทุกที่ที่มีกล้องและผู้ชม' } as L10n,
-};
+/* ------------------------------------------------------------------ co-host */
 
-export const WHERE: { icon: string; t: L10n; b: L10n }[] = [
-  { icon: '📺', t: { he: 'לייב בפייסבוק', en: 'Facebook Live', th: 'Facebook Live' }, b: { he: 'מכירות בשידור חי, עם הקהל הקיים שלכם', en: 'Live selling, with the audience you already have', th: 'ขายสดกับผู้ติดตามที่คุณมีอยู่' } },
-  { icon: '🎵', t: { he: 'TikTok ואינסטגרם', en: 'TikTok and Instagram', th: 'TikTok Shop และ Instagram' }, b: { he: 'לייבים וקליפים קצרים מהשידורים', en: 'Lives, plus short clips cut from them', th: 'ไลฟ์และคลิปสั้นจากไลฟ์' } },
-  { icon: '▶️', t: { he: 'לייב ביוטיוב', en: 'YouTube Live', th: 'YouTube Live' }, b: { he: 'השקות, הדגמות מוצר, שאלות ותשובות', en: 'Launches, product demos, Q&A', th: 'เปิดตัว สาธิตสินค้า ถาม-ตอบ' } },
-  { icon: '🏬', t: { he: 'מסך בחנות או בלובי', en: 'A screen in your store', th: 'จอในร้านหรือล็อบบี้' }, b: { he: 'מקבלת אורחים ומספרת על המוצרים', en: 'Greets guests and talks about the products', th: 'ต้อนรับแขกและเล่าเรื่องสินค้า' } },
-  { icon: '🎓', t: { he: 'שיעור או וובינר', en: 'Class or webinar', th: 'คลาสหรือเว็บบินาร์' }, b: { he: 'מנחה שמלמדת ועונה לשאלות', en: 'A host who teaches and answers questions', th: 'ผู้นำเสนอที่สอนและตอบคำถาม' } },
-  { icon: '🌍', t: { he: 'עברית, אנגלית ותאית', en: 'Hebrew, English and Thai', th: 'ไทย อังกฤษ และฮีบรู' }, b: { he: 'אותה דמות, שלוש שפות', en: 'One character, three languages', th: 'ตัวละครเดียว สามภาษา' } },
-];
-
-export const STEPS_HEAD = { he: 'איך מתחילים', en: 'How to start', th: 'เริ่มต้นยังไง' } as L10n;
-export const STEPS: { t: L10n; b: L10n }[] = [
-  {
-    t: { he: 'שולחים תמונה של מוצר', en: 'Send a product photo', th: 'ส่งรูปสินค้า' },
-    b: { he: 'צילום מהטלפון, שם ומחיר. בוואטסאפ, דקה של עבודה.', en: 'A phone snap, a name and a price. On WhatsApp, a minute of work.', th: 'ถ่ายจากมือถือ ชื่อและราคา ทาง LINE ใช้เวลาแค่นาทีเดียว' },
-  },
-  {
-    t: { he: 'רואים 10 שניות של לייב עם המוצר שלכם', en: 'See 10 seconds of a live with your product', th: 'ดูไลฟ์ 10 วินาทีกับสินค้าของคุณ' },
-    b: {
-      he: 'היא מציגה את המוצר, אומרת את המחיר ועונה לצופה בשם. בדיוק כמו בשידור אמיתי, רק עם המוצר שלכם.',
-      en: 'She presents the product, says the price and answers a viewer by name. Just like a real live, only with your product.',
-      th: 'เธอนำเสนอสินค้า บอกราคา และตอบผู้ชมด้วยชื่อ เหมือนไลฟ์จริง แค่เป็นสินค้าของคุณ',
+/** Cut from maya-lt release/share/cohost-human-plus-ai-133s.mp4 (47.5 to 97 s): Refael + AI co-host, private test. */
+export const COHOST = {
+  title: { he: 'אתם מנחים. ה־AI עונה לצ׳אט.', en: 'You host. The AI co-host takes the chat.', th: 'คุณเป็นพิธีกร AI ดูแลแชทให้' } as L10n,
+  lines: [
+    {
+      he: 'מנחת ה־AI לצדכם על אותו מסך, ואתם מדברים איתה כמו עם שותפה.',
+      en: 'The AI co-host is beside you on the same screen, and you talk to her like a partner.',
+      th: 'พิธีกรร่วม AI อยู่ข้างคุณบนจอเดียวกัน คุณคุยกับเธอเหมือนคุยกับคู่หู',
     },
-  },
-  {
-    t: { he: 'עולים לשידור', en: 'Go live', th: 'ขึ้นไลฟ์' },
-    b: { he: 'מעלים את רשימת המוצרים והשאלות הנפוצות, והיא עולה לשידור הראשון שלכם.', en: 'Upload your product list and common questions, and she goes live for the first time.', th: 'อัปโหลดรายการสินค้าและคำถามที่พบบ่อย แล้วเธอจะขึ้นไลฟ์ครั้งแรกของคุณ' },
-  },
-];
-
-export const OFFER = {
-  title: { he: 'שלחו תמונה. ראו אותה מוכרת אותה.', en: 'Send a photo. Watch her sell it.', th: 'ส่งรูปมา แล้วดูเธอขายให้' } as L10n,
-  body: {
-    he: 'צלמו מוצר אחד שאתם מוכרים ושלחו לי בוואטסאפ. תקבלו בחזרה 10 שניות שלה מציגה אותו בלייב, עם מחיר על המסך ותשובה לצופה בשם.',
-    en: "Snap one product you sell and send it to me on WhatsApp. You'll get back 10 seconds of her presenting it live, with the price on screen and an answer to a viewer by name.",
-    th: 'ถ่ายรูปสินค้าหนึ่งชิ้นที่คุณขาย แล้วส่งมาทาง LINE คุณจะได้คลิป 10 วินาทีที่เธอนำเสนอสินค้านั้นบนไลฟ์ พร้อมราคาบนจอและคำตอบให้ผู้ชมด้วยชื่อ',
+    {
+      he: 'היא עונה לתגובות בשם הכותב ומציגה כרטיס מוצר עם המחיר מהקטלוג שלכם.',
+      en: "She answers comments by the viewer's name and shows a product card with the price from your catalogue.",
+      th: 'เธอตอบคอมเมนต์โดยเรียกชื่อผู้ชม และแสดงการ์ดสินค้าพร้อมราคาจากแคตตาล็อกของคุณ',
+    },
+    {
+      he: 'המנחה השותפה עדיין בבדיקות פרטיות.',
+      en: 'The co-host is still in private testing.',
+      th: 'พิธีกรร่วมยังอยู่ระหว่างการทดสอบแบบส่วนตัว',
+    },
+  ] as L10n[],
+  video: '/live/cohost-test.mp4',
+  poster: '/live/cohost-test.jpg',
+  tag: 'test' as Tag,
+  videoLabel: {
+    he: 'רפאל ומנחת ה־AI, בדיקה פרטית: היא עונה על סרום ויטמין C ומציגה את המחיר',
+    en: 'Refael and the AI co-host, private test: she answers about a vitamin C serum and shows the price',
+    th: 'ราฟาเอลกับพิธีกรร่วม AI การทดสอบส่วนตัว: เธอตอบเรื่องเซรั่มวิตามินซีและแสดงราคา',
   } as L10n,
-  promise: { he: 'בלי התחייבות, בלי טפסים.', en: 'No commitment, no forms.', th: 'ไม่มีข้อผูกมัด ไม่มีแบบฟอร์ม' } as L10n,
-  button: { he: 'שלחו תמונה בוואטסאפ', en: 'Send a photo on WhatsApp', th: 'ส่งรูปทาง LINE' } as L10n,
-  sub: { he: 'וואטסאפ ישיר לרפאל סלע.', en: 'Direct WhatsApp to Refael Sela.', th: 'LINE ตรงถึงราฟาเอล เซลา' } as L10n,
-  message: {
-    he: 'היי רפאל, ראיתי את מיה. אשלח תמונה של מוצר, אשמח לראות 10 שניות שלה מציגה אותו בלייב. אני מוכר/ת: ',
-    en: "Hi Refael, I saw Maya. I'll send a product photo, I'd love to see 10 seconds of her presenting it live. I sell: ",
-    th: 'สวัสดี คุณราฟาเอล เห็นพิธีกร AI แล้ว จะส่งรูปสินค้าให้ อยากดูคลิป 10 วินาทีที่เธอนำเสนอบนไลฟ์ ร้านขาย: ',
-  } as L10n,
 };
 
-export const FAQ_HEAD = { he: 'שאלות שחוזרות', en: 'Questions that come up', th: 'คำถามที่พบบ่อย' } as L10n;
+/* ------------------------------------------------------------------ pricing */
+
+export type LivePlan = {
+  id: 'test' | 'hour' | 'pack' | 'custom';
+  name: L10n;
+  price: number | null;
+  unit: L10n;
+  includes: L10n[];
+  cta: L10n;
+  recommended?: boolean;
+};
+
+const READY_CHARACTER: L10n = { he: 'דמות מוכנה מהספרייה', en: 'A ready-made character', th: 'ตัวละครสำเร็จรูป' };
+
+export const PRICING = {
+  title: { he: 'מחירים', en: 'Pricing', th: 'ราคา' } as L10n,
+  statement: { he: 'משלמים לפי שעת לייב.', en: 'You pay per live hour.', th: 'จ่ายตามชั่วโมงไลฟ์' } as L10n,
+  why: {
+    he: 'כל לייב רץ על שרת GPU משלו לכל אורך השידור, ולכן המחיר הוא לפי שעה.',
+    en: 'Every live runs on its own GPU server for the whole show, so the price is per hour.',
+    th: 'ทุกไลฟ์รันบนเซิร์ฟเวอร์ GPU ของตัวเองตลอดการไลฟ์ ราคาจึงคิดเป็นรายชั่วโมง',
+  } as L10n,
+  note: {
+    he: 'מחירים סופיים בשקלים.',
+    en: 'Final prices in Israeli shekels. Outside Israel, ask for a USD or THB quote.',
+    th: 'ราคาสุทธิเป็นเงินเชเกลอิสราเอล หากอยู่นอกอิสราเอล ขอใบเสนอราคาเป็น USD หรือ THB ได้',
+  } as L10n,
+  recommended: { he: 'הכי משתלם', en: 'Best value', th: 'คุ้มที่สุด' } as L10n,
+  quote: { he: 'הצעת מחיר', en: 'Quote', th: 'ใบเสนอราคา' } as L10n,
+  plans: [
+    {
+      id: 'test',
+      name: { he: 'לייב בדיקה', en: 'Test live', th: 'ไลฟ์ทดลอง' },
+      price: 0,
+      unit: { he: '10 דקות', en: '10 minutes', th: '10 นาที' },
+      includes: [
+        { he: 'לייב של 10 דקות עם המוצר שלכם', en: 'A 10-minute live with your product', th: 'ไลฟ์ 10 นาทีกับสินค้าของคุณ' },
+        READY_CHARACTER,
+      ],
+      cta: { he: 'לקבוע לייב בדיקה', en: 'Book the test live', th: 'นัดไลฟ์ทดลอง' },
+    },
+    {
+      id: 'hour',
+      name: { he: 'שעת לייב', en: 'Live hour', th: 'ไลฟ์รายชั่วโมง' },
+      price: 199,
+      unit: { he: 'לשעה', en: 'an hour', th: 'ต่อชั่วโมง' },
+      includes: [
+        READY_CHARACTER,
+        { he: 'קורא את הצ׳אט ועונה בשם', en: 'Reads the chat, answers by name', th: 'อ่านแชท ตอบโดยเรียกชื่อ' },
+        { he: 'כרטיס מוצר עם מחיר על המסך', en: 'Product card with price on screen', th: 'การ์ดสินค้าพร้อมราคาบนจอ' },
+      ],
+      cta: { he: 'להזמין שעת לייב', en: 'Book a live hour', th: 'จองไลฟ์ 1 ชั่วโมง' },
+    },
+    {
+      id: 'pack',
+      name: { he: '10 שעות לייב', en: '10 live hours', th: 'ไลฟ์ 10 ชั่วโมง' },
+      price: 1490,
+      unit: { he: 'כ־₪149 לשעה', en: '≈₪149 an hour', th: '≈₪149 ต่อชั่วโมง' },
+      includes: [
+        { he: 'כל מה שיש בשעת לייב', en: 'Everything in a live hour', th: 'ทุกอย่างในไลฟ์รายชั่วโมง' },
+        { he: 'לסדרה של לייבים קבועים', en: 'For a regular series of lives', th: 'สำหรับไลฟ์ประจำเป็นซีรีส์' },
+      ],
+      cta: { he: 'להזמין 10 שעות', en: 'Book 10 hours', th: 'จอง 10 ชั่วโมง' },
+      recommended: true,
+    },
+    {
+      id: 'custom',
+      name: { he: 'דמות משלכם', en: 'Your own character', th: 'ตัวละครของคุณเอง' },
+      price: null,
+      unit: { he: 'לפי המותג', en: 'built for your brand', th: 'ตามแบรนด์ของคุณ' },
+      includes: [
+        { he: 'דמות לפי המותג שלכם, או לפי קמע קיים', en: 'A character built for your brand, or from an existing mascot', th: 'ตัวละครตามแบรนด์ของคุณ หรือจากมาสคอตที่มีอยู่' },
+        { he: 'אפשר גם את הקול שלכם, באישורכם', en: 'Your own voice too, with your permission', th: 'ใช้เสียงของคุณได้ด้วย โดยได้รับอนุญาตจากคุณ' },
+      ],
+      cta: { he: 'לבקש הצעת מחיר', en: 'Ask for a quote', th: 'ขอใบเสนอราคา' },
+    },
+  ] as LivePlan[],
+  planMessage: (name: string): L10n => ({
+    he: `היי רפאל, ראיתי את עמוד הלייב. מעניין אותי: ${name}. אני מוכר/ת: `,
+    en: `Hi Refael, I saw the live page. I'm interested in: ${name}. I sell: `,
+    th: `สวัสดีคุณราฟาเอล เห็นหน้าไลฟ์แล้ว สนใจ: ${name} ร้านขาย: `,
+  }),
+};
+
+/* ------------------------------------------------------------------ faq */
+
+export const FAQ_HEAD = { he: 'שאלות', en: 'Questions', th: 'คำถาม' } as L10n;
 export const FAQ: { q: L10n; a: L10n }[] = [
   {
-    q: { he: 'זה באמת חי, או סרטון מוקלט?', en: 'Is it really live, or a recorded video?', th: 'สดจริงหรือเป็นวิดีโออัด?' },
+    q: { he: 'איך זה מתחבר ל־YouTube, Facebook ו־TikTok?', en: 'How does it connect to YouTube, Facebook and TikTok?', th: 'เชื่อมกับ YouTube, Facebook และ TikTok ยังไง?' },
     a: {
-      he: 'חי. היא קוראת את התגובות בזמן השידור ועונה בזמן אמת, בדרך כלל תוך כ-5 שניות. בשידור האחרון שלנו היא ענתה על 10 מתוך 10 תגובות, כל אחת בשם של הכותב.',
-      en: "Live. She reads the comments during the stream and answers in real time, usually within about 5 seconds. In our last live she answered 10 out of 10 comments, each by the commenter's name.",
-      th: 'สดจริง เธออ่านคอมเมนต์ระหว่างไลฟ์และตอบแบบเรียลไทม์ ปกติภายในประมาณ 5 วินาที ในไลฟ์ล่าสุดเธอตอบ 10 จาก 10 คอมเมนต์ เรียกชื่อผู้ถามทุกคน',
+      he: 'הלייב יוצא מהשרת שלנו כשידור רגיל עם מפתח שידור (RTMP), כמו מתוכנת שידור. YouTube ו־Facebook נבדקו אצלנו בלייבים אמיתיים. TikTok מקבל את אותו סוג שידור כשבחשבון שלכם פתוחה האפשרות לשדר עם מפתח.',
+      en: 'The live leaves our server as a normal stream with a stream key (RTMP), like streaming software. We tested YouTube and Facebook on real lives. TikTok takes the same kind of stream when your account has streaming with a key enabled.',
+      th: 'ไลฟ์ส่งออกจากเซิร์ฟเวอร์ของเราเป็นสตรีมปกติด้วย stream key (RTMP) เหมือนโปรแกรมไลฟ์ทั่วไป เราทดสอบ YouTube และ Facebook ในไลฟ์จริงแล้ว TikTok รับสตรีมแบบเดียวกันได้ถ้าบัญชีของคุณเปิดใช้การไลฟ์ด้วย stream key',
     },
   },
   {
-    q: { he: 'אני צריך לעמוד מול המצלמה?', en: 'Do I have to be on camera?', th: 'ต้องอยู่หน้ากล้องไหม?' },
+    q: { he: 'מה המנחה יודע לעשות בלייב?', en: 'What can the host do on a live?', th: 'พิธีกรทำอะไรได้บ้างในไลฟ์?' },
     a: {
-      he: 'לא. היא יכולה להנחות את השידור לבד, או לעבוד לצדכם: אתם מציגים את המוצר, היא עונה לצ׳אט.',
-      en: 'No. She can host the live on her own, or work alongside you: you show the product, she answers the chat.',
-      th: 'ไม่ต้อง เธอดำเนินไลฟ์เองได้ หรือทำงานร่วมกับคุณ คุณนำเสนอสินค้า เธอตอบแชท',
+      he: 'לקרוא תגובות ולענות בקול בשם הכותב, להציג כרטיס מוצר עם מחיר, לבחור בין תרחישים שהכנו מראש לפי מה שהצ׳אט כותב (כמו אדום או כחול), ולשלוח קישור לקנייה. תנועות הגוף מוכנות מראש. הקול והשפתיים נוצרים בזמן אמת.',
+      en: 'Read comments and answer out loud by name, show a product card with the price, pick between scenes we prepared based on what the chat types (like red or blue), and send a buy link. Body movements are prepared ahead. The voice and lips are made in real time.',
+      th: 'อ่านคอมเมนต์และตอบด้วยเสียงโดยเรียกชื่อ แสดงการ์ดสินค้าพร้อมราคา เลือกฉากที่เตรียมไว้ตามที่แชทพิมพ์ (เช่น แดงหรือน้ำเงิน) และส่งลิงก์ซื้อ ท่าทางของร่างกายเตรียมไว้ล่วงหน้า ส่วนเสียงและริมฝีปากสร้างแบบเรียลไทม์',
     },
   },
   {
-    q: { he: 'מה אם שואלים אותה משהו שהיא לא יודעת?', en: "What if someone asks her something she doesn't know?", th: 'ถ้ามีคนถามสิ่งที่เธอไม่รู้ล่ะ?' },
+    q: { he: 'באילו שפות?', en: 'Which languages?', th: 'ภาษาอะไรบ้าง?' },
     a: {
-      he: 'היא לא ממציאה. היא עונה רק ממה שהכנתם לה (מוצרים, מחירים, משלוחים, החזרות), ומה שחורג מזה היא מעבירה אליכם.',
-      en: "She doesn't make things up. She answers only from what you prepared (products, prices, shipping, returns), and anything beyond that she hands to you.",
-      th: 'เธอไม่แต่งเรื่อง เธอตอบเฉพาะจากสิ่งที่คุณเตรียมไว้ (สินค้า ราคา การจัดส่ง การคืนสินค้า) ส่วนที่เกินจากนั้นเธอส่งต่อให้คุณ',
+      he: 'עברית, אנגלית ותאית. הלייבים האמיתיים שלנו היו באנגלית, ובדיקות מוקלטות היו בעברית ובאנגלית. תאית לפי בקשה.',
+      en: 'Hebrew, English and Thai. Our real lives were in English, and recorded tests were in Hebrew and English. Thai on request.',
+      th: 'ฮีบรู อังกฤษ และไทย ไลฟ์จริงของเราเป็นภาษาอังกฤษ การทดสอบที่บันทึกไว้เป็นภาษาฮีบรูและอังกฤษ ภาษาไทยทำได้ตามคำขอ',
     },
   },
   {
-    q: { he: 'באיזה פלטפורמות זה עובד?', en: 'Which platforms does it work on?', th: 'ใช้กับแพลตฟอร์มไหนได้บ้าง?' },
+    q: { he: 'מה כאן אמיתי, ומה מוקלט מראש?', en: "What's real here, and what's pre-recorded?", th: 'อะไรจริง อะไรทำไว้ล่วงหน้า?' },
     a: {
-      he: 'לייב בפייסבוק, ביוטיוב ובטיקטוק, שידורים פרטיים ומסך בחנות. הדמות זהה, משתנה רק היעד של השידור.',
-      en: 'Facebook Live, YouTube, TikTok, private streams and an in-store screen. The character stays the same, only the destination changes.',
-      th: 'Facebook Live, YouTube, TikTok Shop, ไลฟ์ส่วนตัว และจอในร้าน ตัวละครเหมือนเดิม เปลี่ยนแค่ช่องทางไลฟ์',
+      he: 'כל קליפ מסומן. ״שידור חי אמיתי״ הוא הקלטה של לייב ששודר ב־YouTube וב־Facebook ב־30.10.2026, ואת התגובה בצ׳אט כתבנו אנחנו כדי לבדוק. ״בדיקה מוקלטת״ היא לייב פרטי שהקלטנו, עם תגובות שהזנו בעצמנו. ״קליפ מוכן מראש״ נוצר מראש ולא רץ בלייב.',
+      en: 'Every clip is labeled. "Real live" is a recording of a live that aired on YouTube and Facebook on 30.10.2026, and we typed the chat comment ourselves to test it. "Recorded test" is a private live we recorded, with comments we typed in. "Pre-recorded clip" was made ahead and did not run live.',
+      th: 'ทุกคลิปมีป้ายบอก “ไลฟ์จริง” คือบันทึกจากไลฟ์ที่ออกอากาศบน YouTube และ Facebook เมื่อ 30.10.2026 และคอมเมนต์ในแชทเราพิมพ์เองเพื่อทดสอบ “การทดสอบที่บันทึกไว้” คือไลฟ์ส่วนตัวที่เราบันทึก โดยเราพิมพ์คอมเมนต์เอง “คลิปที่ทำไว้ล่วงหน้า” สร้างไว้ก่อนและไม่ได้รันสด',
     },
   },
   {
-    q: { he: 'אפשר דמות אחרת, או הקול שלי?', en: 'Can I get a different character, or my own voice?', th: 'ขอตัวละครอื่น หรือใช้เสียงของฉันได้ไหม?' },
+    q: { he: 'מה המגבלות?', en: 'What are the limits?', th: 'มีข้อจำกัดอะไรบ้าง?' },
     a: {
-      he: 'כן. מיה ונובה הן דוגמאות. אפשר לבנות דמות לפי המותג שלכם, וגם לשבט את הקול שלכם (באישורכם).',
-      en: 'Yes. Maya and Nova are examples. We can build a character around your brand, and clone your own voice (with your permission).',
-      th: 'ได้ ตัวละครในหน้านี้เป็นตัวอย่าง เราสร้างตัวละครตามแบรนด์ของคุณได้ และโคลนเสียงของคุณได้ (โดยได้รับอนุญาตจากคุณ)',
-    },
-  },
-  {
-    q: { he: 'כמה זה עולה?', en: 'How much does it cost?', th: 'ราคาเท่าไหร่?' },
-    a: {
-      he: 'תלוי במספר המוצרים והשידורים. שלחו לי תמונה של מוצר בוואטסאפ, תראו אותה בלייב, ואגיד לכם בדיוק.',
-      en: "It depends on the number of products and lives. Send me a product photo on WhatsApp, see her live with it, and I'll tell you exactly.",
-      th: 'ขึ้นอยู่กับจำนวนสินค้าและไลฟ์ ส่งรูปสินค้ามาทาง LINE ดูเธอบนไลฟ์ แล้วเราจะแจ้งราคาที่แน่นอน',
+      he: 'המנחה עונה רק ממה שהכנתם (מוצרים, מחירים, משלוחים), ואת השאר מעביר אליכם. בין תגובה לתשובה עוברות כמה שניות. תנועה מיוחדת, כמו לפתוח קופסה, צריך להכין מראש לכל מוצר. וכל לייב נקבע מראש, כי השרת עולה במיוחד בשבילו.',
+      en: 'The host answers only from what you prepared (products, prices, shipping) and hands the rest to you. There are a few seconds between a comment and the answer. A special movement, like opening a box, has to be prepared for each product. And every live is booked ahead, because the server starts up just for it.',
+      th: 'พิธีกรตอบเฉพาะจากสิ่งที่คุณเตรียมไว้ (สินค้า ราคา การจัดส่ง) ที่เหลือส่งต่อให้คุณ ระหว่างคอมเมนต์กับคำตอบมีช่วงไม่กี่วินาที ท่าทางพิเศษ เช่น เปิดกล่อง ต้องเตรียมไว้สำหรับแต่ละสินค้า และทุกไลฟ์ต้องจองล่วงหน้า เพราะเซิร์ฟเวอร์เปิดขึ้นสำหรับไลฟ์นั้นโดยเฉพาะ',
     },
   },
 ];
+
+/* ------------------------------------------------------------------ final */
+
+export const FINAL = {
+  title: { he: 'שלחו מוצר. קבלו 10 דקות לייב בחינם.', en: 'Send a product. Get a 10-minute live, free.', th: 'ส่งสินค้ามา รับไลฟ์ 10 นาทีฟรี' } as L10n,
+  body: {
+    he: 'צלמו מוצר אחד, שלחו שם ומחיר, ונקבע לייב בדיקה של 10 דקות עם המנחה.',
+    en: "Snap one product, send its name and price, and we'll book a 10-minute test live with the host.",
+    th: 'ถ่ายรูปสินค้าหนึ่งชิ้น ส่งชื่อและราคามา แล้วเราจะนัดไลฟ์ทดลอง 10 นาทีกับพิธีกร',
+  } as L10n,
+  message: {
+    he: 'היי רפאל, אשמח ללייב בדיקה של 10 דקות עם המוצר שלי. אני מוכר/ת: ',
+    en: "Hi Refael, I'd like a free 10-minute test live with my product. I sell: ",
+    th: 'สวัสดีคุณราฟาเอล อยากได้ไลฟ์ทดลอง 10 นาทีกับสินค้าของฉัน ร้านขาย: ',
+  } as L10n,
+};

@@ -131,9 +131,9 @@ export const LANDINGS: Record<string, Landing> = {
       th: 'คลิปอธิบาย ฝึกอบรมพนักงาน บทเรียนในคอร์ส หรือโฆษณา ส่งข้อความมาให้ผม แล้วรับวิดีโอที่ตัวละครพูดข้อความนั้น ตัวละครเดียวกัน ทั้งภาษาไทย อังกฤษ และฮีบรู',
     },
     media: {
-      he: { src: '/media/maya_speaking_he.mp4', poster: '/media/maya_speaking_poster.jpg', ratio: '9/16' },
-      en: { src: '/media/maya_speaking_en.mp4', poster: '/media/maya_speaking_poster.jpg', ratio: '9/16' },
-      th: { src: '/media/maya_speaking_th.mp4', poster: '/media/maya_speaking_poster.jpg', ratio: '9/16' },
+      he: { src: '/media/maya_speaking_he-v2.mp4', poster: '/media/maya_speaking_poster.jpg', ratio: '9/16' },
+      en: { src: '/media/maya_speaking_en-v2.mp4', poster: '/media/maya_speaking_poster.jpg', ratio: '9/16' },
+      th: { src: '/media/maya_speaking_th-v2.mp4', poster: '/media/maya_speaking_poster.jpg', ratio: '9/16' },
     },
     live: false,
     proof: [

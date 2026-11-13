@@ -8,7 +8,7 @@ import { useSeo, serviceLd, faqLd, breadcrumbLd } from '@/components/site/Seo';
 import { WHATSAPP_URL } from '@/config/avatars';
 import { routeMeta, urlFor, SITE_URL } from '@/config/site';
 import { LANDINGS } from '@/content/landings';
-import { PROOF, OFFER, HERO, FAQ_HEAD } from '@/content/liveSelling';
+import { LANDING_PROOF as PROOF, LANDING_OFFER as OFFER, LANDING_HERO as HERO, LANDING_FAQ_HEAD as FAQ_HEAD } from '@/content/landingDefaults';
 import NotFound from './NotFound';
 
 const SECTIONS = [

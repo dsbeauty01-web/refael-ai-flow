@@ -14,7 +14,10 @@ export type SectionLink = { href: string } & L10n;
  * current page (shown on desktop next to the Products menu); on other pages
  * they would be meaningless, so each page passes its own.
  */
-export default function SiteHeader({ sections = [] }: { sections?: SectionLink[] }) {
+export default function SiteHeader({ sections: allSections = [] }: { sections?: SectionLink[] }) {
+  // A page with its own #pricing section takes over the header's Pricing link (no duplicate link).
+  const ownPricing = allSections.some(s => s.href === '#pricing');
+  const sections = allSections.filter(s => s.href !== '#pricing');
   const { language, setLanguage, pick, tr, isHebrew } = useT();
   const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
@@ -55,10 +58,11 @@ export default function SiteHeader({ sections = [] }: { sections?: SectionLink[]
   // Prices are shown on the website-agent page only; this link is in the header on every page.
   const PRICING_PATH = '/customer-service';
   const pricingLabel = pick('מחירים', 'Pricing', 'ราคา');
+  const pricingTo = ownPricing ? `${pathname}#pricing` : `${PRICING_PATH}#pricing`;
   const onPricing = () => {
     setMenu(false);
     setProducts(false);
-    if (pathname === PRICING_PATH) document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (ownPricing || pathname === PRICING_PATH) document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const solid = scrolled || menu;
@@ -122,7 +126,7 @@ export default function SiteHeader({ sections = [] }: { sections?: SectionLink[]
             </button>
           ))}
           <Link
-            to={`${PRICING_PATH}#pricing`}
+            to={pricingTo}
             onClick={onPricing}
             className="text-[0.9rem] font-semibold text-ink/80 hover:text-ink transition-colors"
           >
@@ -186,7 +190,7 @@ export default function SiteHeader({ sections = [] }: { sections?: SectionLink[]
           </ul>
 
           <Link
-            to={`${PRICING_PATH}#pricing`}
+            to={pricingTo}
             onClick={onPricing}
             className="mt-5 flex items-center rounded-xl px-2.5 py-2.5 text-[1rem] font-semibold text-ink hover:bg-ink/[0.05]"
           >

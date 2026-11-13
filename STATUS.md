@@ -9,7 +9,7 @@ Live: https://refael-ai-flow.lovable.app · Repo is the source of truth; Lovable
 |---|---|---|
 | `/` | Homepage: hero (live Maya demo), product hub, how it works, use cases, packages, FAQ, contact | `src/pages/Index.tsx` |
 | `/customer-service` | Live AI website agent (talking face in the corner of any site). v2 (Nov 12 2026): video-first. Hero clinic mock with the face loop, "hear it talk" (speaking clip per language + 3 character-style loops), "see it work" (tools recording with sound), 3 steps, **prices** (Demo ₪0, Start ₪99 for 60 minutes, Business ₪390 recommended, Pro ₪790; setup ₪0; headline "a conversation from about ₪4"), first-year bars vs HeyGen/Tavus/D-ID with breakdown + sources, short FAQ with honest limits. Autoplay budget: max 2 clips play at once, only on screen, none for reduced motion. Web cuts of clips live in `public/agent/`. `/noa` and `/live-agent` redirect here. | `src/pages/AgentPage.tsx` + `src/content/agentPage.ts` |
-| `/live-selling` | Maya, AI host for live selling. The funnel page every post/DM points to. Thai shows the Thai host. | `src/pages/LiveSelling.tsx` + `src/content/liveSelling.ts` |
+| `/live-selling` | AI live host. v2 (Nov 12 2026): video-first. Hero = the real Professor YouTube/Facebook live (30.10.2026) + 3-step caption (viewer types red, host reads the chat, does it live), channel name badges (YouTube/Facebook/TikTok, text only), 6-clip gallery (one plays at a time), co-host section (Refael + AI co-host private test), **prices per live hour** (test live ₪0 for 10 min, ₪199 an hour, 10 hours ₪1,490, own character = quote), short FAQ with honest limits. **Every clip carries a true tag** (`TAGS` in the content file: real live / recorded test / pre-recorded clip); never upgrade a tag without proof. Old fallbacks for `/ai-avatar` and `/brand-character` moved to `src/content/landingDefaults.ts`. | `src/pages/LiveSelling.tsx` + `src/content/liveSelling.ts` |
 | `/live-avatar` | Flagship: Maya as a full-body lobby/museum/showroom avatar | `src/pages/Maya.tsx` + `src/components/maya/*` |
 | `/ai-avatar` | Keyword page: talking AI avatar for business | `src/pages/Landing.tsx` + `src/content/landings.ts` |
 | `/brand-character` | Keyword page: AI brand character / mascot (Nova) | same as above |
@@ -38,8 +38,8 @@ JavaScript, so these stubs are what give the right card per language.
 - **Products** (header menu, homepage hub, footer): `PRODUCTS` in `src/config/site.ts`.
 - **SEO titles/descriptions**: `src/config/routes.json`. Then run `npm run seo` to regenerate `public/sitemap.xml`
   and the redirect stubs.
-- **Prices**: hidden site-wide (`SHOW_PRICES = false` in `src/config/site.ts`), EXCEPT on `/customer-service`, which
-  shows its own prices directly (approved by Refael, Nov 2026). The header has a "Pricing" link to `/customer-service#pricing`.
+- **Prices**: hidden site-wide (`SHOW_PRICES = false` in `src/config/site.ts`), EXCEPT on `/customer-service` and
+  `/live-selling`, which show their own prices directly (Nov 2026). A page whose `sections` include `#pricing` takes over the header's Pricing link. The header has a "Pricing" link to `/customer-service#pricing`.
   Set `SHOW_PRICES` to `true` and every other price comes back.
 - **A new page**: add the route in `src/App.tsx`, its entry in `routes.json`, call `useSeo({ path })` in the page,
   wrap it in `<SiteLayout sections={...}>`, add it to `PRODUCTS` if it is a product, then `npm run seo`.
@@ -52,6 +52,7 @@ JavaScript, so these stubs are what give the right card per language.
 - `SiteFooter.tsx`: the site map (products, site sections, languages, legal).
 - `Seo.tsx`: `useSeo()` sets title, description, canonical, Open Graph, hreflang (he/en/th/x-default) and JSON-LD.
 - `RouteEffects.tsx`: keeps `?lang=` in sync with the chosen language; scroll to top / to `#section` on navigation.
+- `autoplay.tsx`: shared autoplay budget (max 2 clips playing, only on screen, none for reduced motion) + sound button, used by `/customer-service` and `/live-selling`.
 - `blocks.tsx`: `SpeakingVideo` (tap for sound, pauses off-screen), `FaqList`, `RelatedProducts`.
 - `Price.tsx`: every price renders through it.
 
@@ -64,7 +65,8 @@ JavaScript, so these stubs are what give the right card per language.
 ## Known gaps
 
 - `/live-avatar` (flagship) and its sections are Hebrew + English only; Thai visitors see English there.
-- English live-selling clip is Maya's general English pitch; a dedicated English live-selling clip needs fal credit.
+- `/avatar-videos` plays `public/media/maya_speaking_{he,en,th}-v2.mp4` (Nov 12 2026: new ElevenLabs v3 voice "Matilda" + LatentSync lips via fal). The homepage and `/customer-service` (`public/agent/talk-*.mp4`) still use the old OpenAI-voice cuts.
+- `/ai-avatar` still plays `/maya/maya-live.mp4` (the ad removed from `/live-selling`).
 - Search Console: verify the site and submit `https://refael-ai-flow.lovable.app/sitemap.xml` (needs Refael's Google login).
 - Old generalist components under `src/components/landing/`, `portfolio/` and the root `components/*.tsx` are not routed
   (dead code, safe to delete later).

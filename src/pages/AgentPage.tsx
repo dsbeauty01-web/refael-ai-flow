@@ -11,7 +11,7 @@ import { routeMeta, urlFor, SITE_URL, type L10n } from '@/config/site';
 import { trackWhatsAppClick, trackLineClick } from '@/lib/analytics';
 import {
   FACE_VIDEO, FACE_POSTER, TALK_VIDEO, TALK_POSTER, WORK_VIDEO, WORK_POSTER, STYLES,
-  HERO, MOCK, TALK, BIZ, WORK, HOW, PRICING, COMPARE, FAQ_HEAD, FAQ, FINAL, SECTIONS, type Plan,
+  HERO, MOCK, TALK, BIZ, REELS, WORK, HOW, PRICING, COMPARE, FAQ_HEAD, FAQ, FINAL, SECTIONS, type Plan,
 } from '@/content/agentPage';
 
 const PATH = '/customer-service';
@@ -384,6 +384,43 @@ function BizStrip() {
   );
 }
 
+/** One short vertical reel: plays muted while on screen (shared budget), tap for sound. */
+function ReelCard({ i }: { i: number }) {
+  const { tr, isHebrew } = useT();
+  const ref = useRef<HTMLVideoElement>(null);
+  const c = REELS.clips[i];
+  useAutoplay(ref, { threshold: 0.6 });
+  const { muted, toggle } = useSound(ref);
+  const showSound = isHebrew || !c.hebrewOnly;
+  return (
+    <li className="snap-start shrink-0 w-[58vw] max-w-[240px] md:w-auto md:max-w-none min-w-0">
+      <div className="relative overflow-hidden rounded-2xl aspect-[9/16] bg-black border border-ink/10">
+        <video
+          ref={ref}
+          src={tr(c.src)}
+          poster={tr(c.poster)}
+          muted
+          loop
+          playsInline
+          preload="none"
+          aria-label={tr(c.label)}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {showSound && <SoundButton muted={muted} onClick={toggle} className="absolute bottom-2.5 inset-x-2.5 !text-[0.8rem] !px-3" />}
+      </div>
+      <p className="mt-2 text-[0.9rem] font-semibold text-ink/80">{tr(c.label)}</p>
+    </li>
+  );
+}
+
+function ReelRow() {
+  return (
+    <ul className="mt-7 -mx-4 px-4 sm:mx-0 sm:px-0 flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-5 md:gap-4 md:overflow-visible">
+      {REELS.clips.map((c, i) => <ReelCard key={c.id} i={i} />)}
+    </ul>
+  );
+}
+
 /** The 16:9 tools recording, with sound. */
 function WorkVideo() {
   const { tr } = useT();
@@ -703,6 +740,16 @@ export default function AgentPage() {
           <p className="mt-3 text-[1.05rem] leading-[1.6] text-ink/70">{tr(BIZ.line)}</p>
           <BizStrip />
           <p className="mt-4 text-[0.8rem] text-muted-foreground">{tr(BIZ.caption)}</p>
+        </div>
+      </section>
+
+      {/* SHORT VIDEOS */}
+      <section id="reels" className="px-4 sm:px-5 pt-12 pb-4 lg:pt-16 lg:pb-6 bg-paper overflow-hidden">
+        <div className="max-w-[1100px] mx-auto">
+          <h2 className={h2}>{tr(REELS.title)}</h2>
+          <p className="mt-3 text-[1.05rem] leading-[1.6] text-ink/70">{tr(REELS.line)}</p>
+          <ReelRow />
+          <p className="mt-4 text-[0.8rem] text-muted-foreground">{tr(REELS.caption)}</p>
         </div>
       </section>
 

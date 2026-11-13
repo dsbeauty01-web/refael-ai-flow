@@ -187,6 +187,38 @@ export const BIZ = {
   }[],
 };
 
+/* ------------------------------------------------------------------ short videos */
+
+const reel = (he: string, en: string) => ({ he: `/ads/${he}.mp4`, en: `/ads/${en}.mp4`, th: `/ads/${en}.mp4` });
+const reelPoster = (he: string, en: string) => ({ he: `/ads/${he}.jpg`, en: `/ads/${en}.jpg`, th: `/ads/${en}.jpg` });
+
+/** Short vertical reels (v1 cuts of the ad test). Hebrew everywhere; en/th get English cuts of reels 3 and 4. */
+export const REELS = {
+  title: { he: 'סרטונים קצרים', en: 'Short videos', th: 'วิดีโอสั้น' } as L10n,
+  line: {
+    he: 'חמישה סרטונים של חצי דקה: איך זה נראה, מה זה עושה וכמה זה עולה.',
+    en: 'Five short videos: how it looks, what it does and what it costs.',
+    th: 'วิดีโอสั้นห้าตัว: หน้าตาเป็นอย่างไร ทำอะไรได้ และราคาเท่าไร',
+  } as L10n,
+  caption: {
+    he: 'אתרי העסקים הם המחשה. הנתון 7.75% ל־26.58% הוא ממקרה בוחן של ספק, לא תוצאה שלנו. מחירי המתחרים לפי מחירון שפורסם, אוק׳ 2026.',
+    en: 'The business sites are illustrations. The 7.75% to 26.58% figure is from a vendor case study, not our result. Competitor prices are published list prices, Oct 2026.',
+    th: 'เว็บไซต์ธุรกิจเป็นภาพประกอบ ตัวเลข 7.75% เป็น 26.58% มาจากกรณีศึกษาของผู้ให้บริการรายอื่น ไม่ใช่ผลของเรา ราคาคู่แข่งตามราคาที่ประกาศ ต.ค. 2026',
+  } as L10n,
+  clips: [
+    { id: 'research', he: 'reel-1-research-he', en: 'reel-1-research-he', hebrewOnly: true,
+      label: { he: 'מה המחקר מצא', en: 'What a study found', th: 'ผลการศึกษา' } },
+    { id: 'chat', he: 'reel-2-chat-he', en: 'reel-2-chat-he', hebrewOnly: true,
+      label: { he: 'במקום צ׳אט רגיל', en: 'Instead of chat', th: 'แทนแชตธรรมดา' } },
+    { id: 'why-us', he: 'reel-3-why-us-he', en: 'reel-3-why-us-en', hebrewOnly: false,
+      label: { he: 'למה דווקא אנחנו', en: 'Why us', th: 'ทำไมต้องเรา' } },
+    { id: 'any-business', he: 'reel-4-any-business-he', en: 'reel-4-any-business-en', hebrewOnly: false,
+      label: { he: 'כל סוג עסק', en: 'Any business', th: 'ทุกธุรกิจ' } },
+    { id: 'watch', he: 'reel-5-watch-it-work-he', en: 'reel-5-watch-it-work-he', hebrewOnly: true,
+      label: { he: 'ככה זה עובד', en: 'Watch it work', th: 'ดูการทำงาน' } },
+  ].map(c => ({ id: c.id, label: c.label as L10n, src: reel(c.he, c.en) as L10n, poster: reelPoster(c.he, c.en) as L10n, hebrewOnly: c.hebrewOnly })),
+};
+
 /* ------------------------------------------------------------------ see it work */
 
 export const WORK = {

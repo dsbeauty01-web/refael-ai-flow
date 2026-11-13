@@ -173,13 +173,13 @@ const Site: React.FC<{ site: NonNullable<PhoneScene['site']>; frame: number; sta
   const open = pop(frame, site.openAt, { damping: 16 });
 
   // chat state
-  const bubbles: { agent: boolean; text: string; at: number }[] = [];
+  const bubbles: { agent: boolean; text: string; at: number; card?: any }[] = [];
   let typingAgent = false;
   let input = '';
   for (const e of site.events) {
     if (e.kind === 'agent') {
       const ty = e.typing ?? 0;
-      if (frame >= e.at) bubbles.push({ agent: true, text: e.text, at: e.at });
+      if (frame >= e.at) bubbles.push({ agent: true, text: e.text, at: e.at, card: e.card });
       else if (ty && frame >= e.at - ty) typingAgent = true;
     } else {
       const td = e.typeDur ?? 0;
@@ -284,6 +284,16 @@ const Site: React.FC<{ site: NonNullable<PhoneScene['site']>; frame: number; sta
                   }}
                 >
                   <T>{b.text}</T>
+                  {b.card && (
+                    <div style={{ marginTop: 12, borderRadius: 22, background: '#fff', padding: '16px 20px 18px', boxShadow: '0 6px 18px -8px rgba(0,0,0,0.25)' }}>
+                      <div style={{ fontSize: 26, color: '#8a7c74', fontWeight: 700 }}>{b.card.title}</div>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 2 }}>
+                        <span style={{ fontFamily: F.rubik, fontSize: 52, fontWeight: 800, color: S.ink }}><T>{b.card.price}</T></span>
+                        <span style={{ fontSize: 26, color: '#8a7c74' }}>{b.card.note}</span>
+                      </div>
+                      <div style={{ marginTop: 10, borderRadius: 999, background: S.accent, color: '#fff', textAlign: 'center', fontSize: 28, fontWeight: 800, padding: '10px 0 12px' }}>{b.card.cta}</div>
+                    </div>
+                  )}
                 </div>
               );
             })}

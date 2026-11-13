@@ -10,8 +10,8 @@ QC = f"{SCR}/qc"
 OUT = "/home/claude/rf-pack/public/ads/pack"
 os.makedirs(OUT, exist_ok=True)
 SPECS = {s["id"]: s for s in json.load(open(f"{SCR}/meta.json"))}
-COVER_FRAME = {"2304": 22, "line": 44, "night": 50}
-SAFE_FRAME = {"RA-2304-15s": 200, "RA-line-15s": 300, "RA-night-15s": 300}
+COVER_FRAME = {"2304": 22, "line": 44, "night": 50, "face": 130}
+SAFE_FRAME = {"RA-2304-15s": 200, "RA-line-15s": 300, "RA-night-15s": 300, "RA-face-15s": 140}
 only = sys.argv[1:]
 
 def run(cmd, **kw):
@@ -67,6 +67,8 @@ SCENE_TXT = {  # on-screen text of brand scenes, for viewers who turn captions o
     "chars": "דמות וקול בסגנון שלכם. אתם בוחרים מראה, קול ושם.",
     "multi": "עד 3 מבקרים בו זמנית.",
     "langs": "עברית, אנגלית ותאית.",
+    "triptych": "",
+    "research": "מחקר 2025, 80 משתתפים: מול אווטאר מדבר אנשים ענו בפירוט רב יותר מאשר מול צ׳אט טקסט (arXiv 2508.02376). מחקר 2023, 31 משתתפים: 54% אמרו שיסמכו יותר בחירום על ראש רובוט עם פנים, 23% על רמקול קולי (Frontiers in Robotics and AI). מחקרים קטנים, התוצאות ראשוניות.",
     "end": "הדגמה חיה של 3 דקות על האתר שלכם. בחינם. ₪99 לחודש / שעת שיחה. הקמה ₪0.",
 }
 
@@ -79,7 +81,7 @@ def srt(spec):
     if spec.get("offerStrip"):
         a, b = spec["offerStrip"]; ev.append((a, b, "הדגמה חיה בחינם. ₪99 לחודש / שעת שיחה."))
     for sc in spec["scenes"]:
-        if sc["type"] in SCENE_TXT:
+        if SCENE_TXT.get(sc["type"]):
             ev.append((sc["from"] + 4, sc["from"] + sc["dur"], SCENE_TXT[sc["type"]]))
     ev.sort()
     # merge cues that start within 1 s of the previous cue, then clip each cue at the next start

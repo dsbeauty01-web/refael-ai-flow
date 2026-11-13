@@ -1,7 +1,7 @@
 export type CamKey = { at: number; v: 'full' | 'low' | 'chat' | 'lead' };
 
 export type ChatEvent =
-  | { kind: 'agent'; at: number; text: string; typing?: number }
+  | { kind: 'agent'; at: number; text: string; typing?: number; card?: { title: string; price: string; note: string; cta: string } }
   | { kind: 'visitor'; at: number; text: string; typeDur?: number };
 
 export type Notif = { at: number; title: string; body: string; time: string };
@@ -32,7 +32,9 @@ export type Scene =
   | { type: 'chars'; from: number; dur: number }
   | { type: 'multi'; from: number; dur: number }
   | { type: 'langs'; from: number; dur: number }
-  | { type: 'end'; from: number; dur: number };
+  | { type: 'end'; from: number; dur: number }
+  | { type: 'triptych'; from: number; dur: number; answerAt: number; dimAt: number }
+  | { type: 'research'; from: number; dur: number; long?: boolean };
 
 export type CaptionGroup = { at: number; text: string; hl?: boolean };
 export type Caption = { from: number; to: number; groups: CaptionGroup[]; size?: number };

@@ -338,4 +338,76 @@ function cnight_long(): Spec {
   return b.done();
 }
 
-export const SPECS: Spec[] = [c2304_15(), c2304_7(), c2304_long(), cline_15(), cline_7(), cline_long(), cnight_15(), cnight_7(), cnight_long()];
+
+/* ================================================================== 4. face vs chat vs voice */
+const PRICE_CARD = { title: 'הסרת שיער בלייזר', price: '₪450', note: 'לטיפול', cta: 'לשמור שיחת ייעוץ' };
+const faceHook = (b: B) => {
+  b.scene({ type: 'triptych', from: 0, dur: 210, answerAt: 66, dimAt: 190 });
+  b.voice(66, 'A2');
+  b.sfx(188, 'swoosh', 0.35);
+  b.cap(0, 210, [[0, 'אותה תשובה.'], [0, 'שלוש דרכים.', true], [0, 'במה הייתם בוחרים?']], 64);
+};
+
+function cface_15(): Spec {
+  const b = new B('RA-face-15s', 'RA_face_15s_9x16_he', 450);
+  faceHook(b);
+  b.scene({
+    type: 'phone', from: 210, dur: 60, statusTime: '23:04', night: true,
+    cam: [{ at: 0, v: 'chat' }],
+    site: {
+      key: 'clinic', popAt: -40, openAt: -40,
+      events: [
+        { kind: 'visitor', at: -40, text: Q_PRICE },
+        { kind: 'agent', at: -30, text: A_PRICE },
+        { kind: 'visitor', at: 18, text: 'דנה, 052-555-0147', typeDur: 14 },
+        { kind: 'agent', at: 32, text: 'רשמתי! הקליניקה תחזור אלייך בבוקר.', typing: 6 },
+      ],
+    },
+  });
+  b.scene({ type: 'research', from: 270, dur: 90 });
+  [271, 293].forEach((t) => b.sfx(t, 'pop', 0.4));
+  b.scene({ type: 'end', from: 360, dur: 90 });
+  b.voice(362, 'E');
+  b.cap(212, 270, [[212, 'ככה היא נראית'], [220, 'באתר שלכם.', true]], 70);
+  b.cap(272, 360, [[272, 'מה מצאו המחקרים?']], 66);
+  b.spec.illus = [[0, 270]];
+  return b.done();
+}
+
+function cface_long(): Spec {
+  const b = new B('RA-face-32s', 'RA_face_32s_9x16_he', 975);
+  faceHook(b);
+  b.scene({
+    type: 'phone', from: 210, dur: 260, statusTime: '23:04', night: true,
+    cam: [{ at: 0, v: 'chat' }, { at: 200, v: 'full' }],
+    site: {
+      key: 'clinic', popAt: -40, openAt: -40,
+      events: [
+        { kind: 'agent', at: -40, text: 'היי! אפשר לעזור?' },
+        { kind: 'visitor', at: 16, text: Q_PRICE, typeDur: 16 },
+        { kind: 'agent', at: 26, text: 'הנה המחיר:', typing: 6, card: PRICE_CARD },
+        { kind: 'visitor', at: 136, text: 'דנה, 052-555-0147', typeDur: 16 },
+        { kind: 'agent', at: 146, text: VO.A3.text, typing: 6 },
+      ],
+      banner: { at: 206, rows: LEAD_DANA, time: '23:06' },
+    },
+  });
+  b.voice(234, 'A2');
+  b.voice(354, 'A3');
+  b.scene({ type: 'research', from: 470, dur: 210, long: true });
+  [471, 545].forEach((t) => b.sfx(t, 'pop', 0.4));
+  b.scene({ type: 'chars', from: 680, dur: 105 });
+  [692, 698].forEach((t) => b.sfx(t, 'pop', 0.35));
+  b.scene({ type: 'offer', from: 785, dur: 105 });
+  [789, 803, 817, 833].forEach((t) => b.sfx(t, 'pop', 0.4));
+  b.scene({ type: 'end', from: 890, dur: 85 });
+  b.voice(892, 'E');
+  b.cap(212, 300, [[214, 'עונה בקול'], [224, 'ומציגה מחיר.', true]], 70);
+  b.cap(300, 345, [[302, 'ושומרת את הליד.', true]], 70);
+  b.cap(472, 680, [[472, 'מה מצאו המחקרים?']], 66);
+  b.spec.offerStrip = [345, 470];
+  b.spec.illus = [[0, 470], [680, 785]];
+  return b.done();
+}
+
+export const SPECS: Spec[] = [c2304_15(), c2304_7(), c2304_long(), cline_15(), cline_7(), cline_long(), cnight_15(), cnight_7(), cnight_long(), cface_15(), cface_long()];

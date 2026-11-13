@@ -6,6 +6,7 @@ import { PhoneShot } from './components/Phone';
 import { Badges, Chars, CodeBeat, Compare, Editor, End, Kinetic, Langs, Multi, Offer } from './components/Scenes';
 import { Captions, IllusLabel, OfferStrip } from './components/Overlay';
 import { ease } from './components/common';
+import { Research, Triptych } from './components/Concept4';
 
 const SceneView: React.FC<{ sc: Scene }> = ({ sc }) => {
   const f = useCurrentFrame();
@@ -35,6 +36,10 @@ const SceneView: React.FC<{ sc: Scene }> = ({ sc }) => {
         return <Langs />;
       case 'end':
         return <End />;
+      case 'triptych':
+        return <Triptych answerAt={sc.answerAt} dimAt={sc.dimAt} />;
+      case 'research':
+        return <Research long={sc.long} />;
     }
   })();
   const night = sc.type === 'phone' && sc.night;

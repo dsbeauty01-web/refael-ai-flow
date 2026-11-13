@@ -10,9 +10,10 @@ product's real character, voiced with the same ElevenLabs voice that is on the s
 - 23:04 (story): RA_2304_15s_9x16_he.mp4 (cold), RA_2304_15s_4x5_he.mp4 (feed), RA_2304_7s_9x16_he.mp4 (bumper), RA_2304_38s_9x16_he.mp4 (long, retargeting)
 - שורה אחת (install): RA_line_15s_9x16_he.mp4, RA_line_15s_4x5_he.mp4, RA_line_8s_9x16_he.mp4, RA_line_31s_9x16_he.mp4
 - משמרת לילה (price): RA_night_15s_9x16_he.mp4, RA_night_15s_4x5_he.mp4, RA_night_7s_9x16_he.mp4, RA_night_31s_9x16_he.mp4
+- פנים (face vs chat vs voice): RA_face_15s_9x16_he.mp4, RA_face_15s_4x5_he.mp4, RA_face_32s_9x16_he.mp4 (no bumper)
 
 Each video has a cover (same name, .jpg) and a Hebrew caption file (same name, .srt).
-Safe-zone check frames: RA_2304_15s_9x16_he_safezone.jpg, RA_line_15s_9x16_he_safezone.jpg, RA_night_15s_9x16_he_safezone.jpg
+Safe-zone check frames: RA_2304_15s_9x16_he_safezone.jpg, RA_line_15s_9x16_he_safezone.jpg, RA_night_15s_9x16_he_safezone.jpg, RA_face_15s_9x16_he_safezone.jpg
 (red = Reels UI top 14% and bottom 35%, orange = action rail on both sides because Hebrew UI mirrors it, cyan = 4:5 crop, y 260 to 1610).
 
 Specs: 1080x1920 (4:5 = 1080x1350), 30 fps, H.264 High yuv420p, AAC 160k 48 kHz, faststart, -14 LUFS integrated, true peak under -1.5 dBFS.
@@ -124,6 +125,54 @@ Half of that is ₪3,221.93, shown as "≈₪3,200 בחודש". It is the gross 
 The on-screen card names the source in small type. Update the card if the minimum wage changes (next update usually 1 April).
 
 
+## Ad 4: פנים (face vs chat vs voice)
+
+The product is the talking face, so this ad shows the same customer question answered three ways at once (text chat, voice only, our face with the same audio), then leaves the face in the corner of the clinic site, shows two small studies, and ends on the offer. It makes no claim that a face raises sales.
+
+**Hypothesis:** in stage 1 (same broad audience and budget), "פנים" gets a 3-second hook rate at least 3 points above 23:04, because the first frame shows how the product differs from a normal chat widget. Expect cost per WhatsApp conversation within 20% of 23:04; if it is much higher, the comparison grabs attention but does not create intent.
+
+**Organic post for the Refael.ai Page** (no hard sell; post the 15 s video with it)
+```
+שאלה אחת, שלוש דרכים לענות עליה.
+בניתי ניסוי קטן: אותה שאלה של לקוחה ("כמה עולה הסרת שיער בלייזר?") ואותה תשובה. פעם בצ׳אט טקסט, פעם בקול בלבד, ופעם מפנים שמדברות.
+חיפשתי מה המחקר אומר על זה ומצאתי שני מחקרים קטנים. באחד (2025, 80 משתתפים) אנשים ענו בפירוט רב יותר מול אווטאר מדבר מאשר מול צ׳אט טקסט. בשני (2023, 31 משתתפים) יותר אנשים אמרו שיסמכו בחירום על ראש רובוט עם פנים מאשר על רמקול חכם.
+אלה מחקרים קטנים, אז אני לא מסיק מהם הרבה. אבל זה מעניין אותי מהצד של הלקוח.
+אתם, כלקוחות, הייתם מעדיפים לקבל תשובה באתר בטקסט, בקול או מפנים שמדברות?
+```
+First comment (optional, after people answer): the sources line below.
+
+**Primary text 1**
+```
+אותה תשובה, בשלוש דרכים: צ׳אט טקסט, קול בלבד, או פנים שמדברות. במה הייתם בוחרים?
+עוזרת AI עם פנים יכולה לשבת בפינת האתר שלכם. היא עונה למבקרים בקול ובעברית, מראה להם מחיר ושומרת לכם את השם והטלפון.
+הדגמה חיה של 3 דקות על האתר שלכם. בחינם. ₪99 לחודש / שעת שיחה, הקמה ₪0.
+```
+**Primary text 2**
+```
+במחקר מ־2025 עם 80 משתתפים, אנשים ענו בפירוט רב יותר מול אווטאר מדבר מאשר מול צ׳אט טקסט. מחקר קטן, ובכל זאת שווה לבדוק את זה על האתר שלכם.
+עוזרת AI עם פנים בפינת האתר, ₪99 לחודש / שעת שיחה. הדגמה חיה של 3 דקות, בחינם.
+```
+**Primary text 3**
+```
+צ׳אט בפינת האתר כבר מוכר לכולם. פנים שמדברות ועונות בקול, הרבה פחות. רוצים לראות איך זה נראה אצלכם? הדגמה חיה של 3 דקות, בחינם.
+```
+**Headlines**
+1. צ׳אט, קול או פנים? תבחרו
+2. פנים שעונות באתר שלכם, בקול
+3. הדגמה חיה על האתר שלכם, בחינם
+
+**Description:** ₪99 לחודש / שעת שיחה. הקמה ₪0
+**CTA button:** Send WhatsApp message. Website variant: Learn more.
+**WhatsApp opener:** היי רפאל, ראיתי את הסרטון על הפנים שמדברות. אשמח להדגמה חיה של 3 דקות על האתר שלי:
+`https://wa.me/972533217125?text=%D7%94%D7%99%D7%99%20%D7%A8%D7%A4%D7%90%D7%9C%2C%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%90%D7%AA%20%D7%94%D7%A1%D7%A8%D7%98%D7%95%D7%9F%20%D7%A2%D7%9C%20%D7%94%D7%A4%D7%A0%D7%99%D7%9D%20%D7%A9%D7%9E%D7%93%D7%91%D7%A8%D7%95%D7%AA.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%94%D7%93%D7%92%D7%9E%D7%94%20%D7%97%D7%99%D7%94%20%D7%A9%D7%9C%203%20%D7%93%D7%A7%D7%95%D7%AA%20%D7%A2%D7%9C%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%A9%D7%9C%D7%99%3A%20`
+**UTM links:** same base, `utm_content=face_15s`, `face_15s_4x5`, `face_32s`.
+
+**The research on screen, and its limits**
+- Study 1: Krajcovic, Demcak, Kuric, "Talking Surveys: How Photorealistic Embodied Conversational Agents Shape Response Quality, Engagement, and Satisfaction", arXiv 2508.02376 (2025). 80 UK participants, between-subjects, a voice agent with an animated video avatar vs a text chatbot, in an online survey. The abstract says embodied agents "can contribute significantly to more informative, detailed responses". Satisfaction did not differ significantly. On screen: "מול אווטאר מדבר, אנשים ענו בפירוט רב יותר מאשר מול צ׳אט טקסט."
+- Study 2: Robb et al., "Seeing eye to eye: trustworthy embodiment for task-based conversational agents", Frontiers in Robotics and AI (30.8.2023), n=31. The face was a Furhat robot head (an animated face on a physical head), compared with a Google Home smart speaker, in a simulated emergency task. Asked "which assistant would you trust more in an emergency": robot 54%, speaker 23%, neither 23% (p = 0.04). A 14-item trust scale showed no difference. On screen this is worded as "ראש רובוט עם פנים" and "על מי תסמכו יותר", because it was a robot head and an opinion question, not a screen avatar or an observed choice.
+- On screen under both: "מחקרים קטנים. התוצאות ראשוניות." Neither study measured sales or leads, and the ad does not claim either.
+- Not used: vendor case-study numbers.
+
 ## Test plan
 
 **Stage 1: which angle (4 days)**
@@ -132,6 +181,7 @@ The on-screen card names the source in small type. Update the card if the minimu
 - Audience: Israel, Hebrew, 25 to 65, Advantage+ audience with no interest stack (broad). Placements: Advantage+ (Reels, Feed, Stories).
 - Do not edit the ad sets for 4 days. Judge only ads with 1,000+ impressions.
 - Read, per ad: hook rate (3-second views / impressions, target 25 to 30%+), hold rate (ThruPlays / 3-second views), link CTR, cost per WhatsApp conversation started.
+- Concept 4 (פנים) runs as a 4th ad set in stage 1 (₪50 a day, same settings), or, if stage 1 has already run, against the stage 1 winner for 4 days.
 - Decision: the winner is the lowest cost per WhatsApp conversation; if no ad set has 3+ conversations, use the highest hook rate x CTR. Kill any concept under 20% hook rate.
 
 **Stage 2: short vs long (4 to 7 days)**
@@ -162,4 +212,6 @@ The on-screen card names the source in small type. Update the card if the minimu
 ## Sources
 - Minimum wage from 1.4.2026: Bituach Leumi (National Insurance Institute), "שכר מינימום", https://www.btl.gov.il/MEDINIYUT/GENERALDATA/Pages/שכר%20מינימום.aspx (₪6,443.85 a month; ₪35.40 an hour on a 182-hour basis). Checked 12.11.2026.
 - Earlier figure for comparison: Bituach Leumi benefits update January 2026, https://www.btl.gov.il/Publications/benefits_update/Documents/hozerkizba2026.pdf (₪6,247.67 until March 2026).
+- Study 1 (concept 4): https://arxiv.org/abs/2508.02376 (checked 12.11.2026).
+- Study 2 (concept 4): https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2023.1234767/full (checked 12.11.2026).
 - Prices, plans and the clinic mock: src/content/agentPage.ts (this repo).

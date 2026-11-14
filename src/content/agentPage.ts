@@ -15,7 +15,7 @@ export const FACE_VIDEO = '/agent/face.mp4';
 export const FACE_POSTER = '/agent/face.jpg';
 
 /** Cropped, compressed web cuts of /media/maya_speaking_{he,en,th}.mp4 (head to waist, 480x600). */
-export const TALK_VIDEO: L10n = { he: '/agent/talk-he.mp4', en: '/agent/talk-en.mp4', th: '/agent/talk-th.mp4' };
+export const TALK_VIDEO: L10n = { he: '/agent/talk-en.mp4', en: '/agent/talk-en.mp4', th: '/agent/talk-th.mp4' };
 export const TALK_POSTER = '/agent/talk.jpg';
 
 /** Tools screen recording from private test sessions. Swap when the real widget session is recorded. */

@@ -8,15 +8,14 @@ import { WhatsAppGlyph, LineGlyph } from '@/components/site/icons';
 import { useSeo, serviceLd, faqLd, breadcrumbLd, ORG_ID } from '@/components/site/Seo';
 import { WHATSAPP_URL, LINE_URL } from '@/config/avatars';
 import { routeMeta, urlFor, SITE_URL, type L10n } from '@/config/site';
+import { money, CURRENCY, type Money } from '@/config/currency';
 import { trackWhatsAppClick, trackLineClick } from '@/lib/analytics';
 import {
   FACE_VIDEO, FACE_POSTER, TALK_VIDEO, TALK_POSTER, WORK_VIDEO, WORK_POSTER, STYLES,
-  HERO, MOCK, TALK, BIZ, REELS, WORK, HOW, PRICING, COMPARE, FAQ_HEAD, FAQ, FINAL, SECTIONS, type Plan,
+  HERO, MOCK, TALK, BIZ, REELS, WORK, HOW, PRICING, PRICES, COMPARE, FAQ_HEAD, FAQ, FINAL, SECTIONS, type Plan,
 } from '@/content/agentPage';
 
 const PATH = '/customer-service';
-
-const shekel = (n: number) => `₪${n.toLocaleString('en-US')}`;
 
 /** The display faces draw ₪ as a ש״ח ligature or lack it; set the sign in the body face. */
 const sh = (text: string) =>
@@ -470,9 +469,9 @@ function LoopFace({ className = '' }: { className?: string }) {
 /* ------------------------------------------------------------------ comparison */
 
 function CostBars() {
-  const { tr, fontDisplay } = useT();
-  const max = COMPARE.bars[0].total;
-  const pct = (n: number) => `${Math.max(6, (n / max) * 100)}%`;
+  const { tr, fontDisplay, language } = useT();
+  const max = COMPARE.bars[0].total[language];
+  const pct = (m: Money) => `${Math.max(6, (m[language] / max) * 100)}%`;
   return (
     <div className="mt-10">
       <p className="text-[0.98rem] font-semibold text-ink/85">{tr(COMPARE.scenario)}</p>
@@ -482,7 +481,7 @@ function CostBars() {
             <span className="text-[0.98rem] font-semibold text-ink/70">{b.name}</span>
             <span className="flex items-center gap-3 min-w-0">
               <span className="h-3.5 rounded-full bg-ink/25" style={{ width: pct(b.total) }} aria-hidden />
-              <span dir="ltr" className="font-mono-num text-[0.95rem] sm:text-[1.05rem] text-ink/60 whitespace-nowrap">≈{shekel(b.total)}</span>
+              <span dir="ltr" className="font-mono-num text-[0.95rem] sm:text-[1.05rem] text-ink/60 whitespace-nowrap">≈{money(b.total, language)}</span>
             </span>
           </li>
         ))}
@@ -493,7 +492,7 @@ function CostBars() {
           </span>
           <span className="flex flex-wrap items-center gap-x-3 gap-y-1 min-w-0">
             <span className="h-3.5 rounded-full bg-live-gradient" style={{ width: pct(COMPARE.oursTotal) }} aria-hidden />
-            <span className={`${fontDisplay} text-[1.9rem] sm:text-[2.4rem] leading-none text-live-gradient`}>{sh(shekel(COMPARE.oursTotal))}</span>
+            <span className={`${fontDisplay} text-[1.9rem] sm:text-[2.4rem] leading-none text-live-gradient`}>{sh(money(COMPARE.oursTotal, language))}</span>
             <span className="text-[0.82rem] text-ink/60">{tr(COMPARE.oursNote)}</span>
           </span>
         </li>
@@ -503,7 +502,7 @@ function CostBars() {
 }
 
 function CostBreakdown() {
-  const { tr } = useT();
+  const { tr, language } = useT();
   const L = COMPARE.layers;
   return (
     <details className="group mt-10 rounded-2xl border border-ink/10 bg-paper/60">
@@ -531,7 +530,7 @@ function CostBreakdown() {
                 </td>
                 {row.others.map((c, j) => (
                   <td key={j} className="p-3">
-                    <span dir="ltr" className="block font-mono-num text-ink/80">{c.t}</span>
+                    <span dir="ltr" className="block font-mono-num text-ink/80">{tr(c.t)}</span>
                     <span className="mt-0.5 block text-[0.76rem] leading-[1.4] text-ink/50">{tr(c.note)}</span>
                   </td>
                 ))}
@@ -539,8 +538,8 @@ function CostBreakdown() {
             ))}
             <tr className="border-t-2 border-ink/20">
               <th scope="row" className="p-3 text-start font-bold text-ink">{tr(COMPARE.totalLabel)}</th>
-              <td className="p-3 bg-live-a/[0.08] rounded-b-xl font-mono-num font-bold text-live-a">{shekel(COMPARE.oursTotal)}</td>
-              {COMPARE.otherTotals.map((t, j) => <td key={j} dir="ltr" className="p-3 text-start font-mono-num text-ink/60">{t}</td>)}
+              <td className="p-3 bg-live-a/[0.08] rounded-b-xl font-mono-num font-bold text-live-a">{money(COMPARE.oursTotal, language)}</td>
+              {COMPARE.otherTotals.map((t, j) => <td key={j} dir="ltr" className="p-3 text-start font-mono-num text-ink/60">{tr(t)}</td>)}
             </tr>
           </tbody>
         </table>
@@ -553,7 +552,7 @@ function CostBreakdown() {
               <dd className="mt-2 grid grid-cols-2 gap-x-4 gap-y-2 text-[0.85rem]">
                 <span className="font-semibold text-live-a">{COMPARE.oursName}: {tr(row.ours)}</span>
                 {row.others.map((c, j) => (
-                  <span key={j} className="text-ink/70">{COMPARE.competitors[j]}: <bdi dir="ltr" className="font-mono-num">{c.t}</bdi></span>
+                  <span key={j} className="text-ink/70">{COMPARE.competitors[j]}: <bdi dir="ltr" className="font-mono-num">{tr(c.t)}</bdi></span>
                 ))}
               </dd>
             </div>
@@ -567,7 +566,7 @@ function CostBreakdown() {
 /* ------------------------------------------------------------------ pricing */
 
 function PlanCard({ p, cta }: { p: Plan; cta: { href: (msg: L10n) => string; track: (where: string) => () => void; Icon: typeof WhatsAppGlyph } }) {
-  const { tr } = useT();
+  const { tr, language } = useT();
   const rec = !!p.recommended;
   return (
     <article
@@ -581,7 +580,7 @@ function PlanCard({ p, cta }: { p: Plan; cta: { href: (msg: L10n) => string; tra
       <h3 className="text-[1.2rem] font-bold text-ink">{tr(p.name)}</h3>
       <p className="mt-1 text-[0.9rem] text-ink/60">{tr(p.tagline)}</p>
       <p className="mt-5 flex items-baseline gap-2">
-        <span className="font-mono-num text-[2.6rem] font-semibold leading-none text-ink">{shekel(p.price)}</span>
+        <span className="font-mono-num text-[2.6rem] font-semibold leading-none text-ink">{money(p.price, language)}</span>
         <span className="text-[0.95rem] text-muted-foreground">{tr(PRICING.perMonth)}</span>
       </p>
       <p className="mt-3 text-[0.98rem] text-ink/85">
@@ -589,7 +588,7 @@ function PlanCard({ p, cta }: { p: Plan; cta: { href: (msg: L10n) => string; tra
         <span className="text-ink/55"> · {tr(PRICING.convsLabel(p.convs))}</span>
       </p>
       <p className="mt-1 text-[0.86rem] text-ink/60">
-        <span dir="ltr" className="font-mono-num">{p.perConv}</span> {tr(PRICING.perConvLabel)} · <span dir="ltr" className="font-mono-num">{p.perDay}</span> {tr(PRICING.perDayLabel)}
+        <span dir="ltr" className="font-mono-num">{tr(p.perConv)}</span> {tr(PRICING.perConvLabel)} · <span dir="ltr" className="font-mono-num">{tr(p.perDay)}</span> {tr(PRICING.perDayLabel)}
       </p>
       <ul className="mt-5 pt-4 border-t border-ink/10 space-y-2 text-[0.94rem] leading-[1.5] text-ink/85">
         {p.includes.map((f, i) => (
@@ -630,20 +629,21 @@ export default function AgentPage() {
 
   const meta = routeMeta(PATH)!;
   const pageUrl = urlFor(PATH, language);
-  const offer = (name: string, description: string, price: number) => ({
+  const currency = CURRENCY[language];
+  const offer = (name: string, description: string, m: Money) => ({
     '@type': 'Offer',
     name: `Refael.ai ${name}`,
     description,
-    price: String(price),
-    priceCurrency: 'ILS',
+    price: String(m[language]),
+    priceCurrency: currency,
     url: `${pageUrl}#pricing`,
     availability: 'https://schema.org/InStock',
-    ...(price > 0 ? { priceSpecification: { '@type': 'UnitPriceSpecification', price: String(price), priceCurrency: 'ILS', unitText: 'MONTH' } } : {}),
+    ...(m[language] > 0 ? { priceSpecification: { '@type': 'UnitPriceSpecification', price: String(m[language]), priceCurrency: currency, unitText: 'MONTH' } } : {}),
     seller: { '@id': ORG_ID },
   });
   const offers = [
-    offer('Free demo', '3-minute live demo on your own site + consultation', 0),
-    ...PRICING.plans.map(p => offer(p.name.en, `${p.minutes} conversation minutes a month, setup ₪0`, p.price)),
+    offer('Free demo', '3-minute live demo on your own site + consultation', PRICES.demo),
+    ...PRICING.plans.map(p => offer(p.name.en, `${p.minutes} conversation minutes a month, setup ${money(PRICES.setup, language)}`, p.price)),
   ];
   useSeo({
     path: PATH,
@@ -803,7 +803,7 @@ export default function AgentPage() {
             <article className="flex flex-col rounded-[22px] p-6 border border-dashed border-ink/25">
               <h3 className="text-[1.2rem] font-bold text-ink">{tr(PRICING.free.name)}</h3>
               <p className="mt-1 text-[0.9rem] text-ink/60">{tr(PRICING.free.tagline)}</p>
-              <p className="mt-5 font-mono-num text-[2.6rem] font-semibold leading-none text-ink">₪0</p>
+              <p className="mt-5 font-mono-num text-[2.6rem] font-semibold leading-none text-ink">{money(PRICES.demo, language)}</p>
               <ul className="mt-5 pt-4 border-t border-ink/10 space-y-2 text-[0.94rem] leading-[1.5] text-ink/85">
                 {PRICING.free.includes.map((f, i) => (
                   <li key={i} className="flex gap-2">

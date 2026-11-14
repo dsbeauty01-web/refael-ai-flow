@@ -1,4 +1,28 @@
 import type { L10n } from '@/config/site';
+import { money, perLang, type Money } from '@/config/currency';
+
+/* ------------------------------------------------------------------ prices */
+
+/**
+ * The one price table for this page. Hebrew ₪, English $, Thai ฿ (see config/currency.ts).
+ * Decided, rounded prices per language: change them here only.
+ */
+export const PRICES = {
+  demo: { he: 0, en: 0, th: 0 },
+  setup: { he: 0, en: 0, th: 0 },
+  start: { he: 99, en: 29, th: 990 },
+  business: { he: 390, en: 119, th: 3900 },
+  pro: { he: 790, en: 239, th: 7900 },
+  extraMinute: { he: 2.5, en: 0.79, th: 25 },
+  customCharacter: { he: 490, en: 149, th: 4900 },
+} satisfies Record<string, Money>;
+
+type PriceKey = keyof typeof PRICES;
+const P = (k: PriceKey) => perLang(lang => money(PRICES[k], lang));
+const START = P('start');
+const SETUP = P('setup');
+const EXTRA_MIN = P('extraMinute');
+const CUSTOM = P('customCharacter');
 
 /**
  * /customer-service (v2): the live talking-face website agent.
@@ -54,8 +78,8 @@ export const HERO = {
     en: 'A talking face in the corner of your site, 24/7. One line of code.',
     th: 'ใบหน้าที่พูดได้ที่มุมเว็บไซต์ ตลอด 24 ชั่วโมง โค้ดบรรทัดเดียว',
   } as L10n,
-  priceChip: { he: 'מ־₪99 לחודש', en: 'From ₪99 a month', th: 'เริ่ม ₪99 ต่อเดือน' } as L10n,
-  priceChipNote: { he: 'הקמה ₪0. מבטלים בכל חודש.', en: 'Setup ₪0. Cancel any month.', th: 'ค่าติดตั้ง ₪0 ยกเลิกได้ทุกเดือน' } as L10n,
+  priceChip: { he: `מ־${START.he} לחודש`, en: `From ${START.en} a month`, th: `เริ่ม ${START.th} ต่อเดือน` } as L10n,
+  priceChipNote: { he: `הקמה ${SETUP.he}. מבטלים בכל חודש.`, en: `Setup ${SETUP.en}. Cancel any month.`, th: `ค่าติดตั้ง ${SETUP.th} ยกเลิกได้ทุกเดือน` } as L10n,
   cta: {
     he: 'הדגמה חיה על האתר שלכם, בחינם',
     en: 'Free live demo on your own site',
@@ -270,29 +294,29 @@ export type Plan = {
   id: 'start' | 'business' | 'pro';
   name: L10n;
   tagline: L10n;
-  price: number;
+  price: Money;
   minutes: number;
   convs: number;
-  perMin: string;
-  perConv: string;
-  perDay: string;
+  /** price ÷ conversations and price ÷ 30 days, rounded by hand per currency */
+  perConv: L10n;
+  perDay: L10n;
   includes: L10n[];
   recommended?: boolean;
 };
 
-const SETUP_FREE: L10n = { he: 'הקמה ₪0', en: 'Setup ₪0', th: 'ค่าติดตั้ง ₪0' };
+const SETUP_FREE: L10n = { he: `הקמה ${SETUP.he}`, en: `Setup ${SETUP.en}`, th: `ค่าติดตั้ง ${SETUP.th}` };
 
 export const PRICING = {
   title: { he: 'מחירים', en: 'Pricing', th: 'ราคา' } as L10n,
   statement: {
     he: 'שיחה עם לקוח: מ־₪4 בערך',
-    en: 'A conversation with a customer: from about ₪4',
-    th: 'คุยกับลูกค้าหนึ่งครั้ง: เริ่มราว ₪4',
+    en: 'A conversation with a customer: from about $1.20',
+    th: 'คุยกับลูกค้าหนึ่งครั้ง: เริ่มราว ฿41',
   } as L10n,
   statementNote: {
-    he: 'שיחה טיפוסית של 2.5 דקות בחבילת Start. מחירים סופיים, הקמה ₪0, מבטלים בכל חודש.',
-    en: 'A typical 2.5-minute conversation on Start. Final prices, setup ₪0, cancel any month.',
-    th: 'บทสนทนาทั่วไป 2.5 นาทีในแพ็กเกจ Start ราคาสุทธิ ค่าติดตั้ง ₪0 ยกเลิกได้ทุกเดือน',
+    he: `שיחה טיפוסית של 2.5 דקות בחבילת Start. מחירים סופיים, הקמה ${SETUP.he}, מבטלים בכל חודש.`,
+    en: `A typical 2.5-minute conversation on Start. Final prices, setup ${SETUP.en}, cancel any month.`,
+    th: `บทสนทนาทั่วไป 2.5 นาทีในแพ็กเกจ Start ราคาสุทธิ ค่าติดตั้ง ${SETUP.th} ยกเลิกได้ทุกเดือน`,
   } as L10n,
   perMonth: { he: 'לחודש', en: '/ month', th: '/ เดือน' } as L10n,
   minutesLabel: { he: 'דקות שיחה', en: 'minutes of conversation', th: 'นาทีสนทนา' } as L10n,
@@ -315,12 +339,11 @@ export const PRICING = {
       id: 'start',
       name: { he: 'Start', en: 'Start', th: 'Start' },
       tagline: { he: 'להתחיל בקטן', en: 'To start small', th: 'เริ่มเล็กๆ ก่อน' },
-      price: 99,
+      price: PRICES.start,
       minutes: 60,
       convs: 24,
-      perMin: '≈₪1.65',
-      perConv: '≈₪4',
-      perDay: '≈₪3.30',
+      perConv: { he: '≈₪4', en: '≈$1.20', th: '≈฿41' },
+      perDay: { he: '≈₪3.30', en: '≈$0.97', th: '≈฿33' },
       includes: [
         { he: 'דמות מוכנה מהספרייה', en: 'A ready-made character', th: 'ตัวละครสำเร็จรูป' },
         SETUP_FREE,
@@ -330,12 +353,11 @@ export const PRICING = {
       id: 'business',
       name: { he: 'Business', en: 'Business', th: 'Business' },
       tagline: { he: 'דמות משלכם, מספיק לעסק פעיל', en: 'Your own character, enough for an active business', th: 'ตัวละครของคุณเอง พอสำหรับธุรกิจที่มีลูกค้าเข้าเรื่อยๆ' },
-      price: 390,
+      price: PRICES.business,
       minutes: 150,
       convs: 60,
-      perMin: '₪2.60',
-      perConv: '₪6.50',
-      perDay: '₪13',
+      perConv: { he: '₪6.50', en: '≈$2', th: '฿65' },
+      perDay: { he: '₪13', en: '≈$4', th: '฿130' },
       includes: [
         { he: 'דמות מותאמת אישית, כלולה', en: 'Your own custom character, included', th: 'ตัวละครเฉพาะของคุณ รวมแล้ว' },
         SETUP_FREE,
@@ -346,12 +368,11 @@ export const PRICING = {
       id: 'pro',
       name: { he: 'Pro', en: 'Pro', th: 'Pro' },
       tagline: { he: 'נציג שגם מבצע פעולות', en: 'An agent that also takes actions', th: 'เจ้าหน้าที่ที่ลงมือทำงานให้ด้วย' },
-      price: 790,
+      price: PRICES.pro,
       minutes: 400,
       convs: 160,
-      perMin: '≈₪1.98',
-      perConv: '≈₪5',
-      perDay: '≈₪26',
+      perConv: { he: '≈₪5', en: '≈$1.50', th: '≈฿49' },
+      perDay: { he: '≈₪26', en: '≈$8', th: '≈฿263' },
       includes: [
         { he: 'דמות מותאמת אישית', en: 'Custom character', th: 'ตัวละครเฉพาะของคุณ' },
         { he: 'פעולות n8n: תורים, CRM, מעקב בוואטסאפ', en: 'n8n actions: booking, CRM, WhatsApp follow-up', th: 'แอ็กชัน n8n: จองคิว CRM ติดตามทาง WhatsApp' },
@@ -366,15 +387,15 @@ export const PRICING = {
     th: `สวัสดีครับ/ค่ะ สนใจแพ็กเกจ ${name} สำหรับเจ้าหน้าที่บนเว็บ เว็บของฉัน: `,
   }),
   extras: [
-    { k: { he: 'דקה נוספת', en: 'Extra minute', th: 'นาทีเพิ่มเติม' }, v: { he: '₪2.50', en: '₪2.50', th: '₪2.50' } },
-    { k: { he: 'דמות משלכם ב־Start', en: 'Own character on Start', th: 'ตัวละครเฉพาะใน Start' }, v: { he: '₪490 חד־פעמי, לא חובה', en: '₪490 once, optional', th: '₪490 ครั้งเดียว ไม่บังคับ' } },
+    { k: { he: 'דקה נוספת', en: 'Extra minute', th: 'นาทีเพิ่มเติม' }, v: EXTRA_MIN },
+    { k: { he: 'דמות משלכם ב־Start', en: 'Own character on Start', th: 'ตัวละครเฉพาะใน Start' }, v: { he: `${CUSTOM.he} חד־פעמי, לא חובה`, en: `${CUSTOM.en} once, optional`, th: `${CUSTOM.th} ครั้งเดียว ไม่บังคับ` } },
     { k: { he: 'תשלום שנתי', en: 'Annual billing', th: 'จ่ายรายปี' }, v: { he: 'חודשיים מתנה', en: '2 months free', th: 'ฟรี 2 เดือน' } },
     { k: { he: 'ביטול', en: 'Cancel', th: 'ยกเลิก' }, v: { he: 'בכל חודש', en: 'Any month', th: 'ได้ทุกเดือน' } },
   ] as { k: L10n; v: L10n }[],
   foreign: {
     he: '',
-    en: 'Prices in Israeli shekels. Outside Israel, ask for a USD or THB quote.',
-    th: 'ราคาเป็นเงินเชเกลอิสราเอล หากอยู่นอกอิสราเอล ขอใบเสนอราคาเป็น USD หรือ THB ได้',
+    en: 'Prices in US dollars.',
+    th: 'ราคาเป็นเงินบาท',
   } as L10n,
 };
 
@@ -385,6 +406,7 @@ export const PRICING = {
  * $1 = ₪3.08 (Wise, Nov 12 2026), €1 ≈ ₪3.55. Competitor list prices from HeyGen's blog
  * (updated Oct 29 2026), n8n Starter €24 (toolradar 2026), developer from ≈₪5,000 (AI Buddy, dev.to 2026).
  * First year = (face + n8n) × 12 + developer.
+ * en and th show the same list prices converted at the Nov 12 2026 rates (≈$1 = ₪3.08 = ฿32.6), rounded.
  */
 export const COMPARE = {
   hook: {
@@ -398,14 +420,19 @@ export const COMPARE = {
     th: 'ปีแรก รวมทุกอย่าง สนทนา 150 นาทีต่อเดือน พร้อมตัวละครเฉพาะของคุณ',
   } as L10n,
   oursName: 'Refael.ai',
-  oursNote: { he: '₪390 × 12, הקמה ₪0', en: '₪390 × 12, setup ₪0', th: '₪390 × 12 ค่าติดตั้ง ₪0' } as L10n,
+  oursNote: perLang(l => ({
+    he: `${money(PRICES.business, l)} × 12, הקמה ${money(PRICES.setup, l)}`,
+    en: `12 × ${money(PRICES.business, l)}, setup ${money(PRICES.setup, l)}`,
+    th: `12 × ${money(PRICES.business, l)} ค่าติดตั้ง ${money(PRICES.setup, l)}`,
+  })[l]) as L10n,
   faceAlt: { he: 'הפנים המדברות של הנציג', en: "The agent's talking face", th: 'ใบหน้าที่พูดได้ของเจ้าหน้าที่' } as L10n,
   bars: [
-    { name: 'HeyGen', total: 23600 },
-    { name: 'D-ID', total: 16900 },
-    { name: 'Tavus', total: 10100 },
-  ],
-  oursTotal: 4680,
+    { name: 'HeyGen', total: { he: 23600, en: 7700, th: 250000 } },
+    { name: 'D-ID', total: { he: 16900, en: 5500, th: 179000 } },
+    { name: 'Tavus', total: { he: 10100, en: 3300, th: 107000 } },
+  ] as { name: string; total: Money }[],
+  /** 12 × Business */
+  oursTotal: { he: 4680, en: 1428, th: 46800 } as Money,
   breakdownTitle: { he: 'איך חישבנו', en: 'How we counted', th: 'เราคำนวณอย่างไร' } as L10n,
   competitors: ['HeyGen', 'Tavus', 'D-ID'],
   layers: [
@@ -413,24 +440,29 @@ export const COMPARE = {
       label: { he: 'פנים + קול, דמות מותאמת, לחודש', en: 'Face + voice, custom character, a month', th: 'ใบหน้า + เสียง ตัวละครเฉพาะ ต่อเดือน' },
       ours: { he: 'כלול', en: 'Included', th: 'รวมแล้ว' },
       others: [
-        { t: '≈₪1,463', note: { he: 'Business ‏$475, נדרש לדמות מותאמת ב־1080p', en: 'Business $475, needed for custom 1080p', th: 'Business $475 จำเป็นสำหรับตัวละครเฉพาะ 1080p' } },
-        { t: '≈₪343', note: { he: '$59 + ‏150 דקות × $0.35', en: '$59 + 150 min × $0.35', th: '$59 + 150 นาที × $0.35' } },
-        { t: '≈₪906', note: { he: '$1.96 לדקה (Advanced). מעל 100 דקות: הצעת מחיר ארגונית', en: '$1.96/min (Advanced). Above 100 min: enterprise quote', th: '$1.96/นาที (Advanced) เกิน 100 นาทีต้องขอราคาองค์กร' } },
+        { t: { he: '≈₪1,463', en: '$475', th: '≈฿15,500' }, note: { he: 'Business ‏$475, נדרש לדמות מותאמת ב־1080p', en: 'Business $475, needed for custom 1080p', th: 'Business $475 จำเป็นสำหรับตัวละครเฉพาะ 1080p' } },
+        { t: { he: '≈₪343', en: '≈$112', th: '≈฿3,600' }, note: { he: '$59 + ‏150 דקות × $0.35', en: '$59 + 150 min × $0.35', th: '$59 + 150 นาที × $0.35' } },
+        { t: { he: '≈₪906', en: '≈$294', th: '≈฿9,600' }, note: { he: '$1.96 לדקה (Advanced). מעל 100 דקות: הצעת מחיר ארגונית', en: '$1.96/min (Advanced). Above 100 min: enterprise quote', th: '$1.96/นาที (Advanced) เกิน 100 นาทีต้องขอราคาองค์กร' } },
       ],
     },
     {
       label: { he: '+ סוכן AI (אחסון n8n), לחודש', en: '+ AI agent (n8n hosting), a month', th: '+ AI agent (โฮสต์ n8n) ต่อเดือน' },
       ours: { he: 'כלול', en: 'Included', th: 'รวมแล้ว' },
-      others: Array(3).fill({ t: '≈₪85', note: { he: 'n8n Starter ‏€24', en: 'n8n Starter €24', th: 'n8n Starter €24' } }),
+      others: Array(3).fill({ t: { he: '≈₪85', en: '≈$28', th: '≈฿900' }, note: { he: 'n8n Starter ‏€24', en: 'n8n Starter €24', th: 'n8n Starter €24' } }),
     },
     {
       label: { he: '+ מתכנת: לידים, תורים, וואטסאפ, עברית', en: '+ Developer: leads, booking, WhatsApp, Hebrew', th: '+ นักพัฒนา: ลีด การจอง WhatsApp ภาษาฮีบรู' },
-      ours: { he: '₪0', en: '₪0', th: '₪0' },
-      others: Array(3).fill({ t: '≈₪5,000+', note: { he: 'חד־פעמי, לפחות', en: 'once, at least', th: 'ครั้งเดียว ขั้นต่ำ' } }),
+      ours: SETUP,
+      others: Array(3).fill({ t: { he: '≈₪5,000+', en: '≈$1,600+', th: '≈฿53,000+' }, note: { he: 'חד־פעמי, לפחות', en: 'once, at least', th: 'ครั้งเดียว ขั้นต่ำ' } }),
     },
-  ] as { label: L10n; ours: L10n; others: { t: string; note: L10n }[] }[],
+  ] as { label: L10n; ours: L10n; others: { t: L10n; note: L10n }[] }[],
   totalLabel: { he: 'שנה ראשונה', en: 'First year', th: 'ปีแรก' } as L10n,
-  otherTotals: ['≈₪23,600', '≈₪10,100', '≈₪16,900'],
+  /** same order as `competitors` */
+  otherTotals: [
+    { he: '≈₪23,600', en: '≈$7,700', th: '≈฿250,000' },
+    { he: '≈₪10,100', en: '≈$3,300', th: '≈฿107,000' },
+    { he: '≈₪16,900', en: '≈$5,500', th: '≈฿179,000' },
+  ] as L10n[],
   honest: {
     he: 'לפי דקה גולמית, מנועים שמוכרים רק פנים יכולים לצאת זולים יותר. הם מוכרים פנים. אנחנו מספקים נציג עובד.',
     en: 'Per raw minute, face-only engines can be cheaper. They sell a face. We deliver a working agent.',
@@ -438,8 +470,8 @@ export const COMPARE = {
   } as L10n,
   sourcesNote: {
     he: 'מחירי מחירון כפי שפורסמו. ‏$1 = ₪3.08 (Wise, 12 בנובמבר 2026), €1 ≈ ₪3.55. מעוגל ומסומן ≈. הסכומים של המתחרים הם רף תחתון.',
-    en: 'Published list prices. $1 = ₪3.08 (Wise, Nov 12 2026), €1 ≈ ₪3.55. Rounded and marked ≈. Competitor totals are lower bounds.',
-    th: 'ราคาตามที่เผยแพร่ $1 = ₪3.08 (Wise, 12 พ.ย. 2026) €1 ≈ ₪3.55 ปัดเศษและทำเครื่องหมาย ≈ ยอดของผู้ให้บริการอื่นเป็นค่าขั้นต่ำ',
+    en: 'Published list prices, converted to US dollars at the rates of Nov 12 2026 (Wise). Converted figures are rounded and marked ≈. Competitor totals are lower bounds.',
+    th: 'ราคาตามที่เผยแพร่ แปลงเป็นเงินบาทตามอัตราแลกเปลี่ยนวันที่ 12 พ.ย. 2026 (Wise) ตัวเลขที่แปลงแล้วปัดเศษและทำเครื่องหมาย ≈ ยอดของผู้ให้บริการอื่นเป็นค่าขั้นต่ำ',
   } as L10n,
   sources: [
     {
@@ -486,17 +518,17 @@ export const FAQ: { q: L10n; a: L10n }[] = [
   {
     q: { he: 'אפשר לבטל?', en: 'Can I cancel?', th: 'ยกเลิกได้ไหม?' },
     a: {
-      he: 'כן, בכל חודש. התשלום חודשי, ההקמה ₪0. בתשלום שנתי מקבלים חודשיים מתנה.',
-      en: 'Yes, any month. Billing is monthly and setup is ₪0. Pay yearly and get 2 months free.',
-      th: 'ได้ทุกเดือน เรียกเก็บรายเดือน ค่าติดตั้ง ₪0 จ่ายรายปีฟรี 2 เดือน',
+      he: `כן, בכל חודש. התשלום חודשי, ההקמה ${SETUP.he}. בתשלום שנתי מקבלים חודשיים מתנה.`,
+      en: `Yes, any month. Billing is monthly and setup is ${SETUP.en}. Pay yearly and get 2 months free.`,
+      th: `ได้ทุกเดือน เรียกเก็บรายเดือน ค่าติดตั้ง ${SETUP.th} จ่ายรายปีฟรี 2 เดือน`,
     },
   },
   {
     q: { he: 'מה נחשב דקה, ומה אם עוברים את החבילה?', en: 'What counts as a minute, and what if I go over?', th: 'นับนาทีอย่างไร และถ้าใช้เกินล่ะ?' },
     a: {
-      he: 'נספרות רק דקות של שיחה פעילה עם מבקר. שיחה טיפוסית לוקחת בערך 2.5 דקות. מעבר לחבילה כל דקה עולה ₪2.50, ואפשר לעבור לחבילה גדולה יותר בכל רגע.',
-      en: 'Only active conversation minutes with a visitor count. A typical conversation is about 2.5 minutes. Beyond your plan each minute is ₪2.50, and you can move up a plan any time.',
-      th: 'นับเฉพาะนาทีที่สนทนากับผู้เข้าชมจริง บทสนทนาทั่วไปราว 2.5 นาที ถ้าเกินแพ็กเกจ นาทีละ ₪2.50 และเปลี่ยนเป็นแพ็กเกจใหญ่ขึ้นได้ทุกเมื่อ',
+      he: `נספרות רק דקות של שיחה פעילה עם מבקר. שיחה טיפוסית לוקחת בערך 2.5 דקות. מעבר לחבילה כל דקה עולה ${EXTRA_MIN.he}, ואפשר לעבור לחבילה גדולה יותר בכל רגע.`,
+      en: `Only active conversation minutes with a visitor count. A typical conversation is about 2.5 minutes. Beyond your plan each minute is ${EXTRA_MIN.en}, and you can move up a plan any time.`,
+      th: `นับเฉพาะนาทีที่สนทนากับผู้เข้าชมจริง บทสนทนาทั่วไปราว 2.5 นาที ถ้าเกินแพ็กเกจ นาทีละ ${EXTRA_MIN.th} และเปลี่ยนเป็นแพ็กเกจใหญ่ขึ้นได้ทุกเมื่อ`,
     },
   },
   {

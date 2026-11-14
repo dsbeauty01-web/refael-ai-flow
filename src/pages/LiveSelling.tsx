@@ -8,16 +8,16 @@ import { WhatsAppGlyph, LineGlyph, SpeakerGlyph } from '@/components/site/icons'
 import { useSeo, serviceLd, faqLd, breadcrumbLd, ORG_ID } from '@/components/site/Seo';
 import { WHATSAPP_URL, LINE_URL } from '@/config/avatars';
 import { routeMeta, urlFor, SITE_URL, type L10n } from '@/config/site';
+import { money, CURRENCY, type Money } from '@/config/currency';
 import { trackWhatsAppClick, trackLineClick } from '@/lib/analytics';
 import {
-  TAGS, SECTIONS, HERO_VIDEO, HERO_POSTER, HERO, PLATFORMS, GALLERY, COHOST, USE_CASES, PRICING,
+  TAGS, SECTIONS, HERO_VIDEO, HERO_POSTER, HERO, PLATFORMS, GALLERY, COHOST, USE_CASES, PRICING, PRICES,
   FAQ_EYEBROW, FAQ_HEAD, FAQ, FINAL,
   type Tag, type LivePlan, type Platform,
 } from '@/content/liveSelling';
 
 const PATH = '/live-selling';
 
-const shekel = (n: number) => `₪${n.toLocaleString('en-US')}`;
 
 /** The display faces draw ₪ as a ש״ח ligature or lack it; set the sign in the body face. */
 const sh = (text: string) =>
@@ -338,9 +338,9 @@ function CohostVideo() {
 function PlanCard({ p, href, onClick, Icon, ctaColor }: {
   p: LivePlan; href: string; onClick: () => void; Icon: typeof WhatsAppGlyph; ctaColor: string;
 }) {
-  const { tr } = useT();
+  const { tr, language } = useT();
   const rec = !!p.recommended;
-  const free = p.price === 0;
+  const free = p.price !== null && p.price[language] === 0;
   return (
     <article
       className={`relative flex flex-col rounded-[22px] p-6 ${
@@ -355,7 +355,7 @@ function PlanCard({ p, href, onClick, Icon, ctaColor }: {
       <h3 className="text-[1.2rem] font-bold text-ink">{tr(p.name)}</h3>
       <p className="mt-4 flex flex-wrap items-baseline gap-x-2 gap-y-1">
         <span className="tabular-nums text-[2.5rem] font-bold leading-none tracking-tight text-ink">
-          {p.price === null ? <span className="font-sans text-[1.9rem]">{tr(PRICING.quote)}</span> : sh(shekel(p.price))}
+          {p.price === null ? <span className="font-sans text-[1.9rem]">{tr(PRICING.quote)}</span> : sh(money(p.price, language))}
         </span>
         <span className="text-[0.95rem] text-muted-foreground">{sh(tr(p.unit))}</span>
       </p>
@@ -398,21 +398,22 @@ export default function LiveSelling() {
 
   const meta = routeMeta(PATH)!;
   const pageUrl = urlFor(PATH, language);
-  const offer = (name: string, description: string, price: number, unitText?: string) => ({
+  const currency = CURRENCY[language];
+  const offer = (name: string, description: string, m: Money, unitText?: string) => ({
     '@type': 'Offer',
     name: `Refael.ai ${name}`,
     description,
-    price: String(price),
-    priceCurrency: 'ILS',
+    price: String(m[language]),
+    priceCurrency: currency,
     url: `${pageUrl}#pricing`,
     availability: 'https://schema.org/InStock',
-    ...(unitText ? { priceSpecification: { '@type': 'UnitPriceSpecification', price: String(price), priceCurrency: 'ILS', unitText } } : {}),
+    ...(unitText ? { priceSpecification: { '@type': 'UnitPriceSpecification', price: String(m[language]), priceCurrency: currency, unitText } } : {}),
     seller: { '@id': ORG_ID },
   });
   const offers = [
-    offer('Free test live', '10-minute test live with your product', 0),
-    offer('AI live host, per live hour', 'One live hour with a ready-made AI host on YouTube, Facebook or TikTok', 199, 'HOUR'),
-    offer('AI live host, 10 live hours', '10 live hours, about ₪149 an hour', 1490),
+    offer('Free test live', '10-minute test live with your product', PRICES.test),
+    offer('AI live host, per live hour', 'One live hour with a ready-made AI host on YouTube, Facebook or TikTok', PRICES.hour, 'HOUR'),
+    offer('AI live host, 10 live hours', `10 live hours, about ${money(PRICES.packPerHour, language)} an hour`, PRICES.pack),
   ];
   useSeo({
     path: PATH,

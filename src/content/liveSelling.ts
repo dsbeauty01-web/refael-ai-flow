@@ -1,4 +1,5 @@
 import type { L10n } from '@/config/site';
+import { money, type Money } from '@/config/currency';
 
 /**
  * /live-selling (v3, Nov 2026): the AI live host page, written for the seller who buys it.
@@ -403,10 +404,23 @@ export const USE_CASES = {
 
 /* ------------------------------------------------------------------ pricing */
 
+/**
+ * The one price table for this page. Hebrew ₪, English $, Thai ฿ (see config/currency.ts).
+ * Decided, rounded prices per language: change them here only. The custom character is a quote.
+ */
+export const PRICES = {
+  test: { he: 0, en: 0, th: 0 },
+  hour: { he: 199, en: 59, th: 1900 },
+  pack: { he: 1490, en: 449, th: 14900 },
+  /** pack ÷ 10 hours, rounded */
+  packPerHour: { he: 149, en: 45, th: 1490 },
+} satisfies Record<string, Money>;
+
 export type LivePlan = {
   id: 'test' | 'hour' | 'pack' | 'custom';
   name: L10n;
-  price: number | null;
+  /** null = quote */
+  price: Money | null;
   unit: L10n;
   includes: L10n[];
   cta: L10n;
@@ -426,8 +440,8 @@ export const PRICING = {
   } as L10n,
   note: {
     he: 'מחירים סופיים בשקלים.',
-    en: 'Final prices in Israeli shekels. Outside Israel, ask for a USD or THB quote.',
-    th: 'ราคาสุทธิเป็นเงินเชเกลอิสราเอล หากอยู่นอกอิสราเอล ขอใบเสนอราคาเป็น USD หรือ THB ได้ครับ',
+    en: 'Final prices in US dollars.',
+    th: 'ราคาสุทธิเป็นเงินบาทครับ',
   } as L10n,
   recommended: { he: 'הכי משתלם', en: 'Best value', th: 'คุ้มที่สุด' } as L10n,
   quote: { he: 'הצעת מחיר', en: 'Quote', th: 'ใบเสนอราคา' } as L10n,
@@ -435,7 +449,7 @@ export const PRICING = {
     {
       id: 'test',
       name: { he: 'לייב בדיקה', en: 'Test live', th: 'ไลฟ์ทดลอง' },
-      price: 0,
+      price: PRICES.test,
       unit: { he: '10 דקות', en: '10 minutes', th: '10 นาที' },
       includes: [
         { he: 'לייב של 10 דקות עם המוצר שלכם', en: 'A 10-minute live with your product', th: 'ไลฟ์ 10 นาทีกับสินค้าของคุณ' },
@@ -446,7 +460,7 @@ export const PRICING = {
     {
       id: 'hour',
       name: { he: 'שעת לייב', en: 'Live hour', th: 'ไลฟ์รายชั่วโมง' },
-      price: 199,
+      price: PRICES.hour,
       unit: { he: 'לשעה', en: 'an hour', th: 'ต่อชั่วโมง' },
       includes: [
         READY_CHARACTER,
@@ -458,8 +472,12 @@ export const PRICING = {
     {
       id: 'pack',
       name: { he: '10 שעות לייב', en: '10 live hours', th: 'ไลฟ์ 10 ชั่วโมง' },
-      price: 1490,
-      unit: { he: 'כ־₪149 לשעה', en: '≈₪149 an hour', th: '≈₪149 ต่อชั่วโมง' },
+      price: PRICES.pack,
+      unit: {
+        he: `כ־${money(PRICES.packPerHour, 'he')} לשעה`,
+        en: `≈${money(PRICES.packPerHour, 'en')} an hour`,
+        th: `${money(PRICES.packPerHour, 'th')} ต่อชั่วโมง`,
+      },
       includes: [
         { he: 'כל מה שיש בשעת לייב', en: 'Everything in a live hour', th: 'ทุกอย่างในไลฟ์รายชั่วโมง' },
         { he: 'לסדרה של לייבים קבועים', en: 'For a regular series of lives', th: 'สำหรับไลฟ์ประจำเป็นซีรีส์' },

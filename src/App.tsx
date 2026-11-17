@@ -15,6 +15,7 @@ const Landing = lazy(() => import("./pages/Landing"));
 const AgentPage = lazy(() => import("./pages/AgentPage"));
 const Maya = lazy(() => import("./pages/Maya"));
 const Voices = lazy(() => import("./pages/Voices"));
+const Clinics = lazy(() => import("./pages/Clinics"));
 const Legal = lazy(() => import("./pages/Legal"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -53,6 +54,7 @@ const App = () => {
               <Route path="/brand-character" element={<Landing />} />
               <Route path="/avatar-videos" element={<Landing />} />
               <Route path="/voices" element={<Voices />} />
+              <Route path="/clinics" element={<Clinics />} />
               <Route path="/legal/:slug" element={<Legal />} />
 
               {/* moved pages */}

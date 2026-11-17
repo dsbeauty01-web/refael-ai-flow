@@ -7,10 +7,10 @@ import { trackWhatsAppClick } from '@/lib/analytics';
 /**
  * /clinics — the one landing page for aesthetic clinics (Hebrew only).
  * One offer, one demo, one WhatsApp button. Every channel sends traffic here.
- * Offer and pilot terms: MARKETING-PLAN-2026-11-17.md section 2.1.
+ * Offer: 10 days free, no card, then ₪390 a month (Refael, 2026-11-17).
  */
 
-const WA_TEXT = 'היי רפאל, אני רוצה פיילוט חינם של העוזרת באתר הקליניקה שלי. כתובת האתר: ';
+const WA_TEXT = 'היי רפאל, אני רוצה לנסות 10 ימים חינם את העוזרת באתר שלי. כתובת האתר: ';
 const WA_LINK = `${WHATSAPP_URL}?text=${encodeURIComponent(WA_TEXT)}`;
 
 const POINTS = [
@@ -34,8 +34,8 @@ const POINTS = [
 const STEPS = [
   'שולחים לנו את כתובת האתר בוואטסאפ.',
   'תוך כמה ימים העוזרת עולה באתר שלכם, בצבעים ובשם של הקליניקה.',
-  '30 יום בלי תשלום. מודדים יחד כמה פניות אמיתיות הגיעו.',
-  'ביום ה-30 מחליטים: ממשיכים במחיר שסיכמנו מראש, או נפרדים כידידים.',
+  '10 ימים בלי תשלום ובלי כרטיס אשראי. רואים יחד כמה פניות הגיעו.',
+  'ביום העשירי מחליטים: ממשיכים ב-₪390 לחודש, או נפרדים כידידים.',
 ];
 
 function WhatsAppButton({ source }: { source: string }) {
@@ -56,9 +56,9 @@ function WhatsAppButton({ source }: { source: string }) {
 const Clinics = () => {
   useSeo({
     path: '/clinics',
-    title: 'עוזרת AI לאתר הקליניקה: פיילוט 30 יום חינם | Refael.ai',
+    title: 'עוזרת AI לאתר הקליניקה: 10 ימי ניסיון חינם | Refael.ai',
     description:
-      'עוזרת AI בעברית באתר הקליניקה שלכם: עונה למבקרים 24/7 ושולחת לכם שם וטלפון לוואטסאפ. פיילוט 30 יום חינם.',
+      'עוזרת AI בעברית באתר הקליניקה שלכם: עונה למבקרים 24/7 ושולחת לכם שם וטלפון לוואטסאפ. 10 ימי ניסיון חינם, בלי כרטיס אשראי.',
   });
 
   return (
@@ -74,14 +74,14 @@ const Clinics = () => {
               עוזרת AI בעברית יושבת בפינת האתר של הקליניקה, עונה למבקרים 24/7, ושולחת לכם את השם והטלפון
               שלהם לוואטסאפ.
             </p>
-            <p className="mt-4 text-xl font-bold">פיילוט 30 יום חינם על האתר שלכם.</p>
+            <p className="mt-4 text-xl font-bold">10 ימי ניסיון חינם על האתר שלכם. בלי כרטיס אשראי.</p>
             <p className="mt-1 text-base text-ink/70">
-              אחרי הפיילוט: ₪790 לחודש, או ₪80 לכל פנייה אמיתית. המחיר נסגר בכתב לפני שמתחילים.
+              אחרי הניסיון: ₪390 לחודש. בלי דמי הקמה.
             </p>
             <div className="mt-7">
               <WhatsAppButton source="clinics_hero" />
             </div>
-            <p className="mt-3 text-sm text-ink/50">בלי כרטיס אשראי. בלי התחייבות בזמן הפיילוט.</p>
+            <p className="mt-3 text-sm text-ink/50">בלי התחייבות. מבטלים בהודעת וואטסאפ.</p>
           </div>
 
           <div className="mx-auto w-full max-w-[320px]">
@@ -109,7 +109,7 @@ const Clinics = () => {
         </section>
 
         <section className="mx-auto mt-16 max-w-[720px] px-5">
-          <h2 className="text-center text-2xl font-extrabold md:text-3xl">איך הפיילוט עובד</h2>
+          <h2 className="text-center text-2xl font-extrabold md:text-3xl">איך הניסיון עובד</h2>
           <ol className="mt-6 space-y-3">
             {STEPS.map((step, i) => (
               <li key={step} className="flex gap-3 rounded-2xl border border-ink/10 bg-white/5 p-4">
@@ -120,10 +120,6 @@ const Clinics = () => {
               </li>
             ))}
           </ol>
-          <p className="mt-5 text-center text-sm leading-relaxed text-ink/60">
-            בזמן הפיילוט העוזרת מוצגת לחצי מהמבקרים, כדי שנוכל להשוות ולראות אם היא באמת מביאה יותר פניות. הפיילוט
-            פתוח ל-5 קליניקות בלבד.
-          </p>
           <div className="mt-8 text-center">
             <WhatsAppButton source="clinics_bottom" />
           </div>

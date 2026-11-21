@@ -15,14 +15,21 @@ Boost = the quick "Boost post" screen on the Page. Use it for a first cheap test
 | Message destination | WhatsApp number of the Refael.ai business (the Page, not the personal/dance account) | Leads must land in the business inbox |
 | Special Ad Category | **None** | Meta suggests "Employment" because of the page category. It is wrong for us: we sell a service, not jobs. Picking it locks targeting and adds review. |
 | Location | **Israel** (never leave the default Thailand: the default comes from where the phone is) | Hebrew ad, Israeli buyers, shekel offer |
-| Age | 28 to 60 | Business owners |
-| Advantage+ audience | On | Broad works best on Meta in 2026; the creative does the targeting |
-| Placements | Facebook + Instagram, automatic | Reels placements are where the 9:16 video belongs |
+| Age | 30 to 55 | Business owners. 55+ ate 44% of spend and gave junk chats (2026-11-21) |
+| Advantage+ audience | **Off** | With it on, Meta ignores the age range and finds cheap tappers. Refael's call 2026-11-21 after junk chats |
+| Placements | Manual: **Facebook feed only** (no Audience Network) | 2026-11-21: feed gave 5 of 6 chats; reels, in-stream and Instagram took ฿293 for 1 |
 | Budget | ~₪50/day (≈ ฿500) per reel | Enough data for a 3 to 4 day read |
 | Duration | **Set an end date: 4 days.** Do not run "continuously" | Avoid a forgotten spend |
 | Payment | Refael confirms the card himself | Claude never enters or confirms payment |
 
 Currency: if the ad account is in THB, ₪50 ≈ ฿480 to ฿500 per day (check the rate).
+
+## Traps seen
+
+- The Boost button defaults to an **Engagement** goal. Every boost until 2026-11-21 ran on it and brought junk chats. Use Ads Manager with the Messages goal.
+- A Hebrew boost ran in Thailand (฿430 wasted). Check the location every time.
+- The ad account is in **THB**.
+- Judge a boost by chat quality, not cost per chat: ฿68 a chat looked cheap but every chat was junk.
 
 ## Read after 4 days
 

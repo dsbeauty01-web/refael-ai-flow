@@ -26,7 +26,8 @@ Currency: if the ad account is in THB, ₪50 ≈ ฿480 to ฿500 per day (check
 
 ## Traps seen
 
-- The Boost button defaults to an **Engagement** goal. Every boost until 2026-11-21 ran on it and brought junk chats. Use Ads Manager with the Messages goal.
+- In reports a Messages boost shows objective OUTCOME_ENGAGEMENT. That is normal (Engagement + Conversations optimisation), not a wrong goal. The boosts of Nov 2026 were already optimised for Messenger chats; the junk came from Advantage+ on, age 20 to 65 and all placements.
+- Ready campaign built 2026-11-22 (paused): "Clinics IL - Messages - feed only", id 120252625082420275. Israel, 30 to 55, FB feed only, Advantage+ off, ฿500/day, ends Nov 29, Messenger.
 - A Hebrew boost ran in Thailand (฿430 wasted). Check the location every time.
 - The ad account is in **THB**.
 - Judge a boost by chat quality, not cost per chat: ฿68 a chat looked cheap but every chat was junk.

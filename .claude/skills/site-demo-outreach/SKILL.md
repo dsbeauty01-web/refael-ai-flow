@@ -43,16 +43,17 @@ The video is the fixed widget reel. Only the first 7 seconds are personal: THEIR
 - Cost per prospect: 0 (screenshots + the existing reel). Generation budget only for a new fixed reel, with Refael's OK.
 
 ## 4. The message (WhatsApp, Hebrew)
-Structure: Observation, what I built for you, the link, one soft ask. Founder voice ("בניתי"), peer not vendor.
+The message is the whole product, not one feature: a LIVE AI agent with a talking face on their site. It greets a visitor who stays, answers in voice, books the appointment, takes name and phone to their WhatsApp, 24/7. Backed by research (label it as a study, never "raises sales"). Then one soft ask.
 ```
 היי, כאן רפאל.
 {signal line}
-בניתי לכם הדגמה קטנה: עוזרת AI עם פנים וקול שיושבת באתר שלכם, עונה למבקרים גם בלילה ושולחת לכם את הפנייה לוואטסאפ.
-ככה זה נראה אצלכם: {demo link}
+בניתי לאתר שלכם סוכן AI חי עם פנים שמדברות. מבקר שנשאר באתר כמה שניות, הוא פונה אליו בקול, עונה על השאלות, קובע תור ומעביר לכם שם וטלפון לוואטסאפ. 24 שעות, גם כשהקליניקה סגורה.
+במחקר מ-2026 אנשים סיפרו לדמות שמדברת פי 2 יותר מאשר לצ'אט טקסט. יותר שיחות, יותר תורים.
+מצרף סרטון של 35 שניות, ככה זה נראה על האתר שלכם.
 
-שווה לבדוק? אפשר להפעיל 10 ימים בחינם.
+רוצים לנסות 10 ימים בחינם?
 ```
-Rules: under 400 characters, one link, no price, no dashes (— or --), no "I hope you're well", no feature list, no call request. Give Refael wa.me links with the text prefilled (one tap, send).
+Rules: one message, no price, no dashes (— or --), no feature list beyond the sentence above, no call request. Male agent for men's clinics (סוכן / הוא), female elsewhere (סוכנת / היא). Attach the video; a link only once the site is published.
 
 ## 5. Volume and safety
 - Max 5 new chats a day from Refael's number, spread out. Different text per person (the signal line does this).

@@ -32,13 +32,15 @@ Read the homepage text BEFORE closing popups (popups hold the best signals). Ran
 4. Only path is "book a consultation".
 The signal sentence must connect to the problem we solve (visitors not answered right now). If you can delete it and the message still makes sense, it is not personal enough.
 
-## 3. Build the demo (`scripts/site_demo.py`)
-`python3 scripts/site_demo.py leads/prospects-<date>.json [slug ...]`
-- Screenshots their homepage desktop + mobile, removes cookie banners, popups, accessibility and WhatsApp floaters.
-- Same face for everyone: `public/agent/style-clinic.mp4` in a circle, bottom left, bubble "היי! אני העוזרת של {name}". Line changes by kind (clinic: טיפולים, מחירים ותורים; school: קורסים, מחירים ומועדי פתיחה).
-- Writes `refael-ai-flow/public/d/<slug>.html` + `<slug>.jpg` (1200x630 preview, shows in WhatsApp) + desk/mob backgrounds.
-- **Look at every preview image.** Drop any that is blank, a loader, or shows "video not available". A broken demo is worse than none.
+## 3. Build the demo (`scripts/site_demo_reel.py` + `scripts/site_demo.py`)
+The video is the fixed widget reel. Only the first 7 seconds are personal: THEIR homepage.
+- Fixed part (never changes): `reels/widget-honest-reel-he.mp4`, scenes "שואלים אותה, היא עונה בקול" (clay Noa talking), "הפנייה אצלכם בוואטסאפ", "10 ימים חינם". Same voice (s0T0DT6EAPeX57MQpn3I), same face, same words for everyone. Do not re-record, do not generate new faces or lip-sync per prospect.
+- Personal part: their mobile homepage scrolling in a phone frame, Noa idle in the corner with "היי! אני העוזרת של {name}", one fixed VO line "ככה זה ייראה באתר שלכם". Title: "ככה זה ייראה באתר של {name}".
+- Total about 27 s. The message in those seconds: this is your site; she answers in voice; the lead lands in your WhatsApp; 10 days free.
+- `python3 scripts/site_demo_reel.py <slug>` makes `media/site-demo/v3/reel_<slug>.mp4`; copy it to `refael-ai-flow/public/d/<slug>.mp4`, then `python3 scripts/site_demo.py leads/prospects-<date>.json <slug>` writes the page `public/d/<slug>.html` (video + WhatsApp button) and the 1200x630 preview `<slug>.jpg`.
+- **Look at every preview image.** Drop any that is blank, a loader, or shows "video not available".
 - Push to `main`, then **Refael presses Publish in Lovable** (Claude cannot publish). Check one URL returns 200 before giving links.
+- Cost per prospect: 0 (screenshots + the existing reel). Generation budget only for a new fixed reel, with Refael's OK.
 
 ## 4. The message (WhatsApp, Hebrew)
 Structure: Observation, what I built for you, the link, one soft ask. Founder voice ("בניתי"), peer not vendor.
